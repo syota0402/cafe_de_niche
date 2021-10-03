@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get 'coffee_shops/index'
+  get 'coffee_shops/show'
+  get 'coffee_shops/new'
+  get 'coffee_shops/create'
+  get 'coffee_shops/edit'
+  get 'coffee_shops/update'
+  get 'coffee_shops/destroy'
   devise_for :users, :controllers => {
     :registrations => 'users/registrations',
     :sessions => 'users/sessions',

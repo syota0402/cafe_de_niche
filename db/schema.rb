@@ -10,7 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_30_132903) do
+ActiveRecord::Schema.define(version: 2021_10_03_104233) do
+
+  create_table "coffee_shops", force: :cascade do |t|
+    t.string "name"
+    t.string "shop_url"
+    t.string "address"
+    t.integer "tell"
+    t.string "access"
+    t.time "business_start_hour"
+    t.time "business_end_hour"
+    t.string "regular_holiday"
+    t.string "instagram_url"
+    t.string "instagram_spot_url"
+    t.integer "municipalitie_id"
+    t.string "first_image_url"
+    t.string "second_image_url"
+    t.string "third_image_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
