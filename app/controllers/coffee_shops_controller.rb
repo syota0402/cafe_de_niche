@@ -7,6 +7,7 @@ class CoffeeShopsController < ApplicationController
   end
 
   def new
+    @coffee_shop = CoffeeShop.new
   end
 
   def create
