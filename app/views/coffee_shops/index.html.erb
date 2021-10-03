@@ -1,2 +1,22 @@
 <h1>CoffeeShops#index</h1>
-<p>Find me in app/views/coffee_shops/index.html.erb</p>
+<% @coffee_shops.each do |coffee_shop| %>
+  <%= coffee_shop.name %>
+  <%= coffee_shop.shop_url %>
+  <%= coffee_shop.address %>
+  <%= coffee_shop.tell %>
+  <%= coffee_shop.access %>
+  <%= coffee_shop.business_start_hour %>
+  <%= coffee_shop.business_end_hour %>
+  <%= coffee_shop.regular_holiday %>
+  <%= coffee_shop.instagram_url %>
+  <%= coffee_shop.instagram_spot_url %>
+  <%= coffee_shop.municipalitie_id %>
+  <%= coffee_shop.first_image_url %>
+  <%= coffee_shop.second_image_url %>
+  <%= coffee_shop.third_image_url %>
+  
+  <%= link_to "Show", coffee_shop_path(coffee_shop) %>
+  <%= link_to "Edit", edit_coffee_shop_path(coffee_shop) %>
+<% end %>
+
+<%= link_to "New", new_coffee_shop_path %>
