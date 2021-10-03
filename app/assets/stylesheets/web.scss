@@ -1,3 +1,29 @@
-// Place all the styles related to the web controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.cover-container {
+
+}
+
+// サインイン前のヘッダー
+.cover-container-befoer-sign-in {
+  line-height: normal;
+  letter-spacing: normal;
+  background-image: url(/toppage.jpg);
+  background-position: center bottom;
+  background-size: cover;
+  width: 100%;
+  height: 400px;
+}
+
+.title-text {
+  margin-top: 12px;
+  font-family: YuGo;
+  font-size: 30px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.title-sub-text {
+  font-family: YuGo;
+  margin-top: 12px;
+  font-size: 15px;
+  text-align: center;
+}
