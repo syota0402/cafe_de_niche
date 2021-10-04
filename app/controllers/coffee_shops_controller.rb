@@ -18,9 +18,13 @@ class CoffeeShopsController < ApplicationController
   end
 
   def edit
+    @coffee_shop = CoffeeShop.find(params[:id])
   end
 
   def update
+    @coffee_shop = CoffeeShop.find(params[:id])
+    @coffee_shop.update(coffee_shop_params)
+    redirect_to coffee_shop_url @coffee_shop
   end
 
   def destroy
