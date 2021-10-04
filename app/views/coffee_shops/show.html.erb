@@ -1,17 +1,30 @@
 <h1>CoffeeShops#show</h1>
-<%= @coffee_shop.name %>
-<%= @coffee_shop.shop_url %>
-<%= @coffee_shop.address %>
-<%= @coffee_shop.tell %>
-<%= @coffee_shop.access %>
-<%= @coffee_shop.business_start_hour %>
-<%= @coffee_shop.business_end_hour %>
-<%= @coffee_shop.regular_holiday %>
-<%= @coffee_shop.instagram_url %>
-<%= @coffee_shop.instagram_spot_url %>
-<%= @coffee_shop.municipalitie_id %>
-<%= @coffee_shop.first_image_url %>
-<%= @coffee_shop.second_image_url %>
-<%= @coffee_shop.third_image_url %>
-
+  店舗名<%= @coffee_shop.name %>
+  <br>
+  店舗HP<%= @coffee_shop.shop_url %>
+  <br>
+  住所<%= @coffee_shop.address %>
+  <br>
+  電話番号<%= @coffee_shop.tell %>
+  <br>
+  アクセス<%= @coffee_shop.access %>
+  <br>
+  営業開始時間<%= @coffee_shop.business_start_hour %>
+  <br>
+  営業終了時間<%= @coffee_shop.business_end_hour %>
+  <br>
+  定休日<%= @coffee_shop.regular_holiday %>
+  <br>
+  Instagram公式URL<%= @coffee_shop.instagram_url %>
+  <br>
+  InstagramスポットURL<%= @coffee_shop.instagram_spot_url %>
+  <br>
+  エリアid<%= @coffee_shop.municipalitie_id %>
+  <br>
+  画像１<%= @coffee_shop.first_image_url %>
+  <br>
+  画像２<%= @coffee_shop.second_image_url %>
+  <br>
+  画像３<%= @coffee_shop.third_image_url %>
+	<br>
 <%= link_to "Back", coffee_shops_path %>

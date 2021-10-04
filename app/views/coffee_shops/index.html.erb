@@ -17,6 +17,7 @@
   
   <%= link_to "Show", coffee_shop_path(coffee_shop) %>
   <%= link_to "Edit", edit_coffee_shop_path(coffee_shop) %>
+  <%= link_to "Delete", coffee_shop_path(coffee_shop), method: :delete, data: { confirm: 'Are you sure?' }  %>
   <br>
 <% end %>
 

@@ -9,6 +9,8 @@
   <br>
   電話番号<%= f.number_field :tell %>
   <br>
+  アクセス<%= f.text_field :access %>
+  <br>
   営業開始時間<%= f.time_field :business_start_hour %>
   <br>
   営業終了時間<%= f.time_field :business_end_hour %>
@@ -26,7 +28,7 @@
   画像２<%= f.text_field :second_image_url %>
   <br>
   画像３<%= f.text_field :third_image_url %>
-  
+  <br>
   <%= f.submit "Update" %>
 <% end %>
 
