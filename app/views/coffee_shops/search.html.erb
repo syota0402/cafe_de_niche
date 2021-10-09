@@ -1,0 +1,17 @@
+<h1>検索結果</h1>
+<table>
+  <thead>
+    <tr>
+      <th>
+        Name
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @coffee_shops.each do |coffee_shop| %>
+      <tr>
+        <td><%= coffee_shop.name %><%= link_to "Show", coffee_shop_path(coffee_shop) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
