@@ -15,6 +15,12 @@ class CoffeeShopsController < ApplicationController
     @coffee_shop = CoffeeShop.new(coffee_shop_params)
     @coffee_shop.save
     redirect_to coffee_shop_url @coffee_shop
+    # バリデーションエラーでメッセージを出したい
+    # if @coffee_shop.save
+    #   redirect_to coffee_shop_url @coffee_shop
+    # else
+    #   render @coffee_shop.new
+    # end
   end
 
   def edit

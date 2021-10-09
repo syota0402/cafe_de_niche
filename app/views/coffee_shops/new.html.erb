@@ -1,5 +1,8 @@
 <h1>CoffeeShops#new</h1>
+
 <%= form_with model: @coffee_shop do |f| %>
+<!--バリデーションエラーでメッセージを出したい-->
+<!--<%= render 'layouts/error_messages', locals: { coffee_shop: @coffee_shop } %>-->
   店舗名<%= f.text_field :name %>
   <br>
   店舗HP<%= f.text_field :shop_url %>
