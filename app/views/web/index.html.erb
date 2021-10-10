@@ -24,13 +24,16 @@
   <div class="search_by_area">
     (検索のエリア)
     <%= form_with url: search_coffee_shops_path, method: :get, local: true do |f| %>
-      店舗名：
+      店舗名
+      <br>
       <%= f.text_field :name %>
       <%= f.submit :search %>
     <% end %>
+    <hr>
     <%= form_with url: search_coffee_shops_path, method: :get, local: true do |f| %>
-      電話番号：
-      <%= f.text_field :tell %>
+      電話番号検索
+      <br>
+      <%= f.number_field :tell %>
       <%= f.submit :search %>
     <% end %>
   </div>
