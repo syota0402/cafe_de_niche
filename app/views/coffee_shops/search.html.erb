@@ -1,0 +1,24 @@
+<h1>検索結果</h1>
+<% if @coffee_shops.blank? %>
+  該当店舗なし
+  <br>
+<% else %>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @coffee_shops.each do |coffee_shop| %>
+      
+        <tr>
+          <td><%= coffee_shop.name %><%= link_to "Show", coffee_shop_path(coffee_shop) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+<%= link_to "New", new_coffee_shop_path %>

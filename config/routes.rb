@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :coffee_shops
+  resources :coffee_shops do
+    get :search, on: :collection
+  end
   
   devise_for :users, :controllers => {
     :registrations => 'users/registrations',
@@ -16,7 +18,5 @@ Rails.application.routes.draw do
     get "login", :to => "users/sessions#new"
     delete "logout", :to => "users/sessions#destroy"
   end
-  
-  resources :products
   
 end
