@@ -29,4 +29,8 @@ class CoffeeShop < ApplicationRecord
 	validates :second_image_url, length: { maximum: 2048}
 	validates :third_image_url, length: { maximum: 2048}
 	
+	scope :search_for_name_and_tell, -> (keyword) {
+		where("name LIKE ?", "%#{keyword}%").
+		or(where(tell: keyword.to_i))
+	}
 end
