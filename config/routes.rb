@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "dashboard", :to => "dashboard#index"
+  
   resources :coffee_shops do
     get :search, on: :collection
   end
