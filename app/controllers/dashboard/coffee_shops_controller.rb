@@ -41,6 +41,6 @@ class Dashboard::CoffeeShopsController < ApplicationController
   
   private
     def set_coffee_shop
-      @coffee_shop = Coffeeshop.find(params[:id])
+      @coffee_shop = CoffeeShop.find(params[:id])
     end
 end

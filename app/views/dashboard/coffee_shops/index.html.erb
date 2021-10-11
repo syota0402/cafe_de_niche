@@ -26,7 +26,7 @@
         <td><%= coffee_shop.tell %></td>
         <td><%= coffee_shop.address %></td>
         <td><%= link_to "編集", edit_dashboard_coffee_shop_path(coffee_shop) %></td>
-        <td><%= link_to "削除", dashboard_coffee_shop_path(coffee_shop), method: :delete %></td>
+        <td><%= link_to "削除", dashboard_coffee_shop_path(coffee_shop), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
