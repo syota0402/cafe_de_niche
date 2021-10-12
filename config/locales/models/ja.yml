@@ -1,0 +1,20 @@
+ja:
+  activerecord:
+    models:
+      coffee_shop: 店舗
+    attributes:
+      coffee_shop:
+        name: 店舗名
+        shop_url: 店舗HP
+        address: 住所
+        tell: 電話番号
+        access: アクセス
+        business_start_hour: 営業開始時間
+        business_end_hour: 営業終了時間
+        regular_holiday: 定休日
+        instagram_url: Instagram公式URL
+        instagram_spot_url: InstagramスポットURL
+        municipalitie_id: エリアid
+        first_image_url: 画像１
+        second_image_url: 画像２
+        third_image_url: 画像３

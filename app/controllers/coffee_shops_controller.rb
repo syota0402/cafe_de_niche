@@ -13,10 +13,6 @@ class CoffeeShopsController < ApplicationController
 
   def create
     @coffee_shop = CoffeeShop.new(coffee_shop_params)
-    # binding.pry
-    # @coffee_shop.save
-    # redirect_to coffee_shop_url @coffee_shop
-    # バリデーションエラーでメッセージを出したい
     if @coffee_shop.save
       redirect_to coffee_shop_url @coffee_shop, notice: '登録完了'
     else

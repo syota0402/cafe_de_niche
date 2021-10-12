@@ -22,8 +22,12 @@ class Dashboard::CoffeeShopsController < ApplicationController
 
   def create
     @coffee_shop = CoffeeShop.new(coffee_shop_params)
-    @coffee_shop.save
-    redirect_to dashboard_coffee_shops_url
+    if @coffee_shop.save
+      redirect_to dashboard_coffee_shops_path, notice: '登録完了'
+    else
+      flash[:alert] = @coffee_shop.errors.full_messages
+      redirect_back(fallback_location: new_dashboard_coffee_shop_path)
+    end
   end
 
   def edit
@@ -42,5 +46,9 @@ class Dashboard::CoffeeShopsController < ApplicationController
   private
     def set_coffee_shop
       @coffee_shop = CoffeeShop.find(params[:id])
+    end
+    
+    def coffee_shop_params
+      params.require(:coffee_shop).permit(:name, :shop_url, :address, :tell, :access, :business_start_hour, :business_end_hour, :regular_holiday, :instagram_url, :instagram_spot_url, :municipalitie_id, :first_image_url, :second_image_url, :third_image_url)
     end
 end
