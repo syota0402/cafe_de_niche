@@ -1,6 +1,6 @@
 <h1>店舗編集</h1>
 
-<%= form_with model: @coffee_shop, url: dashboard_coffee_shops_path, local: true do |f| %>
+<%= form_with model: @coffee_shop, url: dashboard_coffee_shop_path, local: true do |f| %>
   店舗名<%= f.text_field :name %>
   <br>
   店舗HP<%= f.text_field :shop_url %>

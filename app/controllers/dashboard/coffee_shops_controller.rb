@@ -34,8 +34,12 @@ class Dashboard::CoffeeShopsController < ApplicationController
   end
 
   def update
-    @coffee_shop.update(coffee_shop_params)
-    redirect_to dashboard_coffee_shops_url
+    if @coffee_shop.update(coffee_shop_params)
+      redirect_to dashboard_coffee_shops_url, notice: '登録完了'
+    else
+      flash[:alert] = @coffee_shop.errors.full_messages
+      redirect_back(fallback_location: edit_dashboard_coffee_shop_path)
+    end
   end
 
   def destroy
