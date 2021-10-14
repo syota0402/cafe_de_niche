@@ -13,14 +13,12 @@ class CoffeeShopsController < ApplicationController
 
   def create
     @coffee_shop = CoffeeShop.new(coffee_shop_params)
-    @coffee_shop.save
-    redirect_to coffee_shop_url @coffee_shop
-    # バリデーションエラーでメッセージを出したい
-    # if @coffee_shop.save
-    #   redirect_to coffee_shop_url @coffee_shop
-    # else
-    #   render @coffee_shop.new
-    # end
+    if @coffee_shop.save
+      redirect_to coffee_shop_url @coffee_shop, notice: '登録完了'
+    else
+      flash[:alert] = @coffee_shop.errors.full_messages
+      redirect_back(fallback_location: new_coffee_shop_path)
+    end
   end
 
   def edit
@@ -40,15 +38,8 @@ class CoffeeShopsController < ApplicationController
   end
   
   def search
-    # 店舗名　一部一致
-    if params[:name].present?
-      @coffee_shops = CoffeeShop.where('name LIKE ?', "%#{params[:name]}%")
-    # 電話番号　完全一致
-    elsif params[:tell].present?
-      @coffee_shops = CoffeeShop.where(tell: params[:tell])
-    else
-      @coffee_shops = CoffeeShop.none
-    end
+    @coffee_shop_search_service = CoffeeShopSearchService.new(params[:name],params[:tell])
+    @coffee_shops = @coffee_shop_search_service.search
   end
   
   private

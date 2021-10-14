@@ -1,6 +1,6 @@
-<h1>CoffeeShops#new</h1>
+<h1>店舗編集</h1>
 
-<%= form_with model: @coffee_shop do |f| %>
+<%= form_with model: @coffee_shop, url: dashboard_coffee_shop_path, local: true do |f| %>
   店舗名<%= f.text_field :name %>
   <br>
   店舗HP<%= f.text_field :shop_url %>
@@ -29,7 +29,7 @@
   <br>
   画像３<%= f.text_field :third_image_url %>
   <br>
-  <%= f.submit "Create" %>
+  <%= f.submit "更新" %>
 <% end %>
 
-<%= link_to "Back", coffee_shops_path %>
+<%= link_to "一覧に戻る", dashboard_coffee_shops_path %>
