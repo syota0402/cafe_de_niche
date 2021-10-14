@@ -1,0 +1,2 @@
+class SearchCategory < ApplicationRecord
+end
