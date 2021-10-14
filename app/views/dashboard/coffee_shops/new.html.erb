@@ -29,6 +29,12 @@
   <br>
   画像３<%= f.text_field :third_image_url %>
   <br>
+  <div class="check_box">
+    <%= f.collection_check_boxes(:search_category_ids, SearchCategory.all, :id, :name) do |b| %>
+      <%= b.label { b.check_box + b.text } %>
+    <% end %>
+  </div>
+  
   <%= f.submit "追加" %>
 <% end %>
 

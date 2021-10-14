@@ -25,6 +25,11 @@ class Dashboard::SearchCategoriesController < ApplicationController
     redirect_to dashboard_search_categories_path
   end
   
+  def destroy
+    @search_category.destroy
+    redirect_to dashboard_search_categories_path
+  end
+  
   private
   
   def set_search_category
