@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_03_104233) do
+ActiveRecord::Schema.define(version: 2021_10_14_112346) do
+
+  create_table "coffee_shop_search_categories", force: :cascade do |t|
+    t.integer "coffee_shop_id"
+    t.integer "search_category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "coffee_shops", force: :cascade do |t|
     t.string "name"
@@ -27,6 +34,12 @@ ActiveRecord::Schema.define(version: 2021_10_03_104233) do
     t.string "first_image_url"
     t.string "second_image_url"
     t.string "third_image_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "search_categories", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
