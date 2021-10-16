@@ -12,13 +12,27 @@
   <hr>
   
   <%= f.label :age, "年齢" %>
-  <%= f.text_field :age, value: @user.age, placeholder: @user.age %>
+  <% choices = [['10代', 10],['20代', 20],['30代',30],['40代',40],['50代',50],['60代',60],['シニア','シニア']] %>
+  <%= f.select :age, choices, selected: @user.age %>
+  
   
   <hr>
   
-  <%= f.label :gender, "性別" %>
-  <%= f.text_field :gender, value: @user.gender, placeholder: @user.gender %>
+  <% if @user.gender == "male" %>
+    <%= f.radio_button :gender, :male, {:checked => true } %>
+    <%= f.label :gender, "男性", {value: :male, stylr: "display: inline-block;"} %>
+  <% else %>
+    <%= f.radio_button :gender, :male %>
+    <%= f.label :gender, "男性", {value: :male, stylr: "display: inline-block;"} %>
+  <% end %>
   
+  <% if @user.gender == "female" %>
+    <%= f.radio_button :gender, :female, {:checked => true } %>
+    <%= f.label :gender, "女性", {value: :female, style: "display: inline-block;"} %>
+  <% else %>
+    <%= f.radio_button :gender, :female %>
+    <%= f.label :gender, "女性", {value: :female, style: "display: inline-block;"} %>
+  <% end %>
   <hr>
   
   <%= f.label :self_introduction, "自己紹介"%>
