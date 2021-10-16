@@ -18,6 +18,7 @@ class Dashboard::CoffeeShopsController < ApplicationController
 
   def new
     @coffee_shop = CoffeeShop.new
+    @search_categories = SearchCategory.all
   end
 
   def create
@@ -53,6 +54,6 @@ class Dashboard::CoffeeShopsController < ApplicationController
     end
     
     def coffee_shop_params
-      params.require(:coffee_shop).permit(:name, :shop_url, :address, :tell, :access, :business_start_hour, :business_end_hour, :regular_holiday, :instagram_url, :instagram_spot_url, :municipalitie_id, :first_image_url, :second_image_url, :third_image_url)
+      params.require(:coffee_shop).permit(:name, :shop_url, :address, :tell, :access, :business_start_hour, :business_end_hour, :regular_holiday, :instagram_url, :instagram_spot_url, :municipalitie_id, :first_image_url, :second_image_url, :third_image_url, { :search_category_ids => [ ]})
     end
 end

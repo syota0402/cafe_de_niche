@@ -1,4 +1,9 @@
 class CoffeeShop < ApplicationRecord
+	has_many :coffee_shop_search_categories, dependent: :destroy
+	has_many :search_categories, :through => :coffee_shop_search_categories
+	
+	accepts_nested_attributes_for :coffee_shop_search_categories, allow_destroy: true
+	
 	# バリデーション
 	# 必ず登録してほしい項目
 	validates :name, :address, :tell, presence: true
