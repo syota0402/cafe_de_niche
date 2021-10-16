@@ -1,7 +1,7 @@
 <h1>店舗一覧</h1>
 <%= form_with url: dashboard_coffee_shops_path, method: :get, local: true do |f|%>
   店舗名・電話番号
-  <%= f.text_area :keyword %>
+  <%= f.text_field :keyword %>
   <%= f.submit "検索" %>
 <% end %>
 
