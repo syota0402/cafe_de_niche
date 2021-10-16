@@ -1,0 +1,15 @@
+<h1>ユーザー情報編集</h1>
+<hr>
+<%= form_with url: mypage_users_path, local: true, method: :put do |f| %>
+  <%= f.label :name, "氏名" %>
+  <%= f.text_field :name, value: @user.name, placeholder: @user.name %>
+  
+  <hr>
+  
+  <%= f.label :email, "氏名" %>
+  <%= f.email_field :email, value: @user.email, placeholder: @user.email %>
+  
+  <hr>
+  
+  <%= f.submit "保存" %>
+<% end %>
