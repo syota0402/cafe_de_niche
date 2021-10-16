@@ -12,12 +12,14 @@ class UsersController < ApplicationController
   def mypage
   end
   
+  
+  
   private
   def set_user
     @user = current_user
   end
   
   def user_params
-    params.permit(:name, :email, :password, :password_confirmation, :age, :gender, :self_introduction, :image)
+    params.permit(:name, :email, :password, :password_confirmation, :age, :gender, :self_introduction, :image, :instagram_url)
   end
 end

@@ -44,5 +44,10 @@
   
   <hr>
   
+  <%= f.label :instagram_url, "インスタグラムのアカウント" %>
+  <%= f.text_field :instagram_url, value: @user.instagram_url, placeholder: @user.instagram_url %>
+  
+  <hr>
+  
   <%= f.submit "保存" %>
 <% end %>
