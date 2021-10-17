@@ -1,0 +1,53 @@
+<h1>ユーザー情報編集</h1>
+<hr>
+<%= form_with url: mypage_users_path, local: true, method: :put do |f| %>
+  <%= f.label :name, "氏名" %>
+  <%= f.text_field :name, value: @user.name %>
+  
+  <hr>
+  
+  <%= f.label :email, "E-mail" %>
+  <%= f.email_field :email, value: @user.email %>
+  
+  <hr>
+  
+  <%= f.label :age, "年齢" %>
+  <% choices = [['10代', 10],['20代', 20],['30代',30],['40代',40],['50代',50],['60代',60],['シニア','シニア']] %>
+  <%= f.select :age, choices, selected: @user.age %>
+  
+  
+  <hr>
+  
+  <% if @user.gender == "male" %>
+    <%= f.radio_button :gender, :male, {:checked => true } %>
+    <%= f.label :gender, "男性", {value: :male, stylr: "display: inline-block;"} %>
+  <% else %>
+    <%= f.radio_button :gender, :male %>
+    <%= f.label :gender, "男性", {value: :male, stylr: "display: inline-block;"} %>
+  <% end %>
+  
+  <% if @user.gender == "female" %>
+    <%= f.radio_button :gender, :female, {:checked => true } %>
+    <%= f.label :gender, "女性", {value: :female, style: "display: inline-block;"} %>
+  <% else %>
+    <%= f.radio_button :gender, :female %>
+    <%= f.label :gender, "女性", {value: :female, style: "display: inline-block;"} %>
+  <% end %>
+  <hr>
+  
+  <%= f.label :self_introduction, "自己紹介"%>
+  <%= f.text_area :self_introduction, value: @user.self_introduction %>
+  
+  <hr>
+  
+  画像(未実装)
+  
+  <hr>
+  
+  <%= f.label :instagram_url, "インスタグラムのアカウント" %>
+  <%= f.text_field :instagram_url, value: @user.instagram_url %>
+  
+  <hr>
+  
+  <%= f.submit "保存" %>
+<% end %>

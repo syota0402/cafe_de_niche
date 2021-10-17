@@ -2,6 +2,8 @@ ja:
   activerecord:
     models:
       coffee_shop: 店舗
+      user: ユーザー
+      search_category: 検索カテゴリ
     attributes:
       coffee_shop:
         name: 店舗名
@@ -18,3 +20,15 @@ ja:
         first_image_url: 画像１
         second_image_url: 画像２
         third_image_url: 画像３
+        
+      user:
+        name: ユーザー名
+        email: メールアドレス
+        age: 年齢
+        gender: 性別
+        self_introduction: 自己紹介
+        instagram_url: インスタグラムのアカウント
+        
+      search_category:
+        name: カテゴリ名
+        
