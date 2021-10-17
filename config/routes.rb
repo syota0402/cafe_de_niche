@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
   
   namespace :dashboard do
+    resources :users, only: [:index, :destroy]
     resources :coffee_shops, except: [:show]
     resources :search_categories, except: [:new]
   end

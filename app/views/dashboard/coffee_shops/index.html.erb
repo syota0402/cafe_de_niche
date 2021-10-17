@@ -1,34 +1,35 @@
-<h1>店舗一覧</h1>
-<%= form_with url: dashboard_coffee_shops_path, method: :get, local: true do |f|%>
-  店舗名・電話番号
-  <%= f.text_field :keyword %>
-  <%= f.submit "検索" %>
-<% end %>
-
-<div>合計<%= @total_count %>件</div>
-
-<%= link_to "店舗追加", new_dashboard_coffee_shop_path %>
-
-<table border="1">
-  <thead>
-    <tr>
-      <th>店舗名</th>
-      <th>電話番号</th>
-      <th>住所</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @coffee_shops.each do |coffee_shop| %>
-      <tr>
-        <td><%= coffee_shop.name %></td>
-        <td><%= coffee_shop.tell %></td>
-        <td><%= coffee_shop.address %></td>
-        <td><%= link_to "編集", edit_dashboard_coffee_shop_path(coffee_shop) %></td>
-        <td><%= link_to "削除", dashboard_coffee_shop_path(coffee_shop), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
+<div class="w-75">
+  <h1>店舗一覧</h1>
+  <%= form_with url: dashboard_coffee_shops_path, method: :get, local: true do |f|%>
+    店舗名・電話番号
+    <%= f.text_field :keyword %>
+    <%= f.submit "検索" %>
+  <% end %>
   
-</table>
+  <div>合計<%= @total_count %>件</div>
+  
+  <%= link_to "店舗追加", new_dashboard_coffee_shop_path %>
+  
+  <table class="table mt-5">
+    <thead>
+      <tr>
+        <th scope="col">店舗名</th>
+        <th scope="col">電話番号</th>
+        <th scope="col">住所</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @coffee_shops.each do |coffee_shop| %>
+        <tr>
+          <td><%= coffee_shop.name %></td>
+          <td><%= coffee_shop.tell %></td>
+          <td><%= coffee_shop.address %></td>
+          <td><%= link_to "編集", edit_dashboard_coffee_shop_path(coffee_shop) %></td>
+          <td><%= link_to "削除", dashboard_coffee_shop_path(coffee_shop), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

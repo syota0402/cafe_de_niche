@@ -30,4 +30,8 @@ class User < ApplicationRecord
     clean_up_passwords
     result
   end
+  
+  scope :search_information, -> (keyword) {
+    where("name LIKE :keyword OR email LIKE :keyword", keyword: "%#{keyword}%")
+  }
 end

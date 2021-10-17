@@ -1,0 +1,31 @@
+<div class="w-75">
+
+  <h1>ユーザー一覧</h1>
+  
+  <div class="w-75">
+    <%= form_with url: dashboard_users_path, method: :get, local: true do |f| %>
+      <%= f.text_field :keyword, value: @keyword %>
+      <%= f.submit "検索" %>
+    <% end %>
+  </div>
+
+  <table class="table mt-5">
+    <thead>
+      <tr>
+        <th scope="col" class="w-25">ID</th>
+        <th scope="col">名前</th>
+        <th scope="col">メールアドレス</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+      <tr>
+        <th scope="row"><%= user.id %></td>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

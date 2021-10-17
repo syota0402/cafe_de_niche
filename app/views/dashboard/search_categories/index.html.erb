@@ -1,34 +1,37 @@
-<h1>カテゴリ一覧</h1>
-
-<%= form_with(model: @search_category, url: dashboard_search_categories_path, local: true) do |f| %>
-  <%= f.label :name, "カテゴリ名" %>
-  <%= f.text_field :name %>
+<div class="w-75">
   
-  <%= f.submit "新規作成" %>
-<% end %>
-
-<table border="1">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>カテゴリ</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @search_categories.each do |search_category| %>
-    <tr>
-      <td><%= search_category.id %></td>
-      <td><%= search_category.name %></td>
-      <td>
-        <%= link_to "編集", edit_dashboard_search_category_path(search_category) %>
-        
-      </td>
-      <td>
-        <%= link_to "削除", dashboard_search_category_path(search_category), method: :delete, data: { confirm: 'Are you sure?' } %>
-      </td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+  <h1>カテゴリ一覧</h1>
+  
+  <%= form_with(model: @search_category, url: dashboard_search_categories_path, local: true) do |f| %>
+    <%= f.label :name, "カテゴリ名" %>
+    <%= f.text_field :name %>
+    
+    <%= f.submit "新規作成" %>
+  <% end %>
+  
+  <table class="table mt-5">
+    <thead>
+      <tr>
+        <th scope="col" class="w-25">ID</th>
+        <th scope="col">カテゴリ</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @search_categories.each do |search_category| %>
+      <tr>
+        <td scope="row"><%= search_category.id %></td>
+        <td><%= search_category.name %></td>
+        <td>
+          <%= link_to "編集", edit_dashboard_search_category_path(search_category) %>
+          
+        </td>
+        <td>
+          <%= link_to "削除", dashboard_search_category_path(search_category), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
