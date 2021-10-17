@@ -2,12 +2,12 @@
 <hr>
 <%= form_with url: mypage_users_path, local: true, method: :put do |f| %>
   <%= f.label :name, "氏名" %>
-  <%= f.text_field :name, value: @user.name, placeholder: @user.name %>
+  <%= f.text_field :name, value: @user.name %>
   
   <hr>
   
   <%= f.label :email, "E-mail" %>
-  <%= f.email_field :email, value: @user.email, placeholder: @user.email %>
+  <%= f.email_field :email, value: @user.email %>
   
   <hr>
   
@@ -36,7 +36,7 @@
   <hr>
   
   <%= f.label :self_introduction, "自己紹介"%>
-  <%= f.text_area :self_introduction, value: @user.self_introduction, placeholder: @user.self_introduction %>
+  <%= f.text_area :self_introduction, value: @user.self_introduction %>
   
   <hr>
   
@@ -45,7 +45,7 @@
   <hr>
   
   <%= f.label :instagram_url, "インスタグラムのアカウント" %>
-  <%= f.text_field :instagram_url, value: @user.instagram_url, placeholder: @user.instagram_url %>
+  <%= f.text_field :instagram_url, value: @user.instagram_url %>
   
   <hr>
   

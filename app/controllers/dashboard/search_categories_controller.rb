@@ -12,17 +12,24 @@ class Dashboard::SearchCategoriesController < ApplicationController
   
   def create
     @search_category = SearchCategory.new(search_category_params)
-    @search_category.save
-    redirect_to dashboard_search_categories_path
+    if @search_category.save
+      redirect_to dashboard_search_categories_path, notice: '登録完了'
+    else
+      flash[:alert] = @search_category.errors.full_messages
+      redirect_back(fallback_location: dashboard_search_categories_path)
+    end
   end
   
   def edit
   end
   
   def update
-    @search_category.update(search_category_params)
-    @search_category.save
-    redirect_to dashboard_search_categories_path
+    if @search_category.update(search_category_params)
+      redirect_to dashboard_search_categories_path, notice: '変更完了'
+    else
+      flash[:alert] = @search_category.errors.full_messages
+      redirect_back(fallback_location: dashboard_search_categories_path)
+    end
   end
   
   def destroy

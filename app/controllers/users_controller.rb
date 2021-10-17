@@ -5,8 +5,12 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user.update_without_password(user_params)
-    redirect_to root_path 
+    if @user.update_without_password(user_params)
+      redirect_to root_path
+    else
+      flash[:alert] = @user.errors.full_messages
+      redirect_back(fallback_location: mypage_edit_users_path)
+    end
   end
 
   def mypage
