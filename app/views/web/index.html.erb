@@ -27,14 +27,26 @@
       店舗名
       <br>
       <%= f.text_field :name %>
-    <% end %>
+    
     <hr>
-    <%= form_with url: search_coffee_shops_path, method: :get, local: true do |f| %>
       電話番号検索
       <br>
       <%= f.number_field :tell %>
+    <hr>
+      イチオシpoint検索
+      こだわり
+      おすすめ
+      特徴
+      イチオシ
+      個性
+      <br>
+      <div class="check_box">
+        <%= f.collection_check_boxes(:search_category_ids, SearchCategory.all, :id, :name, {include_hidden: false}) do |b| %>
+          <%= b.label { b.check_box + b.text } %>
+        <% end %>
+      </div>
       <%= f.submit :search %>
-    <% end %>
+    <% end %> 
   </div>
   
   <hr>

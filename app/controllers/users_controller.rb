@@ -32,7 +32,8 @@ class UsersController < ApplicationController
   def destroy
     @user.deleted_flg = User.switch_flg(@user.deleted_flg)
     @user.update(deleted_flg: @user.deleted_flg)
-    redirect_to new_user_session_path
+    reset_session
+    redirect_to root_path
   end
   
   private
