@@ -33,12 +33,7 @@
       <br>
       <%= f.number_field :tell %>
     <hr>
-      イチオシpoint検索
-      こだわり
-      おすすめ
-      特徴
-      イチオシ
-      個性
+      こだわり検索
       <br>
       <div class="check_box">
         <%= f.collection_check_boxes(:search_category_ids, SearchCategory.all, :id, :name, {include_hidden: false}) do |b| %>
