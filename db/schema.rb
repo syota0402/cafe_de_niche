@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_16_071835) do
+ActiveRecord::Schema.define(version: 2021_10_17_072925) do
 
   create_table "coffee_shop_search_categories", force: :cascade do |t|
     t.integer "coffee_shop_id"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 2021_10_16_071835) do
     t.string "self_introduction"
     t.string "image"
     t.string "instagram_url"
+    t.boolean "deleted_flg", default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

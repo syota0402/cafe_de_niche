@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  extend SwitchFlg
+  
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -30,4 +32,8 @@ class User < ApplicationRecord
     clean_up_passwords
     result
   end
+  
+  scope :search_information, -> (keyword) {
+    where("name LIKE :keyword OR email LIKE :keyword", keyword: "%#{keyword}%")
+  }
 end

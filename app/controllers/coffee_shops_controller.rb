@@ -38,7 +38,7 @@ class CoffeeShopsController < ApplicationController
   end
   
   def search
-    @coffee_shop_search_service = CoffeeShopSearchService.new(params[:name],params[:tell])
+    @coffee_shop_search_service = CoffeeShopSearchService.new(params[:name],params[:tell],params[:search_category_ids])
     @coffee_shops = @coffee_shop_search_service.search
   end
   

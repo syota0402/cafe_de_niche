@@ -29,6 +29,13 @@ class UsersController < ApplicationController
   def edit_password
   end
   
+  def destroy
+    @user.deleted_flg = User.switch_flg(@user.deleted_flg)
+    @user.update(deleted_flg: @user.deleted_flg)
+    reset_session
+    redirect_to root_path
+  end
+  
   private
   def set_user
     @user = current_user
