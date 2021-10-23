@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   
   resources :coffee_shops do
     get :search, on: :collection
+    resources :reviews, only: [:create]
   end
   
   namespace :dashboard do

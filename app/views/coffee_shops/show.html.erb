@@ -27,4 +27,26 @@
   <br>
   画像３<%= @coffee_shop.third_image_url %>
 	<br>
+	
+	<div class = "row">
+		<% @reviews.each do |review| %>
+			<dic class="offset-md-5 col-md-5">
+				<p class="h3"><%= review.review_comment %></p>
+				<label><%= review.created_at %></label>
+			</dic>
+		<%end %>
+	</div>
+	
+	<% if user_signed_in? %>
+		<div class="row">
+			<div class="offset-md-5 col-md-5">
+				<%= form_with model: @review, url: coffee_shop_reviews_path(@coffee_shop) do |f| %>
+					<%= f.text_area :review_comment, class: "form-control m-2" %>
+					<%= f.number_field :review_score, class: "form-control m-2" %>
+					<%= f.submit "レビューを追加" %>
+				<% end %>
+			</div>
+		</div>
+	<% end %>
+	
 <%= link_to "戻る", :back %>
