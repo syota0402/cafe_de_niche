@@ -36,6 +36,10 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
   
+  def show
+    @show_user = User.find_by(id: params[:id])
+  end
+  
   private
   def set_user
     @user = current_user

@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
-  get 'users/edit'
-  get 'users/update'
-  get 'users/mypage'
   get "dashboard", :to => "dashboard#index"
+  get '/users/:id', to: 'users#show'
   
   resources :coffee_shops do
     get :search, on: :collection
