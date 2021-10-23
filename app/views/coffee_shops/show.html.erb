@@ -32,6 +32,7 @@
 		<% @reviews.each do |review| %>
 			<dic class="offset-md-5 col-md-5">
 				<p class="h3"><%= review.review_comment %></p>
+				<p class="h4"><%= review.review_score %></p>
 				<label><%= review.created_at %></label>
 			</dic>
 		<%end %>
