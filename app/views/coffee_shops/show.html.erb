@@ -26,27 +26,29 @@
   画像２<%= @coffee_shop.second_image_url %>
   <br>
   画像３<%= @coffee_shop.third_image_url %>
-	<br>
+	<hr>
 	
-	<div class = "row">
-		<% @reviews.each do |review| %>
-			<dic class="offset-md-5 col-md-5">
-				<p class="h3"><%= review.review_comment %></p>
-				<p class="h4"><%= review.review_score %></p>
-				<label><%= review.created_at %></label>
-			</dic>
-		<%end %>
-	</div>
+	<% @reviews.each do |review| %>
+		<dic class="offset-md-5 col-md-5">
+			<p>投稿者：<%= review.user_id %></p>
+			<p>投稿者：<%= link_to review.user_id, user_path(review.user_id) %></p>
+			<p>スコア：<%= review.review_score %></p>
+			<p>レビュー：<%= review.review_comment %></p>
+			<label>投稿日：<%= review.created_at %></label>
+			<% if user_signed_in? and current_user.id == review.user_id %>
+				<p><%= link_to "削除", review_path(review), method: :delete, data: { confirm: '削除してもいいですか?' } %></p>
+			<% end %>
+			<hr>
+		</dic>
+	<%end %>
 	
 	<% if user_signed_in? %>
-		<div class="row">
-			<div class="offset-md-5 col-md-5">
-				<%= form_with model: @review, url: coffee_shop_reviews_path(@coffee_shop) do |f| %>
-					<%= f.text_area :review_comment, class: "form-control m-2" %>
-					<%= f.number_field :review_score, class: "form-control m-2" %>
-					<%= f.submit "レビューを追加" %>
-				<% end %>
-			</div>
+		<div class="offset-md-5 col-md-5">
+			<%= form_with model: @review, url: coffee_shop_reviews_path(@coffee_shop) do |f| %>
+				<%= f.text_area :review_comment, class: "form-control m-2" %>
+				<%= f.number_field :review_score, class: "form-control m-2" %>
+				<%= f.submit "レビューを追加" %>
+			<% end %>
 		</div>
 	<% end %>
 	

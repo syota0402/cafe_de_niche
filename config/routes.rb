@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
   get "dashboard", :to => "dashboard#index"
-  get '/users/:id', to: 'users#show'
   
   resources :coffee_shops do
     get :search, on: :collection
     resources :reviews, only: [:create]
   end
+  
+  resources :reviews, only: [:destroy]
   
   namespace :dashboard do
     resources :users, only: [:index, :destroy]
@@ -39,5 +40,7 @@ Rails.application.routes.draw do
       delete "mypage/delete", :to => "users#destroy"
     end
   end
+  
+  get '/users/:id', to: 'users#show'
   
 end

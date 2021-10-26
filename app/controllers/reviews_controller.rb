@@ -6,6 +6,13 @@ class ReviewsController < ApplicationController
     redirect_to coffee_shop_url(coffee_shop)
   end
   
+  def destroy
+    @review = Review.find(params[:id])
+    coffee_shop = CoffeeShop.find(@review.coffee_shop_id)
+    @review.destroy
+    redirect_to coffee_shop_url(coffee_shop)
+  end
+  
   private
   def review_params
     params.require(:review).permit(:review_comment, :review_score).merge(user_id: current_user.id, coffee_shop_id: params[:coffee_shop_id])

@@ -6,7 +6,7 @@ class CoffeeShopsController < ApplicationController
   def show
     @coffee_shop = CoffeeShop.find(params[:id])
     @reviews = @coffee_shop.reviews
-    @review = @reviews.new
+    @review = Review.new
   end
 
   def new
