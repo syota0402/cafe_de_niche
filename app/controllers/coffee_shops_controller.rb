@@ -42,12 +42,25 @@ class CoffeeShopsController < ApplicationController
   end
   
   def search
-    @coffee_shop_search_service = CoffeeShopSearchService.new(params[:name],params[:tell],params[:search_category_ids],params[:review_score],params[:review_score_search_type],params[:review_count],params[:review_count_search_type])
+    @coffee_shop_search_service = CoffeeShopSearchService.new(set_search_hash)
     @coffee_shops = @coffee_shop_search_service.search
   end
   
   private
     def coffee_shop_params
       params.require(:coffee_shop).permit(:name, :shop_url, :address, :tell, :access, :business_start_hour, :business_end_hour, :regular_holiday, :instagram_url, :instagram_spot_url, :municipalitie_id, :first_image_url, :second_image_url, :third_image_url)
+    end
+    
+    def set_search_hash
+      hash = {}
+      hash.class
+      hash[:name] = params[:name]
+      hash[:tell] = params[:tell]
+      hash[:search_category_ids] = params[:search_category_ids]
+      hash[:review_score] = params[:review_score]
+      hash[:review_score_search_type] = params[:review_score_search_type]
+      hash[:review_count] = params[:review_count]
+      hash[:review_count_search_type] = params[:review_count_search_type]
+      hash
     end
 end

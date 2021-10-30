@@ -1,12 +1,12 @@
 class CoffeeShopSearchService
-  def initialize(name,tell,search_category_ids,review_score,review_score_search_type,review_count,review_count_search_type)
-    @name = name
-    @tell = tell
-    @search_category_ids = search_category_ids
-    @review_score = review_score
-    @review_score_search_type = review_score_search_type
-    @review_count = review_count
-    @review_count_search_type = review_count_search_type
+  def initialize(hash)
+    @name = hash[:name]
+    @tell = hash[:tell]
+    @search_category_ids = hash[:search_category_ids]
+    @review_score = hash[:review_score]
+    @review_score_search_type = hash[:review_score_search_type]
+    @review_count = hash[:review_count]
+    @review_count_search_type = hash[:review_count_search_type]
   end
   
   def search
