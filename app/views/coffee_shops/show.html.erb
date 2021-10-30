@@ -1,4 +1,8 @@
 <h1>CoffeeShops#show</h1>
+	<%= link_to favorite_coffee_shop_path, class: "btn favorite-button text-favorite" do %>
+		<i class="fa fa-heart"></i><%= current_user.likes?(@coffee_shop) ? "お気に入り解除" : "お気に入り" %>
+	<% end %>
+	<br>
   店舗名<%= @coffee_shop.name %>
   <br>
   店舗HP<%= @coffee_shop.shop_url %>

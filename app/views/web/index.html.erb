@@ -8,6 +8,10 @@
         <%= current_user.name %>
         さん
         </p>
+        お気に入り店舗
+        <% current_user.likees(CoffeeShop).each do |favorite_coffee_shop| %>
+          <%= link_to favorite_coffee_shop.name, coffee_shop_path(favorite_coffee_shop) %>
+        <% end %>
       <!--サインインしていない-->
       <% else %>
         <div class="cover-container-befoer-sign-in">

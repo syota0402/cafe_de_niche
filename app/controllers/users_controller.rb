@@ -40,6 +40,10 @@ class UsersController < ApplicationController
     @show_user = User.find_by(id: params[:id])
   end
   
+  def favorite
+    @favorites = @user.likees(CoffeeShop)
+  end
+  
   private
   def set_user
     @user = current_user

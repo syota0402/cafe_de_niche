@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   get "dashboard", :to => "dashboard#index"
   
   resources :coffee_shops do
+    member do 
+      get :favorite
+    end
     get :search, on: :collection
     resources :reviews, only: [:create]
   end
