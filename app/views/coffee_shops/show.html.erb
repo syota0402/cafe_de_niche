@@ -27,11 +27,12 @@
   <br>
   画像３<%= @coffee_shop.third_image_url %>
 	<hr>
+	レビュー点数<%= @review_average_score %>
+	<hr>
 	
 	<% @reviews.each do |review| %>
 		<dic class="offset-md-5 col-md-5">
-			<p>投稿者：<%= review.user_id %></p>
-			<p>投稿者：<%= link_to review.user_id, user_path(review.user_id) %></p>
+			<p>投稿者：<%= link_to review.user.name, user_path(review.user_id) %></p>
 			<p>スコア：<%= review.review_score %></p>
 			<p>レビュー：<%= review.review_comment %></p>
 			<label>投稿日：<%= review.created_at %></label>
@@ -45,7 +46,10 @@
 	<% if user_signed_in? %>
 		<div class="offset-md-5 col-md-5">
 			<%= form_with model: @review, url: coffee_shop_reviews_path(@coffee_shop) do |f| %>
+				レビュー内容 ※150字以内
 				<%= f.text_area :review_comment, class: "form-control m-2" %>
+				<br>
+				レビュースコア ※0~100、整数のみ
 				<%= f.number_field :review_score, class: "form-control m-2" %>
 				<%= f.submit "レビューを追加" %>
 			<% end %>

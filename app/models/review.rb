@@ -4,7 +4,7 @@ class Review < ApplicationRecord
   
   # バリデーション
   # 必須項目
-  validates :review_comment, :review_score, presence: true
+  validates :review_score, presence: true
   
   # 文字数
   validates :review_comment, length: { maximum: 150}

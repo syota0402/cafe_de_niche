@@ -40,8 +40,18 @@
           <%= b.label { b.check_box + b.text } %>
         <% end %>
       </div>
+    <hr>
+      レビュー点数検索
+      <br>
+      <%= f.number_field :review_score %>
+      <%= f.radio_button :review_score_search_type, :more_than, {:checked => true} %>
+      <%= f.label :review_score_search_type, "以上", {value: :more_than, stylr: "display: inline-block;"} %>
+      <%= f.radio_button :review_score_search_type, :less_than %>
+      <%= f.label :review_score_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>
+    <hr>
       <%= f.submit :search %>
     <% end %> 
+      
   </div>
   
   <hr>
