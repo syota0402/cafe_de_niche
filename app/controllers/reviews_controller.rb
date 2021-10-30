@@ -2,11 +2,11 @@ class ReviewsController < ApplicationController
   def create
     coffee_shop = CoffeeShop.find(params[:coffee_shop_id])
     review = coffee_shop.review_new
-    if review_params[:review_score] <= "100"
+    if review_params[:review_score].to_i <= 100 && review_params[:review_score].to_i >= 0
       review.save_review(review,review_params)
       redirect_to coffee_shop_url(coffee_shop)
     else
-      flash[:alert] = "スコアは100以下でレビューしてください"
+      flash[:alert] = "スコアは0~100でレビューしてください"
       redirect_back(fallback_location: coffee_shop_url(coffee_shop))
     end
   end
