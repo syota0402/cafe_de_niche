@@ -26,5 +26,34 @@
   画像２<%= @coffee_shop.second_image_url %>
   <br>
   画像３<%= @coffee_shop.third_image_url %>
-	<br>
+	<hr>
+	レビュー点数<%= @review_average_score %>
+	<hr>
+	
+	<% @reviews.each do |review| %>
+		<dic class="offset-md-5 col-md-5">
+			<p>投稿者：<%= link_to review.user.name, user_path(review.user_id) %></p>
+			<p>スコア：<%= review.review_score %></p>
+			<p>レビュー：<%= review.review_comment %></p>
+			<label>投稿日：<%= review.created_at %></label>
+			<% if user_signed_in? and current_user.id == review.user_id %>
+				<p><%= link_to "削除", review_path(review), method: :delete, data: { confirm: '削除してもいいですか?' } %></p>
+			<% end %>
+			<hr>
+		</dic>
+	<%end %>
+	
+	<% if user_signed_in? %>
+		<div class="offset-md-5 col-md-5">
+			<%= form_with model: @review, url: coffee_shop_reviews_path(@coffee_shop) do |f| %>
+				レビュー内容 ※150字以内
+				<%= f.text_area :review_comment, class: "form-control m-2" %>
+				<br>
+				レビュースコア ※0~100、整数のみ
+				<%= f.number_field :review_score, class: "form-control m-2" %>
+				<%= f.submit "レビューを追加" %>
+			<% end %>
+		</div>
+	<% end %>
+	
 <%= link_to "戻る", :back %>

@@ -1,7 +1,7 @@
 class CoffeeShop < ApplicationRecord
 	has_many :coffee_shop_search_categories, dependent: :destroy
 	has_many :search_categories, :through => :coffee_shop_search_categories
-	
+	has_many :reviews
 	accepts_nested_attributes_for :coffee_shop_search_categories, allow_destroy: true
 	
 	# バリデーション
@@ -38,4 +38,8 @@ class CoffeeShop < ApplicationRecord
 		where("name LIKE ?", "%#{keyword}%").
 		or(where(tell: keyword.to_i))
 	}
+	
+	def review_new
+		reviews.new
+	end
 end

@@ -5,6 +5,10 @@ class CoffeeShopsController < ApplicationController
 
   def show
     @coffee_shop = CoffeeShop.find(params[:id])
+    @reviews = @coffee_shop.reviews
+    @review = Review.new
+    # 店舗のレビューの平均点を計算
+    @review_average_score = ReviewAverageScoreService.new(@reviews).calculation
   end
 
   def new
@@ -38,7 +42,7 @@ class CoffeeShopsController < ApplicationController
   end
   
   def search
-    @coffee_shop_search_service = CoffeeShopSearchService.new(params[:name],params[:tell],params[:search_category_ids])
+    @coffee_shop_search_service = CoffeeShopSearchService.new(params[:name],params[:tell],params[:search_category_ids],params[:review_score],params[:review_score_search_type],params[:review_count],params[:review_count_search_type])
     @coffee_shops = @coffee_shop_search_service.search
   end
   
