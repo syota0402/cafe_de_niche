@@ -61,7 +61,7 @@
       <br>
       <%= f.number_field :review_count %>
       <%= f.radio_button :review_count_search_type, :more_than, {:checked => true} %>
-      <%= f.label :review_count_search_type, "以上", {value: :more_than, stylr: "display: inline-block;"} %>
+      <%= f.label :review_count_search_type, "以上", {value: :more_than, style: "display: inline-block;"} %>
       <%= f.radio_button :review_count_search_type, :less_than %>
       <%= f.label :review_count_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>
     <hr>
@@ -69,7 +69,7 @@
       <br>
       <%= f.number_field :favorite_count %>
       <%= f.radio_button :favorite_count_search_type, :more_than, {:checked => true} %>
-      <%= f.label :favorite_count_search_type, "以上", {value: :more_than, stylr: "display: inline-block;"} %>
+      <%= f.label :favorite_count_search_type, "以上", {value: :more_than, style: "display: inline-block;"} %>
       <%= f.radio_button :favorite_count_search_type, :less_than %>
       <%= f.label :favorite_count_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>
     <hr>

@@ -5,6 +5,11 @@
 	<br>
 	お気に入り数：<%= @likers.count %>
 	<br>
+	お気に入りユーザー：
+	<% @likers.last(5).each do |liker| %>
+		<%= link_to liker.name, user_path(liker.id) %>,
+	<% end %>
+	<br>
   店舗名：<%= @coffee_shop.name %>
   <br>
   店舗HP：<%= @coffee_shop.shop_url %>
