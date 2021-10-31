@@ -1,0 +1,11 @@
+<h1>お気に入り</h1>
+
+<hr>
+
+<% @favorites.each do |favorite| %>
+  <%= favorite.name %>
+  <%= link_to favorite_coffee_shop_path(favorite) do %>
+    解除
+  <% end %>
+  <hr>
+<% end %>

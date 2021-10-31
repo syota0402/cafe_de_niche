@@ -38,10 +38,26 @@ class UsersController < ApplicationController
   
   def show
     @show_user = User.find_by(id: params[:id])
+    @followers = @show_user.followers(User)
+    @reviews = Review.where(user_id: params[:id])
   end
   
   def favorite
     @favorites = @user.likees(CoffeeShop)
+  end
+
+  def follow
+    @follow_user = User.find_by(id: params[:id])
+    current_user.toggle_follow!(@follow_user)
+    redirect_to user_path(@follow_user.id)
+  end
+  
+  def following
+    @follow_users = @user.followees(User)
+  end
+  
+  def follower 
+    @follower = @user.followers(User)
   end
   
   private

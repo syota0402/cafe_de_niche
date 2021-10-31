@@ -1,0 +1,8 @@
+<h1>フォロワー</h1>
+
+<hr>
+
+<% @follower.each do |follower| %>
+  <%= link_to follower.name, user_path(follower.id) %>
+  <hr>
+<% end %>

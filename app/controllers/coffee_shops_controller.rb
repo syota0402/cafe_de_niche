@@ -7,6 +7,7 @@ class CoffeeShopsController < ApplicationController
     @coffee_shop = CoffeeShop.find(params[:id])
     @reviews = @coffee_shop.reviews
     @review = Review.new
+    @likers = @coffee_shop.likers(User)
     # 店舗のレビューの平均点を計算
     @review_average_score = ReviewAverageScoreService.new(@reviews).calculation
   end
@@ -67,6 +68,8 @@ class CoffeeShopsController < ApplicationController
       hash[:review_score_search_type] = params[:review_score_search_type]
       hash[:review_count] = params[:review_count]
       hash[:review_count_search_type] = params[:review_count_search_type]
+      hash[:favorite_count] = params[:favorite_count]
+      hash[:favorite_count_search_type] = params[:favorite_count_search_type]
       hash
     end
 end

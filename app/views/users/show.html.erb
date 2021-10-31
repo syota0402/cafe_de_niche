@@ -1,5 +1,13 @@
 <h1>ユーザー詳細</h1>
 
+<% unless current_user == @show_user %>
+  <%= link_to follow_user_path, class: "btn favorite-button text-favorite" do %>
+  	<i class="fa fa-heart"></i><%= current_user.follows?(@show_user) ? "フォロー解除" : "フォロー" %><br>
+  <% end %>
+<%end %>
+<br>
+フォロワー数：<%= @followers.count %>
+<br>
 名前：<%= @show_user.name %>
 <br>
 年齢：<%= @show_user.age %>
@@ -8,5 +16,19 @@
 <br>
 自己紹介：<%= @show_user.self_introduction %>
 <br>
+お気に入り店舗:<%= @show_user.likees(CoffeeShop).count %>件
+<br>
+<% @show_user.likees(CoffeeShop).each do |favorite_coffee_shop| %>
+  <%= link_to favorite_coffee_shop.name, coffee_shop_path(favorite_coffee_shop) %>|
+<%end %>
+<br>
+レビュー：<%= @reviews.count %>件
+<br>
+<% @reviews.last(10).each do |review| %>
+  店舗名<%= link_to review.coffee_shop.name, coffee_shop_path(review.coffee_shop) %><br>
+  スコア<%= review.review_score %><br>
+  <%= review.review_comment %>
+  <hr>
+<% end %>
 
 <%= link_to "戻る", :back %>
