@@ -1,33 +1,46 @@
 <h1>CoffeeShops#show</h1>
-  店舗名<%= @coffee_shop.name %>
+	<%= link_to favorite_coffee_shop_path, class: "btn favorite-button text-favorite" do %>
+		<i class="fa fa-heart"></i><%= current_user.likes?(@coffee_shop) ? "お気に入り解除" : "お気に入り" %>
+	<% end %>
+	<br>
+	お気に入り数：<%= @likers.count %>
+	<br>
+	お気に入りユーザー：
+	<% @likers.last(5).each do |liker| %>
+		<%= link_to liker.name, user_path(liker.id) %>,
+	<% end %>
+	<br>
+  店舗名：<%= @coffee_shop.name %>
   <br>
-  店舗HP<%= @coffee_shop.shop_url %>
+  店舗HP：<%= @coffee_shop.shop_url %>
   <br>
-  住所<%= @coffee_shop.address %>
+  住所：<%= @coffee_shop.address %>
   <br>
-  電話番号<%= @coffee_shop.tell %>
+  電話番号：<%= @coffee_shop.tell %>
   <br>
-  アクセス<%= @coffee_shop.access %>
+  アクセス：<%= @coffee_shop.access %>
   <br>
-  営業開始時間<%= @coffee_shop.business_start_hour %>
+  営業開始時間：<%= @coffee_shop.business_start_hour %>
   <br>
-  営業終了時間<%= @coffee_shop.business_end_hour %>
+  営業終了時間：<%= @coffee_shop.business_end_hour %>
   <br>
-  定休日<%= @coffee_shop.regular_holiday %>
+  定休日：<%= @coffee_shop.regular_holiday %>
   <br>
-  Instagram公式URL<%= @coffee_shop.instagram_url %>
+  Instagram公式URL：<%= @coffee_shop.instagram_url %>
   <br>
-  InstagramスポットURL<%= @coffee_shop.instagram_spot_url %>
+  InstagramスポットURL：<%= @coffee_shop.instagram_spot_url %>
   <br>
-  エリアid<%= @coffee_shop.municipalitie_id %>
+  エリアid：<%= @coffee_shop.municipalitie_id %>
   <br>
-  画像１<%= @coffee_shop.first_image_url %>
+  画像１：<%= @coffee_shop.first_image_url %>
   <br>
-  画像２<%= @coffee_shop.second_image_url %>
+  画像２：<%= @coffee_shop.second_image_url %>
   <br>
-  画像３<%= @coffee_shop.third_image_url %>
+  画像３：<%= @coffee_shop.third_image_url %>
 	<hr>
-	レビュー点数<%= @review_average_score %>
+	レビュー数：<%= @reviews.count %>
+	<hr>
+	レビュー点数：<%= @review_average_score %>
 	<hr>
 	
 	<% @reviews.each do |review| %>

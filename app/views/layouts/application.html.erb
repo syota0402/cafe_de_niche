@@ -33,6 +33,7 @@
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <%= link_to "プロフィール変更", mypage_edit_users_path, class: "dropdown-item" %>
                     <%= link_to "パスワード変更", mypage_edit_password_users_path, class: "dropdown-item" %>
+                    <%= link_to "フォロワー", follower_users_path, class: "dropdown-item" %>
                     <%= link_to "sign out", logout_path, method: :delete, class: "dropdown-item" %>
                     <%= link_to "管理画面", dashboard_path, class: "dropdown-item" %>
                     

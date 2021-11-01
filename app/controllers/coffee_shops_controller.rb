@@ -7,6 +7,7 @@ class CoffeeShopsController < ApplicationController
     @coffee_shop = CoffeeShop.find(params[:id])
     @reviews = @coffee_shop.reviews
     @review = Review.new
+    @likers = @coffee_shop.likers(User)
     # 店舗のレビューの平均点を計算
     @review_average_score = ReviewAverageScoreService.new(@reviews).calculation
   end
@@ -46,6 +47,12 @@ class CoffeeShopsController < ApplicationController
     @coffee_shops = @coffee_shop_search_service.search
   end
   
+  def favorite
+    @coffee_shop = CoffeeShop.find(params[:id])
+    current_user.toggle_like!(@coffee_shop)
+    redirect_to coffee_shop_url @coffee_shop
+  end
+  
   private
     def coffee_shop_params
       params.require(:coffee_shop).permit(:name, :shop_url, :address, :tell, :access, :business_start_hour, :business_end_hour, :regular_holiday, :instagram_url, :instagram_spot_url, :municipalitie_id, :first_image_url, :second_image_url, :third_image_url)
@@ -61,6 +68,8 @@ class CoffeeShopsController < ApplicationController
       hash[:review_score_search_type] = params[:review_score_search_type]
       hash[:review_count] = params[:review_count]
       hash[:review_count_search_type] = params[:review_count_search_type]
+      hash[:favorite_count] = params[:favorite_count]
+      hash[:favorite_count_search_type] = params[:favorite_count_search_type]
       hash
     end
 end

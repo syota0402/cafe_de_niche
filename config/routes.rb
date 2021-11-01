@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   get "dashboard", :to => "dashboard#index"
   
   resources :coffee_shops do
+    member do 
+      get :favorite
+    end
     get :search, on: :collection
     resources :reviews, only: [:create]
   end
@@ -38,6 +41,12 @@ Rails.application.routes.draw do
       get "mypage/edit_password", :to => "users#edit_password"
       put "mypage/password", :to => "users#update_password"
       delete "mypage/delete", :to => "users#destroy"
+      get "favorite", :to => "users#favorite"
+      get "following", :to => "users#following"
+      get "follower", :to => "users#follower" 
+    end
+    member do 
+      get :follow
     end
   end
   

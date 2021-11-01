@@ -7,6 +7,8 @@ class CoffeeShopSearchService
     @review_score_search_type = hash[:review_score_search_type]
     @review_count = hash[:review_count]
     @review_count_search_type = hash[:review_count_search_type]
+    @favorite_count = hash[:favorite_count]
+    @favorite_count_search_type = hash[:favorite_count_search_type]
   end
   
   def search
@@ -26,6 +28,9 @@ class CoffeeShopSearchService
     
     # レビュー数検索
     search_by_review_count if @review_count.present?
+    
+    # お気に入り数検索
+    search_by_favorite_count if @favorite_count.present?
     
     @coffee_shops
   end
@@ -84,6 +89,29 @@ class CoffeeShopSearchService
         coffee_shop_ids << coffee_shop.id
       # 以下
       elsif @review_count_search_type.eql?("less_than") && @review_count.to_i >= coffee_shop.reviews.count
+        coffee_shop_ids << coffee_shop.id
+      end
+    end
+    # 条件にあう店舗を取得
+    @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
+  end
+  
+  # お気に入り数検索
+  def search_by_favorite_count
+    coffee_shop_ids = []
+    @coffee_shops.each do |coffee_shop|
+      # 0が検索条件にあれば0件の店舗のみ表示
+      if @favorite_count.eql?("0")
+        coffee_shop_ids << coffee_shop.id if coffee_shop.likers(User).count.zero?
+        next
+      end
+      
+      next if coffee_shop.likers(User).count.zero?
+      # 以上
+      if @favorite_count_search_type.eql?("more_than") && @favorite_count.to_i <= coffee_shop.likers(User).count
+        coffee_shop_ids << coffee_shop.id
+      # 以下
+      elsif @favorite_count_search_type.eql?("less_than") && @favorite_count.to_i >= coffee_shop.likers(User).count
         coffee_shop_ids << coffee_shop.id
       end
     end

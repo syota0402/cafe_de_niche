@@ -6,6 +6,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
+  acts_as_liker
+  acts_as_followable
+  acts_as_follower
          
   # バリデーション
   #文字数

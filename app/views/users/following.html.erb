@@ -1,0 +1,11 @@
+<h1>フォロー</h1>
+
+<hr>
+
+<% @follow_users.each do |follow_user| %>
+  <%= follow_user.name %>
+  <%= link_to follow_user_path(follow_user) do %>
+    解除
+  <% end %>
+  <hr>
+<% end %>

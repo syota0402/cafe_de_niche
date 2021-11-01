@@ -3,11 +3,19 @@
       <!-- user_signed_in? はユーザがログインしているか調べるdeviseのHelperメソッド -->
       <!--サインインしている-->
       <% if user_signed_in? %>
-        <p>サインイン済み</p>
         <p>ようこそ
         <%= current_user.name %>
         さん
         </p>
+        <%= link_to "お気に入り店舗:", favorite_users_path %>
+        <% current_user.likees(CoffeeShop).last(5).each do |favorite_coffee_shop| %>
+          <%= link_to favorite_coffee_shop.name, coffee_shop_path(favorite_coffee_shop) %>
+        <% end %>
+        <br>
+        <%= link_to "フォロー:", following_users_path %>
+        <% current_user.followees(User).last(5).each do |follow_user| %>
+          <%= link_to follow_user.name, user_path(follow_user.id) %>
+        <% end %>
       <!--サインインしていない-->
       <% else %>
         <div class="cover-container-befoer-sign-in">
@@ -53,13 +61,20 @@
       <br>
       <%= f.number_field :review_count %>
       <%= f.radio_button :review_count_search_type, :more_than, {:checked => true} %>
-      <%= f.label :review_count_search_type, "以上", {value: :more_than, stylr: "display: inline-block;"} %>
+      <%= f.label :review_count_search_type, "以上", {value: :more_than, style: "display: inline-block;"} %>
       <%= f.radio_button :review_count_search_type, :less_than %>
       <%= f.label :review_count_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>
     <hr>
+      お気に入り数検索　※0で検索するとお気に入り数0のお店のみ表示します。
+      <br>
+      <%= f.number_field :favorite_count %>
+      <%= f.radio_button :favorite_count_search_type, :more_than, {:checked => true} %>
+      <%= f.label :favorite_count_search_type, "以上", {value: :more_than, style: "display: inline-block;"} %>
+      <%= f.radio_button :favorite_count_search_type, :less_than %>
+      <%= f.label :favorite_count_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>
+    <hr>
       <%= f.submit :search %>
     <% end %> 
-      
   </div>
   
   <hr>

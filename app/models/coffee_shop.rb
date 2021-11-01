@@ -3,6 +3,7 @@ class CoffeeShop < ApplicationRecord
 	has_many :search_categories, :through => :coffee_shop_search_categories
 	has_many :reviews
 	accepts_nested_attributes_for :coffee_shop_search_categories, allow_destroy: true
+	acts_as_likeable
 	
 	# バリデーション
 	# 必ず登録してほしい項目
