@@ -10,6 +10,12 @@
 		<%= link_to liker.name, user_path(liker.id) %>,
 	<% end %>
 	<br>
+	<% if @coffee_shop.image.attached? %>
+    <%= image_tag @coffee_shop.image, size: "100x100" %>
+  <% else %>
+    <%= image_tag "/images/review_dummy.png" %>
+  <% end %>
+	<br>
   店舗名：<%= @coffee_shop.name %>
   <br>
   店舗HP：<%= @coffee_shop.shop_url %>
@@ -31,12 +37,6 @@
   InstagramスポットURL：<%= @coffee_shop.instagram_spot_url %>
   <br>
   エリアid：<%= @coffee_shop.municipalitie_id %>
-  <br>
-  画像１：<%= @coffee_shop.first_image_url %>
-  <br>
-  画像２：<%= @coffee_shop.second_image_url %>
-  <br>
-  画像３：<%= @coffee_shop.third_image_url %>
 	<hr>
 	レビュー数：<%= @reviews.count %>
 	<hr>
@@ -45,6 +45,13 @@
 	
 	<% @reviews.each do |review| %>
 		<dic class="offset-md-5 col-md-5">
+			<p>
+				<% if review.image.attached? %>
+					<%= image_tag review.image, size: "100x100" %>
+				<% else %>
+					<%= image_tag "/images/review_dummy.png", size: "100x100" %>
+				<% end %>
+		  </p>
 			<p>投稿者：<%= link_to review.user.name, user_path(review.user_id) %></p>
 			<p>スコア：<%= review.review_score %></p>
 			<p>レビュー：<%= review.review_comment %></p>
@@ -59,6 +66,17 @@
 	<% if user_signed_in? %>
 		<div class="offset-md-5 col-md-5">
 			<%= form_with model: @review, url: coffee_shop_reviews_path(@coffee_shop) do |f| %>
+		    <%= f.label "画像" %>
+		    <% if @review.image.attached? %>
+		      <%= image_tag @review.image, size: "100x100" %>
+		    <% else %>
+		      <img src="#">
+		    <% end %>
+		    <div class="d-flex flex-column ml-2">
+		      <small class="mb-3">600px×600px推奨。<br>画像をアップロードして下さい。</small>
+		      <%= f.file_field :image %>
+		    </div>
+				<br>
 				レビュー内容 ※150字以内
 				<%= f.text_area :review_comment, class: "form-control m-2" %>
 				<br>
