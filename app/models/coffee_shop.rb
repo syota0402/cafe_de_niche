@@ -36,6 +36,8 @@ class CoffeeShop < ApplicationRecord
 	validates :second_image_url, length: { maximum: 2048}
 	validates :third_image_url, length: { maximum: 2048}
 	
+	validate :image_length
+	
 	scope :search_for_name_and_tell, -> (keyword) {
 		where("name LIKE ?", "%#{keyword}%").
 		or(where(tell: keyword.to_i))
@@ -44,4 +46,13 @@ class CoffeeShop < ApplicationRecord
 	def review_new
 		reviews.new
 	end
+	
+	private
+
+  def image_length
+    if images.length >= 4
+      errors.add(:images, "は3枚以内にしてください")
+    end
+  end
+	
 end

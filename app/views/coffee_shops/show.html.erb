@@ -68,16 +68,9 @@
 	<% if user_signed_in? %>
 		<div class="offset-md-5 col-md-5">
 			<%= form_with model: @review, url: coffee_shop_reviews_path(@coffee_shop) do |f| %>
-		    <%= f.label "画像" %>
-		    <% if @review.image.attached? %>
-		      <%= image_tag @review.image, size: "100x100" %>
-		    <% else %>
-		      <img src="#">
-		    <% end %>
-		    <div class="d-flex flex-column ml-2">
-		      <small class="mb-3">600px×600px推奨。<br>画像をアップロードして下さい。</small>
-		      <%= f.file_field :image %>
-		    </div>
+		  
+				<%= f.file_field :image %>
+				<div id="new-image"></div>
 				<br>
 				レビュー内容 ※150字以内
 				<%= f.text_area :review_comment, class: "form-control m-2" %>
@@ -90,3 +83,5 @@
 	<% end %>
 	
 <%= link_to "戻る", :back %>
+
+<%= javascript_include_tag "coffee_shops/show" %>

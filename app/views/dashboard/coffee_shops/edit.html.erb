@@ -34,8 +34,9 @@
     <% end %>
     <div class="d-flex flex-column ml-2">
       <small class="mb-3">600px×600px推奨。<br>画像をアップロードして下さい。</small>
-      <%= f.file_field :image, multiple: true %>
+      <%= f.file_field :images, multiple: true %>
     </div>
+    <div id="new-image"></div>
   </div>
   <br>
   <div class="check_box">
@@ -48,3 +49,5 @@
 <% end %>
 
 <%= link_to "一覧に戻る", dashboard_coffee_shops_path %>
+
+<%= javascript_include_tag "dashboard/coffee_shops/edit" %>

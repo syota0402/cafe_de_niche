@@ -2,15 +2,14 @@
 <hr>
 <%= form_with url: mypage_users_path, local: true, method: :put do |f| %>
   <div class="form-inline mt-4 mb-4 row">
-    <%= f.label "画像" %>
     <% if @user.image.attached? %>
-      <%= image_tag @user.image, size: "100x100" %>
+      <%= image_tag @user.image, id: "user-image-preview", size: "100x100" %>
     <% else %>
-      <img src="#">
+      <img src="#", id: "user-image-preview">
     <% end %>
     <div class="d-flex flex-column ml-2">
       <small class="mb-3">600px×600px推奨。<br>画像をアップロードして下さい。</small>
-      <%= f.file_field :image %>
+      <%= f.file_field :image, { onChange: "javascript: handleImage(this.files);"} %>
     </div>
   </div>
   
@@ -93,3 +92,5 @@
   </div>
   <% end %>
 </div>
+
+<%= javascript_include_tag "user/edit" %>
