@@ -26,9 +26,9 @@
         <tr>
           <td>
           <% if coffee_shop.image.attached? %>
-            <%= image_tag coffee_shop.image, class: "h-10 img-fluid" %>
+            <%= image_tag coffee_shop.image, size: "100x100" %>
           <% else %>
-            <%= image_tag "/images/coffee_shop_dummy.jpg", class: "h-10 img-fluid" %>
+            <%= image_tag "/images/coffee_shop_dummy.jpg", size: "100x100" %>
           <% end %>
           </td>
           <td><%= coffee_shop.name %></td>

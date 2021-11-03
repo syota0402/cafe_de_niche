@@ -1,6 +1,11 @@
 <h1>CoffeeShops#edit</h1>
 
 <%= form_with model: @coffee_shop do |f| %>
+	<% if f.image.attached? %>
+    <%= image_tag f.image, class: "h-10 img-fluid" %>
+  <% else %>
+    <%= image_tag "/images/coffee_shop_dummy.jpg", class: "h-10 img-fluid" %>
+  <% end %>
 	店舗名<%= f.text_field :name %>
   <br>
   店舗HP<%= f.text_field :shop_url %>
