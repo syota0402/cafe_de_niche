@@ -1,6 +1,21 @@
 <h1>ユーザー情報編集</h1>
 <hr>
 <%= form_with url: mypage_users_path, local: true, method: :put do |f| %>
+  <div class="form-inline mt-4 mb-4 row">
+    <%= f.label "画像" %>
+    <% if @user.image.attached? %>
+      <%= image_tag @user.image, size: "100x100" %>
+    <% else %>
+      <img src="#">
+    <% end %>
+    <div class="d-flex flex-column ml-2">
+      <small class="mb-3">600px×600px推奨。<br>画像をアップロードして下さい。</small>
+      <%= f.file_field :image %>
+    </div>
+  </div>
+  
+  <hr>
+  
   <%= f.label :name, "氏名" %>
   <%= f.text_field :name, value: @user.name %>
   
