@@ -23,11 +23,18 @@
   <br>
   エリアid<%= f.number_field :municipalitie_id %>
   <br>
-  画像１<%= f.text_field :first_image_url %>
-  <br>
-  画像２<%= f.text_field :second_image_url %>
-  <br>
-  画像３<%= f.text_field :third_image_url %>
+  <div class="form-inline mt-4 mb-4 row">
+    <%= f.label "画像" %>
+    <% if @coffee_shop.image.attached? %>
+      <%= image_tag @coffee_shop.image %>
+    <% else %>
+      <img src="#">
+    <% end %>
+    <div class="d-flex flex-column ml-2">
+      <small class="mb-3">600px×600px推奨。<br>画像をアップロードして下さい。</small>
+      <%= f.file_field :image %>
+    </div>
+  </div>
   <br>
   <div class="check_box">
     <%= f.collection_check_boxes(:search_category_ids, SearchCategory.all, :id, :name) do |b| %>

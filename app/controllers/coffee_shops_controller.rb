@@ -43,6 +43,8 @@ class CoffeeShopsController < ApplicationController
   end
   
   def search
+    # 表示させる配列作る
+    set_coffee_shop_search_conditions(set_search_hash)
     @coffee_shop_search_service = CoffeeShopSearchService.new(set_search_hash)
     @coffee_shops = @coffee_shop_search_service.search
   end
@@ -71,5 +73,10 @@ class CoffeeShopsController < ApplicationController
       hash[:favorite_count] = params[:favorite_count]
       hash[:favorite_count_search_type] = params[:favorite_count_search_type]
       hash
+    end
+    
+    def set_coffee_shop_search_conditions(hash)
+      @coffee_shop_search_conditions = []
+      @coffee_shop_search_conditions << "店舗名：#{params[:name]}" if params[:name].present?
     end
 end
