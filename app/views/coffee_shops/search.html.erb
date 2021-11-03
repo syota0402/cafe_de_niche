@@ -17,8 +17,8 @@
       <% @coffee_shops.each do |coffee_shop| %>
         <tr>
           <td>
-          <% if coffee_shop.image.attached? %>
-            <%= image_tag coffee_shop.image, size: "100x100" %>
+          <% if coffee_shop.images.attached? %>
+            <%= image_tag coffee_shop.images.first, size: "100x100" %>
           <% else %>
             <%= image_tag "/images/coffee_shop_dummy.jpg", size: "100x100" %>
           <% end %>

@@ -16,8 +16,8 @@
     <% @favorites.each do |favorite_coffee_shop| %>
       <tr>
         <td>
-        <% if favorite_coffee_shop.image.attached? %>
-          <%= image_tag favorite_coffee_shop.image, size: "100x100" %>
+        <% if favorite_coffee_shop.images.attached? %>
+          <%= image_tag favorite_coffee_shop.images.first, size: "100x100" %>
         <% else %>
           <%= image_tag "/images/coffee_shop_dummy.jpg", size: "100x100" %>
         <% end %>

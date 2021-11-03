@@ -10,10 +10,12 @@
 		<%= link_to liker.name, user_path(liker.id) %>,
 	<% end %>
 	<br>
-	<% if @coffee_shop.image.attached? %>
-    <%= image_tag @coffee_shop.image, size: "100x100" %>
+	<% if @coffee_shop.images.attached? %>
+		<% @coffee_shop.images.each do |image| %>
+    	<%= image_tag image, size: "100x100" %>
+    <% end %>
   <% else %>
-    <%= image_tag "/images/review_dummy.png" %>
+    <%= image_tag "/images/coffee_shop_dummy.jpg", size: "100x100" %>
   <% end %>
 	<br>
   店舗名：<%= @coffee_shop.name %>

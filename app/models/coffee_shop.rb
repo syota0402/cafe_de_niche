@@ -4,7 +4,7 @@ class CoffeeShop < ApplicationRecord
 	has_many :reviews
 	accepts_nested_attributes_for :coffee_shop_search_categories, allow_destroy: true
 	acts_as_likeable
-	has_one_attached :image
+	has_many_attached :images
 	
 	# バリデーション
 	# 必ず登録してほしい項目
