@@ -1,13 +1,13 @@
 <h1>店舗追加</h1>
 
 <%= form_with model: @coffee_shop, url: dashboard_coffee_shops_path, local: true do |f| %>
-  店舗名<%= f.text_field :name %>
+  ※店舗名<%= f.text_field :name %>
   <br>
   店舗HP<%= f.text_field :shop_url %>
   <br>
-  住所<%= f.text_field :address %>
+  ※住所<%= f.text_field :address %>
   <br>
-  電話番号<%= f.number_field :tell %>
+  ※電話番号<%= f.number_field :tell %>
   <br>
   アクセス<%= f.text_field :access %>
   <br>
@@ -21,7 +21,7 @@
   <br>
   InstagramスポットURL<%= f.text_field :instagram_spot_url %>
   <br>
-  エリア<%= f.select :municipalitie_id, @municipality_tags %>
+  ※エリア<%= f.select :municipalitie_id, @municipality_tags, { include_blank: '選択してください' } %>
   <br>
   <div class="form-inline mt-4 mb-4 row">
     <div class="d-flex flex-column ml-2">

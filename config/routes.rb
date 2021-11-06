@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get "dashboard", :to => "dashboard#index"
+  get "search", :to => "web#search"
   
   resources :coffee_shops do
     member do 
