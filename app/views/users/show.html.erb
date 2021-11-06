@@ -1,7 +1,7 @@
 <h1>ユーザー詳細</h1>
 
 <% unless current_user == @show_user %>
-  <%= link_to follow_user_path, class: "btn favorite-button text-favorite" do %>
+  <%= link_to follow_user_path(target_action: "show"), class: "btn favorite-button text-favorite" do %>
   	<i class="fa fa-heart"></i><%= current_user.follows?(@show_user) ? "フォロー解除" : "フォロー" %><br>
   <% end %>
 <%end %>

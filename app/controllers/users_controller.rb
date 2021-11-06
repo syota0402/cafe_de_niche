@@ -49,7 +49,11 @@ class UsersController < ApplicationController
   def follow
     @follow_user = User.find_by(id: params[:id])
     current_user.toggle_follow!(@follow_user)
-    redirect_to user_path(@follow_user.id)
+    if params[:target_action] = "show"
+      redirect_to user_path(@follow_user.id)
+    elsif params[:target_action] = "following"
+      redirect_to following_users_path
+    end
   end
   
   def following
