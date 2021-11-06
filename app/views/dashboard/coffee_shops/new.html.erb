@@ -23,11 +23,14 @@
   <br>
   エリアid<%= f.number_field :municipalitie_id %>
   <br>
-  画像１<%= f.text_field :first_image_url %>
-  <br>
-  画像２<%= f.text_field :second_image_url %>
-  <br>
-  画像３<%= f.text_field :third_image_url %>
+  <div class="form-inline mt-4 mb-4 row">
+    <div class="d-flex flex-column ml-2">
+      <small class="mb-3">600px×600px推奨。<br>画像をアップロードして下さい。</small>
+      <%= f.label "画像を選択" %>
+      <%= f.file_field :images, multiple: true %>
+    </div>
+    <div id="new-image"></div>
+  </div>
   <br>
   <div class="check_box">
     <%= f.collection_check_boxes(:search_category_ids, SearchCategory.all, :id, :name) do |b| %>
@@ -39,3 +42,5 @@
 <% end %>
 
 <%= link_to "一覧に戻る", dashboard_coffee_shops_path %>
+
+<%= javascript_include_tag "dashboard/coffee_shops/new" %>

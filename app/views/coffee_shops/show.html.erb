@@ -1,5 +1,5 @@
 <h1>CoffeeShops#show</h1>
-	<%= link_to favorite_coffee_shop_path, class: "btn favorite-button text-favorite" do %>
+	<%= link_to favorite_coffee_shop_path(target_action: "show"), class: "btn favorite-button text-favorite" do %>
 		<i class="fa fa-heart"></i><%= current_user.likes?(@coffee_shop) ? "お気に入り解除" : "お気に入り" %>
 	<% end %>
 	<br>
@@ -9,6 +9,14 @@
 	<% @likers.last(5).each do |liker| %>
 		<%= link_to liker.name, user_path(liker.id) %>,
 	<% end %>
+	<br>
+	<% if @coffee_shop.images.attached? %>
+		<% @coffee_shop.images.each do |image| %>
+    	<%= image_tag image, size: "100x100" %>
+    <% end %>
+  <% else %>
+    <%= image_tag "/images/coffee_shop_dummy.jpg", size: "100x100" %>
+  <% end %>
 	<br>
   店舗名：<%= @coffee_shop.name %>
   <br>
@@ -31,12 +39,6 @@
   InstagramスポットURL：<%= @coffee_shop.instagram_spot_url %>
   <br>
   エリアid：<%= @coffee_shop.municipalitie_id %>
-  <br>
-  画像１：<%= @coffee_shop.first_image_url %>
-  <br>
-  画像２：<%= @coffee_shop.second_image_url %>
-  <br>
-  画像３：<%= @coffee_shop.third_image_url %>
 	<hr>
 	レビュー数：<%= @reviews.count %>
 	<hr>
@@ -45,6 +47,13 @@
 	
 	<% @reviews.each do |review| %>
 		<dic class="offset-md-5 col-md-5">
+			<p>
+				<% if review.image.attached? %>
+					<%= image_tag review.image, size: "100x100" %>
+				<% else %>
+					<%= image_tag "/images/review_dummy.png", size: "100x100" %>
+				<% end %>
+		  </p>
 			<p>投稿者：<%= link_to review.user.name, user_path(review.user_id) %></p>
 			<p>スコア：<%= review.review_score %></p>
 			<p>レビュー：<%= review.review_comment %></p>
@@ -59,6 +68,10 @@
 	<% if user_signed_in? %>
 		<div class="offset-md-5 col-md-5">
 			<%= form_with model: @review, url: coffee_shop_reviews_path(@coffee_shop) do |f| %>
+		  
+				<%= f.file_field :image %>
+				<div id="new-image"></div>
+				<br>
 				レビュー内容 ※150字以内
 				<%= f.text_area :review_comment, class: "form-control m-2" %>
 				<br>
@@ -70,3 +83,5 @@
 	<% end %>
 	
 <%= link_to "戻る", :back %>
+
+<%= javascript_include_tag "coffee_shops/show" %>

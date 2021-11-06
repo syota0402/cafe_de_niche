@@ -54,6 +54,6 @@ class Dashboard::CoffeeShopsController < ApplicationController
     end
     
     def coffee_shop_params
-      params.require(:coffee_shop).permit(:name, :shop_url, :address, :tell, :access, :business_start_hour, :business_end_hour, :regular_holiday, :instagram_url, :instagram_spot_url, :municipalitie_id, :first_image_url, :second_image_url, :third_image_url, { :search_category_ids => [ ]})
+      params.require(:coffee_shop).permit(:name, :shop_url, :address, :tell, :access, :business_start_hour, :business_end_hour, :regular_holiday, :instagram_url, :instagram_spot_url, :municipalitie_id, {:search_category_ids => []}, images: [])
     end
 end

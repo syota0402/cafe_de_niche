@@ -1,21 +1,29 @@
 <h1>検索結果</h1>
+<h2>検索条件</h2>
+<%= @coffee_shop_search_conditions.first %>
+
 <% if @coffee_shops.blank? %>
   該当店舗なし
   <br>
 <% else %>
-  <table>
+  <table class="table mt-5">
     <thead>
       <tr>
-        <th>
-          Name
-        </th>
+        <th scope="col"></th>
+        <th scope="col">店舗名</th>
       </tr>
     </thead>
     <tbody>
       <% @coffee_shops.each do |coffee_shop| %>
-      
         <tr>
-          <td><%= coffee_shop.name %><%= link_to "Show", coffee_shop_path(coffee_shop) %></td>
+          <td>
+          <% if coffee_shop.images.attached? %>
+            <%= image_tag coffee_shop.images.first, size: "100x100" %>
+          <% else %>
+            <%= image_tag "/images/coffee_shop_dummy.jpg", size: "100x100" %>
+          <% end %>
+          </td>
+          <td><%= link_to coffee_shop.name, coffee_shop_path(coffee_shop) %></td>
         </tr>
       <% end %>
     </tbody>

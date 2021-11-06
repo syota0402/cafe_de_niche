@@ -13,6 +13,7 @@
   <table class="table mt-5">
     <thead>
       <tr>
+        <th scope="col">画像</th>
         <th scope="col">店舗名</th>
         <th scope="col">電話番号</th>
         <th scope="col">住所</th>
@@ -23,6 +24,15 @@
     <tbody>
       <% @coffee_shops.each do |coffee_shop| %>
         <tr>
+          <td>
+          <% if coffee_shop.images.attached? %>
+            <% coffee_shop.images.each do |image| %>
+              <%= image_tag image, size: "100x100" %>
+            <% end %>
+          <% else %>
+            <%= image_tag "/images/coffee_shop_dummy.jpg", size: "100x100" %>
+          <% end %>
+          </td>
           <td><%= coffee_shop.name %></td>
           <td><%= coffee_shop.tell %></td>
           <td><%= coffee_shop.address %></td>

@@ -70,7 +70,6 @@ class UsersController < ApplicationController
   end
   
   def password_set?
-    user_params[:password].present? && user_params[:password_confirmation].present? ?
-    true : false
+    user_params[:password].present? && user_params[:password_confirmation].present? ? true : false
   end
 end

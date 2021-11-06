@@ -1,6 +1,7 @@
 class Review < ApplicationRecord
   belongs_to :coffee_shop
   belongs_to :user
+  has_one_attached :image
   
   # バリデーション
   # 必須項目
@@ -17,6 +18,7 @@ class Review < ApplicationRecord
     review.user_id = review_params[:user_id]
     review.coffee_shop_id = review_params[:coffee_shop_id]
     review.review_score = review_params[:review_score]
+    review.image = review_params[:image]
     save
   end
   
