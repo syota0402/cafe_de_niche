@@ -1,0 +1,8 @@
+<h1>都道府県名編集</h1>
+<%= form_with model: @prefecture, url: dashboard_prefecture_path(@prefecture), local: true do |f| %>
+  <%= f.label :name, "都道府県名" %>
+  <%= f.text_field :name %>
+  
+  <%= f.submit "更新" %>
+<% end %>
+<%= link_to "都道府県一覧に戻る", dashboard_prefectures_path %>

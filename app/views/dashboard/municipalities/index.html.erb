@@ -1,0 +1,41 @@
+<div class="w-75">
+  
+  <h1>エリア一覧</h1>
+  
+  <%= form_with(model: @municipality, url: dashboard_municipalities_path, local: true) do |f| %>
+    <%= f.label :name, "エリア名称" %>
+    <%= f.text_field :name %>
+    <br>
+    <%= f.label :prefecture_id, "都道府県" %>
+    <%= f.select :prefecture_id, @prefecture_tag %>
+    <%= f.submit "新規作成" %>
+  <% end %>
+  
+  <table class="table mt-5">
+    <thead>
+      <tr>
+        <th scope="col" class="w-25">ID</th>
+        <th scope="col">エリア名称</th>
+        <th scope="col">都道府県</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @municipalities.each do |municipality| %>
+      <tr>
+        <td scope="row"><%= municipality.id %></td>
+        <td><%= municipality.name %></td>
+        <td><%= municipality.prefecture.name %></td>
+        <td>
+          <%= link_to "編集", edit_dashboard_municipality_path(municipality) %>
+          
+        </td>
+        <td>
+          <%= link_to "削除", dashboard_municipality_path(municipality), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
