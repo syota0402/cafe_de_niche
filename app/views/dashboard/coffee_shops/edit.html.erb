@@ -21,7 +21,7 @@
   <br>
   InstagramスポットURL<%= f.text_field :instagram_spot_url %>
   <br>
-  エリアid<%= f.number_field :municipalitie_id %>
+  エリア<%= f.select :municipalitie_id, @municipality_tags %>
   <br>
   <div class="form-inline mt-4 mb-4 row">
     <%= f.label "画像" %>

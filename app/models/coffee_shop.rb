@@ -8,7 +8,7 @@ class CoffeeShop < ApplicationRecord
 	
 	# バリデーション
 	# 必ず登録してほしい項目
-	validates :name, :address, :tell, presence: true
+	validates :name, :address, :tell, :municipalitie_id, presence: true
 	
 	# 重複チェック
 	validates :tell, uniqueness: true

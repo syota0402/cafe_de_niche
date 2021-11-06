@@ -19,6 +19,7 @@ class Dashboard::CoffeeShopsController < ApplicationController
   def new
     @coffee_shop = CoffeeShop.new
     @search_categories = SearchCategory.all
+    set_municipality_tags
   end
 
   def create
@@ -32,6 +33,7 @@ class Dashboard::CoffeeShopsController < ApplicationController
   end
 
   def edit
+    set_municipality_tags
   end
 
   def update
@@ -49,11 +51,19 @@ class Dashboard::CoffeeShopsController < ApplicationController
   end
   
   private
-    def set_coffee_shop
-      @coffee_shop = CoffeeShop.find(params[:id])
-    end
+  def set_coffee_shop
+    @coffee_shop = CoffeeShop.find(params[:id])
+  end
     
-    def coffee_shop_params
-      params.require(:coffee_shop).permit(:name, :shop_url, :address, :tell, :access, :business_start_hour, :business_end_hour, :regular_holiday, :instagram_url, :instagram_spot_url, :municipalitie_id, {:search_category_ids => []}, images: [])
+  def set_municipality_tags
+    municipalities = Municipality.all
+    @municipality_tags = []
+    municipalities.each do |municipality|
+      @municipality_tags << [municipality.name, municipality.id]
     end
+  end
+  
+  def coffee_shop_params
+    params.require(:coffee_shop).permit(:name, :shop_url, :address, :tell, :access, :business_start_hour, :business_end_hour, :regular_holiday, :instagram_url, :instagram_spot_url, :municipalitie_id, {:search_category_ids => []}, images: [])
+  end
 end
