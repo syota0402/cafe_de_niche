@@ -21,7 +21,7 @@
         <% end %>
         </td>
         <td><%= link_to follow_user.name, user_path(follow_user.id) %></td>
-        <td><%= link_to "解除", follow_user_path(follow_user) %></td>
+        <td><%= link_to "解除", follow_user_path(follow_user, target_action: "following") %></td>
       </tr>
     <% end %>
   </tbody>

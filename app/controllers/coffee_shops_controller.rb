@@ -52,7 +52,12 @@ class CoffeeShopsController < ApplicationController
   def favorite
     @coffee_shop = CoffeeShop.find(params[:id])
     current_user.toggle_like!(@coffee_shop)
-    redirect_to coffee_shop_url @coffee_shop
+    if params[:target_action] == "show"
+      redirect_to coffee_shop_url @coffee_shop
+    elsif params[:target_action] == "favorite"
+      redirect_to favorite_users_path
+    end
+    
   end
   
   private
@@ -78,5 +83,26 @@ class CoffeeShopsController < ApplicationController
     def set_coffee_shop_search_conditions(hash)
       @coffee_shop_search_conditions = []
       @coffee_shop_search_conditions << "店舗名：#{params[:name]}" if params[:name].present?
+      @coffee_shop_search_conditions << "電話番号：#{params[:tel]}" if params[:tell].present?
+      if params[:search_category_ids].present?
+        search_categorys = SearchCategory.where(id: params[:search_category_ids])
+        return_message = "こだわり検索："
+        search_categorys.each do |search_category|
+          return_message << "#{search_category.name} "
+        end
+        @coffee_shop_search_conditions << return_message
+      end
+      if params[:review_score].present?
+        @coffee_shop_search_conditions << "レビュー点数検索：#{params[:review_score]}点以上" if params[:review_score_search_type].eql?("more_than")
+        @coffee_shop_search_conditions << "レビュー点数検索：#{params[:review_score]}点以下" if params[:review_score_search_type].eql?("less_than")
+      end
+      if params[:review_count].present?
+        @coffee_shop_search_conditions << "レビュー数検索：#{params[:review_count]}件以上" if params[:review_count_search_type].eql?("more_than")
+        @coffee_shop_search_conditions << "レビュー数検索：#{params[:review_count]}件以下" if params[:review_count_search_type].eql?("less_than")
+      end
+      if params[:favorite_count].present?
+        @coffee_shop_search_conditions << "お気に入り数検索：#{params[:favorite_count]}件以上" if params[:favorite_count_search_type].eql?("more_than")
+        @coffee_shop_search_conditions << "お気に入り数検索：#{params[:favorite_count]}件以下" if params[:favorite_count_search_type].eql?("less_than")
+      end
     end
 end

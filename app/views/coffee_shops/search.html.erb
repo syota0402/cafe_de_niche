@@ -1,6 +1,10 @@
 <h1>検索結果</h1>
 <h2>検索条件</h2>
-<%= @coffee_shop_search_conditions.first %>
+<% @coffee_shop_search_conditions.each do |coffee_shop_search_condition| %>
+  <%= coffee_shop_search_condition %> <br>
+<% end %>
+
+<hr>
 
 <% if @coffee_shops.blank? %>
   該当店舗なし
