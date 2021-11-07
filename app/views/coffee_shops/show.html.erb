@@ -38,7 +38,7 @@
   <br>
   InstagramスポットURL：<%= @coffee_shop.instagram_spot_url %>
   <br>
-  エリアid：<%= @coffee_shop.municipalitie_id %>
+  エリア：<%= Municipality.find(@coffee_shop.municipalitie_id).name %>
 	<hr>
 	レビュー数：<%= @reviews.count %>
 	<hr>
