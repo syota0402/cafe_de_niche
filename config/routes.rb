@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get "dashboard", :to => "dashboard#index"
+  get "search", :to => "web#search"
   
   resources :coffee_shops do
     member do 
@@ -15,6 +16,8 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :destroy]
     resources :coffee_shops, except: [:show]
     resources :search_categories, except: [:new]
+    resources :prefectures, except: [:new]
+    resources :municipalities, except: [:new]
   end
   
   devise_for :users, :controllers => {
@@ -49,7 +52,5 @@ Rails.application.routes.draw do
       get :follow
     end
   end
-  
-  # get '/users/:id', to: 'users#show'
   
 end

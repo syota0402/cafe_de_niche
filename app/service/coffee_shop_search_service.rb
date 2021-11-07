@@ -9,6 +9,7 @@ class CoffeeShopSearchService
     @review_count_search_type = hash[:review_count_search_type]
     @favorite_count = hash[:favorite_count]
     @favorite_count_search_type = hash[:favorite_count_search_type]
+    @municipality_id = hash[:municipality_id]
   end
   
   def search
@@ -31,6 +32,9 @@ class CoffeeShopSearchService
     
     # お気に入り数検索
     search_by_favorite_count if @favorite_count.present?
+    
+    # エリア検索
+    search_by_municipality_id if @municipality_id.present?
     
     @coffee_shops
   end
@@ -117,6 +121,11 @@ class CoffeeShopSearchService
     end
     # 条件にあう店舗を取得
     @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
+  end
+  
+  # エリア検索
+  def search_by_municipality_id
+    @coffee_shops = @coffee_shops.where(municipalitie_id: @municipality_id)
   end
   
 end
