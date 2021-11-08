@@ -24,6 +24,7 @@ class Dashboard::CoffeeShopsController < ApplicationController
 
   def create
     @coffee_shop = CoffeeShop.new(coffee_shop_params)
+    binding.pry
     if @coffee_shop.save
       redirect_to dashboard_coffee_shops_path, notice: '登録完了'
     else
