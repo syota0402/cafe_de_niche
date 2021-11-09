@@ -15,7 +15,11 @@
   <br>
   営業終了時間<%= f.time_field :business_end_hour %>
   <br>
-  定休日<%= f.text_field :regular_holiday %>
+  定休日
+  <% %w(月 火 水 木 金 土 日 不定休).each do |ingredient| %>
+    <%= check_box :youbi, ingredient %>
+    <%= ingredient %>
+  <% end %>
   <br>
   Instagram公式URL<%= f.text_field :instagram_url %>
   <br>

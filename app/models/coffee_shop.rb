@@ -1,7 +1,8 @@
 class CoffeeShop < ApplicationRecord
 	has_many :coffee_shop_search_categories, dependent: :destroy
 	has_many :search_categories, :through => :coffee_shop_search_categories
-	has_many :reviews
+	has_many :reviews, dependent: :destroy
+	
 	accepts_nested_attributes_for :coffee_shop_search_categories, allow_destroy: true
 	acts_as_likeable
 	has_many_attached :images
@@ -14,7 +15,9 @@ class CoffeeShop < ApplicationRecord
 	validates :tell, uniqueness: true
 	
 	# 電話番号チェック
-	validates :tell, format: { with: /\A\d{10,11}\z/ }
+	# validates :tell, presence: true, format: { with: /\A\d{10}$|^\d{11}\z/ }
+	validates :tell, presence: true, format: { with: /\A\d{10,11}\z/ }
+	
 	validates :tell, numericality: true
 	
 	# 時間チェック
@@ -26,8 +29,6 @@ class CoffeeShop < ApplicationRecord
 	validates :address, length: { maximum: 300}
 	validates :tell, length: { maximum: 11}
 	validates :access, length: { maximum: 100}
-	validates :business_start_hour, length: { maximum: 6}
-	validates :business_end_hour, length: { maximum: 6}
 	validates :regular_holiday, length: { maximum: 14}
 	validates :instagram_url, length: { maximum: 2048}
 	validates :instagram_spot_url, length: { maximum: 2048}

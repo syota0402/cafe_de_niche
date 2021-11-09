@@ -37,6 +37,12 @@ class Dashboard::CoffeeShopsController < ApplicationController
   end
 
   def update
+    @regular_holiday = ""
+    params[:youbi].each do |regular_holiday|
+      if regular_holiday.second == "1"
+        @regular_holiday << regular_holiday.first
+      end
+    end
     if @coffee_shop.update(coffee_shop_params)
       redirect_to dashboard_coffee_shops_url, notice: '登録完了'
     else
