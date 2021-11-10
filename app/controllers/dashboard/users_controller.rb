@@ -16,4 +16,20 @@ class Dashboard::UsersController < ApplicationController
     user.update(deleted_flg: deleted_flg)
     redirect_to dashboard_users_path
   end
+  
+  def edit
+    @user = User.find(params[:id])
+  end
+  
+  def update
+    @user = User.find(params[:id])
+    @user.update(user_params)
+    redirect_to dashboard_users_path
+  end
+  
+  private
+  def user_params
+    # params.require(:user).permit(:authority)
+    params.permit(:authority)
+  end
 end

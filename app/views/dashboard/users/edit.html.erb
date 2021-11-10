@@ -1,0 +1,26 @@
+<h1>権限変更</h1>
+<%= form_with url: dashboard_user_path, local: true, method: :put do |f| %>
+  <div class="form-inline mt-4 mb-4 row">
+    <% if @user.image.attached? %>
+      <%= image_tag @user.image, id: "user-image-preview", size: "100x100" %>
+    <% else %>
+      アイコンなし
+    <% end %>
+  </div>
+  
+  <hr>
+  
+  <%= "氏名：#{@user.name}" %>
+  
+  <hr>
+  
+  <%= "E-mail：#{@user.email}" %>
+  
+  <hr>
+  
+  権限：<%= f.select :authority, [["一般",1],["編集者",2],["スーパーユーザー",3]], { selected: @user.authority } %>
+  
+  <hr>
+  
+  <%= f.submit "保存" %>
+<% end %>
