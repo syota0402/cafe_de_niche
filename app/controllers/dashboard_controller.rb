@@ -12,7 +12,7 @@ class DashboardController < ApplicationController
 			flash[:alert] = "権限がありません"
 			redirect_to root_path
 		else
-			if @user.authority < "1"
+			if @user.authority.eql?("1")
 				flash[:alert] = "権限がありません"
 				redirect_to root_path 
 			end

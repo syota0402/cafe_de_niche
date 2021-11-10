@@ -1,5 +1,6 @@
 class Dashboard::CoffeeShopsController < ApplicationController
   before_action :set_coffee_shop, only: %w[show edit update destroy]
+  before_action :check_user_authority, only: :destroy
   layout "dashboard/dashboard"
   
   def index
@@ -71,5 +72,13 @@ class Dashboard::CoffeeShopsController < ApplicationController
   
   def coffee_shop_params
     params.require(:coffee_shop).permit(:name, :shop_url, :address, :tell, :access, :business_start_hour, :business_end_hour, :regular_holiday, :instagram_url, :instagram_spot_url, :municipalitie_id, {:search_category_ids => []}, images: [])
+  end
+  
+  def check_user_authority
+		@user = current_user
+		if @user.authority.eql?("2")
+			flash[:alert] = "権限がありません"
+			redirect_to dashboard_path 
+		end
   end
 end

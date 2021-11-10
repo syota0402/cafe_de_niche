@@ -1,5 +1,6 @@
 class Dashboard::UsersController < ApplicationController
   before_action :set_user, only: %w[edit update destroy]
+  before_action :check_user_authority
   layout "dashboard/dashboard"
   
   def index
@@ -32,5 +33,13 @@ class Dashboard::UsersController < ApplicationController
   
   def user_params
     params.permit(:authority)
+  end
+  
+  def check_user_authority
+		@user = current_user
+		if @user.authority.eql?("2")
+			flash[:alert] = "権限がありません"
+			redirect_to dashboard_path 
+		end
   end
 end
