@@ -36,59 +36,31 @@
     <% Prefecture.all.each do |prefecture| %>
       <%= link_to prefecture.name, search_path(prefecture_id: prefecture.id) %>
     <% end %>
-    
-    <hr>
-    
-  <!--  <%= form_with url: search_coffee_shops_path, method: :get, local: true do |f| %>-->
-  <!--    店舗名-->
-  <!--    <br>-->
-  <!--    <%= f.text_field :name %>-->
-    
-  <!--  <hr>-->
-  <!--    電話番号検索-->
-  <!--    <br>-->
-  <!--    <%= f.number_field :tell %>-->
-  <!--  <hr>-->
-  <!--    こだわり検索-->
-  <!--    <br>-->
-  <!--    <div class="check_box">-->
-  <!--      <%= f.collection_check_boxes(:search_category_ids, SearchCategory.all, :id, :name, {include_hidden: false}) do |b| %>-->
-  <!--        <%= b.label { b.check_box + b.text } %>-->
-  <!--      <% end %>-->
-  <!--    </div>-->
-  <!--  <hr>-->
-  <!--    レビュー点数検索-->
-  <!--    <br>-->
-  <!--    <%= f.number_field :review_score %>-->
-  <!--    <%= f.radio_button :review_score_search_type, :more_than, {:checked => true} %>-->
-  <!--    <%= f.label :review_score_search_type, "以上", {value: :more_than, stylr: "display: inline-block;"} %>-->
-  <!--    <%= f.radio_button :review_score_search_type, :less_than %>-->
-  <!--    <%= f.label :review_score_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>-->
-  <!--  <hr>-->
-  <!--    レビュー数検索 ※0で検索すると未レビューのお店のみ表示します。-->
-  <!--    <br>-->
-  <!--    <%= f.number_field :review_count %>-->
-  <!--    <%= f.radio_button :review_count_search_type, :more_than, {:checked => true} %>-->
-  <!--    <%= f.label :review_count_search_type, "以上", {value: :more_than, style: "display: inline-block;"} %>-->
-  <!--    <%= f.radio_button :review_count_search_type, :less_than %>-->
-  <!--    <%= f.label :review_count_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>-->
-  <!--  <hr>-->
-  <!--    お気に入り数検索　※0で検索するとお気に入り数0のお店のみ表示します。-->
-  <!--    <br>-->
-  <!--    <%= f.number_field :favorite_count %>-->
-  <!--    <%= f.radio_button :favorite_count_search_type, :more_than, {:checked => true} %>-->
-  <!--    <%= f.label :favorite_count_search_type, "以上", {value: :more_than, style: "display: inline-block;"} %>-->
-  <!--    <%= f.radio_button :favorite_count_search_type, :less_than %>-->
-  <!--    <%= f.label :favorite_count_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>-->
-  <!--  <hr>-->
-  <!--    <%= f.submit :search %>-->
-  <!--  <% end %> -->
-  <!--</div>-->
+  </div>
   
   <hr>
   
   <div class="ranking_by_area">
-    (ランキングのエリア)
+    (ランキングのエリア)<br>
+    ■お気に入り数<br>
+    <% @rank_favorite_coffee_shops.each do |coffee_shop| %>
+      <%= link_to coffee_shop.name,coffee_shop_path(coffee_shop) %>：<%= coffee_shop.likers_count %>人<br>
+    <%  end %>
+    
+    <br>
+    
+    ■フォロワー数<br>
+    <% @rank_follow_users.each do |user| %>
+      <%= link_to user.name, user_path(user) %>：<%= user.followers_count %>人<br>
+    <% end %>
+    
+    <br>
+    
+    ■レビュー数<br>
+    <% @rank_review_users.each do |user| %>
+      <%= link_to user.name, user_path(user) %>：<%= Review.where(user_id: user.id).count %>件<br>
+    <% end %>
+    
   </div>
   
 </div>
