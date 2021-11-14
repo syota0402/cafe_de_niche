@@ -15,15 +15,33 @@
 
 .title-text {
   margin-top: 12px;
-  font-family: YuGo;
   font-size: 30px;
   text-align: center;
   font-weight: bold;
 }
 
 .title-sub-text {
-  font-family: YuGo;
   margin-top: 12px;
   font-size: 15px;
   text-align: center;
+}
+
+.ranking_by_area {
+  #parent {
+    display: flex;
+  }
+  #child1 {
+    flex-grow: 1;
+    padding: 15px;
+  }
+  #child2 {
+    flex-grow: 1;
+    border-left: 1px solid #929292;
+    padding: 15px;
+  }
+  #child3 {
+    flex-grow: 1;
+    border-left: 1px solid #929292;
+    padding: 15px;
+  }
 }
