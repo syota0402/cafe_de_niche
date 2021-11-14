@@ -3,7 +3,7 @@
 		<i class="fa fa-heart"></i><%= current_user.likes?(@coffee_shop) ? "お気に入り解除" : "お気に入り" %>
 	<% end %>
 	<br>
-	お気に入り数：<%= @likers.count %>
+	お気に入り数：<%= @coffee_shop.likers_count %>
 	<br>
 	お気に入りユーザー：
 	<% @likers.last(5).each do |liker| %>
