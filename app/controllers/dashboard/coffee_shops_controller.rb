@@ -24,7 +24,7 @@ class Dashboard::CoffeeShopsController < ApplicationController
   end
 
   def create
-    @coffee_shop = CoffeeShop.new(coffee_shop_params)
+    @coffee_shop = CoffeeShop.new(coffee_shop_params.merge(regular_holiday: params[:regular_holidays].join(',')))
     if @coffee_shop.save
       redirect_to dashboard_coffee_shops_path, notice: '登録完了'
     else
@@ -38,13 +38,7 @@ class Dashboard::CoffeeShopsController < ApplicationController
   end
 
   def update
-    @regular_holiday = ""
-    params[:youbi].each do |regular_holiday|
-      if regular_holiday.second == "1"
-        @regular_holiday << regular_holiday.first
-      end
-    end
-    if @coffee_shop.update(coffee_shop_params)
+    if @coffee_shop.update(coffee_shop_params.merge(regular_holiday: params[:regular_holidays].join(',')))
       redirect_to dashboard_coffee_shops_url, notice: '登録完了'
     else
       flash[:alert] = @coffee_shop.errors.full_messages
@@ -71,7 +65,7 @@ class Dashboard::CoffeeShopsController < ApplicationController
   end
   
   def coffee_shop_params
-    params.require(:coffee_shop).permit(:name, :shop_url, :address, :tell, :access, :business_start_hour, :business_end_hour, :regular_holiday, :instagram_url, :instagram_spot_url, :municipalitie_id, {:search_category_ids => []}, images: [])
+    params.require(:coffee_shop).permit(:name, :shop_url, :address, :tell, :access, :business_start_hour, :business_end_hour, :instagram_url, :instagram_spot_url, :municipalitie_id, {:search_category_ids => []}, images: [])
   end
   
   def check_user_authority
@@ -81,4 +75,5 @@ class Dashboard::CoffeeShopsController < ApplicationController
 			redirect_to dashboard_path 
 		end
   end
+  
 end
