@@ -1,6 +1,7 @@
 class Dashboard::MunicipalitiesController < ApplicationController
   before_action :set_municipality, only: %w[edit update destroy]
   before_action :set_prefecture_tags, only: %w[index edit]
+  before_action :check_user_authority, except: :index
   layout "dashboard/dashboard"
   
   def index
@@ -46,6 +47,14 @@ class Dashboard::MunicipalitiesController < ApplicationController
   
   def municipality_params
     params.require(:municipality).permit(:name, :prefecture_id)
+  end
+  
+  def check_user_authority
+		@user = current_user
+		if @user.authority.eql?("2")
+			flash[:alert] = "権限がありません"
+			redirect_to dashboard_path 
+		end
   end
 
 end

@@ -16,6 +16,7 @@
         <th scope="col">名前</th>
         <th scope="col">メールアドレス</th>
         <th scope="col"></th>
+        <th scope="col">権限</th>
         <th scope="col"></th>
       </tr>
     </thead>
@@ -27,6 +28,10 @@
         <td><%= user.email %></td>
         <td>
           <%= link_to "表示", user_path(user) %>
+        </td>
+        <td>
+          <%= user.authority %>
+          <%= link_to "変更", edit_dashboard_user_path(user) %>
         </td>
         <td> 
           <%= form_with model: user, url: dashboard_user_path(user), local: true, method: :delete do |f| %>

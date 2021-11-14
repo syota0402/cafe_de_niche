@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :reviews, only: [:destroy]
   
   namespace :dashboard do
-    resources :users, only: [:index, :destroy]
+    resources :users, only: [:index, :destroy, :edit, :update]
     resources :coffee_shops, except: [:show]
     resources :search_categories, except: [:new]
     resources :prefectures, except: [:new]

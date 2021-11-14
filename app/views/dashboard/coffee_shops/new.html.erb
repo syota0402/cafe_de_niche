@@ -16,9 +16,8 @@
   営業終了時間<%= f.time_field :business_end_hour %>
   <br>
   定休日
-  <% %w(月 火 水 木 金 土 日 不定休).each do |ingredient| %>
-    <%= check_box :regular_holiday, ingredient %>
-    <%= ingredient %>
+  <% DayOfWeek.all.each do |day_of_week| %>
+    <%= check_box_tag 'regular_holidays[]', day_of_week.name %><%= day_of_week.name %>
   <% end %>
   <br>
   Instagram公式URL<%= f.text_field :instagram_url %>
