@@ -9,7 +9,7 @@
 <% if @show_user.image.attached? %>
   <%= image_tag @show_user.image, size: "100x100" %>
 <% else %>
-  <%= image_tag "/images/user_dummy.png", size: "100x100" %>
+  <%= image_tag "/images/noimage.png", size: "100x100" %>
 <% end %>
 <br>
 フォロワー数：<%= @followers.count %>
