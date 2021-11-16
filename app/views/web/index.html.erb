@@ -1,66 +1,124 @@
 <div class="container">
   <div class="cover-container">
-      <!-- user_signed_in? はユーザがログインしているか調べるdeviseのHelperメソッド -->
-      <!--サインインしている-->
-      <% if user_signed_in? %>
-        <p>ようこそ
-        <%= current_user.name %>
-        さん
-        </p>
-        <%= link_to "お気に入り店舗:", favorite_users_path %>
-        <% current_user.likees(CoffeeShop).last(5).each do |favorite_coffee_shop| %>
-          <%= link_to favorite_coffee_shop.name, coffee_shop_path(favorite_coffee_shop) %>
-        <% end %>
-        <br>
-        <%= link_to "フォロー:", following_users_path %>
-        <% current_user.followees(User).last(5).each do |follow_user| %>
-          <%= link_to follow_user.name, user_path(follow_user.id) %>
-        <% end %>
-      <!--サインインしていない-->
-      <% else %>
-        <div class="cover-container-befoer-sign-in">
-          <p class="title-text">あなただけの検索条件で、<br>
-          あなたにぴったりのカフェがつかる</p>
-          <p class="title-sub-text" >検索条件は50件以上、お気に入り登録も可能</p>
-        </div> 
+    <!-- user_signed_in? はユーザがログインしているか調べるdeviseのHelperメソッド -->
+    <!--サインインしている-->
+    <% if user_signed_in? %>
+      <%= link_to(favorite_users_path) do %>
+        <span class="badge badge-warning">Favorite shops</span>
       <% end %>
-    </div>
+      <% current_user.likees(CoffeeShop).last(5).each do |favorite_coffee_shop| %>
+        <%= link_to favorite_coffee_shop.name, coffee_shop_path(favorite_coffee_shop), class: "link-text" %>
+      <% end %>
+      <br>
+      <%= link_to(following_users_path) do %>
+        <span class="badge badge-warning">Follow users</span>
+      <% end %>
+      <% current_user.followees(User).last(5).each do |follow_user| %>
+        <%= link_to follow_user.name, user_path(follow_user.id), class: "link-text" %>
+      <% end %>
+    <!--サインインしていない-->
+    <% else %>
+      <div class="cover-container-befoer-sign-in">
+        <p class="title-text">あなただけの検索条件で、<br>
+        あなたにぴったりのカフェがつかる</p>
+        <p class="title-sub-text" >検索条件は50件以上、お気に入り登録も可能</p>
+      </div> 
+    <% end %>
   </div>
+
   
   <hr>
   
-  <div class="search_by_area">
-    (検索のエリア)<br>
-    都道府県
+  <h2>Search</h2>
+  <div class="search-by-area">
+    <%= form_with url: search_coffee_shops_path, method: :get, local: true do |f| %>
+      <div class="search-text">
+        shop name
+        <br>
+        <%= f.text_field :name %>
+      </div>
+      <div class="search-text">
+        tell
+        <br>
+        <%= f.number_field :tell %>
+      </div>
+      <div class="search-btn">
+        <%= f.submit :search %>
+      </div>
+    <% end %> 
+  </div>
+  
+  <br>
+  
+  <div class="search_by_area2">
+    自分にぴったりなカフェを探す
     <br>
     <% Prefecture.all.each do |prefecture| %>
-      <%= link_to prefecture.name, search_path(prefecture_id: prefecture.id) %>
+      <%= link_to search_path(prefecture_id: prefecture.id) , class: "btn btn-prefecture" do %>
+        <%= prefecture.name %>
+      <% end %>
     <% end %>
   </div>
   
   <hr>
   
   <div class="ranking_by_area">
-    (ランキングのエリア)<br>
-    ■お気に入り数<br>
-    <% @rank_favorite_coffee_shops.each do |coffee_shop| %>
-      <%= link_to coffee_shop.name,coffee_shop_path(coffee_shop) %>：<%= coffee_shop.likers_count %>人<br>
-    <%  end %>
+    <h2>Ranking</h2>
+    <div id="ranking">
+      <div id= "rank_favorite">
+        <h3>favorite</h3>
+        <% @rank_favorite_coffee_shops.each do |coffee_shop| %>
+          <%= link_to(coffee_shop_path(coffee_shop)) do %>
+            <% if coffee_shop.images.attached? %>
+              <%= image_tag coffee_shop.images.first, size: "50x50" %>
+            <% else %>
+              <%= image_tag "/images/noimage.png", size: "50x50" %>
+            <% end %>
+            <button type="button" class="btn btn-outline-warning">
+              <%= coffee_shop.name %><span class="badge badge-light"><%= coffee_shop.likers_count %>人</span>
+            </button>
+          <% end %>
+          <br>
+        <%  end %>
+      </div>
+      
+      <br>
     
-    <br>
+      <div id="rank_follow">
+        <h3>follow</h3>
+        <% @rank_follow_users.each do |user| %>
+          <%=link_to(user_path(user)) do %>
+            <% if user.image.attached? %>
+              <%= image_tag user.image, size: "50x50" %>
+            <% else %>
+              <%= image_tag "/images/noimage.png", size: "50x50" %>
+            <% end %>
+            <button type="button" class="btn btn-outline-warning">
+              <%= user.name %><span class="badge badge-light"><%= user.followers_count %>人</span>
+            </button>
+          <% end %>
+          <br>
+        <% end %>
+      </div>
     
-    ■フォロワー数<br>
-    <% @rank_follow_users.each do |user| %>
-      <%= link_to user.name, user_path(user) %>：<%= user.followers_count %>人<br>
-    <% end %>
-    
-    <br>
-    
-    ■レビュー数<br>
-    <% @rank_review_users.each do |user| %>
-      <%= link_to user.name, user_path(user) %>：<%= Review.where(user_id: user.id).count %>件<br>
-    <% end %>
-    
+      <br>
+      
+      <div id="rank_review">
+        <h3>review</h3>
+        <% @rank_review_users.each do |user| %>
+          <%=link_to(user_path(user)) do %>
+            <% if user.image.attached? %>
+              <%= image_tag user.image, size: "50x50" %>
+            <% else %>
+              <%= image_tag "/images/noimage.png", size: "50x50" %>
+            <% end %>
+            <button type="button" class="btn btn-outline-warning">
+              <%= user.name %><span class="badge badge-light"><%= Review.where(user_id: user.id).count %>件</span>
+            </button>
+          <% end %>
+          <br>
+        <% end %>
+      </div>
+    </div> 
   </div>
-  
 </div>
