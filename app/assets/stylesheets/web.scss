@@ -88,3 +88,19 @@
   background: #67c5ff;
   color: white;
 }
+
+.search-by-area {
+  display: flex;
+
+  .search-text {
+    padding: 0.5em;
+    float: left;
+  }
+  
+  .search-btn {
+    padding: 0.5em;
+    float: left;
+    position: relative;
+    top: 22px;
+  }
+}

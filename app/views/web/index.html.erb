@@ -29,9 +29,29 @@
   
   <hr>
   
-  <div class="search_by_area">
-    <h2>Search</h2>
-    都道府県を選択してください。
+  <h2>Search</h2>
+  <div class="search-by-area">
+    <%= form_with url: search_coffee_shops_path, method: :get, local: true do |f| %>
+      <div class="search-text">
+        shop name
+        <br>
+        <%= f.text_field :name %>
+      </div>
+      <div class="search-text">
+        tell
+        <br>
+        <%= f.number_field :tell %>
+      </div>
+      <div class="search-btn">
+        <%= f.submit :search %>
+      </div>
+    <% end %> 
+  </div>
+  
+  <br>
+  
+  <div class="search_by_area2">
+    自分にぴったりなカフェを探す
     <br>
     <% Prefecture.all.each do |prefecture| %>
       <%= link_to search_path(prefecture_id: prefecture.id) , class: "btn btn-prefecture" do %>
