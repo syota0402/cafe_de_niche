@@ -20,6 +20,9 @@
     <%= check_box_tag 'regular_holidays[]', day_of_week.name, @coffee_shop.regular_holiday.include?(day_of_week.name) %><%= day_of_week.name %>
   <% end %>
   <br>
+  年齢層
+  <%= f.select :age_group, AgeGroup.pluck(:name), { include_blank: '選択してください' } %>
+  <br>
   Instagram公式URL<%= f.text_field :instagram_url %>
   <br>
   InstagramスポットURL<%= f.text_field :instagram_spot_url %>
