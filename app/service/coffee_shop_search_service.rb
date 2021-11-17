@@ -11,6 +11,7 @@ class CoffeeShopSearchService
     @favorite_count_search_type = hash[:favorite_count_search_type]
     @municipality_id = hash[:municipality_id]
     @business_hour = hash[:business_hour]
+    @slack_time = hash[:slack_time]
   end
   
   def search
@@ -39,6 +40,9 @@ class CoffeeShopSearchService
     
     # 営業時間検索
     search_by_bussines_hour if @business_hour.present?
+    
+    # すいている時間検索
+    search_by_slack_time if @slack_time.present?
     
     @coffee_shops
   end
@@ -148,4 +152,19 @@ class CoffeeShopSearchService
     @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
   end
   
+  # すいている時間検索
+  def search_by_slack_time
+    coffee_shop_ids = []
+    @coffee_shops.each do |coffee_shop|
+      if coffee_shop.slack_time_start.nil? or coffee_shop.slack_time_end.nil?
+        next
+      end
+      slack_time_start = coffee_shop.slack_time_start.strftime("%H") + ":" + coffee_shop.slack_time_start.strftime("%M")
+      slack_time_end = coffee_shop.slack_time_end.strftime("%H") + ":" + coffee_shop.slack_time_end.strftime("%M")
+      if @slack_time.between?(slack_time_start,slack_time_end)
+        coffee_shop_ids << coffee_shop.id
+      end
+    end
+    @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
+  end
 end
