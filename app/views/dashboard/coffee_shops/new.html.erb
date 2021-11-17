@@ -15,10 +15,13 @@
   <br>
   すいている時間<%= f.time_field :slack_time_start %> ~ <%= f.time_field :slack_time_end %>
   <br>
-  定休日
+  ※定休日
   <% DayOfWeek.all.each do |day_of_week| %>
     <%= check_box_tag 'regular_holidays[]', day_of_week.name %><%= day_of_week.name %>
   <% end %>
+  <br>
+  年齢層
+  <%= f.select :age_group, AgeGroup.pluck(:name), { include_blank: '選択してください' } %>
   <br>
   Instagram公式URL<%= f.text_field :instagram_url %>
   <br>

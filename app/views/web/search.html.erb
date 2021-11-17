@@ -55,5 +55,9 @@
   <br>
   <%= f.time_field :slack_time %>
 <hr>
+  年齢層
+  <br>
+  <%= f.select :age_group, AgeGroup.pluck(:name), { include_blank: '選択してください' } %>
+<hr>
   <%= f.submit :search %>
 <% end %> 

@@ -80,6 +80,7 @@ class CoffeeShopsController < ApplicationController
       hash[:municipality_id] = params[:municipality_id]
       hash[:business_hour] = params[:business_hour]
       hash[:slack_time] = params[:slack_time]
+      hash[:age_group] = params[:age_group]
       hash
     end
     
@@ -110,5 +111,6 @@ class CoffeeShopsController < ApplicationController
       @coffee_shop_search_conditions << "エリア：#{Municipality.find(params[:municipality_id]).name}" if params[:municipality_id].present?
       @coffee_shop_search_conditions << "営業時間：#{params[:business_hour]}" if params[:business_hour].present?
       @coffee_shop_search_conditions << "すいている時間：#{params[:slack_time]}" if params[:slack_time].present?
+      @coffee_shop_search_conditions << "年齢層：#{params[:age_group]}" if params[:age_group].present?
     end
 end

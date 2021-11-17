@@ -12,6 +12,7 @@ class CoffeeShopSearchService
     @municipality_id = hash[:municipality_id]
     @business_hour = hash[:business_hour]
     @slack_time = hash[:slack_time]
+    @age_group = hash[:age_group]
   end
   
   def search
@@ -43,6 +44,9 @@ class CoffeeShopSearchService
     
     # すいている時間検索
     search_by_slack_time if @slack_time.present?
+    
+    # 年齢層検索
+    search_by_age_group if @age_group.present?
     
     @coffee_shops
   end
@@ -167,4 +171,10 @@ class CoffeeShopSearchService
     end
     @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
   end
+  
+  # 年齢層検索
+  def search_by_age_group
+    @coffee_shops = @coffee_shops.where(age_group: @age_group)
+  end
+  
 end
