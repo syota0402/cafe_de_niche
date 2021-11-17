@@ -11,9 +11,9 @@
   <br>
   アクセス<%= f.text_field :access %>
   <br>
-  営業開始時間<%= f.time_field :business_start_hour %>
+  営業時間<%= f.time_field :business_start_hour %> ~ <%= f.time_field :business_end_hour %>
   <br>
-  営業終了時間<%= f.time_field :business_end_hour %>
+  すいている時間<%= f.time_field :slack_time_start %> ~ <%= f.time_field :slack_time_end %>
   <br>
   定休日
   <% DayOfWeek.all.each do |day_of_week| %>
