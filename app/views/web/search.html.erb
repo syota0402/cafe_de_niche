@@ -47,5 +47,9 @@
   <%= f.radio_button :favorite_count_search_type, :less_than %>
   <%= f.label :favorite_count_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>
 <hr>
+  営業時間検索
+  <br>
+  <%= f.time_field :business_hour %>
+<hr>
   <%= f.submit :search %>
 <% end %> 

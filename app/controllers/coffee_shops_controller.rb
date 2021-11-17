@@ -78,6 +78,7 @@ class CoffeeShopsController < ApplicationController
       hash[:favorite_count] = params[:favorite_count]
       hash[:favorite_count_search_type] = params[:favorite_count_search_type]
       hash[:municipality_id] = params[:municipality_id]
+      hash[:business_hour] = params[:business_hour]
       hash
     end
     
@@ -106,6 +107,6 @@ class CoffeeShopsController < ApplicationController
         @coffee_shop_search_conditions << "お気に入り数検索：#{params[:favorite_count]}件以下" if params[:favorite_count_search_type].eql?("less_than")
       end
       @coffee_shop_search_conditions << "エリア：#{Municipality.find(params[:municipality_id]).name}" if params[:municipality_id].present?
-      
+      @coffee_shop_search_conditions << "営業時間：#{params[:business_hour]}" if params[:business_hour].present?
     end
 end
