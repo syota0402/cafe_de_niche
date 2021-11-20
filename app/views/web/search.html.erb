@@ -18,8 +18,16 @@
   こだわり検索
   <br>
   <div class="check_box">
-    <%= f.collection_check_boxes(:search_category_ids, SearchCategory.all, :id, :name, {include_hidden: false}) do |b| %>
-      <%= b.label { b.check_box + b.text } %>
+    <%= f.collection_check_boxes(:search_category_ids, SearchCategory.all, :id, :name, {include_hidden: false}) do |search_category| %>
+      <%= search_category.label { search_category.check_box + search_category.text } %>
+    <% end %>
+  </div>
+<hr>
+  雰囲気検索
+  <br>
+  <div class="check_box">
+    <%= f.collection_check_boxes(:shop_atmosphere_ids, ShopAtmosphere.all, :id, :name, {include_hidden: false}) do |shop_atmosphere| %>
+      <%= shop_atmosphere.label { shop_atmosphere.check_box + shop_atmosphere.text } %>
     <% end %>
   </div>
 <hr>

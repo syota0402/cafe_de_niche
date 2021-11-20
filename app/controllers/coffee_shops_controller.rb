@@ -1,7 +1,4 @@
 class CoffeeShopsController < ApplicationController
-  # def index
-  #   @coffee_shops = CoffeeShop.all
-  # end
 
   def show
     @coffee_shop = CoffeeShop.find(params[:id])
@@ -12,36 +9,6 @@ class CoffeeShopsController < ApplicationController
     @review_average_score = ReviewAverageScoreService.new(@reviews).calculation
   end
 
-  # def new
-  #   @coffee_shop = CoffeeShop.new
-  # end
-
-  # def create
-  #   @coffee_shop = CoffeeShop.new(coffee_shop_params)
-  #   if @coffee_shop.save
-  #     redirect_to coffee_shop_url @coffee_shop, notice: '登録完了'
-  #   else
-  #     flash[:alert] = @coffee_shop.errors.full_messages
-  #     redirect_back(fallback_location: new_coffee_shop_path)
-  #   end
-  # end
-
-  # def edit
-  #   @coffee_shop = CoffeeShop.find(params[:id])
-  # end
-
-  # def update
-  #   @coffee_shop = CoffeeShop.find(params[:id])
-  #   @coffee_shop.update(coffee_shop_params)
-  #   redirect_to coffee_shop_url @coffee_shop
-  # end
-
-  # def destroy
-  #   @coffee_shop = CoffeeShop.find(params[:id])
-  #   @coffee_shop.destroy
-  #   redirect_to coffee_shops_path
-  # end
-  
   def search
     # 表示させる配列作る
     set_coffee_shop_search_conditions(set_search_hash)
@@ -81,6 +48,7 @@ class CoffeeShopsController < ApplicationController
       hash[:business_hour] = params[:business_hour]
       hash[:slack_time] = params[:slack_time]
       hash[:age_group] = params[:age_group]
+      hash[:shop_atmosphere_ids] = params[:shop_atmosphere_ids]
       hash
     end
     
@@ -112,5 +80,13 @@ class CoffeeShopsController < ApplicationController
       @coffee_shop_search_conditions << "営業時間：#{params[:business_hour]}" if params[:business_hour].present?
       @coffee_shop_search_conditions << "すいている時間：#{params[:slack_time]}" if params[:slack_time].present?
       @coffee_shop_search_conditions << "年齢層：#{params[:age_group]}" if params[:age_group].present?
+      if params[:shop_atmosphere_ids].present?
+        shop_atmospheres = ShopAtmosphere.where(id: params[:shop_atmosphere_ids])
+        return_message = "お店の雰囲気："
+        shop_atmospheres.each do |shop_atmospere|
+          return_message << "#{shop_atmospere.name}"
+        end
+        @coffee_shop_search_conditions << return_message
+      end
     end
 end

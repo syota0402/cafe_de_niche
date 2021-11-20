@@ -13,6 +13,7 @@ class CoffeeShopSearchService
     @business_hour = hash[:business_hour]
     @slack_time = hash[:slack_time]
     @age_group = hash[:age_group]
+    @shop_atmosphere_ids = hash[:shop_atmosphere_ids]
   end
   
   def search
@@ -47,6 +48,9 @@ class CoffeeShopSearchService
     
     # 年齢層検索
     search_by_age_group if @age_group.present?
+    
+    # 雰囲気検索
+    search_by_shop_atmosphere if @shop_atmosphere_ids.present?
     
     @coffee_shops
   end
@@ -175,6 +179,12 @@ class CoffeeShopSearchService
   # 年齢層検索
   def search_by_age_group
     @coffee_shops = @coffee_shops.where(age_group: @age_group)
+  end
+  
+  # 雰囲気検索
+  def search_by_shop_atmosphere
+    coffee_shop_ids = CoffeeShopShopAtmosphere.where(shop_atmosphere_id: @shop_atmosphere_ids).pluck(:coffee_shop_id)
+    @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
   end
   
 end
