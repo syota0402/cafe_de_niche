@@ -1,7 +1,7 @@
 class CoffeeShopsController < ApplicationController
-  def index
-    @coffee_shops = CoffeeShop.all
-  end
+  # def index
+  #   @coffee_shops = CoffeeShop.all
+  # end
 
   def show
     @coffee_shop = CoffeeShop.find(params[:id])
@@ -12,35 +12,35 @@ class CoffeeShopsController < ApplicationController
     @review_average_score = ReviewAverageScoreService.new(@reviews).calculation
   end
 
-  def new
-    @coffee_shop = CoffeeShop.new
-  end
+  # def new
+  #   @coffee_shop = CoffeeShop.new
+  # end
 
-  def create
-    @coffee_shop = CoffeeShop.new(coffee_shop_params)
-    if @coffee_shop.save
-      redirect_to coffee_shop_url @coffee_shop, notice: '登録完了'
-    else
-      flash[:alert] = @coffee_shop.errors.full_messages
-      redirect_back(fallback_location: new_coffee_shop_path)
-    end
-  end
+  # def create
+  #   @coffee_shop = CoffeeShop.new(coffee_shop_params)
+  #   if @coffee_shop.save
+  #     redirect_to coffee_shop_url @coffee_shop, notice: '登録完了'
+  #   else
+  #     flash[:alert] = @coffee_shop.errors.full_messages
+  #     redirect_back(fallback_location: new_coffee_shop_path)
+  #   end
+  # end
 
-  def edit
-    @coffee_shop = CoffeeShop.find(params[:id])
-  end
+  # def edit
+  #   @coffee_shop = CoffeeShop.find(params[:id])
+  # end
 
-  def update
-    @coffee_shop = CoffeeShop.find(params[:id])
-    @coffee_shop.update(coffee_shop_params)
-    redirect_to coffee_shop_url @coffee_shop
-  end
+  # def update
+  #   @coffee_shop = CoffeeShop.find(params[:id])
+  #   @coffee_shop.update(coffee_shop_params)
+  #   redirect_to coffee_shop_url @coffee_shop
+  # end
 
-  def destroy
-    @coffee_shop = CoffeeShop.find(params[:id])
-    @coffee_shop.destroy
-    redirect_to coffee_shops_path
-  end
+  # def destroy
+  #   @coffee_shop = CoffeeShop.find(params[:id])
+  #   @coffee_shop.destroy
+  #   redirect_to coffee_shops_path
+  # end
   
   def search
     # 表示させる配列作る

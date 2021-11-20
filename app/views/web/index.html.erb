@@ -69,11 +69,7 @@
         <h3>favorite</h3>
         <% @rank_favorite_coffee_shops.each do |coffee_shop| %>
           <%= link_to(coffee_shop_path(coffee_shop)) do %>
-            <% if coffee_shop.images.attached? %>
-              <%= image_tag coffee_shop.images.first, size: "50x50" %>
-            <% else %>
-              <%= image_tag "/images/noimage.png", size: "50x50" %>
-            <% end %>
+            <%= render partial: 'shared/show_image_first', locals: { target: coffee_shop, image_size: "50x50" } %>
             <button type="button" class="btn btn-outline-warning">
               <%= coffee_shop.name %><span class="badge badge-light"><%= coffee_shop.likers_count %>人</span>
             </button>
@@ -88,11 +84,7 @@
         <h3>follow</h3>
         <% @rank_follow_users.each do |user| %>
           <%=link_to(user_path(user)) do %>
-            <% if user.image.attached? %>
-              <%= image_tag user.image, size: "50x50" %>
-            <% else %>
-              <%= image_tag "/images/noimage.png", size: "50x50" %>
-            <% end %>
+            <%= render partial: 'shared/show_image', locals: { target: user, image_size: "50x50"} %>
             <button type="button" class="btn btn-outline-warning">
               <%= user.name %><span class="badge badge-light"><%= user.followers_count %>人</span>
             </button>
@@ -107,11 +99,7 @@
         <h3>review</h3>
         <% @rank_review_users.each do |user| %>
           <%=link_to(user_path(user)) do %>
-            <% if user.image.attached? %>
-              <%= image_tag user.image, size: "50x50" %>
-            <% else %>
-              <%= image_tag "/images/noimage.png", size: "50x50" %>
-            <% end %>
+            <%= render partial: 'shared/show_image', locals: { target: user, image_size: "50x50" } %>
             <button type="button" class="btn btn-outline-warning">
               <%= user.name %><span class="badge badge-light"><%= Review.where(user_id: user.id).count %>件</span>
             </button>

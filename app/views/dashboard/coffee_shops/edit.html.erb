@@ -31,13 +31,7 @@
   <br>
   <div class="form-inline mt-4 mb-4 row">
     <%= f.label "画像" %>
-    <% if @coffee_shop.images.attached? %>
-      <% @coffee_shop.images.each do |image| %>
-        <%= image_tag image, size: "100x100" %>
-      <% end %>
-    <% else %>
-      <%= image_tag "/images/coffee_shop_dummy.jpg", size: "100x100" %>
-    <% end %>
+    <%= render partial: 'shared/show_images', locals: { target: @coffee_shop, image_size: "100x100" } %>
     <div class="d-flex flex-column ml-2">
       <small class="mb-3">600px×600px推奨。<br>画像をアップロードして下さい。</small>
       <%= f.file_field :images, multiple: true %>

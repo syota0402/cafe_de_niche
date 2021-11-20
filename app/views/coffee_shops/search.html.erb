@@ -21,11 +21,7 @@
       <% @coffee_shops.each do |coffee_shop| %>
         <tr>
           <td>
-          <% if coffee_shop.images.attached? %>
-            <%= image_tag coffee_shop.images.first, size: "100x100" %>
-          <% else %>
-            <%= image_tag "/images/coffee_shop_dummy.jpg", size: "100x100" %>
-          <% end %>
+          <%= render partial: 'shared/show_images', locals: { target: coffee_shop, image_size: "100x100" } %>
           </td>
           <td><%= link_to coffee_shop.name, coffee_shop_path(coffee_shop) %></td>
         </tr>
