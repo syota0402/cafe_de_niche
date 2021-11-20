@@ -39,9 +39,17 @@
     <div id="new-image"></div>
   </div>
   <br>
+  カテゴリ<br>
   <div class="check_box">
     <%= f.collection_check_boxes(:search_category_ids, SearchCategory.all, :id, :name) do |b| %>
       <%= b.label { b.check_box + b.text } %>
+    <% end %>
+  </div>
+  
+  雰囲気<br>
+  <div class="check_box">
+    <%= f.collection_check_boxes(:shop_atmosphere_ids, ShopAtmosphere.all, :id, :name) do |c| %>
+      <%= c.label { c.check_box + c.text } %>
     <% end %>
   </div>
   

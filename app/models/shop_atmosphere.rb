@@ -1,5 +1,5 @@
 class ShopAtmosphere < ApplicationRecord
-  # has_many :coffee_shop_shop_atmospheres, dependent: :destroy
+  has_many :coffee_shop_shop_atmospheres, dependent: :destroy
   has_many :coffee_shops, :through => :coffee_shop_shop_atmospheres
   
   #空白禁止

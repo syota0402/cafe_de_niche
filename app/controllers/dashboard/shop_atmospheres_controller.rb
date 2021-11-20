@@ -34,7 +34,6 @@ class Dashboard::ShopAtmospheresController < ApplicationController
   end
   
   def destroy
-    binding.pry
     @shop_atmosphere.destroy
     redirect_to dashboard_shop_atmospheres_path
   end

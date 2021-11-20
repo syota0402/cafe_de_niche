@@ -19,7 +19,8 @@ class Dashboard::CoffeeShopsController < ApplicationController
 
   def new
     @coffee_shop = CoffeeShop.new
-    @search_categories = SearchCategory.all
+    # @search_categories = SearchCategory.all
+    
     set_municipality_tags
   end
 
@@ -65,7 +66,7 @@ class Dashboard::CoffeeShopsController < ApplicationController
   end
   
   def coffee_shop_params
-    params.require(:coffee_shop).permit(:name, :shop_url, :address, :tell, :access, :business_start_hour, :business_end_hour, :instagram_url, :instagram_spot_url, :municipalitie_id, :slack_time_start, :slack_time_end, :age_group, {:search_category_ids => []}, images: [])
+    params.require(:coffee_shop).permit(:name, :shop_url, :address, :tell, :access, :business_start_hour, :business_end_hour, :instagram_url, :instagram_spot_url, :municipalitie_id, :slack_time_start, :slack_time_end, :age_group, { :search_category_ids => [], :shop_atmosphere_ids => [] }, images: [])
   end
   
   def check_user_authority
