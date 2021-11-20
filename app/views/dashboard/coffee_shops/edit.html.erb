@@ -11,14 +11,17 @@
   <br>
   アクセス<%= f.text_field :access %>
   <br>
-  営業開始時間<%= f.time_field :business_start_hour %>
+  営業時間<%= f.time_field :business_start_hour %> ~ <%= f.time_field :business_end_hour %>
   <br>
-  営業終了時間<%= f.time_field :business_end_hour %>
+  すいている時間<%= f.time_field :slack_time_start %> ~ <%= f.time_field :slack_time_end %>
   <br>
   定休日
   <% DayOfWeek.all.each do |day_of_week| %>
     <%= check_box_tag 'regular_holidays[]', day_of_week.name, @coffee_shop.regular_holiday.include?(day_of_week.name) %><%= day_of_week.name %>
   <% end %>
+  <br>
+  年齢層
+  <%= f.select :age_group, AgeGroup.pluck(:name), { include_blank: '選択してください' } %>
   <br>
   Instagram公式URL<%= f.text_field :instagram_url %>
   <br>
@@ -28,13 +31,7 @@
   <br>
   <div class="form-inline mt-4 mb-4 row">
     <%= f.label "画像" %>
-    <% if @coffee_shop.images.attached? %>
-      <% @coffee_shop.images.each do |image| %>
-        <%= image_tag image, size: "100x100" %>
-      <% end %>
-    <% else %>
-      <%= image_tag "/images/coffee_shop_dummy.jpg", size: "100x100" %>
-    <% end %>
+    <%= render partial: 'shared/show_images', locals: { target: @coffee_shop, image_size: "100x100" } %>
     <div class="d-flex flex-column ml-2">
       <small class="mb-3">600px×600px推奨。<br>画像をアップロードして下さい。</small>
       <%= f.file_field :images, multiple: true %>
@@ -42,12 +39,18 @@
     <div id="new-image"></div>
   </div>
   <br>
+  検索カテゴリ<br>
   <div class="check_box">
     <%= f.collection_check_boxes(:search_category_ids, SearchCategory.all, :id, :name) do |b| %>
       <%= b.label { b.check_box + b.text } %>
     <% end %>
   </div>
-  
+  お店の雰囲気<br>
+  <div class="check_box">
+    <%= f.collection_check_boxes(:shop_atmosphere_ids, ShopAtmosphere.all, :id, :name) do |b| %>
+      <%= b.label { b.check_box + b.text } %>
+    <% end %>
+  </div>
   <%= f.submit "更新" %>
 <% end %>
 

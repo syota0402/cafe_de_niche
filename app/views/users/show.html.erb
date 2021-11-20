@@ -6,11 +6,7 @@
   <% end %>
 <%end %>
 <br>
-<% if @show_user.image.attached? %>
-  <%= image_tag @show_user.image, size: "100x100" %>
-<% else %>
-  <%= image_tag "/images/noimage.png", size: "100x100" %>
-<% end %>
+<%= render partial: 'shared/show_image', locals: { target: @show_user, image_size: "100x100" } %>
 <br>
 フォロワー数：<%= @followers.count %>
 <br>
@@ -31,6 +27,8 @@
 レビュー：<%= @reviews.count %>件
 <br>
 <% @reviews.last(10).each do |review| %>
+  <%= render partial: 'shared/show_image', locals: { target: review, image_size: "100x100" } %>
+  <br>
   店舗名<%= link_to review.coffee_shop.name, coffee_shop_path(review.coffee_shop) %><br>
   スコア<%= review.review_score %><br>
   <%= review.review_comment %>

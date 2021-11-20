@@ -1,0 +1,9 @@
+<h1>雰囲気編集</h1>
+
+<%= form_with model: @shop_atmosphere, url: dashboard_shop_atmosphere_path(@shop_atmosphere), local: true do |f| %>
+  <%= f.label :name, "雰囲気" %>
+  <%= f.text_field :name %>
+  
+  <%= f.submit "更新" %>
+<% end %>
+<%= link_to "雰囲気一覧に戻る", dashboard_shop_atmospheres_path %>

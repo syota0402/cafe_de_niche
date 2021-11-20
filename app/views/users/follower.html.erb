@@ -13,11 +13,7 @@
     <% @follower.each do |follower| %>
       <tr>
         <td>
-        <% if follower.image.attached? %>
-          <%= image_tag follower.image, size: "100x100" %>
-        <% else %>
-          <%= image_tag "/images/user_dummy.png", size: "100x100" %>
-        <% end %>
+        <%= render partial: 'shared/show_image', locals: { target: follower, image_size: "100x100" } %>
         </td>
         <td><%= link_to follower.name, user_path(follower.id) %></td>
       </tr>

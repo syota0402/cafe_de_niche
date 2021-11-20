@@ -1,0 +1,5 @@
+<% if target.image.attached? %>
+	<%= image_tag target.image, size: image_size %>
+<% else %>
+	<%= image_tag "/images/noimage.png", size: image_size %>
+<% end %>

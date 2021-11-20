@@ -2,8 +2,11 @@ class CoffeeShop < ApplicationRecord
 	has_many :coffee_shop_search_categories, dependent: :destroy
 	has_many :search_categories, :through => :coffee_shop_search_categories
 	has_many :reviews, dependent: :destroy
+	has_many :coffee_shop_shop_atmospheres, dependent: :destroy
+	has_many :shop_atmospheres, :through => :coffee_shop_shop_atmospheres
 	
 	accepts_nested_attributes_for :coffee_shop_search_categories, allow_destroy: true
+	accepts_nested_attributes_for :coffee_shop_shop_atmospheres, allow_destroy: true
 	acts_as_likeable
 	has_many_attached :images
 	

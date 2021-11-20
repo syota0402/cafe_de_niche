@@ -2,11 +2,7 @@
 <hr>
 <%= form_with url: mypage_users_path, local: true, method: :put do |f| %>
   <div class="form-inline mt-4 mb-4 row">
-    <% if @user.image.attached? %>
-      <%= image_tag @user.image, id: "user-image-preview", size: "100x100" %>
-    <% else %>
-      <img src="#", id: "user-image-preview">
-    <% end %>
+    <%= render partial: 'shared/show_image', locals: { target: @user, image_size: "100x100" } %>
     <div class="d-flex flex-column ml-2">
       <small class="mb-3">600px×600px推奨。<br>画像をアップロードして下さい。</small>
       <%= f.file_field :image, { onChange: "javascript: handleImage(this.files);"} %>
@@ -51,10 +47,6 @@
   
   <%= f.label :self_introduction, "自己紹介"%>
   <%= f.text_area :self_introduction, value: @user.self_introduction %>
-  
-  <hr>
-  
-  画像(未実装)
   
   <hr>
   

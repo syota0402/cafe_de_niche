@@ -1,4 +1,5 @@
 <h1>検索結果</h1>
+ヒット数：<%= @coffee_shops.count %>件
 <h2>検索条件</h2>
 <% @coffee_shop_search_conditions.each do |coffee_shop_search_condition| %>
   <%= coffee_shop_search_condition %> <br>
@@ -21,11 +22,7 @@
       <% @coffee_shops.each do |coffee_shop| %>
         <tr>
           <td>
-          <% if coffee_shop.images.attached? %>
-            <%= image_tag coffee_shop.images.first, size: "100x100" %>
-          <% else %>
-            <%= image_tag "/images/coffee_shop_dummy.jpg", size: "100x100" %>
-          <% end %>
+          <%= render partial: 'shared/show_images', locals: { target: coffee_shop, image_size: "100x100" } %>
           </td>
           <td><%= link_to coffee_shop.name, coffee_shop_path(coffee_shop) %></td>
         </tr>

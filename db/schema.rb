@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_14_064259) do
+ActiveRecord::Schema.define(version: 2021_11_20_042049) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -33,9 +33,22 @@ ActiveRecord::Schema.define(version: 2021_11_14_064259) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "age_groups", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "coffee_shop_search_categories", force: :cascade do |t|
     t.integer "coffee_shop_id"
     t.integer "search_category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "coffee_shop_shop_atmospheres", force: :cascade do |t|
+    t.integer "coffee_shop_id"
+    t.integer "shop_atmosphere_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -59,6 +72,9 @@ ActiveRecord::Schema.define(version: 2021_11_14_064259) do
     t.datetime "updated_at", null: false
     t.integer "likees_count", default: 0
     t.integer "likers_count", default: 0
+    t.time "slack_time_start"
+    t.time "slack_time_end"
+    t.string "age_group"
   end
 
   create_table "day_of_weeks", force: :cascade do |t|
@@ -123,6 +139,12 @@ ActiveRecord::Schema.define(version: 2021_11_14_064259) do
   end
 
   create_table "search_categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "shop_atmospheres", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -16,11 +16,7 @@
     <% @favorites.each do |favorite_coffee_shop| %>
       <tr>
         <td>
-        <% if favorite_coffee_shop.images.attached? %>
-          <%= image_tag favorite_coffee_shop.images.first, size: "100x100" %>
-        <% else %>
-          <%= image_tag "/images/coffee_shop_dummy.jpg", size: "100x100" %>
-        <% end %>
+          <%= render partial: 'shared/show_image_first', locals: { target: favorite_coffee_shop, image_size: "100x100" } %>
         </td>
         <td><%= link_to favorite_coffee_shop.name, coffee_shop_path(favorite_coffee_shop) %></td>
         <td><%= favorite_coffee_shop.tell %></td>
