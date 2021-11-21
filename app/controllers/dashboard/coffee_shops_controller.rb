@@ -39,6 +39,9 @@ class Dashboard::CoffeeShopsController < ApplicationController
   end
 
   def update
+    if coffee_shop_params[:images].present?
+      @coffee_shop.images.purge
+    end
     if @coffee_shop.update(coffee_shop_params.merge(regular_holiday: params[:regular_holidays].join(',')))
       redirect_to dashboard_coffee_shops_url, notice: '登録完了'
     else
@@ -66,7 +69,7 @@ class Dashboard::CoffeeShopsController < ApplicationController
   end
   
   def coffee_shop_params
-    params.require(:coffee_shop).permit(:name, :shop_url, :address, :tell, :access, :business_start_hour, :business_end_hour, :instagram_url, :instagram_spot_url, :municipalitie_id, :slack_time_start, :slack_time_end, :age_group, { :search_category_ids => [], :shop_atmosphere_ids => [] }, images: [])
+    params.require(:coffee_shop).permit(:name, :shop_url, :address, :tell, :access, :business_start_hour, :business_end_hour, :instagram_url, :instagram_spot_url, :municipalitie_id, :slack_time_start, :slack_time_end, :age_group, :first_image_url, { :search_category_ids => [], :shop_atmosphere_ids => [] }, images: [])
   end
   
   def check_user_authority

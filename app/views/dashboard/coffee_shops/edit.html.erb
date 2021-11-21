@@ -34,9 +34,9 @@
     <%= render partial: 'shared/show_images', locals: { target: @coffee_shop, image_size: "100x100" } %>
     <div class="d-flex flex-column ml-2">
       <small class="mb-3">600px×600px推奨。<br>画像をアップロードして下さい。</small>
-      <%= f.file_field :images, multiple: true %>
+      <%= f.file_field :images, onChange: "javascript: handleImage(this.files);", multiple: true %>
+      <img id="image-preview",size="50x50">
     </div>
-    <div id="new-image"></div>
   </div>
   <br>
   検索カテゴリ<br>
