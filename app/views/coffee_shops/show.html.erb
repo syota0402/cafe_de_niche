@@ -60,9 +60,8 @@
 	<% if user_signed_in? %>
 		<div class="offset-md-5 col-md-5">
 			<%= form_with model: @review, url: coffee_shop_reviews_path(@coffee_shop) do |f| %>
-		  
-				<%= f.file_field :image %>
-				<div id="new-image"></div>
+				<%= f.file_field :image, { onChange: "javascript: handleImage(this.files);"} %>
+				<img id="review-image-preview",size="50x50">
 				<br>
 				レビュー内容 ※150字以内
 				<%= f.text_area :review_comment, class: "form-control m-2" %>

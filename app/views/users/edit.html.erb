@@ -6,6 +6,7 @@
     <div class="d-flex flex-column ml-2">
       <small class="mb-3">600px×600px推奨。<br>画像をアップロードして下さい。</small>
       <%= f.file_field :image, { onChange: "javascript: handleImage(this.files);"} %>
+      <img id="user-image-preview",size="50x50">
     </div>
   </div>
   

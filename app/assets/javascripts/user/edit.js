@@ -5,6 +5,5 @@ function handleImage(image) {
       imagePreview.src = reader.result;
       imagePreview.className += "img-fluid w-25";
     };
-  console.log(image);
   reader.readAsDataURL(image[0]);
 }
