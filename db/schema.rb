@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_20_042049) do
+ActiveRecord::Schema.define(version: 2021_11_21_064428) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -171,6 +171,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_042049) do
     t.boolean "deleted_flg", default: false, null: false
     t.string "authority"
     t.integer "followers_count", default: 0
+    t.integer "best_shop_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
