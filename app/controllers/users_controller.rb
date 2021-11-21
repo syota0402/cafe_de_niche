@@ -64,6 +64,13 @@ class UsersController < ApplicationController
     @follower = @user.followers(User)
   end
   
+  def setbestshop
+    @coffee_shop = CoffeeShop.find_by(id: params[:id])
+    set_best_shop
+    @user.update(best_shop_id: @set_best_shop_id)
+    redirect_to coffee_shop_path(@coffee_shop.id)
+  end
+  
   private
   def set_user
     @user = current_user
@@ -75,5 +82,14 @@ class UsersController < ApplicationController
   
   def password_set?
     user_params[:password].present? && user_params[:password_confirmation].present? ? true : false
+  end
+  
+  def set_best_shop
+    # 同じなら解除
+    if @user.best_shop_id == @coffee_shop.id
+      @set_best_shop_id = ""
+    else
+      @set_best_shop_id = @coffee_shop.id
+    end
   end
 end

@@ -3,6 +3,15 @@
     <!-- user_signed_in? はユーザがログインしているか調べるdeviseのHelperメソッド -->
     <!--サインインしている-->
     <% if user_signed_in? %>
+      <% if @my_best_shop.present? %>
+        <%= link_to(coffee_shop_path(@my_best_shop.id)) do %>
+          <div class="best_shop">
+            my best shop<br>
+            <%= @my_best_shop.name %><br>
+            <%= render partial: 'shared/show_image_first', locals: { target: @my_best_shop, image_size: "100x100" } %>
+          </div>
+        <% end %>
+      <% end %>
       <%= link_to(favorite_users_path) do %>
         <span class="badge badge-warning">Favorite shops</span>
       <% end %>

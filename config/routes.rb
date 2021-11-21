@@ -51,6 +51,7 @@ Rails.application.routes.draw do
     end
     member do 
       get :follow
+      get :setbestshop
     end
   end
   
