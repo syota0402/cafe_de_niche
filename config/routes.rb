@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     resources :prefectures, except: [:new]
     resources :municipalities, except: [:new]
     resources :shop_atmospheres, except: [:new]
+    resources :coffee_beans, except: [:new]
   end
   
   devise_for :users, :controllers => {
