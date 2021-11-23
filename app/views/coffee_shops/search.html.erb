@@ -1,32 +1,47 @@
-<h1>検索結果</h1>
-ヒット数：<%= @coffee_shops.count %>件
-<h2>検索条件</h2>
-<% @coffee_shop_search_conditions.each do |coffee_shop_search_condition| %>
-  <%= coffee_shop_search_condition %> <br>
-<% end %>
-
-<hr>
-
-<% if @coffee_shops.blank? %>
-  該当店舗なし
-  <br>
-<% else %>
-  <table class="table mt-5">
-    <thead>
-      <tr>
-        <th scope="col"></th>
-        <th scope="col">店舗名</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @coffee_shops.each do |coffee_shop| %>
-        <tr>
-          <td>
-          <%= render partial: 'shared/show_images', locals: { target: coffee_shop, image_size: "100x100" } %>
-          </td>
-          <td><%= link_to coffee_shop.name, coffee_shop_path(coffee_shop) %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
+<div class="container">
+  <div class="search-conditions">
+    <% @coffee_shop_search_conditions.each do |coffee_shop_search_condition| %>
+      <p>
+        <%= coffee_shop_search_condition %>
+      </p>
+    <% end %>
+  </div>
+  <hr>
+  全<%= @coffee_shops.count %>件<br>
+  <% if @coffee_shops.blank? %>
+    該当店舗なし
+    <br>
+  <% else %>
+    <% @coffee_shops.each do |coffee_shop| %>
+      <div class="list-shop">
+        <div class="list-image">
+          <%= link_to(coffee_shop_path(coffee_shop)) do %>
+            <%= render partial: 'shared/show_image_first', locals: { target: coffee_shop, image_size: "100x100" } %>
+          <% end %>
+        </div>
+        <h3 class="list-name">
+          <%= link_to coffee_shop.name, coffee_shop_path(coffee_shop) %>
+        </h3>
+        <div class="list-favorite">
+          <% if current_user.likes?(coffee_shop) %>
+            <%= image_tag "/images/heart.png", size: "30x30" %>
+          <% end %>
+        </div>
+        <br>
+        <div class="list-popular">
+          <%= image_tag "/images/review_image.png", size: "30x30" %><%= coffee_shop.reviews.count %>件
+          <%= ReviewAverageScoreService.new(coffee_shop.reviews).calculation %>点
+          <%= image_tag "/images/good_hand.png", size: "30x30" %><%= coffee_shop.likers(User).count %>人
+        </div>
+        <br>
+        <div class="list-info">
+          <%= coffee_shop.address %>
+          <% if coffee_shop.business_start_hour.present? and coffee_shop.business_end_hour.present? %>
+            営業時間：<%= coffee_shop.business_start_hour.hour %>時 ~ <%= coffee_shop.business_end_hour.hour %>時
+          <% end %>
+        </div>
+      </div>
+      <hr>
+    <% end %>
+  <% end %>
+</div>

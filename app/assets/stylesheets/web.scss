@@ -111,3 +111,57 @@
   border: solid;
   border-color: darkgray;
 }
+
+.list-shop {
+  margin: 0;
+  display: flex;
+  position: relative;
+  height: 130px;
+
+}
+
+  .list-image {
+    position: absolute;
+    padding: 0.5em;
+  }
+  
+  .list-name {
+    position: absolute;
+    font-size: 36px;
+    left: 120px;
+  }
+  
+  .list-favorite {
+    position: absolute;
+    right: 0px;
+  }
+  
+  .list-popular {
+    position: absolute;
+    left: 120px;
+    top: 40px;
+    font-size: 20px;
+  }
+  
+  .list-info {
+    position: absolute;
+    left: 120px;
+    top: 70px;
+  }
+  
+.search-conditions{
+  position: relative;
+}
+.search-conditions p {
+  padding: 0.1em 1em;
+  margin: 0.2em;
+  color: #5d627b;
+  background: white;
+  border-left: solid 5px #5d627b;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  display: inline-block;
+}
+
