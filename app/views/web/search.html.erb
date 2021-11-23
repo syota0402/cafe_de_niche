@@ -1,71 +1,97 @@
-<h1>検索</h1>
-
-<%= form_with url: search_coffee_shops_path, method: :get, local: true do |f| %>
-  エリア
-  <br>
-  <% @municipalities.each do |municipality| %>
-    <%= f.radio_button :municipality_id, municipality.id %>
-    <%= f.label :municipality_id, municipality.name, {value: municipality.id, stylr: "display: inline-block;"} %>
+<div class="container">
+  <%= form_with url: search_coffee_shops_path, method: :get, local: true do |f| %>
+    
+    <div class="search-container">
+      <div class="search-name">エリア</div>
+      <% @municipalities.each do |municipality| %>
+        <div class="search-radio">
+          <%= f.radio_button :municipality_id, municipality.id %>
+          <%= f.label :municipality_id, municipality.name, {value: municipality.id, stylr: "display: inline-block;"} %>
+        </div>
+      <% end %> 
+    </div>
+    
+    <div class="search-container">
+      <div class="search-name">店舗名</div>
+      <%= f.text_field :name, :class => 'search-text' %>
+    </div>
+    
+    <br>
+    
+    <div class="search-container">
+      <div class="search-name">こだわり</div>
+      <%= f.collection_check_boxes(:search_category_ids, SearchCategory.all, :id, :name, {include_hidden: false} ) do |search_category| %>
+        <div class="search-checkbox">
+          <%= search_category.check_box %>
+          <%= search_category.label %>
+        </div>
+      <% end %>
+    </div>
+    
+    <br>
+    
+    <div class="search-container">
+      <div class="search-name">お店の雰囲気</div>
+      <%= f.collection_check_boxes(:shop_atmosphere_ids, ShopAtmosphere.all, :id, :name, {include_hidden: false}) do |shop_atmosphere| %>
+        <div class="search-checkbox">
+          <%= shop_atmosphere.check_box %>
+          <%= shop_atmosphere.label %>
+        </div>
+      <% end %>
+    </div>
+    
+    <br>
+    
+    <div class="search-container">
+      <div class="search-name">レビュー点数</div>
+      <%= f.number_field :review_score, :class => 'search-number' %>
+      <div class="search-radio">
+        <%= f.radio_button :review_score_search_type, :more_than, {:checked => true} %>
+        <%= f.label :review_score_search_type, "以上", {value: :more_than, stylr: "display: inline-block;"} %>
+        <%= f.radio_button :review_score_search_type, :less_than %>
+        <%= f.label :review_score_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>
+      </div>
+    </div>
+    <div class="search-container">
+      <div class="search-name">レビュー数</div>
+      <%= f.number_field :review_count, :class => 'search-number' %>
+      <div class="search-radio">
+        <%= f.radio_button :review_count_search_type, :more_than, {:checked => true} %>
+        <%= f.label :review_count_search_type, "以上", {value: :more_than, style: "display: inline-block;"} %>
+        <%= f.radio_button :review_count_search_type, :less_than %>
+        <%= f.label :review_count_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>
+      </div>
+      <!--※0で検索すると未レビューのお店のみ表示します。-->
+    </div>
+    
+    <div class="search-container">
+      <div class="search-name">お気に入り数</div>
+      <%= f.number_field :favorite_count, :class => 'search-number' %>
+      <div class="search-radio">
+        <%= f.radio_button :favorite_count_search_type, :more_than, {:checked => true} %>
+        <%= f.label :favorite_count_search_type, "以上", {value: :more_than, style: "display: inline-block;"} %>
+        <%= f.radio_button :favorite_count_search_type, :less_than %>
+        <%= f.label :favorite_count_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>
+      </div>
+    </div>
+    <!--※0で検索するとお気に入り数0のお店のみ表示します。-->
+    
+    <div class="search-container">
+      <div class="search-name">営業時間</div>
+      <%= f.time_field :business_hour, :class => 'search-time' %>
+    </div>
+    
+    <div class="search-container">
+      <div class="search-name">すいている時間</div>
+      <%= f.time_field :slack_time, :class => 'search-time' %>
+    </div>
+    
+    <div class="search-container">
+      <div class="search-name">年齢層</div>
+      <%= f.select :age_group, AgeGroup.pluck(:name), { include_blank: 'select' }, :class => 'search-select' %>
+    </div>
+    
+    <hr>
+    <%= f.submit :search %>
   <% end %> 
-    
-<hr>
-    
-  店舗名
-  <br>
-  <%= f.text_field :name %>
-
-<hr>
-  こだわり検索
-  <br>
-  <div class="check_box">
-    <%= f.collection_check_boxes(:search_category_ids, SearchCategory.all, :id, :name, {include_hidden: false}) do |search_category| %>
-      <%= search_category.label { search_category.check_box + search_category.text } %>
-    <% end %>
-  </div>
-<hr>
-  雰囲気検索
-  <br>
-  <div class="check_box">
-    <%= f.collection_check_boxes(:shop_atmosphere_ids, ShopAtmosphere.all, :id, :name, {include_hidden: false}) do |shop_atmosphere| %>
-      <%= shop_atmosphere.label { shop_atmosphere.check_box + shop_atmosphere.text } %>
-    <% end %>
-  </div>
-<hr>
-  レビュー点数検索
-  <br>
-  <%= f.number_field :review_score %>
-  <%= f.radio_button :review_score_search_type, :more_than, {:checked => true} %>
-  <%= f.label :review_score_search_type, "以上", {value: :more_than, stylr: "display: inline-block;"} %>
-  <%= f.radio_button :review_score_search_type, :less_than %>
-  <%= f.label :review_score_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>
-<hr>
-  レビュー数検索 ※0で検索すると未レビューのお店のみ表示します。
-  <br>
-  <%= f.number_field :review_count %>
-  <%= f.radio_button :review_count_search_type, :more_than, {:checked => true} %>
-  <%= f.label :review_count_search_type, "以上", {value: :more_than, style: "display: inline-block;"} %>
-  <%= f.radio_button :review_count_search_type, :less_than %>
-  <%= f.label :review_count_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>
-<hr>
-  お気に入り数検索　※0で検索するとお気に入り数0のお店のみ表示します。
-  <br>
-  <%= f.number_field :favorite_count %>
-  <%= f.radio_button :favorite_count_search_type, :more_than, {:checked => true} %>
-  <%= f.label :favorite_count_search_type, "以上", {value: :more_than, style: "display: inline-block;"} %>
-  <%= f.radio_button :favorite_count_search_type, :less_than %>
-  <%= f.label :favorite_count_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>
-<hr>
-  営業時間検索
-  <br>
-  <%= f.time_field :business_hour %>
-<hr>
-  すいている時間検索
-  <br>
-  <%= f.time_field :slack_time %>
-<hr>
-  年齢層
-  <br>
-  <%= f.select :age_group, AgeGroup.pluck(:name), { include_blank: '選択してください' } %>
-<hr>
-  <%= f.submit :search %>
-<% end %> 
+</div>
