@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_23_103921) do
+ActiveRecord::Schema.define(version: 2021_11_24_113551) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 2021_11_23_103921) do
     t.time "slack_time_start"
     t.time "slack_time_end"
     t.string "age_group"
+    t.string "shop_seats"
   end
 
   create_table "day_of_weeks", force: :cascade do |t|

@@ -57,6 +57,8 @@
       <%= coffee_bean.label { coffee_bean.check_box + coffee_bean.text } %>
     <% end %>
   </div>
+  席数<%= f.number_field :shop_seats %>
+  <br>
   <%= f.submit "更新" %>
 <% end %>
 
