@@ -49,6 +49,7 @@ class CoffeeShopsController < ApplicationController
       hash[:slack_time] = params[:slack_time]
       hash[:age_group] = params[:age_group]
       hash[:shop_atmosphere_ids] = params[:shop_atmosphere_ids]
+      hash[:coffee_bean_ids] = params[:coffee_bean_ids]
       hash
     end
     
@@ -58,23 +59,23 @@ class CoffeeShopsController < ApplicationController
       @coffee_shop_search_conditions << "電話番号：#{params[:tel]}" if params[:tell].present?
       if params[:search_category_ids].present?
         search_categorys = SearchCategory.where(id: params[:search_category_ids])
-        return_message = "こだわり検索："
+        return_message = "こだわり："
         search_categorys.each do |search_category|
           return_message << "#{search_category.name} "
         end
         @coffee_shop_search_conditions << return_message
       end
       if params[:review_score].present?
-        @coffee_shop_search_conditions << "レビュー点数検索：#{params[:review_score]}点以上" if params[:review_score_search_type].eql?("more_than")
-        @coffee_shop_search_conditions << "レビュー点数検索：#{params[:review_score]}点以下" if params[:review_score_search_type].eql?("less_than")
+        @coffee_shop_search_conditions << "レビュー点数：#{params[:review_score]}点以上" if params[:review_score_search_type].eql?("more_than")
+        @coffee_shop_search_conditions << "レビュー点数：#{params[:review_score]}点以下" if params[:review_score_search_type].eql?("less_than")
       end
       if params[:review_count].present?
-        @coffee_shop_search_conditions << "レビュー数検索：#{params[:review_count]}件以上" if params[:review_count_search_type].eql?("more_than")
-        @coffee_shop_search_conditions << "レビュー数検索：#{params[:review_count]}件以下" if params[:review_count_search_type].eql?("less_than")
+        @coffee_shop_search_conditions << "レビュー数：#{params[:review_count]}件以上" if params[:review_count_search_type].eql?("more_than")
+        @coffee_shop_search_conditions << "レビュー数：#{params[:review_count]}件以下" if params[:review_count_search_type].eql?("less_than")
       end
       if params[:favorite_count].present?
-        @coffee_shop_search_conditions << "お気に入り数検索：#{params[:favorite_count]}件以上" if params[:favorite_count_search_type].eql?("more_than")
-        @coffee_shop_search_conditions << "お気に入り数検索：#{params[:favorite_count]}件以下" if params[:favorite_count_search_type].eql?("less_than")
+        @coffee_shop_search_conditions << "お気に入り数：#{params[:favorite_count]}件以上" if params[:favorite_count_search_type].eql?("more_than")
+        @coffee_shop_search_conditions << "お気に入り数：#{params[:favorite_count]}件以下" if params[:favorite_count_search_type].eql?("less_than")
       end
       @coffee_shop_search_conditions << "エリア：#{Municipality.find(params[:municipality_id]).name}" if params[:municipality_id].present?
       @coffee_shop_search_conditions << "営業時間：#{params[:business_hour]}" if params[:business_hour].present?
@@ -85,6 +86,14 @@ class CoffeeShopsController < ApplicationController
         return_message = "お店の雰囲気："
         shop_atmospheres.each do |shop_atmospere|
           return_message << "#{shop_atmospere.name}"
+        end
+        @coffee_shop_search_conditions << return_message
+      end
+      if params[:coffee_bean_ids].present?
+        coffee_beans = CoffeeBean.where(id: params[:coffee_bean_ids])
+        return_message = "コーヒー豆："
+        coffee_beans.each do |coffee_bean|
+          return_message << "#{coffee_bean.name}"
         end
         @coffee_shop_search_conditions << return_message
       end
