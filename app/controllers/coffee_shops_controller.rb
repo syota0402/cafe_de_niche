@@ -99,5 +99,9 @@ class CoffeeShopsController < ApplicationController
         end
         @coffee_shop_search_conditions << return_message
       end
+      if params[:shop_seats].present?
+        @coffee_shop_search_conditions << "席数：#{params[:shop_seats]}席以上" if params[:shop_seats_search_type].eql?("more_than") 
+        @coffee_shop_search_conditions << "席数：#{params[:shop_seats]}席以下" if params[:shop_seats_search_type].eql?("less_than")
+      end
     end
 end
