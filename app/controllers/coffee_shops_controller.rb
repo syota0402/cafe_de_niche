@@ -50,6 +50,8 @@ class CoffeeShopsController < ApplicationController
       hash[:age_group] = params[:age_group]
       hash[:shop_atmosphere_ids] = params[:shop_atmosphere_ids]
       hash[:coffee_bean_ids] = params[:coffee_bean_ids]
+      hash[:shop_seats] = params[:shop_seats]
+      hash[:shop_seats_search_type] = params[:shop_seats_search_type]
       hash
     end
     

@@ -14,6 +14,8 @@ class CoffeeShopSearchService
     @slack_time = hash[:slack_time]
     @age_group = hash[:age_group]
     @shop_atmosphere_ids = hash[:shop_atmosphere_ids]
+    @shop_seats = hash[:shop_seats]
+    @shop_seats_search_type = hash[:shop_seats_search_type]
   end
   
   def search
@@ -54,6 +56,9 @@ class CoffeeShopSearchService
     
     # コーヒー豆
     search_by_coffee_bean if @coffee_bean_ids.present?
+    
+    # 席数
+    search_by_shop_seats if @shop_seats.present?
     
     @coffee_shops
   end
@@ -194,6 +199,20 @@ class CoffeeShopSearchService
   def search_by_coffee_bean
     coffee_shop_ids = CoffeeShopCoffeeBean.where(coffee_bean_id: @coffee_bean_ids).pluck(:coffee_shop_id)
     @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
+  end
+  
+  #席数検索
+  def search_by_shop_seats
+    coffee_shop_ids = []
+    @coffee_shops.each do |coffee_shop|
+      next if coffee_shop.shop_seats.nil?
+      if @shop_seats_search_type.eql?("more_than") && @shop_seats.to_i <= coffee_shop.shop_seats.to_i
+        coffee_shop_ids << coffee_shop.id
+      elsif @shop_seats_search_type.eql?("less_than") && @shop_seats.to_i >= coffee_shop.shop_seats.to_i
+        coffee_shop_ids << coffee_shop.id
+      end
+      @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
+    end
   end
   
 end
