@@ -53,6 +53,13 @@
     <% end %>
   </div>
   
+  コーヒー豆<br>
+  <div class="check_box">
+    <%= f.collection_check_boxes(:coffee_bean_ids, CoffeeBean.all, :id, :name) do |d| %>
+      <%= d.label { d.check_box + d.text } %>
+    <% end %>
+  </div>
+  
   <%= f.submit "追加" %>
 <% end %>
 

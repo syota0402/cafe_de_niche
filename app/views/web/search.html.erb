@@ -91,6 +91,16 @@
       <%= f.select :age_group, AgeGroup.pluck(:name), { include_blank: 'select' }, :class => 'search-select' %>
     </div>
     
+    <div class="search-container">
+      <div class="search-name">コーヒー豆</div>
+      <%= f.collection_check_boxes(:coffee_bean_ids, CoffeeBean.all, :id, :name, {include_hidden: false}) do |coffee_bean| %>
+        <div class="search-checkbox">
+          <%= coffee_bean.check_box %>
+          <%= coffee_bean.label %>
+        </div>
+      <% end %>
+    </div>
+    
     <hr>
     <%= f.submit :search %>
   <% end %> 

@@ -52,6 +52,9 @@ class CoffeeShopSearchService
     # 雰囲気検索
     search_by_shop_atmosphere if @shop_atmosphere_ids.present?
     
+    # コーヒー豆
+    search_by_coffee_bean if @coffee_bean_ids.present?
+    
     @coffee_shops
   end
   
@@ -184,6 +187,12 @@ class CoffeeShopSearchService
   # 雰囲気検索
   def search_by_shop_atmosphere
     coffee_shop_ids = CoffeeShopShopAtmosphere.where(shop_atmosphere_id: @shop_atmosphere_ids).pluck(:coffee_shop_id)
+    @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
+  end
+  
+  # コーヒー豆検索
+  def search_by_coffee_bean
+    coffee_shop_ids = CoffeeShopCoffeeBean.where(coffee_bean_id: @coffee_bean_ids).pluck(:coffee_shop_id)
     @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
   end
   
