@@ -11,7 +11,8 @@ class Review < ApplicationRecord
   validates :review_comment, length: { maximum: 150}
   
   # 点数の範囲　0~100
-  validates :review_score, numericality: { in: 0..100 }
+  validates :review_score, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
+  
   
   def save_review(review, review_params)
     review.review_comment = review_params[:review_comment]

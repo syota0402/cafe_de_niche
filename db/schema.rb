@@ -78,9 +78,6 @@ ActiveRecord::Schema.define(version: 2021_11_24_113551) do
     t.string "instagram_url"
     t.string "instagram_spot_url"
     t.integer "municipalitie_id"
-    t.string "first_image_url"
-    t.string "second_image_url"
-    t.string "third_image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "likees_count", default: 0
@@ -88,7 +85,7 @@ ActiveRecord::Schema.define(version: 2021_11_24_113551) do
     t.time "slack_time_start"
     t.time "slack_time_end"
     t.string "age_group"
-    t.string "shop_seats"
+    t.integer "shop_seats"
   end
 
   create_table "day_of_weeks", force: :cascade do |t|
