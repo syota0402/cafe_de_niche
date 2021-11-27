@@ -4,6 +4,7 @@ ja:
       coffee_shop: 店舗
       user: ユーザー
       search_category: 検索カテゴリ
+      review: レビュー
     attributes:
       coffee_shop:
         name: 店舗名
@@ -17,9 +18,6 @@ ja:
         instagram_url: Instagram公式URL
         instagram_spot_url: InstagramスポットURL
         municipalitie_id: エリアid
-        first_image_url: 画像１
-        second_image_url: 画像２
-        third_image_url: 画像３
         
       user:
         name: ユーザー名
@@ -32,3 +30,6 @@ ja:
       search_category:
         name: カテゴリ名
         
+      review:
+        review_comment: レビュー内容
+        review_score: スコア

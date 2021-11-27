@@ -101,6 +101,17 @@
       <% end %>
     </div>
     
+    <div class="search-container">
+      <div class="search-name">席数</div>
+      <%= f.number_field :shop_seats, :class => 'search-number' %>
+      <div class="search-radio">
+        <%= f.radio_button :shop_seats_search_type, :more_than, {:checked => true} %>
+        <%= f.label :shop_seats_search_type, "以上", {value: :more_than, style: "display: inline-block;"} %>
+        <%= f.radio_button :shop_seats_search_type, :less_than %>
+        <%= f.label :shop_seats_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>
+      </div>
+    </div>
+    
     <hr>
     <%= f.submit :search %>
   <% end %> 

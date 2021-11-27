@@ -1,0 +1,8 @@
+<% if notice %><p class="alert alert-success"><%= notice %></p><% end %>
+<% if alert %>
+  <% alert.each do |message| %>
+    <p class="alert alert-danger">
+      <%= message %>
+    </p>
+  <% end %>
+<% end %>

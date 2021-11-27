@@ -29,7 +29,7 @@ class CoffeeShopsController < ApplicationController
   
   private
     def coffee_shop_params
-      params.require(:coffee_shop).permit(:name, :shop_url, :address, :tell, :access, :business_start_hour, :business_end_hour, :regular_holiday, :instagram_url, :instagram_spot_url, :municipalitie_id, :first_image_url, :second_image_url, :third_image_url, images: [])
+      params.require(:coffee_shop).permit(:name, :shop_url, :address, :tell, :access, :business_start_hour, :business_end_hour, :regular_holiday, :instagram_url, :instagram_spot_url, :municipalitie_id, images: [])
     end
     
     def set_search_hash
@@ -50,6 +50,8 @@ class CoffeeShopsController < ApplicationController
       hash[:age_group] = params[:age_group]
       hash[:shop_atmosphere_ids] = params[:shop_atmosphere_ids]
       hash[:coffee_bean_ids] = params[:coffee_bean_ids]
+      hash[:shop_seats] = params[:shop_seats]
+      hash[:shop_seats_search_type] = params[:shop_seats_search_type]
       hash
     end
     
@@ -96,6 +98,10 @@ class CoffeeShopsController < ApplicationController
           return_message << "#{coffee_bean.name}"
         end
         @coffee_shop_search_conditions << return_message
+      end
+      if params[:shop_seats].present?
+        @coffee_shop_search_conditions << "席数：#{params[:shop_seats]}席以上" if params[:shop_seats_search_type].eql?("more_than") 
+        @coffee_shop_search_conditions << "席数：#{params[:shop_seats]}席以下" if params[:shop_seats_search_type].eql?("less_than")
       end
     end
 end
