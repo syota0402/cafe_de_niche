@@ -33,8 +33,8 @@
     <%= f.label "画像" %>
     <div class="d-flex flex-column ml-2">
       <small class="mb-3">600px×600px推奨。<br>画像をアップロードして下さい。</small>
-      <%= f.label "画像を選択" %>
-      <%= f.file_field :images, multiple: true %>
+      <%= f.file_field :images, onChange: "javascript: handleImage(this.files);", multiple: true %>
+      <img id="image-preview",size="50x50">
     </div>
     <div id="new-image"></div>
   </div>
@@ -63,6 +63,13 @@
   席数<%= f.number_field :shop_seats %>
   
   <br>
+  
+  静かさ<br>
+  <div class="check_box">
+    <%= f.collection_check_boxes(:volume_in_shop_ids, VolumeInShop.all, :id, :name) do |volume_in_shop| %>
+      <%= volume_in_shop.label { volume_in_shop.check_box + volume_in_shop.text } %>
+    <% end %>  
+  </div>
   <%= f.submit "追加" %>
 <% end %>
 
