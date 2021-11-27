@@ -20,13 +20,9 @@ class CoffeeShop < ApplicationRecord
 	validates :tell, uniqueness: true
 	
 	# 電話番号チェック
-	# validates :tell, presence: true, format: { with: /\A\d{10}$|^\d{11}\z/ }
 	validates :tell, presence: true, format: { with: /\A\d{10,11}\z/ }
 	
 	validates :tell, numericality: true
-	
-	# 時間チェック
-	# validates　:business_start_hour, :business_end_hour,
 	
 	# 文字数
 	validates :name, length: { maximum: 30 }

@@ -54,14 +54,7 @@
       </nav>
     </header>
     <main class="py-4 mb-5">
-      <% if notice %><p class="alert alert-success"><%= notice %></p><% end %>
-      <% if alert %>
-        <% alert.each do |message| %>
-          <p class="alert alert-danger">
-            <%= message %>
-          </p>
-        <% end %>
-      <% end %>
+      <%= render partial: 'shared/alert_message' %>
       <!--ここに本文がある-->
       <%= yield %>
     </main>
