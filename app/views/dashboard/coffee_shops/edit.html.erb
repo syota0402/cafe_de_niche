@@ -59,6 +59,13 @@
   </div>
   席数<%= f.number_field :shop_seats %>
   <br>
+  静かさ<br>
+  <div class="check_box">
+    <%= f.collection_check_boxes(:volume_in_shop_ids, VolumeInShop.all, :id, :name) do |volume_in_shop| %>
+      <%= volume_in_shop.label { volume_in_shop.check_box + volume_in_shop.text } %>
+    <% end %>  
+  </div>
+  <br>
   <%= f.submit "更新" %>
 <% end %>
 

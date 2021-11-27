@@ -52,6 +52,7 @@ class CoffeeShopsController < ApplicationController
       hash[:coffee_bean_ids] = params[:coffee_bean_ids]
       hash[:shop_seats] = params[:shop_seats]
       hash[:shop_seats_search_type] = params[:shop_seats_search_type]
+      hash[:volume_in_shop_ids] = params[:volume_in_shop_ids]
       hash
     end
     
@@ -62,8 +63,12 @@ class CoffeeShopsController < ApplicationController
       if params[:search_category_ids].present?
         search_categorys = SearchCategory.where(id: params[:search_category_ids])
         return_message = "こだわり："
-        search_categorys.each do |search_category|
-          return_message << "#{search_category.name} "
+        search_categorys.each_with_index do |search_category, i|
+          if i.eql?(0)
+            return_message << "#{search_category.name}"
+          else
+            return_message << "or#{search_category.name}"
+          end
         end
         @coffee_shop_search_conditions << return_message
       end
@@ -86,22 +91,42 @@ class CoffeeShopsController < ApplicationController
       if params[:shop_atmosphere_ids].present?
         shop_atmospheres = ShopAtmosphere.where(id: params[:shop_atmosphere_ids])
         return_message = "お店の雰囲気："
-        shop_atmospheres.each do |shop_atmospere|
-          return_message << "#{shop_atmospere.name}"
+        shop_atmospheres.each_with_index do |shop_atmospere, i|
+          if i.eql?(0)
+            return_message << "#{shop_atmospere.name}"
+          else
+            return_message << "or#{shop_atmospere.name}"
+          end
         end
         @coffee_shop_search_conditions << return_message
       end
       if params[:coffee_bean_ids].present?
         coffee_beans = CoffeeBean.where(id: params[:coffee_bean_ids])
         return_message = "コーヒー豆："
-        coffee_beans.each do |coffee_bean|
-          return_message << "#{coffee_bean.name}"
+        coffee_beans.each_with_index do |coffee_bean, i|
+          if i.eql?(0)
+            return_message << "#{coffee_bean.name}"
+          else
+            return_message << "or#{coffee_bean.name}"
+          end
         end
         @coffee_shop_search_conditions << return_message
       end
       if params[:shop_seats].present?
         @coffee_shop_search_conditions << "席数：#{params[:shop_seats]}席以上" if params[:shop_seats_search_type].eql?("more_than") 
         @coffee_shop_search_conditions << "席数：#{params[:shop_seats]}席以下" if params[:shop_seats_search_type].eql?("less_than")
+      end
+      if params[:volume_in_shop_ids].present?
+        volume_in_shops = VolumeInShop.where(id: params[:volume_in_shop_ids])
+        return_message = "静かさ："
+        volume_in_shops.each_with_index do |volume_in_shop, i|
+          if i.eql?(0)
+            return_message << "#{volume_in_shop.name}"
+          else
+            return_message << "or#{volume_in_shop.name}"
+          end
+        end
+        @coffee_shop_search_conditions << return_message
       end
     end
 end
