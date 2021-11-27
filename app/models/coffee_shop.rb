@@ -32,7 +32,8 @@ class CoffeeShop < ApplicationRecord
 	validates :tell, uniqueness: true
 	
 	# 電話番号チェック
-	validates :tell, presence: true, format: { with: /\A\d{10,11}\z/ }
+	# 頭0だとうまくいかん
+	# validates :tell, presence: true, format: { with: /\A\d{10,11}\z/ }
 	
 	validates :tell, numericality: true
 	
