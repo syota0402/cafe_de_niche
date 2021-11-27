@@ -113,6 +113,18 @@
     </div>
     
     <hr>
+    
+    <div class="search-container">
+      <div class="search-name">お店の静かさ</div>
+      <%= f.collection_check_boxes(:volume_in_shop_ids, VolumeInShop.all, :id, :name, {include_hidden: false}) do |volume_in_shop| %>
+        <div class="search-checkbox">
+          <%= volume_in_shop.check_box %>
+          <%= volume_in_shop.label %>
+        </div>
+      <% end %>
+    </div>
+    
+    <hr>
     <%= f.submit :search %>
   <% end %> 
 </div>
