@@ -53,6 +53,7 @@ class CoffeeShopsController < ApplicationController
       hash[:shop_seats] = params[:shop_seats]
       hash[:shop_seats_search_type] = params[:shop_seats_search_type]
       hash[:volume_in_shop_ids] = params[:volume_in_shop_ids]
+      hash[:food_menu_ids] = params[:food_menu_ids]
       hash
     end
     
@@ -124,6 +125,18 @@ class CoffeeShopsController < ApplicationController
             return_message << "#{volume_in_shop.name}"
           else
             return_message << "or#{volume_in_shop.name}"
+          end
+        end
+        @coffee_shop_search_conditions << return_message
+      end
+      if params[:food_menu_ids].present?
+        food_menus = FoodMenu.where(id: params[:food_menu_ids])
+        return_message = "食べ物："
+        food_menus.each_with_index do |food_menu, i|
+          if i.eql?(0)
+            return_message << "#{food_menu.name}"
+          else
+            return_message << "or#{food_menu.name}"
           end
         end
         @coffee_shop_search_conditions << return_message

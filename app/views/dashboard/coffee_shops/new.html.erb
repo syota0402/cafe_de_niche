@@ -70,6 +70,17 @@
       <%= volume_in_shop.label { volume_in_shop.check_box + volume_in_shop.text } %>
     <% end %>  
   </div>
+  
+  <br>
+  
+  食べ物<br>
+  <div class="check_box">
+    <%= f.collection_check_boxes(:food_menu_ids, FoodMenu.all, :id, :name) do |food_menu| %>
+      <%= food_menu.label { food_menu.check_box + food_menu.text } %>
+    <% end %>
+  </div>
+  
+  <br>
   <%= f.submit "追加" %>
 <% end %>
 

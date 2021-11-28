@@ -66,6 +66,13 @@
     <% end %>  
   </div>
   <br>
+  食べもの<br>
+  <div class="check_box">
+    <%= f.collection_check_boxes(:food_menu_ids, FoodMenu.all, :id, :name) do |food_menu| %>
+      <%= food_menu.label { food_menu.check_box + food_menu.text } %>
+    <% end %>
+  </div>
+  <br>
   <%= f.submit "更新" %>
 <% end %>
 

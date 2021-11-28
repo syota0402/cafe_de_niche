@@ -112,7 +112,7 @@
       </div>
     </div>
     
-    <hr>
+    <br>
     
     <div class="search-container">
       <div class="search-name">お店の静かさ</div>
@@ -123,6 +123,19 @@
         </div>
       <% end %>
     </div>
+    
+    <br>
+    
+    <div class="search-container">
+      <div class="search-name">食べ物</div>
+      <%= f.collection_check_boxes(:food_menu_ids, FoodMenu.all, :id, :name, {include_hidden: false}) do |food_menu| %>
+        <div class="search-checkbox">
+          <%= food_menu.check_box %>
+          <%= food_menu.label %>
+        </div>
+      <% end %>
+    </div>
+    
     
     <hr>
     <%= f.submit :search %>
