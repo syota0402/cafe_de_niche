@@ -1,79 +1,139 @@
-<%= javascript_include_tag "coffee_shops/show" %>
+<div class="container">
+	<div class="shop-container">
+		<h1 class="shop-name"><%= @coffee_shop.name %></h1>
+		<%= link_to favorite_coffee_shop_path(target_action: "show"), class: "btn like-btn text-like" do %>
+			<%= current_user.likes?(@coffee_shop) ? "お気に入り解除" : "お気に入り" %>
+		<% end %>
+		<%= link_to setbestshop_user_path, class: "btn favorite-button text-favorite" do %>
+			<%= current_user.best_shop_id == @coffee_shop.id ? "mybest解除" : "mybest" %>
+		<% end %>
+	</div>
+	<div class="shop-info">
+		<%= render partial: 'shared/show_images', locals: { target: @coffee_shop, image_size: "200x200" } %>
+	  <div class="shop-tell">
+	  	<%= image_tag "/images/tell_icon.png", size: "25x25" %><%= @coffee_shop.tell %>
+	  </div>
+	  <div class="shop-hp">
+	  	<%= image_tag "/images/hp_icon.png", size: "25x25" %><%= link_to @coffee_shop.shop_url, @coffee_shop.shop_url, target: :_blank, rel: "noopener noreferrer" %>
+	  </div>
+	  <div class="shop-insta">
+	  	<%= image_tag "/images/insta_icon.png", size: "25x25" %><%= link_to @coffee_shop.instagram_url, 'https://www.instagram.com/#{@coffee_shop.instagram_url}/', target: :_blank, rel: "noopener noreferrer" %>
+	  </div>
+	  <br>
+	  <table class="shop-table">
+	  	<tbody>
+	  		<tr>
+	  			<th>住所</th>
+	  			<td>
+	  				<%= @coffee_shop.address %>
+	  			</td>
+	  		</tr>
+	  		<tr>
+	  			<th>アクセス</th>
+	  			<td><%= @coffee_shop.access %></td>
+	  		</tr>
+	  		<tr>
+	  			<th>営業時間</th>
+	  			<td><%= @shop_business_hour %></td>
+	  		</tr>
+	  		<tr>
+	  			<th>定休日</th>
+	  			<td><%= @coffee_shop.regular_holiday %></td>
+	  		</tr>
+	  		<tr>
+	  			<th>エリア</th>
+	  			<td><%= Municipality.find(@coffee_shop.municipalitie_id).name %></td>
+	  		</tr>
+	  		<tr>
+	  			<th>こだわり</th>
+	  			<td><%= @search_category %></td>
+	  		</tr>
+	  		<tr>
+	  			<th>すいている時間</th>
+	  			<td><%= @slack_time %></td>
+	  		</tr>
+	  		<tr>
+	  			<th>年齢層</th>
+	  			<td><%= @coffee_shop.age_group %></td>
+	  		</tr>
+	  		<tr>
+	  			<th>お店の雰囲気</th>
+	  			<td><%= @shop_atmospere %></td>
+	  		</tr>
+	  		<tr>
+	  			<th>コーヒー豆</th>
+	  			<td><%= @coffee_bean %></td>
+	  		</tr>
+	  		<tr>
+	  			<th>席数</th>
+	  			<td><%= @coffee_shop.shop_seats %>席</td>
+	  		</tr>
+	  		<tr>
+	  			<th>静かさ</th>
+	  			<td><%= @volume_in_shop %></td>
+	  		</tr>
+	  		<tr>
+	  			<th>食べ物</th>
+	  			<td><%= @food_menu %></td>
+	  		</tr>
+	  	</tbody>
+	  </table>
+	  <div class="liker-container">
+	  	<div class="liker-title">
+	  		お気に入り
+	  	</div>
+	  	<div class="liker-count">
+	  		<%= @coffee_shop.likers_count %>人
+	  	</div>
+	  	<div class="liker-user">
+		  	<% @likers.last(5).each do |liker| %>
+		  		<%= link_to(user_path(liker.id)) do %>
+		  			<%= image_tag liker.image, size: "50x50" %>
+						<%= liker.name %>
+					<% end %>
+		  	<% end %>
+	  	</div>
+	  </div>
+		<hr>
+		レビュー数：<%= @reviews.count %>
+		<hr>
+		レビュー点数：<%= @review_average_score %>
+		<hr>
+		<% @reviews.each do |review| %>
+			<dic class="offset-md-5 col-md-5">
+				<p>
+					<%= render partial: 'shared/show_image', locals: { target: review, image_size: "100x100" } %>
+			  </p>
+				<p>投稿者：<%= link_to review.user.name, user_path(review.user_id) %></p>
+				<p>スコア：<%= review.review_score %></p>
+				<p>レビュー：<%= review.review_comment %></p>
+				<label>投稿日：<%= review.created_at %></label>
+				<% if user_signed_in? and current_user.id == review.user_id %>
+					<p><%= link_to "削除", review_path(review), method: :delete, data: { confirm: '削除してもいいですか?' } %></p>
+				<% end %>
+				<hr>
+			</dic>
+		<%end %>
+		
+		<% if user_signed_in? %>
+			<div class="offset-md-5 col-md-5">
+				<%= form_with model: @review, url: coffee_shop_reviews_path(@coffee_shop) do |f| %>
+					<%= f.file_field :image, { onChange: "javascript: handleImage(this.files);"} %>
+					<img id="review-image-preview",size="50x50">
+					<br>
+					レビュー内容 ※150字以内
+					<%= f.text_area :review_comment, class: "form-control m-2" %>
+					<br>
+					レビュースコア ※0~100、整数のみ
+					<%= f.number_field :review_score, class: "form-control m-2" %>
+					<%= f.submit "レビューを追加" %>
+				<% end %>
+			</div>
+		<% end %>
+		
+	<%= link_to "戻る", :back %>
 
-<h1>CoffeeShops#show</h1>
-	<%= link_to favorite_coffee_shop_path(target_action: "show"), class: "btn favorite-button text-favorite" do %>
-		<i class="fa fa-heart"></i><%= current_user.likes?(@coffee_shop) ? "お気に入り解除" : "お気に入り" %>
-	<% end %>
-	<br>
-	<%= link_to setbestshop_user_path, class: "btn favorite-button text-favorite" do %>
-		<i class="fa fa-heart"></i><%= current_user.best_shop_id == @coffee_shop.id ? "mybest解除" : "mybest" %>
-	<% end %>
-	お気に入り数：<%= @coffee_shop.likers_count %>
-	<br>
-	お気に入りユーザー：
-	<% @likers.last(5).each do |liker| %>
-		<%= link_to liker.name, user_path(liker.id) %>,
-	<% end %>
-	<br>
-	<%= render partial: 'shared/show_images', locals: { target: @coffee_shop, image_size: "100x100" } %>
-	<br>
-  店舗名：<%= @coffee_shop.name %>
-  <br>
-  店舗HP：<%= @coffee_shop.shop_url %>
-  <br>
-  住所：<%= @coffee_shop.address %>
-  <br>
-  電話番号：<%= @coffee_shop.tell %>
-  <br>
-  アクセス：<%= @coffee_shop.access %>
-  <br>
-  営業開始時間：<%= @coffee_shop.business_start_hour %>
-  <br>
-  営業終了時間：<%= @coffee_shop.business_end_hour %>
-  <br>
-  定休日：<%= @coffee_shop.regular_holiday %>
-  <br>
-  Instagram公式URL：<%= @coffee_shop.instagram_url %>
-  <br>
-  InstagramスポットURL：<%= @coffee_shop.instagram_spot_url %>
-  <br>
-  エリア：<%= Municipality.find(@coffee_shop.municipalitie_id).name %>
-	<hr>
-	レビュー数：<%= @reviews.count %>
-	<hr>
-	レビュー点数：<%= @review_average_score %>
-	<hr>
-	
-	<% @reviews.each do |review| %>
-		<dic class="offset-md-5 col-md-5">
-			<p>
-				<%= render partial: 'shared/show_image', locals: { target: review, image_size: "100x100" } %>
-		  </p>
-			<p>投稿者：<%= link_to review.user.name, user_path(review.user_id) %></p>
-			<p>スコア：<%= review.review_score %></p>
-			<p>レビュー：<%= review.review_comment %></p>
-			<label>投稿日：<%= review.created_at %></label>
-			<% if user_signed_in? and current_user.id == review.user_id %>
-				<p><%= link_to "削除", review_path(review), method: :delete, data: { confirm: '削除してもいいですか?' } %></p>
-			<% end %>
-			<hr>
-		</dic>
-	<%end %>
-	
-	<% if user_signed_in? %>
-		<div class="offset-md-5 col-md-5">
-			<%= form_with model: @review, url: coffee_shop_reviews_path(@coffee_shop) do |f| %>
-				<%= f.file_field :image, { onChange: "javascript: handleImage(this.files);"} %>
-				<img id="review-image-preview",size="50x50">
-				<br>
-				レビュー内容 ※150字以内
-				<%= f.text_area :review_comment, class: "form-control m-2" %>
-				<br>
-				レビュースコア ※0~100、整数のみ
-				<%= f.number_field :review_score, class: "form-control m-2" %>
-				<%= f.submit "レビューを追加" %>
-			<% end %>
-		</div>
-	<% end %>
-	
-<%= link_to "戻る", :back %>
+	</div>
+</div>
+
+<%= javascript_include_tag "coffee_shops/show" %>

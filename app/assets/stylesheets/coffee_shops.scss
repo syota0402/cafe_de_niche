@@ -1,3 +1,130 @@
-// Place all the styles related to the Coffee_shops controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.shop-container {
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+  z-index: 100;
+}
+
+.shop-name {
+  padding: 3px 50px;
+  font-size: 30px;
+  border: solid 1px #CC935B;
+  background-color: #ffffff;
+}
+
+.like-btn {
+  border-radius: 2px;
+  border: solid 1px #CC935B;
+  background-color: #ffffff;
+  right: 0;
+  position: absolute;
+  
+}
+
+.text-like {
+  color: #CC935B;
+  font-size: small;
+}
+
+.favorite-button {
+  border-radius: 2px;
+  border: solid 1px #CC935B;
+  background-color: #ffffff;
+  right: 0;
+  position: absolute;
+  top: 35px;
+}
+
+.text-favorite {
+  color: #CC935B;
+  font-size: small;
+}
+
+.shop-info {
+  position: relative;
+}
+
+.shop-tell {
+  font-size: 20px;
+}
+
+.shop-hp {
+  font-size: 20px;
+}
+
+.shop-insta {
+  font-size: 20px;
+}
+
+.shop-table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 0 solid #dbdbdb;
+  border-width: 0 1px 1px 0;
+  line-height: 1.2;
+  table-layout: fixed;
+  width: 100%;
+  word-break: break-all;
+}
+
+.shop-table tr {
+  background: transparent;
+  border: 0;
+  font-size: 100%;
+  font-style: normal;
+  font-weight: 400;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+  text-decoration: none;
+  vertical-align: baseline;
+}
+
+.shop-table td {
+  background: #fff;
+  border: 0 solid #dbdbdb;
+  border-width: 1px 0 0 1px;
+  padding: 10px 12px;
+}
+
+.shop-table th {
+  text-align: left;
+  width: 130px;
+  background: #efefef;
+  border: 0 solid #dbdbdb;
+  border-width: 1px 0 0 1px;
+  padding: 10px 12px;
+}
+
+.liker-container {
+  position: relative;
+  margin: 2em auto;
+  padding: 10px;
+  width: 95%;
+  border: 2px solid #CC935B; /* 枠線の太さ・色 */
+  color: #555555; /* 文字色 */
+  background-color: #f8fafc;
+  box-shadow: 2px 2px 1px #c7c7c7;/* 影の色 */
+  border-radius: 8px; /* 角の丸み */
+  height: 100px;
+}
+
+.liker-title {
+  position: absolute;
+  left: 20px; /*（left）に変更すると左 */
+  top: -15px;
+  padding: 0 .5em;
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #CC935B; /* タイトル色 */
+  background-color: #f8fafc;
+}
+
+.liker-count {
+  position: absolute;
+  
+}
+
+.liker-user {
+  position: absolute;
+}
