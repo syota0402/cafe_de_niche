@@ -85,22 +85,29 @@
 	  	<div class="liker-count">
 	  		<%= @coffee_shop.likers_count %>人
 	  	</div>
-	  	<div class="liker-user">
-		  	<% @likers.last(5).each do |liker| %>
+		  <% @likers.last(5).each do |liker| %>
+		  	<div class="liker-user">
 		  		<%= link_to(user_path(liker.id)) do %>
-		  			<%= image_tag liker.image, size: "50x50" %>
-						<%= liker.name %>
+		  			<%= render partial: 'shared/show_image', locals: { target: liker, image_size: "50x50" } %>
+		  			<p>
+		  				<%= liker.name %>
+		  			</p>
 					<% end %>
-		  	<% end %>
-	  	</div>
+				</div>
+		  <% end %>
 	  </div>
-		<hr>
-		レビュー数：<%= @reviews.count %>
-		<hr>
-		レビュー点数：<%= @review_average_score %>
-		<hr>
+		<div class="review-totel-container">
+			<div class="review-totel-count">
+				<%= @reviews.count %>
+				<p>件</p>
+			</div>
+			<div class="review-totel-score">
+				<%= @review_average_score %><p>点</p>
+			</div>
+		</div>
+		
 		<% @reviews.each do |review| %>
-			<dic class="offset-md-5 col-md-5">
+			<div class="review-container">
 				<p>
 					<%= render partial: 'shared/show_image', locals: { target: review, image_size: "100x100" } %>
 			  </p>
@@ -112,7 +119,7 @@
 					<p><%= link_to "削除", review_path(review), method: :delete, data: { confirm: '削除してもいいですか?' } %></p>
 				<% end %>
 				<hr>
-			</dic>
+			</div>
 		<%end %>
 		
 		<% if user_signed_in? %>
