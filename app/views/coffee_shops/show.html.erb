@@ -108,17 +108,19 @@
 		
 		<% @reviews.each do |review| %>
 			<div class="review-container">
-				<p>
+				<div class="review-image">
 					<%= render partial: 'shared/show_image', locals: { target: review, image_size: "100x100" } %>
-			  </p>
-				<p>投稿者：<%= link_to review.user.name, user_path(review.user_id) %></p>
-				<p>スコア：<%= review.review_score %></p>
-				<p>レビュー：<%= review.review_comment %></p>
-				<label>投稿日：<%= review.created_at %></label>
+			  </div>
+			  <div class="review-user">
+			  	<%= render partial: 'shared/show_image', locals: { target: review.user, image_size: "50x50" } %>
+			  	<p><%= link_to review.user.name, user_path(review.user_id) %></p>
+			  </div>
+				<div class="review-score"><%= review.review_score %></div>
+				<div class="review-comment"><%= review.review_comment %></div>
+				<div class="review-date">投稿日：<%= review.created_at.strftime("%Y-%m-%d") %></div>
 				<% if user_signed_in? and current_user.id == review.user_id %>
-					<p><%= link_to "削除", review_path(review), method: :delete, data: { confirm: '削除してもいいですか?' } %></p>
+					<div class="review-delete"><%= link_to "削除", review_path(review), method: :delete, data: { confirm: '削除してもいいですか?' } %></div>
 				<% end %>
-				<hr>
 			</div>
 		<%end %>
 		
