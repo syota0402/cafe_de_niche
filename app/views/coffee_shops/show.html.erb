@@ -11,7 +11,7 @@
 	<div class="shop-info">
 		<%= render partial: 'shared/show_images', locals: { target: @coffee_shop, image_size: "200x200" } %>
 	  <div class="shop-tell">
-	  	<%= image_tag "/images/tell_icon.png", size: "25x25" %><%= @coffee_shop.tell %>
+	  	<%= image_tag "/images/tell_icon.png", size: "25x25" %><%= @coffee_shop.shop_tell %>
 	  </div>
 	  <div class="shop-hp">
 	  	<%= image_tag "/images/hp_icon.png", size: "25x25" %><%= link_to @coffee_shop.shop_url, @coffee_shop.shop_url, target: :_blank, rel: "noopener noreferrer" %>

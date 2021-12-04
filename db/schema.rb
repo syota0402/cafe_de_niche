@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_27_091626) do
+ActiveRecord::Schema.define(version: 2021_12_04_052443) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -100,6 +100,7 @@ ActiveRecord::Schema.define(version: 2021_11_27_091626) do
     t.time "slack_time_end"
     t.string "age_group"
     t.integer "shop_seats"
+    t.string "shop_tell"
   end
 
   create_table "day_of_weeks", force: :cascade do |t|
