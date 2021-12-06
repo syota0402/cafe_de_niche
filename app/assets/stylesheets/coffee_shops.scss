@@ -1,3 +1,233 @@
-// Place all the styles related to the Coffee_shops controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.shop-container {
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+  z-index: 100;
+}
+
+.shop-name {
+  padding: 3px 50px;
+  font-size: 30px;
+  border: solid 1px #CC935B;
+  background-color: #ffffff;
+}
+
+.like-btn {
+  border-radius: 2px;
+  border: solid 1px #CC935B;
+  background-color: #ffffff;
+  right: 0;
+  position: absolute;
+  
+}
+
+.text-like {
+  color: #CC935B;
+  font-size: small;
+}
+
+.favorite-button {
+  border-radius: 2px;
+  border: solid 1px #CC935B;
+  background-color: #ffffff;
+  right: 0;
+  position: absolute;
+  top: 35px;
+}
+
+.text-favorite {
+  color: #CC935B;
+  font-size: small;
+}
+
+.shop-info {
+  position: relative;
+}
+
+.shop-tell {
+  font-size: 20px;
+}
+
+.shop-hp {
+  font-size: 20px;
+}
+
+.shop-insta {
+  font-size: 20px;
+}
+
+.shop-table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 0 solid #dbdbdb;
+  border-width: 0 1px 1px 0;
+  line-height: 1.2;
+  table-layout: fixed;
+  width: 100%;
+  word-break: break-all;
+}
+
+.shop-table tr {
+  background: transparent;
+  border: 0;
+  font-size: 100%;
+  font-style: normal;
+  font-weight: 400;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+  text-decoration: none;
+  vertical-align: baseline;
+}
+
+.shop-table td {
+  background: #fff;
+  border: 0 solid #dbdbdb;
+  border-width: 1px 0 0 1px;
+  padding: 10px 12px;
+}
+
+.shop-table th {
+  text-align: left;
+  width: 130px;
+  background: #efefef;
+  border: 0 solid #dbdbdb;
+  border-width: 1px 0 0 1px;
+  padding: 10px 12px;
+}
+
+.liker-container {
+  position: relative;
+  margin: 2em auto;
+  padding: 10px;
+  width: 95%;
+  border: 2px solid #CC935B; /* 枠線の太さ・色 */
+  color: #555555; /* 文字色 */
+  background-color: #f8fafc;
+  box-shadow: 2px 2px 1px #c7c7c7;/* 影の色 */
+  border-radius: 8px; /* 角の丸み */
+  height: 100px;
+  display: inline-flex;
+}
+
+.liker-title {
+  position: absolute;
+  left: 20px; /*（left）に変更すると左 */
+  top: -15px;
+  padding: 0 .5em;
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #CC935B; /* タイトル色 */
+  background-color: #f8fafc;
+}
+
+.liker-count {
+  position: absolute;
+  left: 114px;
+  top: -15px;
+  padding: 0 0.5em;
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #CC935B;
+  background-color: #f8fafc;
+}
+
+.liker-user {
+  display: inline-block;
+  width: 18%;
+  text-align: center;
+}
+
+.liker-user p {
+  color: black;
+}
+
+.review-totel-container {
+  position: relative;
+  border-bottom: 3px solid #CC935B;
+  height: 100px;
+}
+
+.review-totel-count {
+  font-family: 'Roboto', sans-serif;
+  font-size: 6rem;
+  line-height: 1;
+  position: absolute;
+  bottom: -1.3rem;
+  left: 0;
+  color: #CC935B;
+}
+.review-totel-count p {
+  font-size: 3rem;
+  line-height: 1;
+  position: absolute;
+  bottom: -0.3rem;
+  right: -47px;
+  color: #CC935B;
+}
+
+.review-totel-score {
+  font-family: 'Roboto', sans-serif;
+  font-size: 6rem;
+  line-height: 1;
+  position: absolute;
+  bottom: -1.3rem;
+  left: 300px;
+  color: #CC935B;
+}
+
+.review-totel-score p {
+  font-size: 3rem;
+  line-height: 1;
+  position: absolute;
+  bottom: -0.3rem;
+  right: -47px;
+  color: #CC935B;
+}
+
+.review-container {
+  position: relative;
+  padding: 0.5em 1em;
+  margin: 1em 0;
+  background: #f4f4f4;
+  border-left: solid 6px #CC935B;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.33);
+  height: 135px;
+}
+
+.review-image {
+  position: absolute;
+}
+
+.review-user {
+  position: absolute;
+  right: 6px;
+  width: 10%;
+  text-align: center;
+}
+
+.review-score {
+  position: absolute;
+  right: 82px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 4rem;
+  line-height: 1;
+  color: #CC935B;
+}
+
+.review-comment {
+  position: absolute;
+  width: 62%;
+  left: 127px;
+}
+
+.review-date {
+  position: absolute;
+  right: 6px;
+  bottom: 0;
+}
+
+.review-delete {
+  position: absolute;
+  bottom: 0;
+}

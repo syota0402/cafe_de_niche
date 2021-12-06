@@ -1,7 +1,7 @@
 class CoffeeShopSearchService
   def initialize(hash)
     @name = hash[:name]
-    @tell = hash[:tell]
+    @shop_tell = hash[:shop_tell]
     @search_category_ids = hash[:search_category_ids]
     @review_score = hash[:review_score]
     @review_score_search_type = hash[:review_score_search_type]
@@ -27,7 +27,7 @@ class CoffeeShopSearchService
     search_by_name if @name.present?
     
     # 電話番号　完全一致
-    search_by_tell if @tell.present?
+    search_by_tell if @shop_tell.present?
     
     # こだわり検索　複数選択可
     search_by_search_category_ids if @search_category_ids.present?
@@ -80,7 +80,7 @@ class CoffeeShopSearchService
   
   # 電話番号検索
   def search_by_tell
-    @coffee_shops = @coffee_shops.where(tell: @tell)
+    @coffee_shops = @coffee_shops.where(shop_tell: @shop_tell)
   end
   
   # こだわり検索

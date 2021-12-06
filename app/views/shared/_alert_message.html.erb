@@ -1,8 +1,17 @@
-<% if notice %><p class="alert alert-success"><%= notice %></p><% end %>
+<% if notice %><p class="alert alert-success"><%= notice %></p>
+
+<% end %>
+
 <% if alert %>
-  <% alert.each do |message| %>
+  <% if alert.instance_of?(Array)%>
+    <% alert.each do |message| %>
+      <p class="alert alert-danger">
+        <%= message %>
+      </p>
+    <% end %>
+  <% else %>
     <p class="alert alert-danger">
-      <%= message %>
-    </p>
+        <%= alert %>
+      </p>
   <% end %>
 <% end %>

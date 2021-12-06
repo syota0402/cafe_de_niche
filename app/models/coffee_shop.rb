@@ -26,22 +26,19 @@ class CoffeeShop < ApplicationRecord
 	
 	# バリデーション
 	# 必ず登録してほしい項目
-	validates :name, :address, :tell, :municipalitie_id, :regular_holiday, presence: true
+	validates :name, :address, :shop_tell, :municipalitie_id, :regular_holiday, presence: true
 	
 	# 重複チェック
-	validates :tell, uniqueness: true
+	validates :shop_tell, uniqueness: true
 	
 	# 電話番号チェック
-	# 頭0だとうまくいかん
-	# validates :tell, presence: true, format: { with: /\A\d{10,11}\z/ }
-	
-	validates :tell, numericality: true
+	validates :shop_tell, presence: true, format: { with: /\A\d{10,11}\z/ }
 	
 	# 文字数
 	validates :name, length: { maximum: 30 }
 	validates :shop_url, length: { maximum: 2048 }
 	validates :address, length: { maximum: 300 }
-	validates :tell, length: { maximum: 11 }
+	validates :shop_tell, length: { maximum: 11 }
 	validates :access, length: { maximum: 100 }
 	validates :regular_holiday, length: { maximum: 14 }
 	validates :instagram_url, length: { maximum: 2048 }
@@ -49,6 +46,9 @@ class CoffeeShop < ApplicationRecord
 	validates :municipalitie_id, length: { maximum: 1000 }
 	
 	validate :image_length
+	
+	# 開始時間と終了時間
+	validate :business_start_hour_and_business_end_hour_must_be_set
 	
 	scope :search_for_name_and_tell, -> (keyword) {
 		where("name LIKE ?", "%#{keyword}%").
@@ -66,5 +66,19 @@ class CoffeeShop < ApplicationRecord
       errors.add(:images, "は3枚以内にしてください")
     end
   end
+	
+	def business_start_hour_and_business_end_hour_must_be_set
+		return if business_start_hour.nil? && business_end_hour.nil?
+		
+		if business_start_hour.nil?
+			errors.add(:business_start_hour, "は営業終了時間とペアで入力してください。")
+		elsif	business_end_hour.nil?
+			errors.add(:business_end_hour, "は営業開始時間とペアで入力してください。")
+		end
+	end
+	
+	# def start_time_and_end_time_must_be_set
+		
+	# end
 	
 end
