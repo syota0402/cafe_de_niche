@@ -51,8 +51,11 @@ gem 'pry-rails'
 # エラーメッセージを日本語化できる
 gem 'rails-i18n'
 
- # socialiizatioinを使用できる
- gem 'socialization'
+# socialiizatioinを使用できる
+gem 'socialization'
+
+# ページネーションを実装できる
+gem 'kaminari'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

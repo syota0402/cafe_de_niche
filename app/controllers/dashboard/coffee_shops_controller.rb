@@ -2,15 +2,16 @@ class Dashboard::CoffeeShopsController < ApplicationController
   before_action :set_coffee_shop, only: %w[show edit update destroy]
   before_action :check_user_authority, only: :destroy
   layout "dashboard/dashboard"
+  PER = 15
   
   def index
     if params[:keyword].present?
       keyword = params[:keyword].strip
       @total_count = CoffeeShop.search_for_name_and_tell(keyword).count
-      @coffee_shops = CoffeeShop.search_for_name_and_tell(keyword)
+      @coffee_shops = CoffeeShop.search_for_name_and_tell(keyword).page(params[:page]).per(PER)
     else
       @total_count = CoffeeShop.count
-      @coffee_shops = CoffeeShop.all
+      @coffee_shops = CoffeeShop.page(params[:page]).per(PER)
     end
   end
   

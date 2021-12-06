@@ -2,13 +2,14 @@ class Dashboard::UsersController < ApplicationController
   before_action :set_user, only: %w[edit update destroy]
   before_action :check_user_authority
   layout "dashboard/dashboard"
+  PER = 15
   
   def index
     if params[:keyword].present?
       @keyword = params[:keyword].strip
-      @users = User.search_information(@keyword).all
+      @users = User.search_information(@keyword).page(params[:page]).per(PER)
     else
-      @users = User.all
+      @users = User.page(params[:page]).per(PER)
     end
   end
   
