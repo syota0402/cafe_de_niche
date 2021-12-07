@@ -1,14 +1,17 @@
 class CoffeeShopsController < ApplicationController
-
+  PER = 15
+  
   def show
     @coffee_shop = CoffeeShop.find(params[:id])
-    @reviews = @coffee_shop.reviews
+    reviews = @coffee_shop.reviews
+    @reviews_count = reviews.count
+    @reviews = reviews.page(params[:page]).per(PER)
     @review = Review.new
     @likers = @coffee_shop.likers(User)
     set_shop_business_hour(@coffee_shop)
     set_slack_time(@coffee_shop)
     # 店舗のレビューの平均点を計算
-    @review_average_score = ReviewAverageScoreService.new(@reviews).calculation
+    @review_average_score = ReviewAverageScoreService.new(reviews).calculation
     @search_category = @coffee_shop.search_categories.pluck(:name).join(',')
     @shop_atmospere = @coffee_shop.shop_atmospheres.pluck(:name).join(',')
     @coffee_bean = @coffee_shop.coffee_beans.pluck(:name).join(',')
@@ -22,7 +25,9 @@ class CoffeeShopsController < ApplicationController
     @coffee_shop_search_conditions = @create_coffeee_shop_search_conditions_service.create
     # 検索条件をもとに店舗を検索する
     @coffee_shop_search_service = CoffeeShopSearchService.new(set_search_hash)
-    @coffee_shops = @coffee_shop_search_service.search
+    coffee_shops = @coffee_shop_search_service.search
+    @coffee_shops = coffee_shops.page(params[:page]).per(PER)
+    @coffee_shops_count = coffee_shops.count
   end
   
   def favorite
@@ -33,7 +38,6 @@ class CoffeeShopsController < ApplicationController
     elsif params[:target_action] == "favorite"
       redirect_to favorite_users_path
     end
-    
   end
   
   private
@@ -46,15 +50,15 @@ class CoffeeShopsController < ApplicationController
     
     def set_slack_time(coffee_shop)
       @slack_time = ""
-      @slack_time << "#{coffee_shop.slack_time_start.hour}:#{coffee_shop.slack_time_start.min}から" if coffee_shop.slack_time_start.present?
-      @slack_time << "#{coffee_shop.slack_time_end.hour}:#{coffee_shop.slack_time_end.min}まで" if coffee_shop.slack_time_end.present?
+      @slack_time << "#{coffee_shop.slack_time_start.strftime("%H:%M")}から" if coffee_shop.slack_time_start.present?
+      @slack_time << "#{coffee_shop.slack_time_end.strftime("%H:%M")}まで" if coffee_shop.slack_time_end.present?
     end
     
     def set_search_hash
       hash = {}
       hash.class
       hash[:name] = params[:name]
-      hash[:tell] = params[:tell]
+      hash[:shop_tell] = params[:shop_tell]
       hash[:search_category_ids] = params[:search_category_ids]
       hash[:review_score] = params[:review_score]
       hash[:review_score_search_type] = params[:review_score_search_type]

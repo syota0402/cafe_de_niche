@@ -98,7 +98,7 @@
 	  </div>
 		<div class="review-totel-container">
 			<div class="review-totel-count">
-				<%= @reviews.count %>
+				<%= @reviews_count %>
 				<p>件</p>
 			</div>
 			<div class="review-totel-score">
@@ -123,6 +123,8 @@
 				<% end %>
 			</div>
 		<%end %>
+		
+		<%= paginate @reviews %>
 		
 		<% if user_signed_in? %>
 			<div class="offset-md-5 col-md-5">

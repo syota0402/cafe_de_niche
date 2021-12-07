@@ -20,8 +20,8 @@
 <br>
 お気に入り店舗:<%= @show_user.likees(CoffeeShop).count %>件
 <br>
-<% @show_user.likees(CoffeeShop).each do |favorite_coffee_shop| %>
-  <%= link_to favorite_coffee_shop.name, coffee_shop_path(favorite_coffee_shop) %>|
+<% @show_user.likees(CoffeeShop).last(5).each do |favorite_coffee_shop| %>
+  <%= link_to favorite_coffee_shop.name, coffee_shop_path(favorite_coffee_shop) %>
 <%end %>
 <br>
 レビュー：<%= @reviews.count %>件

@@ -20,7 +20,6 @@ class Dashboard::CoffeeShopsController < ApplicationController
 
   def new
     @coffee_shop = CoffeeShop.new
-    
     set_municipality_tags
   end
 
@@ -52,6 +51,7 @@ class Dashboard::CoffeeShopsController < ApplicationController
 
   def destroy
     @coffee_shop.destroy
+    delete_user_best_shop
     redirect_to dashboard_coffee_shops_url
   end
   
@@ -78,6 +78,13 @@ class Dashboard::CoffeeShopsController < ApplicationController
 			flash[:alert] = "権限がありません"
 			redirect_to dashboard_path 
 		end
+  end
+  
+  def delete_user_best_shop
+    users = User.where(best_shop_id: @coffee_shop.id) 
+    users.each do |user|
+      user.update(best_shop_id: "")
+    end
   end
   
 end
