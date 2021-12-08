@@ -7,7 +7,7 @@
     <% end %>
   </div>
   <hr>
-  全<%= @coffee_shops.count %>件<br>
+  全<%= @coffee_shops_count %>件<br>
   <% if @coffee_shops.blank? %>
     該当店舗なし
     <br>
@@ -43,5 +43,6 @@
       </div>
       <hr>
     <% end %>
+    <%= paginate @coffee_shops %>
   <% end %>
 </div>

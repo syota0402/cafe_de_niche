@@ -49,6 +49,7 @@ class CoffeeShop < ApplicationRecord
 	
 	# 開始時間と終了時間
 	validate :business_start_hour_and_business_end_hour_must_be_set
+	validate :slack_time_start_and_slack_time_end_must_be_set
 	
 	scope :search_for_name_and_tell, -> (keyword) {
 		where("name LIKE ?", "%#{keyword}%").
@@ -77,8 +78,14 @@ class CoffeeShop < ApplicationRecord
 		end
 	end
 	
-	# def start_time_and_end_time_must_be_set
+	def slack_time_start_and_slack_time_end_must_be_set
+		return if slack_time_start.nil? && slack_time_end.nil?
 		
-	# end
+		if slack_time_start.nil?
+			errors.add(:slack_time_start, "はすいている時間(終了)とペアで入力してください。")
+		elsif	slack_time_end.nil?
+			errors.add(:slack_time_end, "はすいている時間(開始)とペアで入力してください。")
+		end
+	end
 	
 end

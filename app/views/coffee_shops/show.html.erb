@@ -98,7 +98,7 @@
 	  </div>
 		<div class="review-totel-container">
 			<div class="review-totel-count">
-				<%= @reviews.count %>
+				<%= @reviews_count %>
 				<p>件</p>
 			</div>
 			<div class="review-totel-score">
@@ -124,18 +124,23 @@
 			</div>
 		<%end %>
 		
+		<%= paginate @reviews %>
+		
 		<% if user_signed_in? %>
 			<div class="offset-md-5 col-md-5">
+				<p>レビューを書く</p>
 				<%= form_with model: @review, url: coffee_shop_reviews_path(@coffee_shop) do |f| %>
 					<%= f.file_field :image, { onChange: "javascript: handleImage(this.files);"} %>
 					<img id="review-image-preview",size="50x50">
-					<br>
-					レビュー内容 ※150字以内
-					<%= f.text_area :review_comment, class: "form-control m-2" %>
-					<br>
-					レビュースコア ※0~100、整数のみ
-					<%= f.number_field :review_score, class: "form-control m-2" %>
-					<%= f.submit "レビューを追加" %>
+					<div class="user-review-score">
+						満足度　※0~100の整数のみを入力してください
+						<%= f.number_field :review_score, class: "form-control m-2" %>
+					</div>
+					<div class="user-review-comment">
+						レビュー本文　※150字以内で入力してください
+						<%= f.text_area :review_comment, class: "form-control m-2" %>
+					</div>
+					<%= f.submit "書き込む" %>
 				<% end %>
 			</div>
 		<% end %>

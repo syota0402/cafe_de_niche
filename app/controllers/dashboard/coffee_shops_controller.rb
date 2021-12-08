@@ -2,15 +2,16 @@ class Dashboard::CoffeeShopsController < ApplicationController
   before_action :set_coffee_shop, only: %w[show edit update destroy]
   before_action :check_user_authority, only: :destroy
   layout "dashboard/dashboard"
+  PER = 15
   
   def index
     if params[:keyword].present?
       keyword = params[:keyword].strip
       @total_count = CoffeeShop.search_for_name_and_tell(keyword).count
-      @coffee_shops = CoffeeShop.search_for_name_and_tell(keyword)
+      @coffee_shops = CoffeeShop.search_for_name_and_tell(keyword).page(params[:page]).per(PER)
     else
       @total_count = CoffeeShop.count
-      @coffee_shops = CoffeeShop.all
+      @coffee_shops = CoffeeShop.page(params[:page]).per(PER)
     end
   end
   
@@ -19,7 +20,6 @@ class Dashboard::CoffeeShopsController < ApplicationController
 
   def new
     @coffee_shop = CoffeeShop.new
-    
     set_municipality_tags
   end
 
@@ -51,6 +51,7 @@ class Dashboard::CoffeeShopsController < ApplicationController
 
   def destroy
     @coffee_shop.destroy
+    delete_user_best_shop
     redirect_to dashboard_coffee_shops_url
   end
   
@@ -77,6 +78,13 @@ class Dashboard::CoffeeShopsController < ApplicationController
 			flash[:alert] = "権限がありません"
 			redirect_to dashboard_path 
 		end
+  end
+  
+  def delete_user_best_shop
+    users = User.where(best_shop_id: @coffee_shop.id) 
+    users.each do |user|
+      user.update(best_shop_id: "")
+    end
   end
   
 end
