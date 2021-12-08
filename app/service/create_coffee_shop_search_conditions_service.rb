@@ -18,6 +18,7 @@ class CreateCoffeeShopSearchConditionsService
     @shop_seats_search_type = hash[:shop_seats_search_type]
     @volume_in_shop_ids = hash[:volume_in_shop_ids]
     @food_menu_ids = hash[:food_menu_ids]
+    @shop_bgm_ids = hash[:shop_bgm_ids]
   end
   
   def create
@@ -37,7 +38,7 @@ class CreateCoffeeShopSearchConditionsService
     create_shop_seats if @shop_seats.present?
     create_volume_in_shop if @volume_in_shop_ids.present?
     create_food_menu if @food_menu_ids.present?
-    
+    create_shop_bgm if @shop_bgm_ids.present?
     
     @coffee_shop_search_conditions
   end
@@ -113,6 +114,12 @@ class CreateCoffeeShopSearchConditionsService
   def create_food_menu
     food_menus = FoodMenu.where(id: @food_menu_ids)
     return_message = "食べ物：#{food_menus.pluck(:name).join('or')}"
+    @coffee_shop_search_conditions << return_message
+  end
+  
+  def create_shop_bgm
+    shop_bgms = ShopBgm.where(id: @shop_bgm_ids)
+    return_message = "BGM：#{shop_bgms.pluck(:name).join('or')}"
     @coffee_shop_search_conditions << return_message
   end
   
