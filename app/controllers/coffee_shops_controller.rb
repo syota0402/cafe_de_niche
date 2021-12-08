@@ -17,6 +17,7 @@ class CoffeeShopsController < ApplicationController
     @coffee_bean = @coffee_shop.coffee_beans.pluck(:name).join(',')
     @volume_in_shop = @coffee_shop.volume_in_shops.pluck(:name).join(',')
     @food_menu = @coffee_shop.food_menus.pluck(:name).join(',')
+    @shop_bgm = @coffee_shop.shop_bgms.pluck(:name).join(',')
   end
 
   def search

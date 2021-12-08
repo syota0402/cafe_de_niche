@@ -73,6 +73,13 @@
     <% end %>
   </div>
   <br>
+  BGM<br>
+  <div class="check_box">
+    <%= f.collection_check_boxes(:shop_bgm_ids, ShopBgm.all, :id, :name) do |shop_bgm| %>
+      <%= shop_bgm.label { shop_bgm.check_box + shop_bgm.text } %>
+    <% end %>
+  </div>
+  <br>
   <%= f.submit "更新" %>
 <% end %>
 
