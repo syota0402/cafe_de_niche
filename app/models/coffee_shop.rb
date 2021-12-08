@@ -16,11 +16,15 @@ class CoffeeShop < ApplicationRecord
 	has_many :coffee_shop_food_menus, dependent: :destroy
 	has_many :food_menus, :through => :coffee_shop_food_menus
 	
+	has_many :coffee_shop_shop_bgms, dependent: :destroy
+	has_many :shop_bgms, :through => :coffee_shop_shop_bgms
+	
 	accepts_nested_attributes_for :coffee_shop_search_categories, allow_destroy: true
 	accepts_nested_attributes_for :coffee_shop_shop_atmospheres, allow_destroy: true
 	accepts_nested_attributes_for :coffee_shop_coffee_beans, allow_destroy: true
 	accepts_nested_attributes_for :coffee_shop_volume_in_shops, allow_destroy: true
 	accepts_nested_attributes_for :coffee_shop_food_menus, allow_destroy: true
+	accepts_nested_attributes_for :coffee_shop_shop_bgms, allow_destroy: true
 	acts_as_likeable
 	has_many_attached :images
 	
