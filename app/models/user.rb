@@ -17,7 +17,7 @@ class User < ApplicationRecord
   validates :email, length: { maximum: 256}
   validates :age, length: { maximum: 10}
   validates :gender, length: { maximum: 10}
-  validates :self_introduction, length: { maximum: 100}
+  validates :self_introduction, length: { maximum: 200}
   validates :instagram_url, length: { maximum: 50}
   
   # 空白禁止

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, except: :show
+  PER = 15
   
   def edit
   end
@@ -39,7 +40,9 @@ class UsersController < ApplicationController
   def show
     @show_user = User.find_by(id: params[:id])
     @followers = @show_user.followers(User)
-    @reviews = Review.where(user_id: params[:id])
+    reviews = Review.where(user_id: params[:id]).order("created_at DESC")
+    @reviews_count = reviews.count
+    @reviews = reviews.page(params[:page]).per(PER)
   end
   
   def favorite

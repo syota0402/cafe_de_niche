@@ -1,3 +1,54 @@
-// Place all the styles related to the users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.user-container {
+  position: relative;
+}
+
+.user-name {
+  font-size: 2.5rem;
+  left: 124px;
+  position: absolute;
+  top: 14px;
+}
+
+.liker-btn {
+  position: static;
+}
+
+.self-introduction {
+  font-size: 1.5rem;
+}
+
+.user-insta {
+  display: inline-flex;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  font-size: 1.3rem;
+}
+
+.user-follow-count {
+  font-size: 1rem;
+  right: 0px;
+  position: absolute;
+  top: 75px;
+  animation: purupuru_anim 1.5s infinite;
+}
+
+@keyframes purupuru_anim {
+	0% {	transform: translate(0, 0);}
+	5% {	transform: translate(-5px, -0);}
+	10% {	transform: translate(5px, 0);}
+	15% {	transform: translate(-5px, -0);}
+	20% {	transform: translate(5px, 0);}
+	25% {	transform: translate(-5px, -0);}
+	30% {	transform: translate(0, 0);}
+	100% {	transform: translate(0, 0);}
+}
+
+.user-reviews-count {
+  font-size: 2rem;
+}
+
+.like-shop-info {
+  bottom: -27px;
+  position: absolute;
+}
