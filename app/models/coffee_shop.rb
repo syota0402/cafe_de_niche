@@ -48,7 +48,6 @@ class CoffeeShop < ApplicationRecord
 	validates :instagram_url, length: { maximum: 2048 }
 	validates :instagram_spot_url, length: { maximum: 2048 }
 	validates :municipalitie_id, length: { maximum: 1000 }
-	
 	validate :image_length
 	
 	# 開始時間と終了時間
