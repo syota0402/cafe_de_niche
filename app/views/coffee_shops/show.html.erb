@@ -76,6 +76,10 @@
 	  			<th>食べ物</th>
 	  			<td><%= @food_menu %></td>
 	  		</tr>
+	  		<tr>
+	  			<th>BGM</th>
+	  			<td><%= @shop_bgm %></td>
+	  		</tr>
 	  	</tbody>
 	  </table>
 	  <div class="liker-container">
@@ -125,6 +129,8 @@
 		<%end %>
 		
 		<%= paginate @reviews %>
+		
+		<hr>
 		
 		<% if user_signed_in? %>
 			<div class="offset-md-5 col-md-5">

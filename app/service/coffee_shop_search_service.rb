@@ -18,6 +18,7 @@ class CoffeeShopSearchService
     @shop_seats_search_type = hash[:shop_seats_search_type]
     @volume_in_shop_ids = hash[:volume_in_shop_ids]
     @food_menu_ids = hash[:food_menu_ids]
+    @shop_bgm_ids = hash[:shop_bgm_ids]
   end
   
   def search
@@ -67,6 +68,9 @@ class CoffeeShopSearchService
     
     # 食べ物
     search_by_food_menu if @food_menu_ids.present?
+    
+    # BGM
+    search_by_shop_bgm if @shop_bgm_ids.present?
     
     @coffee_shops
   end
@@ -232,6 +236,12 @@ class CoffeeShopSearchService
   # 食べ物
   def search_by_food_menu
     coffee_shop_ids = CoffeeShopFoodMenu.where(food_menu_id: @food_menu_ids).pluck(:coffee_shop_id)
+    @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
+  end
+  
+  # BGM
+  def search_by_shop_bgm
+    coffee_shop_ids = CoffeeShopShopBgm.where(shop_bgm_id: @shop_bgm_ids).pluck(:coffee_shop_id)
     @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
   end
 end

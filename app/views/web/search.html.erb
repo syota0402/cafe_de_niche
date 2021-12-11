@@ -136,6 +136,17 @@
       <% end %>
     </div>
     
+    <br>
+    
+    <div class="search-container">
+      <div class="search-name">BGM</div>
+      <%= f.collection_check_boxes(:shop_bgm_ids, ShopBgm.all, :id, :name, {include_hidden: false}) do |shop_bgm| %>
+        <div class="search-checkbox">
+          <%= shop_bgm.check_box %>
+          <%= shop_bgm.label %>
+        </div>
+      <% end %>
+    </div>
     
     <hr>
     <%= f.submit :search %>
