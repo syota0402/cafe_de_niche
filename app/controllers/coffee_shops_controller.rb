@@ -3,7 +3,7 @@ class CoffeeShopsController < ApplicationController
   
   def show
     @coffee_shop = CoffeeShop.find(params[:id])
-    reviews = @coffee_shop.reviews
+    reviews = @coffee_shop.reviews.order("created_at DESC")
     @reviews_count = reviews.count
     @reviews = reviews.page(params[:page]).per(PER)
     @review = Review.new

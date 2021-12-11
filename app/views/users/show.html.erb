@@ -1,38 +1,69 @@
-<h1>ユーザー詳細</h1>
-
-<% unless current_user == @show_user %>
-  <%= link_to follow_user_path(target_action: "show"), class: "btn favorite-button text-favorite" do %>
-  	<i class="fa fa-heart"></i><%= current_user.follows?(@show_user) ? "フォロー解除" : "フォロー" %><br>
-  <% end %>
-<%end %>
-<br>
-<%= render partial: 'shared/show_image', locals: { target: @show_user, image_size: "100x100" } %>
-<br>
-フォロワー数：<%= @followers.count %>
-<br>
-名前：<%= @show_user.name %>
-<br>
-年齢：<%= @show_user.age %>
-<br>
-性別：<%= @show_user.gender %>
-<br>
-自己紹介：<%= @show_user.self_introduction %>
-<br>
-お気に入り店舗:<%= @show_user.likees(CoffeeShop).count %>件
-<br>
-<% @show_user.likees(CoffeeShop).last(5).each do |favorite_coffee_shop| %>
-  <%= link_to favorite_coffee_shop.name, coffee_shop_path(favorite_coffee_shop) %>
-<%end %>
-<br>
-レビュー：<%= @reviews.count %>件
-<br>
-<% @reviews.last(10).each do |review| %>
-  <%= render partial: 'shared/show_image', locals: { target: review, image_size: "100x100" } %>
-  <br>
-  店舗名<%= link_to review.coffee_shop.name, coffee_shop_path(review.coffee_shop) %><br>
-  スコア<%= review.review_score %><br>
-  <%= review.review_comment %>
-  <hr>
-<% end %>
-
-<%= link_to "戻る", :back %>
+<div class='container'>
+  <div class='user-container'>
+    <div class='user-name'>
+      <%= @show_user.name %>
+    </div>
+    <%= render partial: 'shared/show_image', locals: { target: @show_user, image_size: "100x100" } %>
+    <% if user_signed_in? %>
+      <div class='liker-btn'>
+        <% unless current_user == @show_user %>
+          <%= link_to follow_user_path(target_action: "show"), class: "btn favorite-button text-favorite" do %>
+          	<i class="fa fa-heart"></i><%= current_user.follows?(@show_user) ? "フォロー解除" : "フォロー" %><br>
+          <% end %>
+        <%end %>
+      </div>
+    <% end %>
+    <div class='self-introduction'>
+      <%= @show_user.self_introduction %>
+    </div>
+    <% if @show_user.instagram_url.present? %>
+      <div class="user-insta">
+        <%= image_tag "/images/insta_icon.png", size: "25x25" %><%= link_to @show_user.instagram_url, 'https://www.instagram.com/#{@coffee_shop.instagram_url}/', target: :_blank, rel: "noopener noreferrer" %>
+      </div>
+    <% end %>
+    <div class='user-follow-count'><%= @followers.count %>人がフォローなう</div>
+  </div>
+  
+  <div class='liker-container'>
+    <div class='liker-title'>
+      お気に入り
+    </div>
+    <div class='liker-count'>
+      <%= @show_user.likees(CoffeeShop).count %>件
+    </div>
+    <% @show_user.likees(CoffeeShop).last(5).each do |favorite_coffee_shop| %>
+      <div class="liker-user">
+        <%= link_to(coffee_shop_path(favorite_coffee_shop) ) do %>
+          <%= render partial: 'shared/show_image_first', locals: { target: favorite_coffee_shop, image_size: "50x50" } %>
+	  			<p>
+	  				<%= favorite_coffee_shop.name %>
+	  			</p>
+        <% end %>
+      </div>
+    <%end %>
+    <div class='like-shop-info'>
+      最新5件のみ表示
+    </div>
+  </div>
+  
+  <div class='user-reviews-count'>
+    レビュー：<%= @reviews_count %>件
+    <% @reviews.each do |review| %>
+      <div class='review-container'>
+        <div class='review-image'>
+          <%= render partial: 'shared/show_image', locals: { target: review, image_size: "100x100" } %>
+        </div>
+        <div class="review-user">
+  			  	<%= render partial: 'shared/show_image_first', locals: { target: review.coffee_shop, image_size: "50x50" } %>
+  			  	<p><%= link_to review.coffee_shop.name, coffee_shop_path(review.coffee_shop) %></p>
+  			  </div>
+        <div class="review-score"><%= review.review_score %></div>
+  			<div class="review-comment"><%= review.review_comment %></div>
+  			<div class="review-date">投稿日：<%= review.created_at.strftime("%Y-%m-%d") %></div>
+      </div>
+    <% end %>
+    
+  </div>
+  <%= paginate @reviews %>
+  <%= link_to "戻る", :back %>
+</div>
