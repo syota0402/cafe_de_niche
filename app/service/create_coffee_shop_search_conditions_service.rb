@@ -20,6 +20,7 @@ class CreateCoffeeShopSearchConditionsService
     @food_menu_ids = hash[:food_menu_ids]
     @shop_bgm_ids = hash[:shop_bgm_ids]
     @pc_work = hash[:pc_work]
+    @time_limit = hash[:time_limit]
   end
   
   def create
@@ -41,6 +42,7 @@ class CreateCoffeeShopSearchConditionsService
     create_food_menu if @food_menu_ids.present?
     create_shop_bgm if @shop_bgm_ids.present?
     create_pc_work if @pc_work.present?
+    create_time_limit if @time_limit.present?
     
     @coffee_shop_search_conditions
   end
@@ -127,6 +129,10 @@ class CreateCoffeeShopSearchConditionsService
   
   def create_pc_work
     @coffee_shop_search_conditions << "PC作業：#{@pc_work}"
+  end
+  
+  def create_time_limit
+    @coffee_shop_search_conditions << "時間制限：#{@time_limit}"
   end
   
 end

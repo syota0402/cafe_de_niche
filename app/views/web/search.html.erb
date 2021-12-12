@@ -157,6 +157,13 @@
       <%= f.select :pc_work, PcWork.pluck(:name), { include_blank: '未選択' }, :class => 'search-select' %>
     </div>
     
+    <br>
+    
+    <div class="search-container">
+      <div class="search-name">時間制限</div>
+      <%= f.select :time_limit, TimeLimit.pluck(:name), { include_blank: '未選択' }, :class => 'search-select' %>
+    </div>
+    
     <hr>
     <%= f.submit :search %>
   <% end %> 
