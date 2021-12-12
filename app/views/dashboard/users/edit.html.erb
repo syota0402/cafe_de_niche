@@ -1,5 +1,5 @@
 <h1>権限変更</h1>
-<%= form_with url: dashboard_user_path, local: true, method: :put do |f| %>
+<%= form_with url: dashboard_user_path(target_user: @user), local: true, method: :put do |f| %>
   <div class="form-inline mt-4 mb-4 row">
     <%= render partial: 'shared/show_image', locals: { target: @user, image_size: "100x100" } %>
   </div>
