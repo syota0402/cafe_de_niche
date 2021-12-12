@@ -83,6 +83,10 @@
     <% end %>
   </div>
   
+  PC作業<br>
+  <%= f.select :pc_work, PcWork.pluck(:name), { include_blank: '選択してください' } %>
+  
+  <br>
   <%= f.submit "追加" %>
 <% end %>
 

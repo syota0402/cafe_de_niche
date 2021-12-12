@@ -8,10 +8,10 @@ class Dashboard::CoffeeShopsController < ApplicationController
     if params[:keyword].present?
       keyword = params[:keyword].strip
       @total_count = CoffeeShop.search_for_name_and_tell(keyword).count
-      @coffee_shops = CoffeeShop.search_for_name_and_tell(keyword).page(params[:page]).per(PER)
+      @coffee_shops = CoffeeShop.search_for_name_and_tell(keyword).order("created_at DESC").page(params[:page]).per(PER)
     else
       @total_count = CoffeeShop.count
-      @coffee_shops = CoffeeShop.page(params[:page]).per(PER)
+      @coffee_shops = CoffeeShop.order("created_at DESC").page(params[:page]).per(PER)
     end
   end
   
@@ -69,7 +69,7 @@ class Dashboard::CoffeeShopsController < ApplicationController
   end
   
   def coffee_shop_params
-    params.require(:coffee_shop).permit(:name, :shop_url, :address, :shop_tell, :access, :business_start_hour, :business_end_hour, :instagram_url, :instagram_spot_url, :municipalitie_id, :slack_time_start, :slack_time_end, :age_group, :shop_seats, { :search_category_ids => [], :shop_atmosphere_ids => [], :coffee_bean_ids => [], :volume_in_shop_ids => [], :food_menu_ids => [] ,:shop_bgm_ids => [] }, images: [])
+    params.require(:coffee_shop).permit(:name, :shop_url, :address, :shop_tell, :access, :business_start_hour, :business_end_hour, :instagram_url, :instagram_spot_url, :municipalitie_id, :slack_time_start, :slack_time_end, :age_group, :shop_seats, :pc_work, { :search_category_ids => [], :shop_atmosphere_ids => [], :coffee_bean_ids => [], :volume_in_shop_ids => [], :food_menu_ids => [] ,:shop_bgm_ids => [] }, images: [])
   end
   
   def check_user_authority
