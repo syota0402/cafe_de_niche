@@ -19,6 +19,7 @@ class CreateCoffeeShopSearchConditionsService
     @volume_in_shop_ids = hash[:volume_in_shop_ids]
     @food_menu_ids = hash[:food_menu_ids]
     @shop_bgm_ids = hash[:shop_bgm_ids]
+    @pc_work = hash[:pc_work]
   end
   
   def create
@@ -39,6 +40,7 @@ class CreateCoffeeShopSearchConditionsService
     create_volume_in_shop if @volume_in_shop_ids.present?
     create_food_menu if @food_menu_ids.present?
     create_shop_bgm if @shop_bgm_ids.present?
+    create_pc_work if @pc_work.present?
     
     @coffee_shop_search_conditions
   end
@@ -121,6 +123,10 @@ class CreateCoffeeShopSearchConditionsService
     shop_bgms = ShopBgm.where(id: @shop_bgm_ids)
     return_message = "BGM：#{shop_bgms.pluck(:name).join('or')}"
     @coffee_shop_search_conditions << return_message
+  end
+  
+  def create_pc_work
+    @coffee_shop_search_conditions << "PC作業：#{@pc_work}"
   end
   
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_08_102537) do
+ActiveRecord::Schema.define(version: 2021_12_12_090209) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(version: 2021_12_08_102537) do
     t.string "age_group"
     t.integer "shop_seats"
     t.string "shop_tell"
+    t.string "pc_work"
   end
 
   create_table "day_of_weeks", force: :cascade do |t|
@@ -155,6 +156,12 @@ ActiveRecord::Schema.define(version: 2021_12_08_102537) do
   create_table "municipalities", force: :cascade do |t|
     t.string "name"
     t.integer "prefecture_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pc_works", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

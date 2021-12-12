@@ -88,17 +88,7 @@
     
     <div class="search-container">
       <div class="search-name">年齢層</div>
-      <%= f.select :age_group, AgeGroup.pluck(:name), { include_blank: 'select' }, :class => 'search-select' %>
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">コーヒー豆</div>
-      <%= f.collection_check_boxes(:coffee_bean_ids, CoffeeBean.all, :id, :name, {include_hidden: false}) do |coffee_bean| %>
-        <div class="search-checkbox">
-          <%= coffee_bean.check_box %>
-          <%= coffee_bean.label %>
-        </div>
-      <% end %>
+      <%= f.select :age_group, AgeGroup.pluck(:name), { include_blank: '未選択' }, :class => 'search-select' %>
     </div>
     
     <div class="search-container">
@@ -110,6 +100,18 @@
         <%= f.radio_button :shop_seats_search_type, :less_than %>
         <%= f.label :shop_seats_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>
       </div>
+    </div>
+    
+    <br>
+    
+    <div class="search-container">
+      <div class="search-name">コーヒー豆</div>
+      <%= f.collection_check_boxes(:coffee_bean_ids, CoffeeBean.all, :id, :name, {include_hidden: false}) do |coffee_bean| %>
+        <div class="search-checkbox">
+          <%= coffee_bean.check_box %>
+          <%= coffee_bean.label %>
+        </div>
+      <% end %>
     </div>
     
     <br>
@@ -146,6 +148,13 @@
           <%= shop_bgm.label %>
         </div>
       <% end %>
+    </div>
+    
+    <br>
+    
+    <div class="search-container">
+      <div class="search-name">PC作業</div>
+      <%= f.select :pc_work, PcWork.pluck(:name), { include_blank: '未選択' }, :class => 'search-select' %>
     </div>
     
     <hr>
