@@ -20,6 +20,7 @@ class CoffeeShopSearchService
     @food_menu_ids = hash[:food_menu_ids]
     @shop_bgm_ids = hash[:shop_bgm_ids]
     @pc_work = hash[:pc_work]
+    @time_limit = hash[:time_limit]
   end
   
   def search
@@ -75,6 +76,9 @@ class CoffeeShopSearchService
     
     # PC作業
     search_by_pc_work if @pc_work.present?
+    
+    # 時間制限
+    search_by_time_limit if @time_limit.present?
     
     @coffee_shops
   end
@@ -253,4 +257,10 @@ class CoffeeShopSearchService
   def search_by_pc_work
     @coffee_shops = @coffee_shops.where(pc_work: @pc_work)
   end
+  
+  # 時間制限
+  def search_by_time_limit
+    @coffee_shops = @coffee_shops.where(time_limit: @time_limit)
+  end
+  
 end

@@ -61,6 +61,7 @@
   </div>
   
   席数<%= f.number_field :shop_seats %>
+  <br>
   
   静かさ<br>
   <div class="check_box">
@@ -85,6 +86,11 @@
   
   PC作業<br>
   <%= f.select :pc_work, PcWork.pluck(:name), { include_blank: '選択してください' } %>
+  
+  <br>
+  
+  時間制限<br>
+  <%= f.select :time_limit, TimeLimit.pluck(:name), { include_blank: '選択してください' } %>
   
   <br>
   <%= f.submit "追加" %>
