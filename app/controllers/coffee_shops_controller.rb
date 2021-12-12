@@ -78,6 +78,7 @@ class CoffeeShopsController < ApplicationController
       hash[:volume_in_shop_ids] = params[:volume_in_shop_ids]
       hash[:food_menu_ids] = params[:food_menu_ids]
       hash[:shop_bgm_ids] = params[:shop_bgm_ids]
+      hash[:pc_work] = params[:pc_work]
       hash
     end
 end

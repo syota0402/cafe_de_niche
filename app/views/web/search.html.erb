@@ -148,6 +148,13 @@
       <% end %>
     </div>
     
+    <br>
+    
+    <div class="search-container">
+      <div class="search-name">PC作業</div>
+      <%= f.select :pc_work, PcWork.pluck(:name), { include_blank: 'select' }, :class => 'search-select' %>
+    </div>
+    
     <hr>
     <%= f.submit :search %>
   <% end %> 
