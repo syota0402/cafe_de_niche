@@ -24,7 +24,8 @@ class Dashboard::UsersController < ApplicationController
   end
   
   def update
-    @user.update(user_params)
+    @target_user = User.find(params[:target_user])
+    @target_user.update(user_params)
     redirect_to dashboard_users_path
   end
   
