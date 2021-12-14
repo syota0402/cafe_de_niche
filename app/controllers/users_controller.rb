@@ -43,6 +43,7 @@ class UsersController < ApplicationController
     reviews = Review.where(user_id: params[:id]).order("created_at DESC")
     @reviews_count = reviews.count
     @reviews = reviews.page(params[:page]).per(PER)
+    @user_best_shop = CoffeeShop.find_by(id: @show_user.best_shop_id)
   end
   
   def favorite
