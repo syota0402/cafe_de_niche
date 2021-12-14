@@ -5,10 +5,10 @@
     <% if user_signed_in? %>
       <% if @my_best_shop.present? %>
         <%= link_to(coffee_shop_path(@my_best_shop.id)) do %>
-          <div class="best_shop">
-            my best shop<br>
-            <%= @my_best_shop.name %><br>
-            <%= render partial: 'shared/show_image_first', locals: { target: @my_best_shop, image_size: "100x100" } %>
+          <div class="best-shop">
+            <div class="best-shop-title">my best shop</div>
+            <div class="best-shop-name"><%= @my_best_shop.name %></div>
+            <div class="best-shop-image"><%= render partial: 'shared/show_image_first', locals: { target: @my_best_shop, image_size: "100x100" } %></div>
           </div>
         <% end %>
       <% end %>

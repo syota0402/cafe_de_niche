@@ -52,3 +52,28 @@
   bottom: -27px;
   position: absolute;
 }
+
+.user-best-shop {
+  position: absolute;
+  padding: 0.1em 1em;
+  border: solid 3px #CC935B;
+  border-radius: 8px;
+  height: 7rem;
+  width: 16rem;
+  background-color: #FFF;
+  top: -11px;
+  right: 148px;
+}
+
+.best-shop-title2 {
+  position: absolute;
+  display: inline-block;
+  top: -13px;
+  right: 10px;
+  padding: 0 9px;
+  line-height: 1;
+  font-size: 19px;
+  background: #FFF;
+  color: #CC935B;
+  font-weight: bold;
+}
