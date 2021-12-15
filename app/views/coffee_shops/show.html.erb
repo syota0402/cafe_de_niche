@@ -22,76 +22,12 @@
 	  <br>
 	  <table class="shop-table">
 	  	<tbody>
-	  		<tr>
-	  			<th>住所</th>
-	  			<td>
-	  				<%= @coffee_shop.address %>
-	  			</td>
-	  		</tr>
-	  		<tr>
-	  			<th>アクセス</th>
-	  			<td><%= @coffee_shop.access %></td>
-	  		</tr>
-	  		<tr>
-	  			<th>営業時間</th>
-	  			<td><%= @shop_business_hour %></td>
-	  		</tr>
-	  		<tr>
-	  			<th>定休日</th>
-	  			<td><%= @coffee_shop.regular_holiday %></td>
-	  		</tr>
-	  		<tr>
-	  			<th>エリア</th>
-	  			<td><%= Municipality.find(@coffee_shop.municipalitie_id).name %></td>
-	  		</tr>
-	  		<tr>
-	  			<th>こだわり</th>
-	  			<td><%= @search_category %></td>
-	  		</tr>
-	  		<tr>
-	  			<th>すいている時間</th>
-	  			<td><%= @slack_time %></td>
-	  		</tr>
-	  		<tr>
-	  			<th>年齢層</th>
-	  			<td><%= @coffee_shop.age_group %></td>
-	  		</tr>
-	  		<tr>
-	  			<th>お店の雰囲気</th>
-	  			<td><%= @shop_atmospere %></td>
-	  		</tr>
-	  		<tr>
-	  			<th>コーヒー豆</th>
-	  			<td><%= @coffee_bean %></td>
-	  		</tr>
-	  		<tr>
-	  			<th>席数</th>
-	  			<td><%= @coffee_shop.shop_seats %>席</td>
-	  		</tr>
-	  		<tr>
-	  			<th>静かさ</th>
-	  			<td><%= @volume_in_shop %></td>
-	  		</tr>
-	  		<tr>
-	  			<th>食べ物</th>
-	  			<td><%= @food_menu %></td>
-	  		</tr>
-	  		<tr>
-	  			<th>BGM</th>
-	  			<td><%= @shop_bgm %></td>
-	  		</tr>
-	  		<tr>
-	  			<th>PC作業</th>
-	  			<td><%= @coffee_shop.pc_work %></td>
-	  		</tr>
-	  		<tr>
-	  			<th>時間制限</th>
-	  			<td><%= @coffee_shop.time_limit %></td>
-	  		</tr>
-	  		<tr>
-	  			<th>風景</th>
-	  			<td><%= @shop_scenery %></td>
-	  		</tr>
+	  		<% @shop_info.each do |shop_info| %>
+	  			<tr>
+		  			<th><%= shop_info[:title] %></th>
+		  			<td><%= shop_info[:value] %></td>
+		  		</tr>
+	  		<% end %>
 	  	</tbody>
 	  </table>
 	  <div class="liker-container">

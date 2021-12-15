@@ -8,17 +8,9 @@ class CoffeeShopsController < ApplicationController
     @reviews = reviews.page(params[:page]).per(PER)
     @review = Review.new
     @likers = @coffee_shop.likers(User)
-    set_shop_business_hour(@coffee_shop)
-    set_slack_time(@coffee_shop)
     # 店舗のレビューの平均点を計算
     @review_average_score = ReviewAverageScoreService.new(reviews).calculation
-    @search_category = @coffee_shop.search_categories.pluck(:name).join(',')
-    @shop_atmospere = @coffee_shop.shop_atmospheres.pluck(:name).join(',')
-    @coffee_bean = @coffee_shop.coffee_beans.pluck(:name).join(',')
-    @volume_in_shop = @coffee_shop.volume_in_shops.pluck(:name).join(',')
-    @food_menu = @coffee_shop.food_menus.pluck(:name).join(',')
-    @shop_bgm = @coffee_shop.shop_bgms.pluck(:name).join(',')
-    @shop_scenery = @coffee_shop.shop_sceneries.pluck(:name).join(',')
+    @shop_info = CoffeeShopShowInfoService.new(@coffee_shop).create
   end
 
   def search
@@ -43,18 +35,6 @@ class CoffeeShopsController < ApplicationController
   end
   
   private
-    
-    def set_shop_business_hour(coffee_shop)
-      @shop_business_hour = ""
-      @shop_business_hour << "#{coffee_shop.business_start_hour.strftime("%H:%M")}から" if coffee_shop.business_start_hour.present?
-      @shop_business_hour << "#{coffee_shop.business_end_hour.strftime("%H:%M")}まで" if coffee_shop.business_end_hour.present?
-    end
-    
-    def set_slack_time(coffee_shop)
-      @slack_time = ""
-      @slack_time << "#{coffee_shop.slack_time_start.strftime("%H:%M")}から" if coffee_shop.slack_time_start.present?
-      @slack_time << "#{coffee_shop.slack_time_end.strftime("%H:%M")}まで" if coffee_shop.slack_time_end.present?
-    end
     
     def set_search_hash
       hash = {}
