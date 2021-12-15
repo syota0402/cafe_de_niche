@@ -104,6 +104,15 @@
   <%= f.select :time_limit, TimeLimit.pluck(:name), { include_blank: '選択してください' } %>
   
   <br>
+  
+  風景<br>
+  <div class="check_box">
+    <%= f.collection_check_boxes(:shop_scenery_ids, ShopScenery.all, :id, :name) do |shop_scenery| %>
+      <%= shop_scenery.label { shop_scenery.check_box + shop_scenery.text } %>
+    <% end %>
+  </div>
+  
+  <hr>
   <%= f.submit "更新" %>
 <% end %>
 
