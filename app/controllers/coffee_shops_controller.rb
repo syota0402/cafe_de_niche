@@ -80,6 +80,7 @@ class CoffeeShopsController < ApplicationController
       hash[:shop_bgm_ids] = params[:shop_bgm_ids]
       hash[:pc_work] = params[:pc_work]
       hash[:time_limit] = params[:time_limit]
+      hash[:shop_scenery_ids] = params[:shop_scenery_ids]
       hash
     end
 end

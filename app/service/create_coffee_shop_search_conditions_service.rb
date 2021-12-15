@@ -21,6 +21,7 @@ class CreateCoffeeShopSearchConditionsService
     @shop_bgm_ids = hash[:shop_bgm_ids]
     @pc_work = hash[:pc_work]
     @time_limit = hash[:time_limit]
+    @shop_scenery_ids = hash[:shop_scenery_ids]
   end
   
   def create
@@ -133,6 +134,12 @@ class CreateCoffeeShopSearchConditionsService
   
   def create_time_limit
     @coffee_shop_search_conditions << "時間制限：#{@time_limit}"
+  end
+  
+  def create_shop_scenery
+    shop_sceneries = ShopScenery.where(id: @shop_scenery_ids)
+    @coffee_shop_search_conditions << "風景：#{shop_sceneries.pluck(:name).join('or')}"
+    @coffee_shop_search_conditions << return_message
   end
   
 end

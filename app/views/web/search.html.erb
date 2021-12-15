@@ -164,6 +164,18 @@
       <%= f.select :time_limit, TimeLimit.pluck(:name), { include_blank: '未選択' }, :class => 'search-select' %>
     </div>
     
+    <br>
+    
+    <div class="search-container">
+      <div class="search-name">風景</div>
+      <%= f.collection_check_boxes(:shop_scenery_ids, ShopScenery.all, :id, :name, {include_hidden: false}) do |shop_scenery| %>
+        <div class="search-checkbox">
+          <%= shop_scenery.check_box %>
+          <%= shop_scenery.label %>
+        </div>
+      <% end %>
+    </div>
+    
     <hr>
     <%= f.submit :search %>
   <% end %> 
