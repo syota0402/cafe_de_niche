@@ -1,0 +1,37 @@
+<div class="w-75">
+  
+  <h1>風景一覧</h1>
+  
+  <%= form_with(model: @shop_scenery, url: dashboard_shop_sceneries_path, local: true) do |f| %>
+    <%= f.label :name, "風景" %>
+    <%= f.text_field :name %>
+    
+    <%= f.submit "新規作成" %>
+  <% end %>
+  
+  <table class="table mt-5">
+    <thead>
+      <tr>
+        <th scope="col" class="w-25">ID</th>
+        <th scope="col">風景</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @shop_sceneries.each do |shop_scenery| %>
+      <tr>
+        <td scope="row"><%= shop_scenery.id %></td>
+        <td><%= shop_scenery.name %></td>
+        <td>
+          <%= link_to "編集", edit_dashboard_shop_scenery_path(shop_scenery) %>
+          
+        </td>
+        <td>
+          <%= link_to "削除", dashboard_shop_scenery_path(shop_scenery), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

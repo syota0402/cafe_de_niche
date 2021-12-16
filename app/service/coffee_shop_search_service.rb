@@ -21,6 +21,7 @@ class CoffeeShopSearchService
     @shop_bgm_ids = hash[:shop_bgm_ids]
     @pc_work = hash[:pc_work]
     @time_limit = hash[:time_limit]
+    @shop_scenery_ids = hash[:shop_scenery_ids]
   end
   
   def search
@@ -79,6 +80,9 @@ class CoffeeShopSearchService
     
     # 時間制限
     search_by_time_limit if @time_limit.present?
+    
+    # 風景検索
+    search_by_shop_scenery if @shop_scenery_ids.present?
     
     @coffee_shops
   end
@@ -231,8 +235,8 @@ class CoffeeShopSearchService
       elsif @shop_seats_search_type.eql?("less_than") && @shop_seats.to_i >= coffee_shop.shop_seats.to_i
         coffee_shop_ids << coffee_shop.id
       end
-      @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
     end
+    @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
   end
   
   # 静かさ検索
@@ -261,6 +265,12 @@ class CoffeeShopSearchService
   # 時間制限
   def search_by_time_limit
     @coffee_shops = @coffee_shops.where(time_limit: @time_limit)
+  end
+  
+  # 風景検索
+  def search_by_shop_scenery
+    coffee_shop_ids = CoffeeShopShopScenery.where(shop_scenery_id: @shop_scenery_ids).pluck(:coffee_shop_id)
+    @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
   end
   
 end
