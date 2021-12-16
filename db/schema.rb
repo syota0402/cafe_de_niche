@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_15_102849) do
+ActiveRecord::Schema.define(version: 2021_12_16_103319) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -117,6 +117,17 @@ ActiveRecord::Schema.define(version: 2021_12_15_102849) do
     t.string "shop_tell"
     t.string "pc_work"
     t.string "time_limit"
+    t.string "terrace_seat"
+    t.string "can_reserved"
+    t.string "comic"
+    t.string "magazine"
+    t.string "latte_art"
+    t.string "newspaper"
+    t.string "morning_menu"
+    t.string "parking_place"
+    t.string "free_water"
+    t.string "with_pet"
+    t.string "free_pc"
   end
 
   create_table "day_of_weeks", force: :cascade do |t|

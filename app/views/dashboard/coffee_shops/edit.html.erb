@@ -95,13 +95,11 @@
     <% end %>
   </div>
   
-  PC作業<br>
-  <%= f.select :pc_work, PcWork.pluck(:name), { include_blank: '選択してください' } %>
+  PC作業<%= f.select :pc_work, PcWork.pluck(:name), { include_blank: '選択してください' } %>
   
   <br>
   
-  時間制限<br>
-  <%= f.select :time_limit, TimeLimit.pluck(:name), { include_blank: '選択してください' } %>
+  時間制限<%= f.select :time_limit, TimeLimit.pluck(:name), { include_blank: '選択してください' } %>
   
   <br>
   
@@ -111,6 +109,26 @@
       <%= shop_scenery.label { shop_scenery.check_box + shop_scenery.text } %>
     <% end %>
   </div>
+  
+  テラス席<%= f.select :terrace_seat, ['あり','なし'], { include_blank: '選択してください' }  %>
+  <br>
+  貸切<%= f.select :can_reserved, ['可','不可'], { include_blank: '選択してください'} %>
+  <br>
+  漫画<%= f.select :comic, ['あり','なし'], { include_blank: '選択してください' } %>
+  <br>
+  雑誌<%= f.select :magazine, ['あり','なし'], { include_blank: '選択してください' } %>
+  <br>
+  ラテアート<%= f.select :latte_art, ['あり','なし'], { include_blank: '選択してください' } %>
+  <br>
+  新聞<%= f.select :newspaper, ['あり','なし'], { include_blank: '選択してください' } %>
+  <br>
+  モーニング<%= f.select :morning_menu, ['あり','なし'], { include_blank: '選択してください' } %>
+  <br>
+  無料の水<%= f.select :free_water, ['あり','なし'], { include_blank: '選択してください' } %>
+  <br>
+  ペット<%= f.select :with_pet, ['可','不可'], { include_blank: '選択してください' } %>
+  <br>
+  共有PC<%= f.select :free_pc, ['あり','なし'], { include_blank: '選択してください' } %>
   
   <hr>
   <%= f.submit "更新" %>
