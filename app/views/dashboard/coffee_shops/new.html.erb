@@ -98,6 +98,7 @@
       <%= shop_scenery.label { shop_scenery.check_box + shop_scenery.text } %>
     <% end %>
   </div>
+  
   テラス席<%= f.select :terrace_seat, ['あり','なし'], { include_blank: '選択してください' }  %>
   <br>
   貸切<%= f.select :can_reserved, ['可','不可'], { include_blank: '選択してください'} %>

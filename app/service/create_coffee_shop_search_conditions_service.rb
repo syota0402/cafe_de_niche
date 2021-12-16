@@ -22,6 +22,16 @@ class CreateCoffeeShopSearchConditionsService
     @pc_work = hash[:pc_work]
     @time_limit = hash[:time_limit]
     @shop_scenery_ids = hash[:shop_scenery_ids]
+    @terrace_seat = hash[:terrace_seat]
+    @can_reserved = hash[:can_reserved]
+    @comic = hash[:comic]
+    @magazine = hash[:magazine]
+    @latte_art = hash[:latte_art]
+    @newspaper = hash[:newspaper]
+    @morning_menu = hash[:morning_menu]
+    @free_water = hash[:free_water]
+    @with_pet = hash[:with_pet]
+    @free_pc = hash[:free_pc]
   end
   
   def create
@@ -45,6 +55,16 @@ class CreateCoffeeShopSearchConditionsService
     create_pc_work if @pc_work.present?
     create_time_limit if @time_limit.present?
     create_shop_scenery if @shop_scenery_ids.present?
+    create_terrace_seat if @terrace_seat.present?
+    create_can_reserved if @can_reserved.present?
+    create_comic if @comic.present?
+    create_magazine if @magazine.present?
+    create_latte_art if @latte_art.present?
+    create_newspaper if @newspaper.present?
+    create_morning_menu if @morning_menu.present?
+    create_free_water if @free_water.present?
+    create_with_pet if @with_pet.present?
+    create_free_pc if @free_pc.present?
     
     @coffee_shop_search_conditions
   end
@@ -141,6 +161,46 @@ class CreateCoffeeShopSearchConditionsService
     shop_sceneries = ShopScenery.where(id: @shop_scenery_ids)
     return_message = "風景：#{shop_sceneries.pluck(:name).join('or')}"
     @coffee_shop_search_conditions << return_message
+  end
+  
+  def create_terrace_seat
+    @coffee_shop_search_conditions << "テラス席：#{@terrace_seat}"
+  end
+  
+  def create_can_reserved
+    @coffee_shop_search_conditions << "貸切：#{@can_reserved}"
+  end
+  
+  def create_comic
+    @coffee_shop_search_conditions << "漫画：#{@comic}"
+  end
+  
+  def create_magazine
+    @coffee_shop_search_conditions << "雑誌：#{@magazine}"
+  end
+  
+  def create_latte_art
+    @coffee_shop_search_conditions << "ラテアート：#{@latte_art}"
+  end
+  
+  def create_newspaper
+    @coffee_shop_search_conditions << "新聞：#{@newspaper}"
+  end
+  
+  def create_morning_menu
+    @coffee_shop_search_conditions << "モーニング：#{@morning_menu}"
+  end
+  
+  def create_free_water
+    @coffee_shop_search_conditions << "無料の水：#{@free_water}"
+  end
+  
+  def create_with_pet
+    @coffee_shop_search_conditions << "ペット：#{@with_pet}"
+  end
+  
+  def create_free_pc
+    @coffee_shop_search_conditions << "共有PC：#{@free_pc}"
   end
   
 end

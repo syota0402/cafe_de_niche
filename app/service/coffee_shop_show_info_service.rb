@@ -21,6 +21,16 @@ class CoffeeShopShowInfoService
     create_pc_work if @coffee_shop.pc_work.present?
     create_time_limit if @coffee_shop.time_limit.present?
     create_shop_scenety if @coffee_shop.shop_sceneries.present?
+    create_terrace_seat if @coffee_shop.terrace_seat.present?
+    create_can_reserved if @coffee_shop.can_reserved.present?
+    create_comic if @coffee_shop.omic.present?
+    create_magazine if @coffee_shop.magazine.present?
+    create_latte_art if @coffee_shop.latte_art.present?
+    create_newspaper if @coffee_shop.newspaper.present?
+    create_morning_menu if @coffee_shop.morning_menu.present?
+    create_free_water if @coffee_shop.free_water.present?
+    create_with_pet if @coffee_shop.with_pet.present?
+    create_free_pc if @coffee_shop.free_pc.present?
     
     @shop_info
   end
@@ -151,6 +161,7 @@ class CoffeeShopShowInfoService
     @shop_info << hash
   end
   
+  # PC作業
   def create_pc_work
     hash = {}
     hash.class
@@ -159,6 +170,7 @@ class CoffeeShopShowInfoService
     @shop_info << hash
   end
   
+  # 時間制限
   def create_time_limit
     hash = {}
     hash.class
@@ -167,6 +179,7 @@ class CoffeeShopShowInfoService
     @shop_info << hash
   end
   
+  # 風景
   def create_shop_scenety
     hash = {}
     hash.class
@@ -174,4 +187,95 @@ class CoffeeShopShowInfoService
     hash[:value] = @coffee_shop.shop_sceneries.pluck(:name).join(',')
     @shop_info << hash
   end
+  
+  # テラス席
+  def create_terrace_seat
+    hash = {}
+    hash.class
+    hash[:title] = 'テラス席'
+    hash[:value] = @coffee_shop.terrace_seat
+    @shop_info << hash
+  end
+  
+  # 貸切
+  def create_can_reserved
+    hash = {}
+    hash.class
+    hash[:title] = '貸切'
+    hash[:value] = @coffee_shop.can_reserved
+    @shop_info << hash
+  end
+  
+  # 漫画
+  def create_comic
+    hash = {}
+    hash.class
+    hash[:title] = '漫画'
+    hash[:value] = @coffee_shop.comic
+    @shop_info << hash
+  end
+  
+  # 雑誌
+  def create_magazine
+    hash = {}
+    hash.class
+    hash[:title] = '雑誌'
+    hash[:value] = @coffee_shop.magazine
+    @shop_info << hash
+  end
+  
+  # ラテアート
+  def create_latte_art
+    hash = {}
+    hash.class
+    hash[:title] = 'ラテアート'
+    hash[:value] = @coffee_shop.latte_art
+    @shop_info << hash
+  end
+  
+  # 新聞
+  def create_newspaper
+    hash = {}
+    hash.class
+    hash[:title] = '新聞'
+    hash[:value] = @coffee_shop.newspaper
+    @shop_info << hash
+  end
+  
+  # モーニング
+  def create_morning_menu
+    hash = {}
+    hash.class
+    hash[:title] = 'モーニング'
+    hash[:value] = @coffee_shop.morning_menu
+    @shop_info << hash
+  end
+  
+  # 無料の水
+  def create_free_water
+    hash = {}
+    hash.class
+    hash[:title] = '無料の水'
+    hash[:value] = @coffee_shop.free_water
+    @shop_info << hash
+  end
+  
+  # ペット
+  def create_with_pet
+    hash = {}
+    hash.class
+    hash[:title] = 'ペット'
+    hash[:value] = @coffee_shop.with_pet
+    @shop_info << hash
+  end
+  
+  # 共有PC
+  def create_free_pc
+    hash = {}
+    hash.class
+    hash[:title] = '共有PC'
+    hash[:value] = @coffee_shop.free_pc
+    @shop_info << hash
+  end
+  
 end

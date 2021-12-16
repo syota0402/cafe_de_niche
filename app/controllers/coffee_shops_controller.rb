@@ -63,6 +63,16 @@ class CoffeeShopsController < ApplicationController
       hash[:pc_work] = params[:pc_work]
       hash[:time_limit] = params[:time_limit]
       hash[:shop_scenery_ids] = params[:shop_scenery_ids]
+      hash[:terrace_seat] = params[:terrace_seat]
+      hash[:can_reserved] = params[:can_reserved]
+      hash[:comic] = params[:comic]
+      hash[:magazine] = params[:magazine]
+      hash[:latte_art] = params[:latte_art]
+      hash[:newspaper] = params[:newspaper]
+      hash[:morning_menu] = params[:morning_menu]
+      hash[:free_water] = params[:free_water]
+      hash[:with_pet] = params[:with_pet]
+      hash[:free_pc] = params[:free_pc]
       hash
     end
 end
