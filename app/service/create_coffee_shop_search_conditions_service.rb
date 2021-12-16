@@ -44,6 +44,7 @@ class CreateCoffeeShopSearchConditionsService
     create_shop_bgm if @shop_bgm_ids.present?
     create_pc_work if @pc_work.present?
     create_time_limit if @time_limit.present?
+    create_shop_scenery if @shop_scenery_ids.present?
     
     @coffee_shop_search_conditions
   end
@@ -138,7 +139,7 @@ class CreateCoffeeShopSearchConditionsService
   
   def create_shop_scenery
     shop_sceneries = ShopScenery.where(id: @shop_scenery_ids)
-    @coffee_shop_search_conditions << "風景：#{shop_sceneries.pluck(:name).join('or')}"
+    return_message = "風景：#{shop_sceneries.pluck(:name).join('or')}"
     @coffee_shop_search_conditions << return_message
   end
   

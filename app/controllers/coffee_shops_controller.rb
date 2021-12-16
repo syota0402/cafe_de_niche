@@ -10,6 +10,7 @@ class CoffeeShopsController < ApplicationController
     @likers = @coffee_shop.likers(User)
     # 店舗のレビューの平均点を計算
     @review_average_score = ReviewAverageScoreService.new(reviews).calculation
+    # 店舗の詳細情報を取得
     @shop_info = CoffeeShopShowInfoService.new(@coffee_shop).create
   end
 
