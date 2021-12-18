@@ -18,7 +18,7 @@
     </div>
     <% if @show_user.instagram_url.present? %>
       <div class="user-insta">
-        <%= image_tag "/images/insta_icon.png", size: "25x25" %><%= link_to @show_user.instagram_url, 'https://www.instagram.com/#{@coffee_shop.instagram_url}/', target: :_blank, rel: "noopener noreferrer" %>
+        <%= image_tag "/images/insta_icon.png", size: "25x25" %><%= link_to @show_user.instagram_url, 'https://www.instagram.com/' + @coffee_shop.instagram_url, target: :_blank, rel: "noopener noreferrer" %>
       </div>
     <% end %>
     <div class='user-follow-count'><%= @followers.count %>人がフォローなう</div>
