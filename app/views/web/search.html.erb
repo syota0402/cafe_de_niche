@@ -176,6 +176,116 @@
       <% end %>
     </div>
     
+    <div class="search-container">
+      <div class="search-name">テラス席</div>
+      <div class="search-radio">
+        <%= f.radio_button :terrace_seat, "あり" %>
+        <%= f.label :terrace_seat, "あり", {value: "あり", style: "display: inline-block;"} %>
+        <%= f.radio_button :terrace_seat, "なし" %>
+        <%= f.label :terrace_seat, "なし", {value: "なし", style: "display: inline-block;"} %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <div class="search-name">貸切</div>
+      <div class="search-radio">
+        <%= f.radio_button :can_reserved, "可" %>
+        <%= f.label :can_reserved, "可", {value: "可", style: "display: inline-block;"} %>
+        <%= f.radio_button :can_reserved, "不可" %>
+        <%= f.label :can_reserved, "不可", {value: "不可", style: "display: inline-block;"} %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <div class="search-name">漫画</div>
+      <div class="search-radio">
+        <%= f.radio_button :comic, "あり" %>
+        <%= f.label :comic, "あり", {value: "あり", style: "display: inline-block;"} %>
+        <%= f.radio_button :comic, "なし" %>
+        <%= f.label :comic, "なし", {value: "なし", style: "display: inline-block;"} %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <div class="search-name">雑誌</div>
+      <div class="search-radio">
+        <%= f.radio_button :magazine, "あり" %>
+        <%= f.label :magazine, "あり", {value: "あり", style: "display: inline-block;"} %>
+        <%= f.radio_button :magazine, "なし" %>
+        <%= f.label :magazine, "なし", {value: "なし", style: "display: inline-block;"} %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <div class="search-name">ラテアート</div>
+      <div class="search-radio">
+        <%= f.radio_button :latte_art, "あり" %>
+        <%= f.label :latte_art, "あり", {value: "あり", style: "display: inline-block;"} %>
+        <%= f.radio_button :latte_art, "なし" %>
+        <%= f.label :latte_art, "なし", {value: "なし", style: "display: inline-block;"} %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <div class="search-name">新聞</div>
+      <div class="search-radio">
+        <%= f.radio_button :newspaper, "あり" %>
+        <%= f.label :newspaper, "あり", {value: "あり", style: "display: inline-block;"} %>
+        <%= f.radio_button :newspaper, "なし" %>
+        <%= f.label :newspaper, "なし", {value: "なし", style: "display: inline-block;"} %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <div class="search-name">モーニング</div>
+      <div class="search-radio">
+        <%= f.radio_button :morning_menu, "あり" %>
+        <%= f.label :morning_menu, "あり", {value: "あり", style: "display: inline-block;"} %>
+        <%= f.radio_button :morning_menu, "なし" %>
+        <%= f.label :morning_menu, "なし", {value: "なし", style: "display: inline-block;"} %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <div class="search-name">無料の水</div>
+      <div class="search-radio">
+        <%= f.radio_button :free_water, "あり" %>
+        <%= f.label :free_water, "あり", {value: "あり", style: "display: inline-block;"} %>
+        <%= f.radio_button :free_water, "なし" %>
+        <%= f.label :free_water, "なし", {value: "なし", style: "display: inline-block;"} %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <div class="search-name">ペット</div>
+      <div class="search-radio">
+        <%= f.radio_button :with_pet, "可" %>
+        <%= f.label :with_pet, "可", {value: "可", style: "display: inline-block;"} %>
+        <%= f.radio_button :with_pet, "不可" %>
+        <%= f.label :with_pet, "不可", {value: "不可", style: "display: inline-block;"} %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <div class="search-name">共有PC</div>
+      <div class="search-radio">
+        <%= f.radio_button :free_pc, "あり" %>
+        <%= f.label :free_pc, "あり", {value: "あり", style: "display: inline-block;"} %>
+        <%= f.radio_button :free_pc, "なし" %>
+        <%= f.label :free_pc, "なし", {value: "なし", style: "display: inline-block;"} %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <div class="search-name">駐車場</div>
+      <div class="search-radio">
+        <%= f.radio_button :parking_place, "あり" %>
+        <%= f.label :parking_place, "あり", {value: "あり", style: "display: inline-block;"} %>
+        <%= f.radio_button :parking_place, "なし" %>
+        <%= f.label :parking_place, "なし", {value: "なし", style: "display: inline-block;"} %>
+      </div>
+    </div>
+    
     <hr>
     <%= f.submit :search %>
   <% end %> 

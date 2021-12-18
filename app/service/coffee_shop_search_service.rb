@@ -22,6 +22,17 @@ class CoffeeShopSearchService
     @pc_work = hash[:pc_work]
     @time_limit = hash[:time_limit]
     @shop_scenery_ids = hash[:shop_scenery_ids]
+    @terrace_seat = hash[:terrace_seat]
+    @can_reserved = hash[:can_reserved]
+    @comic = hash[:comic]
+    @magazine = hash[:magazine]
+    @latte_art = hash[:latte_art]
+    @newspaper = hash[:newspaper]
+    @morning_menu = hash[:morning_menu]
+    @free_water = hash[:free_water]
+    @with_pet = hash[:with_pet]
+    @free_pc = hash[:free_pc]
+    @parking_place = hash[:parking_place]
   end
   
   def search
@@ -83,6 +94,39 @@ class CoffeeShopSearchService
     
     # 風景検索
     search_by_shop_scenery if @shop_scenery_ids.present?
+    
+    # テラス席
+    search_by_terrace_seat if @terrace_seat.present?
+    
+    # 貸切
+    search_by_can_reserved if @can_reserved.present?
+    
+    # 漫画
+    search_by_comic if @comic.present?
+    
+    # 雑誌
+    search_by_magazine if @magazine.present?
+    
+    # ラテアート
+    search_by_latte_art if @latte_art.present?
+    
+    # 新聞
+    search_by_newspaper if @newspaper.present?
+    
+    # モーニング
+    search_by_morning_menu if @morning_menu.present?
+    
+    # 無料の水
+    search_by_free_water if @free_water.present?
+    
+    # ペット
+    search_by_with_pet if @with_pet.present?
+    
+    # 共有PC
+    search_by_free_pc if @free_pc.present?
+    
+    # 駐車場
+    search_by_parking_place if @parking_place.present?
     
     @coffee_shops
   end
@@ -271,6 +315,61 @@ class CoffeeShopSearchService
   def search_by_shop_scenery
     coffee_shop_ids = CoffeeShopShopScenery.where(shop_scenery_id: @shop_scenery_ids).pluck(:coffee_shop_id)
     @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
+  end
+  
+  # テラス席
+  def search_by_terrace_seat
+    @coffee_shops = @coffee_shops.where(terrace_seat: @terrace_seat)
+  end
+  
+  # 貸切
+  def search_by_can_reserved
+    @coffee_shops = @coffee_shops.where(can_reserved: @can_reserved)
+  end
+  
+  # 漫画
+  def search_by_comic
+    @coffee_shops = @coffee_shops.where(comic: @comic)
+  end
+  
+  # 雑誌
+  def search_by_magazine
+    @coffee_shops = @coffee_shops.where(magazine: @magazine)
+  end
+  
+  # ラテアート
+  def search_by_latte_art
+    @coffee_shops = @coffee_shops.where(latte_art: @latte_art)
+  end
+  
+  # 新聞
+  def search_by_newspaper
+    @coffee_shops = @coffee_shops.where(newspaper: @newspaper)
+  end
+  
+  # モーニング
+  def search_by_morning_menu
+    @coffee_shops = @coffee_shops.where(morning_menu: @morning_menu)
+  end
+  
+  # 無料の水
+  def search_by_free_water
+    @coffee_shops = @coffee_shops.where(free_water: @free_water)
+  end
+  
+  # ペット
+  def search_by_with_pet
+    @coffee_shops = @coffee_shops.where(with_pet: @with_pet)
+  end
+  
+  # 共有PC
+  def search_by_free_pc
+    @coffee_shops = @coffee_shops.where(free_pc: @free_pc)
+  end
+  
+  # 駐車場
+  def search_by_parking_place
+    @coffee_shops = @coffee_shops.where(parking_place: @parking_place)
   end
   
 end
