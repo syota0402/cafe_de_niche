@@ -32,6 +32,7 @@ class CoffeeShopSearchService
     @free_water = hash[:free_water]
     @with_pet = hash[:with_pet]
     @free_pc = hash[:free_pc]
+    @parking_place = hash[:parking_place]
   end
   
   def search
@@ -123,6 +124,9 @@ class CoffeeShopSearchService
     
     # 共有PC
     search_by_free_pc if @free_pc.present?
+    
+    # 駐車場
+    search_by_parking_place if @parking_place.present?
     
     @coffee_shops
   end
@@ -361,6 +365,11 @@ class CoffeeShopSearchService
   # 共有PC
   def search_by_free_pc
     @coffee_shops = @coffee_shops.where(free_pc: @free_pc)
+  end
+  
+  # 駐車場
+  def search_by_parking_place
+    @coffee_shops = @coffee_shops.where(parking_place: @parking_place)
   end
   
 end

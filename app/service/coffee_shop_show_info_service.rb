@@ -23,7 +23,7 @@ class CoffeeShopShowInfoService
     create_shop_scenety if @coffee_shop.shop_sceneries.present?
     create_terrace_seat if @coffee_shop.terrace_seat.present?
     create_can_reserved if @coffee_shop.can_reserved.present?
-    create_comic if @coffee_shop.omic.present?
+    create_comic if @coffee_shop.comic.present?
     create_magazine if @coffee_shop.magazine.present?
     create_latte_art if @coffee_shop.latte_art.present?
     create_newspaper if @coffee_shop.newspaper.present?
@@ -31,6 +31,7 @@ class CoffeeShopShowInfoService
     create_free_water if @coffee_shop.free_water.present?
     create_with_pet if @coffee_shop.with_pet.present?
     create_free_pc if @coffee_shop.free_pc.present?
+    create_parking_place if @coffee_shop.parking_place.present?
     
     @shop_info
   end
@@ -275,6 +276,15 @@ class CoffeeShopShowInfoService
     hash.class
     hash[:title] = '共有PC'
     hash[:value] = @coffee_shop.free_pc
+    @shop_info << hash
+  end
+  
+  # 駐車場
+  def create_parking_place
+    hash = {}
+    hash.class
+    hash[:title] = '駐車場'
+    hash[:value] = @coffee_shop.parking_place
     @shop_info << hash
   end
   

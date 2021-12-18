@@ -1,0 +1,6 @@
+ja:
+  enums:
+    coffee_shop:
+      terrace_seat:
+        ari: 'あり'
+        nasi: 'なし'

@@ -276,6 +276,16 @@
       </div>
     </div>
     
+    <div class="search-container">
+      <div class="search-name">駐車場</div>
+      <div class="search-radio">
+        <%= f.radio_button :parking_place, "あり" %>
+        <%= f.label :parking_place, "あり", {value: "あり", style: "display: inline-block;"} %>
+        <%= f.radio_button :parking_place, "なし" %>
+        <%= f.label :parking_place, "なし", {value: "なし", style: "display: inline-block;"} %>
+      </div>
+    </div>
+    
     <hr>
     <%= f.submit :search %>
   <% end %> 

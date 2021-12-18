@@ -32,6 +32,7 @@ class CreateCoffeeShopSearchConditionsService
     @free_water = hash[:free_water]
     @with_pet = hash[:with_pet]
     @free_pc = hash[:free_pc]
+    @parking_place = hash[:parking_place]
   end
   
   def create
@@ -65,6 +66,7 @@ class CreateCoffeeShopSearchConditionsService
     create_free_water if @free_water.present?
     create_with_pet if @with_pet.present?
     create_free_pc if @free_pc.present?
+    create_parking_place if @parking_place.present?
     
     @coffee_shop_search_conditions
   end
@@ -201,6 +203,10 @@ class CreateCoffeeShopSearchConditionsService
   
   def create_free_pc
     @coffee_shop_search_conditions << "共有PC：#{@free_pc}"
+  end
+  
+  def create_parking_place
+    @coffee_shop_search_conditions << "駐車場：#{@parking_place}"
   end
   
 end
