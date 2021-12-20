@@ -1,24 +1,37 @@
-# README
+# Cafe de niche
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+数多くの検索項目からカフェを絞り込みユーザーにピッタリのカフェを提案する
 
-Things you may want to cover:
+# DEMO
+- トップページ
+![image](https://user-images.githubusercontent.com/87374457/146740894-2af5e1cc-2522-452a-b147-274b90689055.png)
 
-* Ruby version
+- 検索画面
+![image](https://user-images.githubusercontent.com/87374457/146741081-31921e39-1107-477e-bb5a-93dc33cb4ee6.png)
 
-* System dependencies
+- 店舗詳細ページ
+![image](https://user-images.githubusercontent.com/87374457/146741357-293f8aa1-5678-4977-ba86-7f16423a0d9c.png)
 
-* Configuration
+# Features
 
-* Database creation
+数多くの検索項目がある。
 
-* Database initialization
+# Note
+## 機能
+- 店舗検索
+  - 店舗情報を多くの検索項目から検索する
+- 店舗情報表示
+  - 店舗の情報を表示する。登録できる画像は3枚までにしているので、様々な画像が見たい人はHPやインスタのアカウントで確認してもらう
+- レビュー
+  - ユーザーはレビューの投稿が可能。写真も1枚可能
+- お気に入り登録
+  - ユーザーは店舗に対してお気に入り登録が可能
+- ユーザーをフォロー
+   - ユーザーは他ユーザーをフォローが可能
+- ランキング
+  - お気に入り数が多いユーザー、フォロー数が多いユーザー、レビュー数が多いユーザーがランキングでトップページに表示される
+- 店舗登録
+  - 管理画面から店舗情報の登録が可能。管理画面は権限を持ったユーザーのみが操作できる
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# Author
+2021年12月20日作成
