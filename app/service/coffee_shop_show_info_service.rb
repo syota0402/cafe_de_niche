@@ -32,6 +32,7 @@ class CoffeeShopShowInfoService
     create_with_pet if @coffee_shop.with_pet.present?
     create_free_pc if @coffee_shop.free_pc.present?
     create_parking_place if @coffee_shop.parking_place.present?
+    create_payment_method if @coffee_shop.payment_methods.present?
     
     @shop_info
   end
@@ -285,6 +286,15 @@ class CoffeeShopShowInfoService
     hash.class
     hash[:title] = '駐車場'
     hash[:value] = @coffee_shop.parking_place
+    @shop_info << hash
+  end
+  
+  # 支払い方法
+  def create_payment_method
+    hash = {}
+    hash.class
+    hash[:title] = '支払い方法'
+    hash[:value] = @coffee_shop.payment_methods.pluck(:name).join(',')
     @shop_info << hash
   end
   
