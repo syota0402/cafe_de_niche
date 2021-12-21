@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     resources :food_menus, except: [:new]
     resources :shop_bgms, except: [:new]
     resources :shop_sceneries, except: [:new]
+    resources :payment_methods, except: [:new]
   end
   
   devise_for :users, :controllers => {

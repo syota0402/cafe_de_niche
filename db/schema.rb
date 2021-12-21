@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_16_103319) do
+ActiveRecord::Schema.define(version: 2021_12_21_110549) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -55,6 +55,13 @@ ActiveRecord::Schema.define(version: 2021_12_16_103319) do
   create_table "coffee_shop_food_menus", force: :cascade do |t|
     t.integer "coffee_shop_id"
     t.integer "food_menu_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "coffee_shop_payment_methods", force: :cascade do |t|
+    t.integer "coffee_shop_id"
+    t.integer "payment_method_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -175,6 +182,12 @@ ActiveRecord::Schema.define(version: 2021_12_16_103319) do
   create_table "municipalities", force: :cascade do |t|
     t.string "name"
     t.integer "prefecture_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "payment_methods", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
