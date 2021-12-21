@@ -33,6 +33,7 @@ class CoffeeShopSearchService
     @with_pet = hash[:with_pet]
     @free_pc = hash[:free_pc]
     @parking_place = hash[:parking_place]
+    @payment_method_ids = hash[:payment_method_ids]
   end
   
   def search
@@ -127,6 +128,9 @@ class CoffeeShopSearchService
     
     # 駐車場
     search_by_parking_place if @parking_place.present?
+    
+    # 支払い方法
+    search_by_payment_method if @payment_method_ids.present?
     
     @coffee_shops
   end
@@ -370,6 +374,12 @@ class CoffeeShopSearchService
   # 駐車場
   def search_by_parking_place
     @coffee_shops = @coffee_shops.where(parking_place: @parking_place)
+  end
+  
+  # 支払い方法
+  def search_by_payment_method
+    coffee_shop_ids = CoffeeShopPaymentMethod.where(payment_method_id: @payment_method_ids).pluck(:coffee_shop_id)
+    @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
   end
   
 end

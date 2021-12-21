@@ -74,6 +74,7 @@ class CoffeeShopsController < ApplicationController
       hash[:with_pet] = params[:with_pet]
       hash[:free_pc] = params[:free_pc]
       hash[:parking_place] = params[:parking_place]
+      hash[:payment_method_ids] = params[:payment_method_ids]
       hash
     end
 end
