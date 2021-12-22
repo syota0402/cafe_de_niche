@@ -110,6 +110,13 @@
   共有PC<%= f.select :free_pc, ['あり','なし'], { include_blank: '選択してください' } %>
   <br>
   駐車場<%= f.select :parking_place, ['あり', 'なし'], { include_blank: '選択してください' } %>
+  <br>
+  支払い方法<br>
+  <div class="check_box">
+    <%= f.collection_check_boxes(:payment_method_ids, PaymentMethod.all, :id, :name) do |payment_method| %>
+      <%= payment_method.label { payment_method.check_box + payment_method.text } %>
+    <% end %>
+  </div>
   
   <hr>
   <% if metod.eql?('edit') %>

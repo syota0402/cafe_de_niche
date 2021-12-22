@@ -14,7 +14,7 @@ class Dashboard::CoffeeBeansController < ApplicationController
   def create
     @coffee_bean = CoffeeBean.new(coffee_bean_params)
     if @coffee_bean.save
-      redirect_to dashboard_coffee_beans_path, notice: '店舗情報の登録が完了しました'
+      redirect_to dashboard_coffee_beans_path, notice: '登録が完了しました'
     else
       flash[:alert] = @coffee_bean.errors.full_messages
       redirect_back(fallback_location: dashboard_coffee_beans_path)
@@ -26,7 +26,7 @@ class Dashboard::CoffeeBeansController < ApplicationController
   
   def update
     if @coffee_bean.update(coffee_bean_params)
-      redirect_to dashboard_coffee_beans_path, notice: '店舗情報の変更が完了しました。'
+      redirect_to dashboard_coffee_beans_path, notice: '変更が完了しました。'
     else
       flash[:alert] = @coffee_bean.errors.full_messages
       redirect_back(fallback_location: dashboard_coffee_beans_path)

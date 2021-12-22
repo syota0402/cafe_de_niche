@@ -175,7 +175,7 @@
         </div>
       <% end %>
     </div>
-    
+    <br>
     <div class="search-container">
       <div class="search-name">テラス席</div>
       <div class="search-radio">
@@ -205,7 +205,7 @@
         <%= f.label :comic, "なし", {value: "なし", style: "display: inline-block;"} %>
       </div>
     </div>
-    
+    <br>
     <div class="search-container">
       <div class="search-name">雑誌</div>
       <div class="search-radio">
@@ -235,7 +235,7 @@
         <%= f.label :newspaper, "なし", {value: "なし", style: "display: inline-block;"} %>
       </div>
     </div>
-    
+    <br>
     <div class="search-container">
       <div class="search-name">モーニング</div>
       <div class="search-radio">
@@ -265,7 +265,7 @@
         <%= f.label :with_pet, "不可", {value: "不可", style: "display: inline-block;"} %>
       </div>
     </div>
-    
+    <br>
     <div class="search-container">
       <div class="search-name">共有PC</div>
       <div class="search-radio">
@@ -284,6 +284,16 @@
         <%= f.radio_button :parking_place, "なし" %>
         <%= f.label :parking_place, "なし", {value: "なし", style: "display: inline-block;"} %>
       </div>
+    </div>
+    <br>
+    <div class="search-container">
+      <div class="search-name">支払い方法</div>
+      <%= f.collection_check_boxes(:payment_method_ids, PaymentMethod.all, :id, :name, {include_hidden: false}) do |payment_method| %>
+        <div class="search-checkbox">
+          <%= payment_method.check_box %>
+          <%= payment_method.label %>
+        </div>
+      <% end %>
     </div>
     
     <hr>

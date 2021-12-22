@@ -33,6 +33,7 @@ class CreateCoffeeShopSearchConditionsService
     @with_pet = hash[:with_pet]
     @free_pc = hash[:free_pc]
     @parking_place = hash[:parking_place]
+    @payment_method_ids = hash[:payment_method_ids]
   end
   
   def create
@@ -67,6 +68,7 @@ class CreateCoffeeShopSearchConditionsService
     create_with_pet if @with_pet.present?
     create_free_pc if @free_pc.present?
     create_parking_place if @parking_place.present?
+    create_payment_method if @payment_method_ids.present?
     
     @coffee_shop_search_conditions
   end
@@ -207,6 +209,12 @@ class CreateCoffeeShopSearchConditionsService
   
   def create_parking_place
     @coffee_shop_search_conditions << "駐車場：#{@parking_place}"
+  end
+  
+  def create_payment_method
+    payment_methods = PaymentMethod.where(id: @payment_method_ids)
+    return_message = "風景：#{payment_methods.pluck(:name).join('or')}"
+    @coffee_shop_search_conditions << return_message
   end
   
 end

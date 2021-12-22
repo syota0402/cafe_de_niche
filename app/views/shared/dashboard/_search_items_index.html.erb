@@ -1,0 +1,36 @@
+<div class="w-75">
+  
+  <h1><%= item_name %>一覧</h1>
+  
+  <%= form_with(model: search_item, url: search_items_path, local: true) do |f| %>
+    <%= f.label :name, item_name %>
+    <%= f.text_field :name %>
+    
+    <%= f.submit "新規作成" %>
+  <% end %>
+  
+  <table class="table mt-5">
+    <thead>
+      <tr>
+        <th scope="col" class="w-25">ID</th>
+        <th scope="col"><%= item_name %></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% search_items.each do |item| %>
+      <tr>
+        <td scope="row"><%= item.id %></td>
+        <td><%= item.name %></td>
+        <td>
+          <a href=<%= my_edit_link_to(items,item.id) %>>編集</a>
+        </td>
+        <td>
+          <a data-confirm="本当に削除していいですか？" rel="nofollow" data-method="delete" href=<%= "/dashboard/#{items}/#{item.id}" %>>削除</a>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
