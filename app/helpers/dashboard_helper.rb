@@ -3,7 +3,8 @@ module DashboardHelper
     "#{items}/#{id}/edit"
   end
   
-  def my_destroy_link_to(item,id)
-    "#{item}/#{id}/destroy"
-  end
+  # editページもやりたい
+  # def my_update_link_to(items,id)
+  #   "dashbord/#{items}/#{id}"
+  # end
 end

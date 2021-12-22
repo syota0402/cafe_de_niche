@@ -27,6 +27,7 @@
           <a href=<%= my_edit_link_to(items,item.id) %>>編集</a>
         </td>
         <td>
+          <a data-confirm="本当に削除していいですか？" rel="nofollow" data-method="delete" href=<%= "/dashboard/#{items}/#{item.id}" %>>削除</a>
         </td>
       </tr>
       <% end %>
