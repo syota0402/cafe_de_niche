@@ -21,6 +21,8 @@ ja:
         slack_time_start: すいている時間(開始) 
         slack_time_end: すいている時間(終了)
         shop_tell: 電話番号
+        shop_badget_lower: 予算(下限) 
+        shop_badget_upper: 予算(上限)
         
       user:
         name: ユーザー名

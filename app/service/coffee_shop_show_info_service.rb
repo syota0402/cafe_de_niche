@@ -33,7 +33,10 @@ class CoffeeShopShowInfoService
     create_free_pc if @coffee_shop.free_pc.present?
     create_parking_place if @coffee_shop.parking_place.present?
     create_payment_method if @coffee_shop.payment_methods.present?
-    
+    create_shop_badget if @coffee_shop.shop_badget_lower.present?
+    create_coffee_price if @coffee_shop.coffee_price.present?
+    create_latte_price if @coffee_shop.latte_price.present?
+     
     @shop_info
   end
   
@@ -295,6 +298,33 @@ class CoffeeShopShowInfoService
     hash.class
     hash[:title] = '支払い方法'
     hash[:value] = @coffee_shop.payment_methods.pluck(:name).join(',')
+    @shop_info << hash
+  end
+  
+  # 予算
+  def create_shop_badget
+    hash = {}
+    hash.class
+    hash[:title] = '予算'
+    hash[:value] = '¥' + @coffee_shop.shop_badget_lower.to_s + '〜¥' + @coffee_shop.shop_badget_upper.to_s
+    @shop_info << hash
+  end
+  
+  # コーヒーの値段
+  def create_coffee_price
+    hash = {}
+    hash.class
+    hash[:title] = 'コーヒー(1杯)の値段'
+    hash[:value] = '¥' + @coffee_shop.coffee_price.to_s
+    @shop_info << hash
+  end
+  
+  # カフェラテの値段
+  def create_latte_price
+    hash = {}
+    hash.class
+    hash[:title] = 'カフェラテ(1杯)の値段'
+    hash[:value] = '¥' + @coffee_shop.latte_price.to_s
     @shop_info << hash
   end
   

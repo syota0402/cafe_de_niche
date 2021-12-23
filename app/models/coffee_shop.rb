@@ -62,6 +62,9 @@ class CoffeeShop < ApplicationRecord
 	validate :business_start_hour_and_business_end_hour_must_be_set
 	validate :slack_time_start_and_slack_time_end_must_be_set
 	
+	# 予算
+	validate :shop_badget_lower_and_shop_badget_upper_must_be_set
+	
 	scope :search_for_name_and_tell, -> (keyword) {
 		where("name LIKE ?", "%#{keyword}%").
 		or(where(tell: keyword.to_i))
@@ -96,6 +99,16 @@ class CoffeeShop < ApplicationRecord
 			errors.add(:slack_time_start, "はすいている時間(終了)とペアで入力してください。")
 		elsif	slack_time_end.nil?
 			errors.add(:slack_time_end, "はすいている時間(開始)とペアで入力してください。")
+		end
+	end
+	
+	def shop_badget_lower_and_shop_badget_upper_must_be_set
+		return if shop_badget_lower.nil? && shop_badget_upper.nil?
+		
+		if shop_badget_lower.nil?
+			errors.add(:shop_badget_lower, "は予算(上限)とペアで入力してください。")
+		elsif	shop_badget_upper.nil?
+			errors.add(:shop_badget_upper, "は予算(下限)とペアで入力してください。")
 		end
 	end
 	

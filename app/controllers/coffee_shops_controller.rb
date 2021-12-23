@@ -75,6 +75,11 @@ class CoffeeShopsController < ApplicationController
       hash[:free_pc] = params[:free_pc]
       hash[:parking_place] = params[:parking_place]
       hash[:payment_method_ids] = params[:payment_method_ids]
+      hash[:shop_badget] = params[:shop_badget]
+      hash[:coffee_price] = params[:coffee_price]
+      hash[:coffee_price_search_type] = params[:coffee_price_search_type]
+      hash[:latte_price] = params[:latte_price]
+      hash[:latte_price_search_type] = params[:latte_price_search_type]
       hash
     end
 end
