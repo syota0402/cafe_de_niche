@@ -117,6 +117,14 @@
       <%= payment_method.label { payment_method.check_box + payment_method.text } %>
     <% end %>
   </div>
+  <br>
+  予算(上限)：<%= f.number_field :shop_badget_upper %>円
+  <br>
+  予算(下限)；<%= f.number_field :shop_badget_lower %>円
+  <br>
+  コーヒー(1杯)：<%= f.number_field :coffee_price %>円
+  <br>
+  カフェラテ(1杯)：<%= f.number_field :latte_price %>円
   
   <hr>
   <% if metod.eql?('edit') %>
