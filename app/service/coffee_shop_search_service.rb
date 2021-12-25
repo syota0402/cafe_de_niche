@@ -39,6 +39,7 @@ class CoffeeShopSearchService
     @coffee_price_search_type = hash[:coffee_price_search_type]
     @latte_price = hash[:latte_price]
     @latte_price_search_type = hash[:latte_price_search_type]
+    @chair_type_ids = hash[:chair_type_ids]
   end
   
   def search
@@ -145,6 +146,9 @@ class CoffeeShopSearchService
     
     # カフェラテの値段
     search_by_latte_price if @latte_price.present?
+    
+    # 椅子の種類
+    search_by_chair_type if @chair_type_ids.present?
     
     @coffee_shops
   end
@@ -432,6 +436,12 @@ class CoffeeShopSearchService
         coffee_shop_ids << coffee_shop.id
       end
     end
+    @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
+  end
+  
+  # 椅子の種類
+  def search_by_chair_type
+    coffee_shop_ids = CoffeeShopChairType.where(chair_type_id: @chair_type_ids).pluck(:coffee_shop_id)
     @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
   end
   

@@ -36,6 +36,7 @@ class CoffeeShopShowInfoService
     create_shop_badget if @coffee_shop.shop_badget_lower.present?
     create_coffee_price if @coffee_shop.coffee_price.present?
     create_latte_price if @coffee_shop.latte_price.present?
+    create_chair_type if @coffee_shop.chair_types.present?
      
     @shop_info
   end
@@ -325,6 +326,15 @@ class CoffeeShopShowInfoService
     hash.class
     hash[:title] = 'カフェラテ(1杯)の値段'
     hash[:value] = '¥' + @coffee_shop.latte_price.to_s
+    @shop_info << hash
+  end
+  
+  # 椅子の種類
+  def create_chair_type
+    hash = {}
+    hash.class
+    hash[:title] = '椅子の種類'
+    hash[:value] = @coffee_shop.chair_types.pluck(:name).join(',')
     @shop_info << hash
   end
   

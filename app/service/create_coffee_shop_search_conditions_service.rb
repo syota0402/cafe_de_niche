@@ -39,6 +39,7 @@ class CreateCoffeeShopSearchConditionsService
     @coffee_price_search_type = hash[:coffee_price_search_type]
     @latte_price = hash[:latte_price]
     @latte_price_search_type = hash[:latte_price_search_type]
+    @chair_type_ids = hash[:chair_type_ids]
   end
   
   def create
@@ -77,6 +78,7 @@ class CreateCoffeeShopSearchConditionsService
     create_shop_badget if @shop_badget.present?
     create_coffee_price if @coffee_price.present?
     create_latte_price if @latte_price.present?
+    create_chair_type if @chair_type_ids.present?
     
     @coffee_shop_search_conditions
   end
@@ -237,6 +239,12 @@ class CreateCoffeeShopSearchConditionsService
   def create_latte_price
     @coffee_shop_search_conditions << "カフェラテ1杯：#{@latte_price}円以上" if @latte_price_search_type.eql?("more_than") 
     @coffee_shop_search_conditions << "カフェラテ1杯：#{@latte_price}円以下" if @latte_price_search_type.eql?("less_than")
+  end
+  
+  def create_chair_type
+    chair_types = ChairType.where(id: @chair_type_ids)
+    return_message = "椅子の種類：#{chair_types.pluck(:name).join('or')}"
+    @coffee_shop_search_conditions << return_message
   end
   
 end
