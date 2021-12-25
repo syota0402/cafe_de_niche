@@ -34,6 +34,11 @@ class CreateCoffeeShopSearchConditionsService
     @free_pc = hash[:free_pc]
     @parking_place = hash[:parking_place]
     @payment_method_ids = hash[:payment_method_ids]
+    @shop_badget = hash[:shop_badget]
+    @coffee_price = hash[:coffee_price]
+    @coffee_price_search_type = hash[:coffee_price_search_type]
+    @latte_price = hash[:latte_price]
+    @latte_price_search_type = hash[:latte_price_search_type]
   end
   
   def create
@@ -69,6 +74,9 @@ class CreateCoffeeShopSearchConditionsService
     create_free_pc if @free_pc.present?
     create_parking_place if @parking_place.present?
     create_payment_method if @payment_method_ids.present?
+    create_shop_badget if @shop_badget.present?
+    create_coffee_price if @coffee_price.present?
+    create_latte_price if @latte_price.present?
     
     @coffee_shop_search_conditions
   end
@@ -215,6 +223,20 @@ class CreateCoffeeShopSearchConditionsService
     payment_methods = PaymentMethod.where(id: @payment_method_ids)
     return_message = "風景：#{payment_methods.pluck(:name).join('or')}"
     @coffee_shop_search_conditions << return_message
+  end
+  
+  def create_shop_badget
+    @coffee_shop_search_conditions << "予算：#{@shop_badget}円"
+  end
+  
+  def create_coffee_price
+    @coffee_shop_search_conditions << "コーヒー1杯：#{@coffee_price}円以上" if @coffee_price_search_type.eql?("more_than") 
+    @coffee_shop_search_conditions << "コーヒー1杯：#{@coffee_price}円以下" if @coffee_price_search_type.eql?("less_than")
+  end
+  
+  def create_latte_price
+    @coffee_shop_search_conditions << "カフェラテ1杯：#{@latte_price}円以上" if @latte_price_search_type.eql?("more_than") 
+    @coffee_shop_search_conditions << "カフェラテ1杯：#{@latte_price}円以下" if @latte_price_search_type.eql?("less_than")
   end
   
 end

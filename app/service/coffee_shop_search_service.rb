@@ -34,6 +34,11 @@ class CoffeeShopSearchService
     @free_pc = hash[:free_pc]
     @parking_place = hash[:parking_place]
     @payment_method_ids = hash[:payment_method_ids]
+    @shop_badget = hash[:shop_badget]
+    @coffee_price = hash[:coffee_price]
+    @coffee_price_search_type = hash[:coffee_price_search_type]
+    @latte_price = hash[:latte_price]
+    @latte_price_search_type = hash[:latte_price_search_type]
   end
   
   def search
@@ -131,6 +136,15 @@ class CoffeeShopSearchService
     
     # 支払い方法
     search_by_payment_method if @payment_method_ids.present?
+    
+    # 予算
+    search_by_shop_badget if @shop_badget.present?
+    
+    # コーヒーの値段
+    search_by_coffee_price if @coffee_price.present?
+    
+    # カフェラテの値段
+    search_by_latte_price if @latte_price.present?
     
     @coffee_shops
   end
@@ -379,6 +393,45 @@ class CoffeeShopSearchService
   # 支払い方法
   def search_by_payment_method
     coffee_shop_ids = CoffeeShopPaymentMethod.where(payment_method_id: @payment_method_ids).pluck(:coffee_shop_id)
+    @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
+  end
+  
+  # 予算
+  def search_by_shop_badget
+    coffee_shop_ids = []
+    @coffee_shops.each do |coffee_shop|
+      if @shop_badget.to_i <= coffee_shop.shop_badget_upper.to_i && @shop_badget.to_i >= coffee_shop.shop_badget_lower.to_i
+        coffee_shop_ids << coffee_shop.id
+      end
+    end
+    @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
+  end
+  
+  # コーヒー1杯
+  def search_by_coffee_price
+    coffee_shop_ids = []
+    @coffee_shops.each do |coffee_shop|
+      next if coffee_shop.coffee_price.nil?
+      if @coffee_price_search_type.eql?("more_than") && @coffee_price.to_i <= coffee_shop.coffee_price.to_i
+        coffee_shop_ids << coffee_shop.id
+      elsif @coffee_price_search_type.eql?("less_than") && @coffee_price.to_i >= coffee_shop.coffee_price.to_i
+        coffee_shop_ids << coffee_shop.id
+      end
+    end
+    @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
+  end
+  
+  # カフェラテ1杯
+  def search_by_latte_price
+    coffee_shop_ids = []
+    @coffee_shops.each do |coffee_shop|
+      next if coffee_shop.latte_price.nil?
+      if @latte_price_search_type.eql?("more_than") && @latte_price.to_i <= coffee_shop.latte_price.to_i
+        coffee_shop_ids << coffee_shop.id
+      elsif @latte_price_search_type.eql?("less_than") && @latte_price.to_i >= coffee_shop.latte_price.to_i
+        coffee_shop_ids << coffee_shop.id
+      end
+    end
     @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
   end
   

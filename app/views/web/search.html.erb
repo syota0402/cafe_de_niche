@@ -16,8 +16,6 @@
       <%= f.text_field :name, :class => 'search-text' %>
     </div>
     
-    <br>
-    
     <div class="search-container">
       <div class="search-name">こだわり</div>
       <%= f.collection_check_boxes(:search_category_ids, SearchCategory.all, :id, :name, {include_hidden: false} ) do |search_category| %>
@@ -27,8 +25,6 @@
         </div>
       <% end %>
     </div>
-    
-    <br>
     
     <div class="search-container">
       <div class="search-name">お店の雰囲気</div>
@@ -40,8 +36,6 @@
       <% end %>
     </div>
     
-    <br>
-    
     <div class="search-container">
       <div class="search-name">レビュー点数</div>
       <%= f.number_field :review_score, :class => 'search-number' %>
@@ -52,6 +46,7 @@
         <%= f.label :review_score_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>
       </div>
     </div>
+    
     <div class="search-container">
       <div class="search-name">レビュー数</div>
       <%= f.number_field :review_count, :class => 'search-number' %>
@@ -102,8 +97,6 @@
       </div>
     </div>
     
-    <br>
-    
     <div class="search-container">
       <div class="search-name">コーヒー豆</div>
       <%= f.collection_check_boxes(:coffee_bean_ids, CoffeeBean.all, :id, :name, {include_hidden: false}) do |coffee_bean| %>
@@ -113,8 +106,6 @@
         </div>
       <% end %>
     </div>
-    
-    <br>
     
     <div class="search-container">
       <div class="search-name">お店の静かさ</div>
@@ -126,8 +117,6 @@
       <% end %>
     </div>
     
-    <br>
-    
     <div class="search-container">
       <div class="search-name">食べ物</div>
       <%= f.collection_check_boxes(:food_menu_ids, FoodMenu.all, :id, :name, {include_hidden: false}) do |food_menu| %>
@@ -137,8 +126,6 @@
         </div>
       <% end %>
     </div>
-    
-    <br>
     
     <div class="search-container">
       <div class="search-name">BGM</div>
@@ -150,21 +137,15 @@
       <% end %>
     </div>
     
-    <br>
-    
     <div class="search-container">
       <div class="search-name">PC作業</div>
       <%= f.select :pc_work, PcWork.pluck(:name), { include_blank: '未選択' }, :class => 'search-select' %>
     </div>
     
-    <br>
-    
     <div class="search-container">
       <div class="search-name">時間制限</div>
       <%= f.select :time_limit, TimeLimit.pluck(:name), { include_blank: '未選択' }, :class => 'search-select' %>
     </div>
-    
-    <br>
     
     <div class="search-container">
       <div class="search-name">風景</div>
@@ -175,7 +156,7 @@
         </div>
       <% end %>
     </div>
-    <br>
+    
     <div class="search-container">
       <div class="search-name">テラス席</div>
       <div class="search-radio">
@@ -205,7 +186,7 @@
         <%= f.label :comic, "なし", {value: "なし", style: "display: inline-block;"} %>
       </div>
     </div>
-    <br>
+    
     <div class="search-container">
       <div class="search-name">雑誌</div>
       <div class="search-radio">
@@ -235,7 +216,7 @@
         <%= f.label :newspaper, "なし", {value: "なし", style: "display: inline-block;"} %>
       </div>
     </div>
-    <br>
+    
     <div class="search-container">
       <div class="search-name">モーニング</div>
       <div class="search-radio">
@@ -265,7 +246,7 @@
         <%= f.label :with_pet, "不可", {value: "不可", style: "display: inline-block;"} %>
       </div>
     </div>
-    <br>
+    
     <div class="search-container">
       <div class="search-name">共有PC</div>
       <div class="search-radio">
@@ -285,7 +266,7 @@
         <%= f.label :parking_place, "なし", {value: "なし", style: "display: inline-block;"} %>
       </div>
     </div>
-    <br>
+    
     <div class="search-container">
       <div class="search-name">支払い方法</div>
       <%= f.collection_check_boxes(:payment_method_ids, PaymentMethod.all, :id, :name, {include_hidden: false}) do |payment_method| %>
@@ -294,6 +275,33 @@
           <%= payment_method.label %>
         </div>
       <% end %>
+    </div>
+    
+    <div class="search-container">
+      <div class="search-name">予算</div>
+      <%= f.number_field :shop_badget, :class => 'search-number' %>円
+    </div>
+    
+    <div class="search-container">
+      <div class="search-name">コーヒー1杯</div>
+      <%= f.number_field :coffee_price, :class => 'search-number' %>
+      <div class="search-radio">
+        <%= f.radio_button :coffee_price_search_type, :more_than, {:checked => true} %>
+        <%= f.label :coffee_price_search_type, "以上", {value: :more_than, style: "display: inline-block;"} %>
+        <%= f.radio_button :coffee_price_search_type, :less_than %>
+        <%= f.label :coffee_price_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <div class="search-name">カフェラテ1杯</div>
+      <%= f.number_field :latte_price, :class => 'search-number' %>
+      <div class="search-radio">
+        <%= f.radio_button :latte_price_search_type, :more_than, {:checked => true} %>
+        <%= f.label :latte_price_search_type, "以上", {value: :more_than, style: "display: inline-block;"} %>
+        <%= f.radio_button :latte_price_search_type, :less_than %>
+        <%= f.label :latte_price_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>
+      </div>
     </div>
     
     <hr>
