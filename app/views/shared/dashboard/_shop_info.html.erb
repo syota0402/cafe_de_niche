@@ -125,6 +125,13 @@
   コーヒー(1杯)：<%= f.number_field :coffee_price %>円
   <br>
   カフェラテ(1杯)：<%= f.number_field :latte_price %>円
+  <br>
+  椅子の種類<br>
+  <div class="check_box">
+    <%= f.collection_check_boxes(:chair_type_ids, ChairType.all, :id, :name) do |chair_type| %>
+      <%= chair_type.label { chair_type.check_box + chair_type.text } %>
+    <% end %>
+  </div>
   
   <hr>
   <% if metod.eql?('edit') %>
