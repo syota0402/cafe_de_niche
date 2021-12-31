@@ -19,7 +19,7 @@
           <%= render partial: 'shared/show_image_first', locals: { target: favorite_coffee_shop, image_size: "100x100" } %>
         </td>
         <td><%= link_to favorite_coffee_shop.name, coffee_shop_path(favorite_coffee_shop) %></td>
-        <td><%= favorite_coffee_shop.tell %></td>
+        <td><%= favorite_coffee_shop.shop_tell %></td>
         <td><%= favorite_coffee_shop.address %></td>
         <td><%= link_to "解除", favorite_coffee_shop_path(favorite_coffee_shop,target_action: "favorite") %></td>
       </tr>

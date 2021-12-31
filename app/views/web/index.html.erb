@@ -48,15 +48,19 @@
       <div class="search-text">
         shop name
         <br>
-        <%= f.text_field :name %>
+        <div class="cp_iptxt">
+          <%= f.text_field :name, :class => 'cp_iptxt' %>
+        </div>
       </div>
       <div class="search-text">
         tell
         <br>
-        <%= f.number_field :shop_tell %>
+        <div class="cp_ipnum">
+          <%= f.number_field :shop_tell, :class => 'cp_ipnum' %>
+        </div>
       </div>
       <div class="search-btn">
-        <%= f.submit :search %>
+        <%= f.submit :search, :class => 'btn-search' %>
       </div>
     <% end %> 
   </div>
@@ -64,7 +68,7 @@
   <br>
   
   <div class="search_by_area2">
-    自分にぴったりなカフェを探す
+    様々な検索条件から自分にぴったりなカフェを探す
     <br>
     <% Prefecture.all.each do |prefecture| %>
       <%= link_to search_path(prefecture_id: prefecture.id) , class: "btn btn-prefecture" do %>

@@ -304,7 +304,17 @@
       </div>
     </div>
     
+    <div class="search-container">
+      <div class="search-name">椅子の種類</div>
+      <%= f.collection_check_boxes(:chair_type_ids, ChairType.all, :id, :name, {include_hidden: false}) do |chair_type| %>
+        <div class="search-checkbox">
+          <%= chair_type.check_box %>
+          <%= chair_type.label %>
+        </div>
+      <% end %>
+    </div>
+    
     <hr>
-    <%= f.submit :search %>
+    <%= f.submit :search, :class => 'btn-search' %>
   <% end %> 
 </div>

@@ -1,0 +1,9 @@
+<h1>椅子の種類編集</h1>
+
+<%= form_with model: @chair_type, url: dashboard_chair_type_path(@chair_type), local: true do |f| %>
+  <%= f.label :name, "椅子の種類" %>
+  <%= f.text_field :name %>
+  
+  <%= f.submit "更新" %>
+<% end %>
+<%= link_to "椅子の種類一覧に戻る", dashboard_chair_types_path %>

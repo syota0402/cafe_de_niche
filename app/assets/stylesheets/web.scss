@@ -193,3 +193,48 @@
   width: fit-content;
   display: inline-block;
 }
+
+.cp_iptxt {
+	position: relative;
+	border-color: #CC935B;
+	height: 2em;
+}
+.cp_iptxt input[type='text']:focus {
+	width: 100%;
+	padding: 0.3em;
+	transition: 0.3s;
+	letter-spacing: 1px;
+	border-bottom: 2px solid #800000;
+	background: transparent;
+	box-shadow: 0 0 7px #800000;
+}
+
+.cp_ipnum {
+	position: relative;
+	border-color: #CC935B;
+	height: 2em;
+}
+.cp_ipnum input[type='number']:focus {
+	width: 100%;
+	padding: 0.3em;
+	transition: 0.3s;
+	letter-spacing: 1px;
+	border-bottom: 2px solid #800000;
+	background: transparent;
+	box-shadow: 0 0 7px #800000;
+}
+
+.cp_ipnum::-webkit-inner-spin-button,
+.cp_ipnum::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  -moz-appearance:textfield;
+}
+
+.btn-search {
+  color: #ffffff;
+  background-color: #CC935B;
+  border: none;
+  height: 2em;
+  border-radius: 0.5em;
+}
