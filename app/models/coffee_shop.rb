@@ -71,6 +71,8 @@ class CoffeeShop < ApplicationRecord
 	
 	# enum
 	enum outlet: { none_seat: 0, all_seat: 1, part_seat: 2 }
+	enum wifi: { available: 0, not_available: 1 }
+	enum smoking: { smoking: 0, no_smoking: 1, separate_smoke: 2}
 	
 	scope :search_for_name_and_tell, -> (keyword) {
 		where("name LIKE ?", "%#{keyword}%").

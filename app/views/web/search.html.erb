@@ -324,6 +324,26 @@
       <% end %>
     </div>
     
+    <div class="search-container">
+      <div class="search-name">Wi-Fi</div>
+      <%= f.collection_radio_buttons(:wifi, CoffeeShop.wifis_i18n, :first, :last, {include_hidden: false}) do |wifi| %>
+        <div class="search-radio">
+          <%= wifi.radio_button %>
+          <%= wifi.label %>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="search-container">
+      <div class="search-name">喫煙・分煙</div>
+      <%= f.collection_radio_buttons(:smoking, CoffeeShop.smokings_i18n, :first, :last, {include_hidden: false}) do |smoking| %>
+        <div class="search-radio">
+          <%= smoking.radio_button %>
+          <%= smoking.label %>
+        </div>
+      <% end %>
+    </div>
+    
     <hr>
     <%= f.submit :search, :class => 'btn-search' %>
   <% end %> 

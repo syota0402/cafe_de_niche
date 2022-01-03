@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_03_042241) do
+ActiveRecord::Schema.define(version: 2022_01_03_045723) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -156,6 +156,8 @@ ActiveRecord::Schema.define(version: 2022_01_03_042241) do
     t.string "existence_wifi"
     t.string "can_smoking"
     t.integer "outlet"
+    t.integer "wifi"
+    t.integer "smoking"
   end
 
   create_table "day_of_weeks", force: :cascade do |t|

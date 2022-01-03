@@ -133,6 +133,10 @@
     <% end %>
   </div>
   コンセント：<%= f.select :outlet, CoffeeShop.outlets_i18n.invert, { include_blank: '選択してください'} %>
+  <br>
+  Wi-Fi：<%= f.select :wifi, CoffeeShop.wifis_i18n.invert, { include_blank: '選択してください'} %>
+  <br>
+  禁煙・喫煙：<%= f.select :smoking, CoffeeShop.smokings_i18n.invert, { include_blank: '選択してください'} %>
   <hr>
   <% if metod.eql?('edit') %>
     <%= f.submit "更新" %>

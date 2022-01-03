@@ -41,6 +41,8 @@ class CoffeeShopSearchService
     @latte_price_search_type = hash[:latte_price_search_type]
     @chair_type_ids = hash[:chair_type_ids]
     @outlet = hash[:outlet]
+    @wifi = hash[:wifi]
+    @smoking = hash[:smoking]
   end
   
   def search
@@ -153,6 +155,12 @@ class CoffeeShopSearchService
     
     # コンセント
     srarch_by_outlet if @outlet.present?
+    
+    # wifi
+    search_by_wifi if @wifi.present?
+    
+    # 喫煙
+    search_by_smoking if @smoking.present?
     
     @coffee_shops
   end
@@ -452,6 +460,16 @@ class CoffeeShopSearchService
   # コンセント
   def srarch_by_outlet
     @coffee_shops = @coffee_shops.where(outlet: @outlet)
+  end
+  
+  # wifi
+  def search_by_wifi
+    @coffee_shops = @coffee_shops.where(wifi: @wifi)
+  end
+  
+  # 喫煙
+  def search_by_smoking
+    @coffee_shops = @coffee_shops.where(smoking: @smoking)
   end
   
 end

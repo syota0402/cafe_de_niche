@@ -38,6 +38,8 @@ class CoffeeShopShowInfoService
     create_latte_price if @coffee_shop.latte_price.present?
     create_chair_type if @coffee_shop.chair_types.present?
     create_outlet if @coffee_shop.outlet.present?
+    create_wifi if @coffee_shop.wifi.present?
+    create_smoking if @coffee_shop.smoking.present?
     
     @shop_info
   end
@@ -345,6 +347,24 @@ class CoffeeShopShowInfoService
     hash.class
     hash[:title] = 'コンセント'
     hash[:value] = @coffee_shop.outlet_i18n
+    @shop_info << hash
+  end
+  
+  # Wi-Fi
+  def create_wifi
+    hash = {}
+    hash.class
+    hash[:title] = 'Wi-Fi'
+    hash[:value] = @coffee_shop.wifi_i18n
+    @shop_info << hash
+  end
+  
+  # 喫煙
+  def create_smoking
+    hash = {}
+    hash.class
+    hash[:title] = '喫煙・禁煙'
+    hash[:value] = @coffee_shop.smoking_i18n
     @shop_info << hash
   end
   
