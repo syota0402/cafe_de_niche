@@ -314,6 +314,16 @@
       <% end %>
     </div>
     
+    <div class="search-container">
+      <div class="search-name">コンセント</div>
+      <%= f.collection_radio_buttons(:outlet, CoffeeShop.outlets_i18n, :first, :last, {include_hidden: false}) do |outlet| %>
+        <div class="search-radio">
+          <%= outlet.radio_button %>
+          <%= outlet.label %>
+        </div>
+      <% end %>
+    </div>
+    
     <hr>
     <%= f.submit :search, :class => 'btn-search' %>
   <% end %> 

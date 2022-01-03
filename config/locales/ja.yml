@@ -1,6 +1,7 @@
 ja:
   enums:
     coffee_shop:
-      terrace_seat:
-        ari: 'あり'
-        nasi: 'なし'
+      outlet:
+        none_seat: 'なし'
+        all_seat: 'あり'
+        part_seat: '一部席あり'

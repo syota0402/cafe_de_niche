@@ -40,6 +40,7 @@ class CreateCoffeeShopSearchConditionsService
     @latte_price = hash[:latte_price]
     @latte_price_search_type = hash[:latte_price_search_type]
     @chair_type_ids = hash[:chair_type_ids]
+    @outlet = hash[:outlet]
   end
   
   def create
@@ -79,6 +80,7 @@ class CreateCoffeeShopSearchConditionsService
     create_coffee_price if @coffee_price.present?
     create_latte_price if @latte_price.present?
     create_chair_type if @chair_type_ids.present?
+    create_outlet if @outlet.present?
     
     @coffee_shop_search_conditions
   end
@@ -245,6 +247,10 @@ class CreateCoffeeShopSearchConditionsService
     chair_types = ChairType.where(id: @chair_type_ids)
     return_message = "椅子の種類：#{chair_types.pluck(:name).join('or')}"
     @coffee_shop_search_conditions << return_message
+  end
+  
+  def create_outlet
+    @coffee_shop_search_conditions << "コンセント：#{CoffeeShop.outlets_i18n[@outlet]}"
   end
   
 end

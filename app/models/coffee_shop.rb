@@ -69,6 +69,9 @@ class CoffeeShop < ApplicationRecord
 	# 予算
 	validate :shop_badget_lower_and_shop_badget_upper_must_be_set
 	
+	# enum
+	enum outlet: { none_seat: 0, all_seat: 1, part_seat: 2 }
+	
 	scope :search_for_name_and_tell, -> (keyword) {
 		where("name LIKE ?", "%#{keyword}%").
 		or(where(tell: keyword.to_i))
