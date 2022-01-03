@@ -1,6 +1,14 @@
 ja:
   enums:
     coffee_shop:
-      terrace_seat:
-        ari: 'あり'
-        nasi: 'なし'
+      outlet:
+        none_seat: 'なし'
+        all_seat: 'あり'
+        part_seat: '一部席あり'
+      wifi:
+        available: 'あり'
+        not_available: 'なし'
+      smoking:
+        smoking: '喫煙可能'
+        no_smoking: '禁煙'
+        separate_smoke: '分煙'

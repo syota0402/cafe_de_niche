@@ -40,6 +40,9 @@ class CreateCoffeeShopSearchConditionsService
     @latte_price = hash[:latte_price]
     @latte_price_search_type = hash[:latte_price_search_type]
     @chair_type_ids = hash[:chair_type_ids]
+    @outlet = hash[:outlet]
+    @wifi = hash[:wifi]
+    @smoking = hash[:smoking]
   end
   
   def create
@@ -79,6 +82,9 @@ class CreateCoffeeShopSearchConditionsService
     create_coffee_price if @coffee_price.present?
     create_latte_price if @latte_price.present?
     create_chair_type if @chair_type_ids.present?
+    create_outlet if @outlet.present?
+    create_wifi if @wifi.present?
+    create_smoking if @smoking.present?
     
     @coffee_shop_search_conditions
   end
@@ -245,6 +251,18 @@ class CreateCoffeeShopSearchConditionsService
     chair_types = ChairType.where(id: @chair_type_ids)
     return_message = "椅子の種類：#{chair_types.pluck(:name).join('or')}"
     @coffee_shop_search_conditions << return_message
+  end
+  
+  def create_outlet
+    @coffee_shop_search_conditions << "コンセント：#{CoffeeShop.outlets_i18n[@outlet]}"
+  end
+  
+  def create_wifi
+    @coffee_shop_search_conditions << "Wi-Fi：#{CoffeeShop.wifis_i18n[@wifi]}"
+  end
+  
+  def create_smoking
+    @coffee_shop_search_conditions << "喫煙・禁煙：#{CoffeeShop.smokings_i18n[@smoking]}"
   end
   
 end

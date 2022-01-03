@@ -81,6 +81,9 @@ class CoffeeShopsController < ApplicationController
       hash[:latte_price] = params[:latte_price]
       hash[:latte_price_search_type] = params[:latte_price_search_type]
       hash[:chair_type_ids] = params[:chair_type_ids]
+      hash[:outlet] = params[:outlet]
+      hash[:wifi] = params[:wifi]
+      hash[:smoking] = params[:smoking]
       hash
     end
 end
