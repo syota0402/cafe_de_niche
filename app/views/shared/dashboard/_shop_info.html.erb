@@ -137,6 +137,13 @@
   Wi-Fi：<%= f.select :wifi, CoffeeShop.wifis_i18n.invert, { include_blank: '選択してください'} %>
   <br>
   禁煙・喫煙：<%= f.select :smoking, CoffeeShop.smokings_i18n.invert, { include_blank: '選択してください'} %>
+  <br>
+  利用シーン<br>
+  <div class="check_box">
+    <%= f.collection_check_boxes(:use_scene_ids, UseScene.all, :id, :name) do |use_scene| %>
+      <%= use_scene.label { use_scene.check_box + use_scene.text } %>
+    <% end %>
+  </div>
   <hr>
   <% if metod.eql?('edit') %>
     <%= f.submit "更新" %>
