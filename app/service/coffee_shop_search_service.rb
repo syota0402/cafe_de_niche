@@ -43,6 +43,7 @@ class CoffeeShopSearchService
     @outlet = hash[:outlet]
     @wifi = hash[:wifi]
     @smoking = hash[:smoking]
+    @use_scene_ids = hash[:use_scene_ids]
   end
   
   def search
@@ -161,6 +162,9 @@ class CoffeeShopSearchService
     
     # 喫煙
     search_by_smoking if @smoking.present?
+    
+    # 利用シーン
+    search_by_use_scene if @use_scene_ids.present?
     
     @coffee_shops
   end
@@ -470,6 +474,12 @@ class CoffeeShopSearchService
   # 喫煙
   def search_by_smoking
     @coffee_shops = @coffee_shops.where(smoking: @smoking)
+  end
+  
+  # 利用シーン
+  def search_by_use_scene
+    coffee_shop_ids = CoffeeShopUseScene.where(use_scene_id: @use_scene_ids).pluck(:coffee_shop_id)
+    @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
   end
   
 end

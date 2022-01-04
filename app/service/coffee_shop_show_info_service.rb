@@ -40,6 +40,7 @@ class CoffeeShopShowInfoService
     create_outlet if @coffee_shop.outlet.present?
     create_wifi if @coffee_shop.wifi.present?
     create_smoking if @coffee_shop.smoking.present?
+    create_use_scene if @coffee_shop.use_scenes.present?
     
     @shop_info
   end
@@ -365,6 +366,15 @@ class CoffeeShopShowInfoService
     hash.class
     hash[:title] = '喫煙・禁煙'
     hash[:value] = @coffee_shop.smoking_i18n
+    @shop_info << hash
+  end
+  
+  # 利用シーン
+  def create_use_scene
+    hash = {}
+    hash.class
+    hash[:title] = '利用シーン'
+    hash[:value] = @coffee_shop.use_scenes.pluck(:name).join(',')
     @shop_info << hash
   end
   

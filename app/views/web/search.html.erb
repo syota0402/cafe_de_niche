@@ -344,6 +344,16 @@
       <% end %>
     </div>
     
+    <div class="search-container">
+      <div class="search-name">利用シーン</div>
+      <%= f.collection_check_boxes(:use_scene_ids, UseScene.all, :id, :name, {include_hidden: false}) do |use_scene| %>
+        <div class="search-checkbox">
+          <%= use_scene.check_box %>
+          <%= use_scene.label %>
+        </div>
+      <% end %>
+    </div>
+    
     <hr>
     <%= f.submit :search, :class => 'btn-search' %>
   <% end %> 
