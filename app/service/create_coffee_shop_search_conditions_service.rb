@@ -43,6 +43,7 @@ class CreateCoffeeShopSearchConditionsService
     @outlet = hash[:outlet]
     @wifi = hash[:wifi]
     @smoking = hash[:smoking]
+    @use_scene_ids = hash[:use_scene_ids]
   end
   
   def create
@@ -85,6 +86,7 @@ class CreateCoffeeShopSearchConditionsService
     create_outlet if @outlet.present?
     create_wifi if @wifi.present?
     create_smoking if @smoking.present?
+    create_use_scene if @use_scene_ids.present?
     
     @coffee_shop_search_conditions
   end
@@ -253,16 +255,26 @@ class CreateCoffeeShopSearchConditionsService
     @coffee_shop_search_conditions << return_message
   end
   
+  # コンセント
   def create_outlet
     @coffee_shop_search_conditions << "コンセント：#{CoffeeShop.outlets_i18n[@outlet]}"
   end
   
+  # WI-Fi
   def create_wifi
     @coffee_shop_search_conditions << "Wi-Fi：#{CoffeeShop.wifis_i18n[@wifi]}"
   end
   
+  # 喫煙・禁煙
   def create_smoking
     @coffee_shop_search_conditions << "喫煙・禁煙：#{CoffeeShop.smokings_i18n[@smoking]}"
+  end
+  
+  # 利用シーン
+  def create_use_scene
+    use_scenes = UseScene.where(id: @use_scene_ids)
+    return_message = "利用シーン：#{use_scenes.pluck(:name).join('or')}"
+    @coffee_shop_search_conditions << return_message
   end
   
 end

@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     resources :shop_sceneries, except: [:new]
     resources :payment_methods, except: [:new]
     resources :chair_types, except: [:new]
+    resources :use_scenes, except: [:new]
   end
   
   devise_for :users, :controllers => {

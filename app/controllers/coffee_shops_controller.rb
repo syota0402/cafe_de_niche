@@ -84,6 +84,7 @@ class CoffeeShopsController < ApplicationController
       hash[:outlet] = params[:outlet]
       hash[:wifi] = params[:wifi]
       hash[:smoking] = params[:smoking]
+      hash[:use_scene_ids] = params[:use_scene_ids]
       hash
     end
 end

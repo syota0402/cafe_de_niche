@@ -1,7 +1,7 @@
 class CoffeeShop < ApplicationRecord
 	has_many :coffee_shop_search_categories, dependent: :destroy
-	
 	has_many :search_categories, :through => :coffee_shop_search_categories
+	
 	has_many :reviews, dependent: :destroy
 	
 	has_many :coffee_shop_shop_atmospheres, dependent: :destroy
@@ -28,6 +28,9 @@ class CoffeeShop < ApplicationRecord
 	has_many :coffee_shop_chair_types, dependent: :destroy
 	has_many :chair_types, :through => :coffee_shop_chair_types
 	
+	has_many :coffee_shop_use_scenes, dependent: :destroy
+	has_many :use_scenes, :through => :coffee_shop_use_scenes
+	
 	accepts_nested_attributes_for :coffee_shop_search_categories, allow_destroy: true
 	accepts_nested_attributes_for :coffee_shop_shop_atmospheres, allow_destroy: true
 	accepts_nested_attributes_for :coffee_shop_coffee_beans, allow_destroy: true
@@ -37,6 +40,7 @@ class CoffeeShop < ApplicationRecord
 	accepts_nested_attributes_for :coffee_shop_shop_sceneries, allow_destroy: true
 	accepts_nested_attributes_for :coffee_shop_payment_methods, allow_destroy: true
 	accepts_nested_attributes_for :coffee_shop_chair_types, allow_destroy: true
+	accepts_nested_attributes_for :coffee_shop_use_scenes, allow_destroy: true
 	acts_as_likeable
 	has_many_attached :images
 	
