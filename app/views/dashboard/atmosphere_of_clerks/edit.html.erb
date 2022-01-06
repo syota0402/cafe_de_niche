@@ -1,0 +1,9 @@
+<h1>店員さんの雰囲気編集</h1>
+
+<%= form_with model: @atmosphere_of_clerk, url: dashboard_atmosphere_of_clerk_path(@atmosphere_of_clerk), local: true do |f| %>
+  <%= f.label :name, "店員さんの雰囲気" %>
+  <%= f.text_field :name %>
+  
+  <%= f.submit "更新" %>
+<% end %>
+<%= link_to "店員さんの雰囲気一覧に戻る", dashboard_atmosphere_of_clerks_path %>
