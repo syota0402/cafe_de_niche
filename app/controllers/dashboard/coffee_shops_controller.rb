@@ -70,7 +70,7 @@ class Dashboard::CoffeeShopsController < ApplicationController
   
   def coffee_shop_params
     params.require(:coffee_shop).permit(:name, :shop_url, :address, :shop_tell, :access, :business_start_hour, :business_end_hour, :instagram_url, :instagram_spot_url, :municipalitie_id, :slack_time_start, :slack_time_end, :age_group, :shop_seats, :pc_work, :time_limit, :terrace_seat, :can_reserved, :comic, :magazine, :latte_art, :newspaper, :morning_menu, :parking_place, :free_water, :with_pet, :free_pc, :shop_badget_upper, :shop_badget_lower, :coffee_price, :latte_price, :outlet, :wifi, :smoking, 
-    { :search_category_ids => [], :shop_atmosphere_ids => [], :coffee_bean_ids => [], :volume_in_shop_ids => [], :food_menu_ids => [], :shop_bgm_ids => [], :shop_scenery_ids => [], :payment_method_ids => [], :chair_type_ids => [], :use_scene_ids => [] }, images: [])
+    { :search_category_ids => [], :shop_atmosphere_ids => [], :coffee_bean_ids => [], :volume_in_shop_ids => [], :food_menu_ids => [], :shop_bgm_ids => [], :shop_scenery_ids => [], :payment_method_ids => [], :chair_type_ids => [], :use_scene_ids => [], :atmosphere_of_clerk_ids => [] }, images: [])
   end
   
   def check_user_authority
