@@ -9,9 +9,6 @@ class Dashboard::MunicipalitiesController < ApplicationController
     @municipality = Municipality.new
   end
   
-  def show
-  end
-  
   def create
     @municipality = Municipality.new(municipality_params)
     @municipality.save

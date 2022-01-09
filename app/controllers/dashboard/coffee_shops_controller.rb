@@ -15,9 +15,6 @@ class Dashboard::CoffeeShopsController < ApplicationController
     end
   end
   
-  def show
-  end
-
   def new
     @coffee_shop = CoffeeShop.new
     set_municipality_tags

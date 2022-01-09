@@ -8,9 +8,6 @@ class Dashboard::UseScenesController < ApplicationController
     @use_scene = UseScene.new
   end
   
-  def show
-  end
-  
   def create
     @use_scene = UseScene.new(use_scene_params)
     if @use_scene.save

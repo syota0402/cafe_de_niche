@@ -8,9 +8,6 @@ class Dashboard::VolumeInShopsController < ApplicationController
     @volume_in_shop = VolumeInShop.new
   end
   
-  def show
-  end
-  
   def create
     @volume_in_shop = VolumeInShop.new(volume_in_shop_params)
     if @volume_in_shop.save

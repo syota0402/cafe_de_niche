@@ -8,9 +8,6 @@ class Dashboard::ChairTypesController < ApplicationController
     @chair_type = ChairType.new
   end
   
-  def show
-  end
-  
   def create
     @chair_type = ChairType.new(chair_type_params)
     if @chair_type.save

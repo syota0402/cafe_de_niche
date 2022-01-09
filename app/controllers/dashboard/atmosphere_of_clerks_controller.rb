@@ -8,9 +8,6 @@ class Dashboard::AtmosphereOfClerksController < ApplicationController
     @atmosphere_of_clerk = AtmosphereOfClerk.new
   end
   
-  def show
-  end
-  
   def create
     @atmosphere_of_clerk = AtmosphereOfClerk.new(atmosphere_of_clerk_params)
     if @atmosphere_of_clerk.save
