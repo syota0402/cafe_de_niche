@@ -45,6 +45,7 @@ class CoffeeShopSearchService
     @smoking = hash[:smoking]
     @use_scene_ids = hash[:use_scene_ids]
     @atmosphere_of_clerk_ids = hash[:atmosphere_of_clerk_ids]
+    @size_of_desk_ids = hash[:size_of_desk_ids]
   end
   
   def search
@@ -169,6 +170,9 @@ class CoffeeShopSearchService
     
     # 店員さんの雰囲気
     search_by_atmosphere_of_clerk if @atmosphere_of_clerk_ids.present?
+    
+    # 机の広さ
+    search_by_size_of_desk if @size_of_desk_ids.present?
     
     @coffee_shops
   end
@@ -489,6 +493,12 @@ class CoffeeShopSearchService
   # 店員さんの雰囲気
   def search_by_atmosphere_of_clerk
     coffee_shop_ids = CoffeeShopAtmosphereOfClerk.where(atmosphere_of_clerk_id: @atmosphere_of_clerk_ids).pluck(:coffee_shop_id)
+    @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
+  end
+  
+  # 机の広さ
+  def search_by_size_of_desk
+    coffee_shop_ids = CoffeeShopSizeOfDesk.where(size_of_desk_id: @size_of_desk_ids).pluck(:coffee_shop_id)
     @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
   end
   

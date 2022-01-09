@@ -364,6 +364,16 @@
       <% end %>
     </div>
     
+    <div class="search-container">
+      <div class="search-name">机の広さ</div>
+      <%= f.collection_check_boxes(:size_of_desk_ids, SizeOfDesk.all, :id, :name, {include_hidden: false}) do |size_of_desk| %>
+        <div class="search-checkbox">
+          <%= size_of_desk.check_box %>
+          <%= size_of_desk.label %>
+        </div>
+      <% end %>
+    </div>
+    
     <hr>
     <%= f.submit :search, :class => 'btn-search' %>
   <% end %> 
