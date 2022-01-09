@@ -45,6 +45,7 @@ class CreateCoffeeShopSearchConditionsService
     @smoking = hash[:smoking]
     @use_scene_ids = hash[:use_scene_ids]
     @atmosphere_of_clerk_ids = hash[:atmosphere_of_clerk_ids]
+    @size_of_desk_ids = hash[:size_of_desk_ids]
   end
   
   def create
@@ -89,6 +90,7 @@ class CreateCoffeeShopSearchConditionsService
     create_smoking if @smoking.present?
     create_use_scene if @use_scene_ids.present?
     create_atmosphere_of_clerk if @atmosphere_of_clerk_ids.present?
+    create_size_of_desk if @size_of_desk_ids.present?
     
     @coffee_shop_search_conditions
   end
@@ -283,6 +285,13 @@ class CreateCoffeeShopSearchConditionsService
   def create_atmosphere_of_clerk
     atmosphere_of_clerks = AtmosphereOfClerk.where(id: @atmosphere_of_clerk_ids)
     return_message = "店員さんの雰囲気:#{atmosphere_of_clerks.pluck(:name).join('or')}"
+    @coffee_shop_search_conditions << return_message
+  end
+  
+  # 机の広さ
+  def create_size_of_desk
+    size_of_desks = SizeOfDesk.where(id: @size_of_desk_ids)
+    return_message = "机の広さ：#{size_of_desks.pluck(:name).join('or')}"
     @coffee_shop_search_conditions << return_message
   end
   

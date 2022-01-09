@@ -8,9 +8,6 @@ class Dashboard::PrefecturesController < ApplicationController
     @prefecture = Prefecture.new
   end
   
-  def show
-  end
-  
   def create
     @prefecture = Prefecture.new(prefecture_params)
     @prefecture.save

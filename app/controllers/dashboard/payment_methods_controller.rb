@@ -8,9 +8,6 @@ class Dashboard::PaymentMethodsController < ApplicationController
     @payment_method = PaymentMethod.new
   end
   
-  def show
-  end
-  
   def create
     @payment_method = PaymentMethod.new(payment_method_params)
     if @payment_method.save

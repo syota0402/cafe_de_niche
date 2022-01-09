@@ -8,9 +8,6 @@ class Dashboard::FoodMenusController < ApplicationController
     @food_menu = FoodMenu.new
   end
   
-  def show
-  end
-  
   def create
     @food_menu = FoodMenu.new(food_menu_params)
     if @food_menu.save

@@ -8,9 +8,6 @@ class Dashboard::ShopBgmsController < ApplicationController
     @shop_bgm = ShopBgm.new
   end
   
-  def show
-  end
-  
   def create
     @shop_bgm = ShopBgm.new(shop_bgm_params)
     if @shop_bgm.save

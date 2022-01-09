@@ -8,9 +8,6 @@ class Dashboard::SearchCategoriesController < ApplicationController
     @search_category = SearchCategory.new
   end
   
-  def show
-  end
-  
   def create
     @search_category = SearchCategory.new(search_category_params)
     if @search_category.save

@@ -1,0 +1,9 @@
+<h1>机の広さ編集</h1>
+
+<%= form_with model: @size_of_desk, url: dashboard_size_of_desk_path(@size_of_desk), local: true do |f| %>
+  <%= f.label :name, "机の広さ" %>
+  <%= f.text_field :name %>
+  
+  <%= f.submit "更新" %>
+<% end %>
+<%= link_to "机の広さ一覧に戻る", dashboard_size_of_desks_path %>

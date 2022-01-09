@@ -8,9 +8,6 @@ class Dashboard::CoffeeBeansController < ApplicationController
     @coffee_bean = CoffeeBean.new
   end
   
-  def show
-  end
-  
   def create
     @coffee_bean = CoffeeBean.new(coffee_bean_params)
     if @coffee_bean.save

@@ -8,9 +8,6 @@ class Dashboard::ShopAtmospheresController < ApplicationController
     @shop_atmosphere = ShopAtmosphere.new
   end
   
-  def show
-  end
-  
   def create
     @shop_atmosphere = ShopAtmosphere.new(shop_atmosphere_params)
     if @shop_atmosphere.save

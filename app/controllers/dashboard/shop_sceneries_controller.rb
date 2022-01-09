@@ -8,9 +8,6 @@ class Dashboard::ShopSceneriesController < ApplicationController
     @shop_scenery = ShopScenery.new
   end
   
-  def show
-  end
-  
   def create
     @shop_scenery = ShopScenery.new(shop_scenery_params)
     if @shop_scenery.save
