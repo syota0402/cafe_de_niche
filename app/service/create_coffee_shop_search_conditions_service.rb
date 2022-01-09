@@ -47,6 +47,12 @@ class CreateCoffeeShopSearchConditionsService
     @atmosphere_of_clerk_ids = hash[:atmosphere_of_clerk_ids]
     @size_of_desk_ids = hash[:size_of_desk_ids]
     @point_card_ids = hash[:point_card_ids]
+    @reservation = hash[:reservation]
+    @take_out = hash[:take_out]
+    @with_children = hash[:with_children]
+    @have_insta_account = hash[:have_insta_account]
+    @amusement = hash[:amusement]
+    @look_by_instagram = hash[:look_by_instagram]
   end
   
   def create
@@ -93,6 +99,12 @@ class CreateCoffeeShopSearchConditionsService
     create_atmosphere_of_clerk if @atmosphere_of_clerk_ids.present?
     create_size_of_desk if @size_of_desk_ids.present?
     create_point_card if @point_card_ids.present?
+    create_reservation if @reservation.present?
+    create_take_out if @take_out.present?
+    create_with_children if @with_children.present?
+    create_have_insta_account if @have_insta_account.present?
+    create_amusement if @amusement.present?
+    create_look_by_instagram if @look_by_instagram.present?
     
     @coffee_shop_search_conditions
   end
@@ -303,5 +315,35 @@ class CreateCoffeeShopSearchConditionsService
     return_message = "ポイントカード：#{point_cards.pluck(:name).join('or')}"
     @coffee_shop_search_conditions << return_message
   end 
+  
+  # 予約
+  def create_reservation
+    @coffee_shop_search_conditions << "予約：#{CoffeeShop.reservations_i18n[@reservation]}"
+  end
+  
+  # テイクアウト
+  def create_take_out
+    @coffee_shop_search_conditions << "テイクアウト：#{CoffeeShop.take_outs_i18n[@take_out]}"
+  end
+  
+  # お子様連れ
+  def create_with_children
+    @coffee_shop_search_conditions << "お子様連れ：#{CoffeeShop.with_children_i18n[@with_children]}"
+  end
+  
+  # Instagramアカウント
+  def create_have_insta_account
+    @coffee_shop_search_conditions << "Instagramアカウント：#{CoffeeShop.have_insta_accounts_i18n[@have_insta_account]}"
+  end
+  
+  # アミューズメント
+  def create_amusement
+    @coffee_shop_search_conditions << "アミューズメント：#{CoffeeShop.amusements_i18n[@amusement]}"
+  end
+  
+  # インスタ映え
+  def create_look_by_instagram
+    @coffee_shop_search_conditions << "インスタ映え：#{CoffeeShop.look_by_instagrams_i18n[@look_by_instagram]}"
+  end
   
 end

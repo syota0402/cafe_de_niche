@@ -86,9 +86,15 @@ class CoffeeShop < ApplicationRecord
 	validate :shop_badget_lower_and_shop_badget_upper_must_be_set
 	
 	# enum
-	enum outlet: { none_seat: 0, all_seat: 1, part_seat: 2 }
-	enum wifi: { available: 0, not_available: 1 }
-	enum smoking: { smoking: 0, no_smoking: 1, separate_smoke: 2}
+	enum outlet: { none_seat: 0, all_seat: 1, part_seat: 2 }, _prefix: true
+	enum wifi: { available: 0, not_available: 1 }, _prefix: true
+	enum smoking: { smoking: 0, no_smoking: 1, separate_smoke: 2}, _prefix: true
+	enum reservation: { reservation_possible: 0, reservations_not_accepted: 1}, _prefix: true
+	enum take_out: { available: 0, not_available: 1 }, _prefix: true
+	enum with_children: { available: 0, not_available: 1 }, _prefix: true
+	enum have_insta_account: { have_account: 0, not_have_account: 1 }, _prefix: true
+	enum amusement: { exist: 0, not_exist: 1 }, _prefix: true
+	enum look_by_instagram: { exterior: 0, interior: 1, food: 2 }, _prefix: true
 	
 	scope :search_for_name_and_tell, -> (keyword) {
 		where("name LIKE ?", "%#{keyword}%").

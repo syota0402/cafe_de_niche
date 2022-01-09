@@ -161,6 +161,17 @@
       <%= point_card.label { point_card.check_box + point_card.text } %>
     <% end %>
   </div>
+  予約：<%= f.select :reservation, CoffeeShop.reservations_i18n.invert, { include_blank: '選択してください'} %>
+  <br>
+  テイクアウト：<%= f.select :take_out, CoffeeShop.take_outs_i18n.invert, { include_blank: '選択してください'} %>
+  <br>
+  お子様連れ：<%= f.select :with_children, CoffeeShop.with_children_i18n.invert, { include_blank: '選択してください'} %>
+  <br>
+  Instagramのアカウント：<%= f.select :have_insta_account, CoffeeShop.have_insta_accounts_i18n.invert, { include_blank: '選択してください'} %>
+  <br>
+  アミューズメント：<%= f.select :amusement, CoffeeShop.amusements_i18n.invert, { include_blank: '選択してください'} %>
+  <br>
+  インスタ映え：<%= f.select :look_by_instagram, CoffeeShop.look_by_instagrams_i18n.invert, { include_blank: '選択してください'} %>
   <hr>
   <% if metod.eql?('edit') %>
     <%= f.submit "更新" %>

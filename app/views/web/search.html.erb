@@ -384,6 +384,66 @@
       <% end %>
     </div>
     
+    <div class="search-container">
+      <div class="search-name">予約</div>
+      <%= f.collection_radio_buttons(:reservation, CoffeeShop.reservations_i18n, :first, :last, {include_hidden: false}) do |reservation| %>
+        <div class="search-radio">
+          <%= reservation.radio_button %>
+          <%= reservation.label %>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="search-container">
+      <div class="search-name">テイクアウト</div>
+      <%= f.collection_radio_buttons(:take_out, CoffeeShop.take_outs_i18n, :first, :last, {include_hidden: false}) do |take_out| %>
+        <div class="search-radio">
+          <%= take_out.radio_button %>
+          <%= take_out.label %>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="search-container">
+      <div class="search-name">お子様連れ</div>
+      <%= f.collection_radio_buttons(:with_children, CoffeeShop.with_children_i18n, :first, :last, {include_hidden: false}) do |with_children| %>
+        <div class="search-radio">
+          <%= with_children.radio_button %>
+          <%= with_children.label %>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="search-container">
+      <div class="search-name">Instagramアカウント</div>
+      <%= f.collection_radio_buttons(:have_insta_account, CoffeeShop.have_insta_accounts_i18n, :first, :last, {include_hidden: false}) do |have_insta_account| %>
+        <div class="search-radio">
+          <%= have_insta_account.radio_button %>
+          <%= have_insta_account.label %>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="search-container">
+      <div class="search-name">アミューズメント</div>
+      <%= f.collection_radio_buttons(:amusement, CoffeeShop.amusements_i18n, :first, :last, {include_hidden: false}) do |amusement| %>
+        <div class="search-radio">
+          <%= amusement.radio_button %>
+          <%= amusement.label %>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="search-container">
+      <div class="search-name">インスタ映え</div>
+      <%= f.collection_radio_buttons(:look_by_instagram, CoffeeShop.look_by_instagrams_i18n, :first, :last, {include_hidden: false}) do |look_by_instagram| %>
+        <div class="search-radio">
+          <%= look_by_instagram.radio_button %>
+          <%= look_by_instagram.label %>
+        </div>
+      <% end %>
+    </div>
+    
     <hr>
     <%= f.submit :search, :class => 'btn-search' %>
   <% end %> 

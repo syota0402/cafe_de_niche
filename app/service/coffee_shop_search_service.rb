@@ -47,6 +47,12 @@ class CoffeeShopSearchService
     @atmosphere_of_clerk_ids = hash[:atmosphere_of_clerk_ids]
     @size_of_desk_ids = hash[:size_of_desk_ids]
     @point_card_ids = hash[:point_card_ids]
+    @reservation = hash[:reservation]
+    @take_out = hash[:take_out]
+    @with_children = hash[:with_children]
+    @have_insta_account = hash[:have_insta_account]
+    @amusement = hash[:amusement]
+    @look_by_instagram = hash[:look_by_instagram]
   end
   
   def search
@@ -175,6 +181,12 @@ class CoffeeShopSearchService
     # 机の広さ
     search_by_size_of_desk if @size_of_desk_ids.present?
     search_by_point_card if @point_card_ids.present?
+    search_by_reservation if @reservation.present?
+    search_by_take_out if @take_out.present?
+    search_by_with_children if @with_children.present?
+    search_by_have_insta_account if @have_insta_account.present?
+    search_by_amusement if @amusement.present?
+    search_by_look_by_instagram if @look_by_instagram.present?
     
     @coffee_shops
   end
@@ -509,4 +521,35 @@ class CoffeeShopSearchService
     coffee_shop_ids = CoffeeShopPointCard.where(point_card_id: @point_card_ids).pluck(:coffee_shop_id)
     @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
   end
+  
+  # 予約
+  def search_by_reservation
+    @coffee_shops = @coffee_shops.where(reservation: @reservation)
+  end
+  
+  # テイクアウト
+  def search_by_take_out
+    @coffee_shops = @coffee_shops.where(take_out: @take_out)
+  end
+  
+  # お子様連れ
+  def search_by_with_children
+    @coffee_shops = @coffee_shops.where(with_children: @with_children)
+  end
+  
+  # インスタのアカウント
+  def search_by_have_insta_account
+    @coffee_shops = @coffee_shops.where(have_insta_account: @have_insta_account)
+  end
+  
+  # アミューズメント
+  def search_by_amusement
+    @coffee_shops = @coffee_shops.where(amusement: @amusement)
+  end
+  
+  # インスタ映え
+  def search_by_look_by_instagram
+    @coffee_shops = @coffee_shops.where(look_by_instagram: @look_by_instagram)  
+  end
+  
 end
