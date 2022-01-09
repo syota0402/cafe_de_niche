@@ -43,6 +43,7 @@ class CoffeeShopShowInfoService
     create_use_scene if @coffee_shop.use_scenes.present?
     create_atmosphere_of_clerk if @coffee_shop.atmosphere_of_clerks.present?
     create_size_of_desk if @coffee_shop.size_of_desks.present?
+    create_point_card if @coffee_shop.point_cards.present?
     
     @shop_info
   end
@@ -395,6 +396,15 @@ class CoffeeShopShowInfoService
     hash.class
     hash[:title] = '机の広さ'
     hash[:value] = @coffee_shop.size_of_desks.pluck(:name).join(',')
+    @shop_info << hash
+  end
+  
+  # ポイントカード
+  def create_point_card
+    hash = {}
+    hash.class
+    hash[:title] = 'ポイントカード'
+    hash[:value] = @coffee_shop.point_cards.pluck(:name).join(',')
     @shop_info << hash
   end
   

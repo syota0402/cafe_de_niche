@@ -155,6 +155,12 @@
       <%= size_of_desk.label { size_of_desk.check_box + size_of_desk.text } %>
     <% end %>
   </div>
+  ポイントカード<br>
+  <div class="check_box">
+    <%= f.collection_check_boxes(:point_card_ids, PointCard.all, :id, :name) do |point_card| %>
+      <%= point_card.label { point_card.check_box + point_card.text } %>
+    <% end %>
+  </div>
   <hr>
   <% if metod.eql?('edit') %>
     <%= f.submit "更新" %>

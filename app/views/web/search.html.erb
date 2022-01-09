@@ -374,6 +374,16 @@
       <% end %>
     </div>
     
+    <div class="search-container">
+      <div class="search-name">ポイントカード</div>
+      <%= f.collection_check_boxes(:point_card_ids, PointCard.all, :id, :name, {include_hidden: false}) do |point_card| %>
+        <div class="search-checkbox">
+          <%= point_card.check_box %>
+          <%= point_card.label %>
+        </div>
+      <% end %>
+    </div>
+    
     <hr>
     <%= f.submit :search, :class => 'btn-search' %>
   <% end %> 

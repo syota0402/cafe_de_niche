@@ -87,6 +87,7 @@ class CoffeeShopsController < ApplicationController
       hash[:use_scene_ids] = params[:use_scene_ids]
       hash[:atmosphere_of_clerk_ids] = params[:atmosphere_of_clerk_ids]
       hash[:size_of_desk_ids] = params[:size_of_desk_ids]
+      hash[:point_card_ids] = params[:point_card_ids]
       hash
     end
 end

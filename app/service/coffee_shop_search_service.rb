@@ -46,6 +46,7 @@ class CoffeeShopSearchService
     @use_scene_ids = hash[:use_scene_ids]
     @atmosphere_of_clerk_ids = hash[:atmosphere_of_clerk_ids]
     @size_of_desk_ids = hash[:size_of_desk_ids]
+    @point_card_ids = hash[:point_card_ids]
   end
   
   def search
@@ -173,6 +174,7 @@ class CoffeeShopSearchService
     
     # 机の広さ
     search_by_size_of_desk if @size_of_desk_ids.present?
+    search_by_point_card if @point_card_ids.present?
     
     @coffee_shops
   end
@@ -502,4 +504,9 @@ class CoffeeShopSearchService
     @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
   end
   
+  # ポイントカード
+  def search_by_point_card
+    coffee_shop_ids = CoffeeShopPointCard.where(point_card_id: @point_card_ids).pluck(:coffee_shop_id)
+    @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
+  end
 end
