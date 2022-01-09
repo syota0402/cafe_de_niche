@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_04_095255) do
+ActiveRecord::Schema.define(version: 2022_01_06_100510) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -39,6 +39,12 @@ ActiveRecord::Schema.define(version: 2022_01_04_095255) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "atmosphere_of_clerks", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "chair_types", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -47,6 +53,13 @@ ActiveRecord::Schema.define(version: 2022_01_04_095255) do
 
   create_table "coffee_beans", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "coffee_shop_atmosphere_of_clerks", force: :cascade do |t|
+    t.integer "coffee_shop_id"
+    t.integer "atmosphere_of_clerk_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -41,6 +41,7 @@ class CoffeeShopShowInfoService
     create_wifi if @coffee_shop.wifi.present?
     create_smoking if @coffee_shop.smoking.present?
     create_use_scene if @coffee_shop.use_scenes.present?
+    create_atmosphere_of_clerk if @coffee_shop.atmosphere_of_clerks.present?
     
     @shop_info
   end
@@ -375,6 +376,15 @@ class CoffeeShopShowInfoService
     hash.class
     hash[:title] = '利用シーン'
     hash[:value] = @coffee_shop.use_scenes.pluck(:name).join(',')
+    @shop_info << hash
+  end
+  
+  # 店員さんの雰囲気
+  def create_atmosphere_of_clerk
+    hash = {}
+    hash.class
+    hash[:title] = '店員さんの雰囲気'
+    hash[:value] = @coffee_shop.atmosphere_of_clerks.pluck(:name).join(',')
     @shop_info << hash
   end
   

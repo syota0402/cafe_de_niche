@@ -354,6 +354,16 @@
       <% end %>
     </div>
     
+    <div class="search-container">
+      <div class="search-name">店員さんの雰囲気</div>
+      <%= f.collection_check_boxes(:atmosphere_of_clerk_ids, AtmosphereOfClerk.all, :id, :name, {include_hidden: false}) do |atmosphere_of_clerk| %>
+        <div class="search-checkbox">
+          <%= atmosphere_of_clerk.check_box %>
+          <%= atmosphere_of_clerk.label %>
+        </div>
+      <% end %>
+    </div>
+    
     <hr>
     <%= f.submit :search, :class => 'btn-search' %>
   <% end %> 

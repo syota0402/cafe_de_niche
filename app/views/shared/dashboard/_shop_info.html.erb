@@ -41,7 +41,7 @@
       <img id="image-preview",size="50x50">
     </div>
   </div>
-  検索カテゴリ<br>
+  こだわり<br>
   <div class="check_box">
     <%= f.collection_check_boxes(:search_category_ids, SearchCategory.all, :id, :name) do |search_category| %>
       <%= search_category.label { search_category.check_box + search_category.text } %>
@@ -142,6 +142,12 @@
   <div class="check_box">
     <%= f.collection_check_boxes(:use_scene_ids, UseScene.all, :id, :name) do |use_scene| %>
       <%= use_scene.label { use_scene.check_box + use_scene.text } %>
+    <% end %>
+  </div>
+  店員さんの雰囲気<br>
+  <div class="check_box">
+    <%= f.collection_check_boxes(:atmosphere_of_clerk_ids, AtmosphereOfClerk.all, :id, :name) do |atmosphere_of_clerk| %>
+      <%= atmosphere_of_clerk.label { atmosphere_of_clerk.check_box + atmosphere_of_clerk.text } %>
     <% end %>
   </div>
   <hr>

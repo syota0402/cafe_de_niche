@@ -44,6 +44,7 @@ class CreateCoffeeShopSearchConditionsService
     @wifi = hash[:wifi]
     @smoking = hash[:smoking]
     @use_scene_ids = hash[:use_scene_ids]
+    @atmosphere_of_clerk_ids = hash[:atmosphere_of_clerk_ids]
   end
   
   def create
@@ -87,6 +88,7 @@ class CreateCoffeeShopSearchConditionsService
     create_wifi if @wifi.present?
     create_smoking if @smoking.present?
     create_use_scene if @use_scene_ids.present?
+    create_atmosphere_of_clerk if @atmosphere_of_clerk_ids.present?
     
     @coffee_shop_search_conditions
   end
@@ -274,6 +276,13 @@ class CreateCoffeeShopSearchConditionsService
   def create_use_scene
     use_scenes = UseScene.where(id: @use_scene_ids)
     return_message = "利用シーン：#{use_scenes.pluck(:name).join('or')}"
+    @coffee_shop_search_conditions << return_message
+  end
+  
+  # 店員さんの雰囲気
+  def create_atmosphere_of_clerk
+    atmosphere_of_clerks = AtmosphereOfClerk.where(id: @atmosphere_of_clerk_ids)
+    return_message = "店員さんの雰囲気:#{atmosphere_of_clerks.pluck(:name).join('or')}"
     @coffee_shop_search_conditions << return_message
   end
   
