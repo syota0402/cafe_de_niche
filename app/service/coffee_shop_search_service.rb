@@ -1,5 +1,6 @@
 class CoffeeShopSearchService
-  def initialize(hash)
+  def initialize(hash,current_user)
+    @current_user = current_user
     @name = hash[:name]
     @shop_tell = hash[:shop_tell]
     @search_category_ids = hash[:search_category_ids]
@@ -53,6 +54,7 @@ class CoffeeShopSearchService
     @have_insta_account = hash[:have_insta_account]
     @amusement = hash[:amusement]
     @look_by_instagram = hash[:look_by_instagram]
+    @bookmark = hash[:bookmark]
   end
   
   def search
@@ -187,6 +189,7 @@ class CoffeeShopSearchService
     search_by_have_insta_account if @have_insta_account.present?
     search_by_amusement if @amusement.present?
     search_by_look_by_instagram if @look_by_instagram.present?
+    search_by_bookmark if @bookmark.present?
     
     @coffee_shops
   end
@@ -539,7 +542,16 @@ class CoffeeShopSearchService
   
   # インスタのアカウント
   def search_by_have_insta_account
-    @coffee_shops = @coffee_shops.where(have_insta_account: @have_insta_account)
+    coffee_shop_ids = []
+    @coffee_shops.each do |coffee_shop|
+      next if coffee_shop.instagram_url.nil?
+      if @have_insta_account.eql?("have_account") && coffee_shop.instagram_url.present?
+        coffee_shop_ids << coffee_shop.id
+      elsif @have_insta_account.eql?("not_have_account") && coffee_shop.instagram_url.empty?
+        coffee_shop_ids << coffee_shop.id
+      end
+    end
+    @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
   end
   
   # アミューズメント
@@ -550,6 +562,19 @@ class CoffeeShopSearchService
   # インスタ映え
   def search_by_look_by_instagram
     @coffee_shops = @coffee_shops.where(look_by_instagram: @look_by_instagram)  
+  end
+  
+  # お気に入り済みか
+  def search_by_bookmark
+    coffee_shop_ids = []
+    @coffee_shops.each do |coffee_shop|
+      if @bookmark.eql?("register") && @current_user.likes?(coffee_shop) == true
+        coffee_shop_ids << coffee_shop.id
+      elsif @bookmark.eql?("unregistered") && @current_user.likes?(coffee_shop) == false
+        coffee_shop_ids << coffee_shop.id
+      end
+    end
+    @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
   end
   
 end

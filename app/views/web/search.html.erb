@@ -444,6 +444,16 @@
       <% end %>
     </div>
     
+    <div class="search-container">
+      <div class="search-name">お気に入り登録</div>
+      <div class="search-radio">
+        <%= f.radio_button :bookmark, :register %>
+        <%= f.label :bookmark, "登録済み", {value: :register, style: "display: inline-block;"} %>
+        <%= f.radio_button :bookmark, :unregistered %>
+        <%= f.label :bookmark, "未登録", {value: :unregistered, style: "display: inline-block;"} %>
+      </div>
+    </div>
+    
     <hr>
     <%= f.submit :search, :class => 'btn-search' %>
   <% end %> 

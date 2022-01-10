@@ -47,7 +47,6 @@ class CoffeeShopShowInfoService
     create_reservation if @coffee_shop.reservation.present?
     create_take_out if @coffee_shop.take_out.present?
     create_with_children if @coffee_shop.with_children.present?
-    create_have_insta_account if @coffee_shop.have_insta_account.present?
     create_amusement if @coffee_shop.amusement.present?
     create_look_by_instagram if @coffee_shop.look_by_instagram.present?
     
@@ -438,15 +437,6 @@ class CoffeeShopShowInfoService
     hash.class
     hash[:title] = 'お子様連れ'
     hash[:value] = @coffee_shop.with_children_i18n
-    @shop_info << hash
-  end
-  
-  # インスタアカウント
-  def create_have_insta_account
-    hash = {}
-    hash.class
-    hash[:title] = 'Instagramアカウント'
-    hash[:value] = @coffee_shop.have_insta_account_i18n
     @shop_info << hash
   end
   

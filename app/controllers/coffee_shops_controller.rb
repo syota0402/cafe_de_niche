@@ -19,7 +19,7 @@ class CoffeeShopsController < ApplicationController
     @create_coffeee_shop_search_conditions_service = CreateCoffeeShopSearchConditionsService.new(set_search_hash)
     @coffee_shop_search_conditions = @create_coffeee_shop_search_conditions_service.create
     # 検索条件をもとに店舗を検索する
-    @coffee_shop_search_service = CoffeeShopSearchService.new(set_search_hash)
+    @coffee_shop_search_service = CoffeeShopSearchService.new(set_search_hash,current_user)
     coffee_shops = @coffee_shop_search_service.search
     @coffee_shops = coffee_shops.page(params[:page]).per(PER)
     @coffee_shops_count = coffee_shops.count
@@ -94,6 +94,7 @@ class CoffeeShopsController < ApplicationController
       hash[:have_insta_account] = params[:have_insta_account]
       hash[:amusement] = params[:amusement]
       hash[:look_by_instagram] = params[:look_by_instagram]
+      hash[:bookmark] = params[:bookmark]
       hash
     end
 end
