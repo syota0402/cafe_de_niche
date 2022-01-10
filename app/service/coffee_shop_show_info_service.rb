@@ -43,6 +43,12 @@ class CoffeeShopShowInfoService
     create_use_scene if @coffee_shop.use_scenes.present?
     create_atmosphere_of_clerk if @coffee_shop.atmosphere_of_clerks.present?
     create_size_of_desk if @coffee_shop.size_of_desks.present?
+    create_point_card if @coffee_shop.point_cards.present?
+    create_reservation if @coffee_shop.reservation.present?
+    create_take_out if @coffee_shop.take_out.present?
+    create_with_children if @coffee_shop.with_children.present?
+    create_amusement if @coffee_shop.amusement.present?
+    create_look_by_instagram if @coffee_shop.look_by_instagram.present?
     
     @shop_info
   end
@@ -395,6 +401,60 @@ class CoffeeShopShowInfoService
     hash.class
     hash[:title] = '机の広さ'
     hash[:value] = @coffee_shop.size_of_desks.pluck(:name).join(',')
+    @shop_info << hash
+  end
+  
+  # ポイントカード
+  def create_point_card
+    hash = {}
+    hash.class
+    hash[:title] = 'ポイントカード'
+    hash[:value] = @coffee_shop.point_cards.pluck(:name).join(',')
+    @shop_info << hash
+  end
+  
+  # 予約
+  def create_reservation
+    hash = {}
+    hash.class
+    hash[:title] = '予約'
+    hash[:value] = @coffee_shop.reservation_i18n
+    @shop_info << hash
+  end
+  
+  # テイクアウト
+  def create_take_out
+    hash = {}
+    hash.class
+    hash[:title] = 'テイクアウト'
+    hash[:value] = @coffee_shop.take_out_i18n
+    @shop_info << hash
+  end
+  
+  # お子様連れ
+  def create_with_children
+    hash = {}
+    hash.class
+    hash[:title] = 'お子様連れ'
+    hash[:value] = @coffee_shop.with_children_i18n
+    @shop_info << hash
+  end
+  
+  # アミューズメント
+  def create_amusement
+    hash = {}
+    hash.class
+    hash[:title] = 'アミューズメント'
+    hash[:value] = @coffee_shop.amusement_i18n
+    @shop_info << hash
+  end
+  
+  # インスタ映え
+  def create_look_by_instagram
+    hash = {}
+    hash.class
+    hash[:title] = 'インスタ映え'
+    hash[:value] = @coffee_shop.look_by_instagram_i18n
     @shop_info << hash
   end
   

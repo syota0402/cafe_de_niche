@@ -12,3 +12,22 @@ ja:
         smoking: '喫煙可能'
         no_smoking: '禁煙'
         separate_smoke: '分煙'
+      reservation:
+        reservation_possible: '予約可'
+        reservations_not_accepted: '予約不可'
+      take_out:
+        available: 'あり'
+        not_available: 'なし'
+      with_children:
+        available: '子供可'
+        not_available: '子供不可'
+      have_insta_account:
+        have_account: 'あり'
+        not_have_account: 'なし'
+      amusement:
+        exist: 'あり'
+        not_exist: 'なし'
+      look_by_instagram:
+        exterior: '外観'
+        interior: '内装'
+        food: '食べ物'

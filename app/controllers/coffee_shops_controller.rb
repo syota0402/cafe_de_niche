@@ -19,7 +19,7 @@ class CoffeeShopsController < ApplicationController
     @create_coffeee_shop_search_conditions_service = CreateCoffeeShopSearchConditionsService.new(set_search_hash)
     @coffee_shop_search_conditions = @create_coffeee_shop_search_conditions_service.create
     # 検索条件をもとに店舗を検索する
-    @coffee_shop_search_service = CoffeeShopSearchService.new(set_search_hash)
+    @coffee_shop_search_service = CoffeeShopSearchService.new(set_search_hash,current_user)
     coffee_shops = @coffee_shop_search_service.search
     @coffee_shops = coffee_shops.page(params[:page]).per(PER)
     @coffee_shops_count = coffee_shops.count
@@ -87,6 +87,14 @@ class CoffeeShopsController < ApplicationController
       hash[:use_scene_ids] = params[:use_scene_ids]
       hash[:atmosphere_of_clerk_ids] = params[:atmosphere_of_clerk_ids]
       hash[:size_of_desk_ids] = params[:size_of_desk_ids]
+      hash[:point_card_ids] = params[:point_card_ids]
+      hash[:reservation] = params[:reservation]
+      hash[:take_out] = params[:take_out]
+      hash[:with_children] = params[:with_children]
+      hash[:have_insta_account] = params[:have_insta_account]
+      hash[:amusement] = params[:amusement]
+      hash[:look_by_instagram] = params[:look_by_instagram]
+      hash[:bookmark] = params[:bookmark]
       hash
     end
 end

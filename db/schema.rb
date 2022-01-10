@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_09_043253) do
+ActiveRecord::Schema.define(version: 2022_01_09_084321) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -88,6 +88,13 @@ ActiveRecord::Schema.define(version: 2022_01_09_043253) do
   create_table "coffee_shop_payment_methods", force: :cascade do |t|
     t.integer "coffee_shop_id"
     t.integer "payment_method_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "coffee_shop_point_cards", force: :cascade do |t|
+    t.integer "coffee_shop_id"
+    t.integer "point_card_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -185,6 +192,12 @@ ActiveRecord::Schema.define(version: 2022_01_09_043253) do
     t.integer "outlet"
     t.integer "wifi"
     t.integer "smoking"
+    t.integer "reservation"
+    t.integer "take_out"
+    t.integer "with_children"
+    t.integer "have_insta_account"
+    t.integer "amusement"
+    t.integer "look_by_instagram"
   end
 
   create_table "day_of_weeks", force: :cascade do |t|
@@ -243,6 +256,12 @@ ActiveRecord::Schema.define(version: 2022_01_09_043253) do
   end
 
   create_table "pc_works", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "point_cards", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

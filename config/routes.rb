@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     resources :use_scenes, except: [:new]
     resources :atmosphere_of_clerks, except: [:new]
     resources :size_of_desks, except: [:new]
+    resources :point_cards, except: [:new]
   end
   
   devise_for :users, :controllers => {
