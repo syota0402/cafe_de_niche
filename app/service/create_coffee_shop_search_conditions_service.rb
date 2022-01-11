@@ -54,6 +54,7 @@ class CreateCoffeeShopSearchConditionsService
     @amusement = hash[:amusement]
     @look_by_instagram = hash[:look_by_instagram]
     @bookmark = hash[:bookmark]
+    @bookmark_by_follower = hash[:bookmark_by_follower]
   end
   
   def create
@@ -107,6 +108,7 @@ class CreateCoffeeShopSearchConditionsService
     create_amusement if @amusement.present?
     create_look_by_instagram if @look_by_instagram.present?
     create_bookmark if @bookmark.present?
+    create_bookmark_by_follower if @bookmark_by_follower.present?
     
     @coffee_shop_search_conditions
   end
@@ -352,6 +354,12 @@ class CreateCoffeeShopSearchConditionsService
   def create_bookmark
     @coffee_shop_search_conditions << "お気に入り登録：登録済み" if @bookmark.eql?("register") 
     @coffee_shop_search_conditions << "おきにりお登録：未登録" if @bookmark.eql?("unregistered")
+  end
+  
+  # フォローユーザーのお気に入りか
+  def create_bookmark_by_follower
+    @coffee_shop_search_conditions << "フォローユーザーのお気に入り：登録済み" if @bookmark_by_follower.eql?("register") 
+    @coffee_shop_search_conditions << "フォローユーザーのお気に入り：未登録" if @bookmark_by_follower.eql?("unregistered")
   end
   
 end

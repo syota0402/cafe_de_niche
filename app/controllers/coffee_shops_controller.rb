@@ -95,6 +95,7 @@ class CoffeeShopsController < ApplicationController
       hash[:amusement] = params[:amusement]
       hash[:look_by_instagram] = params[:look_by_instagram]
       hash[:bookmark] = params[:bookmark]
+      hash[:bookmark_by_follower] = params[:bookmark_by_follower]
       hash
     end
 end
