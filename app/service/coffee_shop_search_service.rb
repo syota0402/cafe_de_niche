@@ -56,6 +56,7 @@ class CoffeeShopSearchService
     @look_by_instagram = hash[:look_by_instagram]
     @bookmark = hash[:bookmark]
     @bookmark_by_follower = hash[:bookmark_by_follower]
+    @best_shop_by_follower = hash[:best_shop_by_follower]
   end
   
   def search
@@ -192,6 +193,7 @@ class CoffeeShopSearchService
     search_by_look_by_instagram if @look_by_instagram.present?
     search_by_bookmark if @bookmark.present?
     search_by_bookmark_by_follower if @bookmark_by_follower.present?
+    search_by_best_shop_by_follower if @best_shop_by_follower.present?
     
     @coffee_shops
   end
@@ -587,6 +589,21 @@ class CoffeeShopSearchService
       if @bookmark_by_follower.eql?("register") && follower.likes?(coffee_shop) == true
         coffee_shop_ids << coffee_shop.id
       elsif @bookmark_by_follower.eql?("unregistered") && follower.likes?(coffee_shop) == false
+        coffee_shop_ids << coffee_shop.id
+      end
+      end
+    end
+    @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
+  end
+  
+  # フォローユーザーのbest shopか
+  def search_by_best_shop_by_follower
+    coffee_shop_ids = []
+    @coffee_shops.each do |coffee_shop|
+      @current_user.followees(User).each do |follower|
+      if @best_shop_by_follower.eql?("register") && follower.best_shop_id == coffee_shop.id
+        coffee_shop_ids << coffee_shop.id
+      elsif @best_shop_by_follower.eql?("unregistered") && follower.best_shop_id != coffee_shop.id
         coffee_shop_ids << coffee_shop.id
       end
       end
