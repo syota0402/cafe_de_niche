@@ -23,8 +23,10 @@
           <%= link_to coffee_shop.name, coffee_shop_path(coffee_shop) %>
         </h3>
         <div class="list-favorite">
-          <% if current_user.likes?(coffee_shop) %>
-            <%= image_tag "/images/heart.png", size: "30x30" %>
+          <% if user_signed_in? %>
+            <% if current_user.likes?(coffee_shop) %>
+              <%= image_tag "/images/heart.png", size: "30x30" %>
+            <% end %>
           <% end %>
         </div>
         <br>
