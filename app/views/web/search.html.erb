@@ -444,35 +444,41 @@
       <% end %>
     </div>
     
-    <div class="search-container">
-      <div class="search-name">お気に入り登録</div>
-      <div class="search-radio">
-        <%= f.radio_button :bookmark, :register %>
-        <%= f.label :bookmark, "登録済み", {value: :register, style: "display: inline-block;"} %>
-        <%= f.radio_button :bookmark, :unregistered %>
-        <%= f.label :bookmark, "未登録", {value: :unregistered, style: "display: inline-block;"} %>
+    <% if user_signed_in? %>
+      <div class="search-container">
+        <div class="search-name">お気に入り登録</div>
+        <div class="search-radio">
+          <%= f.radio_button :bookmark, :register %>
+          <%= f.label :bookmark, "登録済み", {value: :register, style: "display: inline-block;"} %>
+          <%= f.radio_button :bookmark, :unregistered %>
+          <%= f.label :bookmark, "未登録", {value: :unregistered, style: "display: inline-block;"} %>
+        </div>
       </div>
-    </div>
+    <% end %>
     
-    <div class="search-container">
-      <div class="search-name">フォローユーザーのお気に入り</div>
-      <div class="search-radio">
-        <%= f.radio_button :bookmark_by_follower, :register %>
-        <%= f.label :bookmark_by_follower, "登録済み", {value: :register, style: "display: inline-block;"} %>
-        <%= f.radio_button :bookmark_by_follower, :unregistered %>
-        <%= f.label :bookmark_by_follower, "未登録", {value: :unregistered, style: "display: inline-block;"} %>
+    <% if user_signed_in? %>
+      <div class="search-container">
+        <div class="search-name">フォローユーザーのお気に入り</div>
+        <div class="search-radio">
+          <%= f.radio_button :bookmark_by_follower, :register %>
+          <%= f.label :bookmark_by_follower, "登録済み", {value: :register, style: "display: inline-block;"} %>
+          <%= f.radio_button :bookmark_by_follower, :unregistered %>
+          <%= f.label :bookmark_by_follower, "未登録", {value: :unregistered, style: "display: inline-block;"} %>
+        </div>
       </div>
-    </div>
+    <% end %>
     
-    <div class="search-container">
-      <div class="search-name">フォローユーザーのbest shop</div>
-      <div class="search-radio">
-        <%= f.radio_button :best_shop_by_follower, :register %>
-        <%= f.label :best_shop_by_follower, "登録済み", {value: :register, style: "display: inline-block;"} %>
-        <%= f.radio_button :best_shop_by_follower, :unregistered %>
-        <%= f.label :best_shop_by_follower, "未登録", {value: :unregistered, style: "display: inline-block;"} %>
+    <% if user_signed_in? %>
+      <div class="search-container">
+        <div class="search-name">フォローユーザーのbest shop</div>
+        <div class="search-radio">
+          <%= f.radio_button :best_shop_by_follower, :register %>
+          <%= f.label :best_shop_by_follower, "登録済み", {value: :register, style: "display: inline-block;"} %>
+          <%= f.radio_button :best_shop_by_follower, :unregistered %>
+          <%= f.label :best_shop_by_follower, "未登録", {value: :unregistered, style: "display: inline-block;"} %>
+        </div>
       </div>
-    </div>
+    <% end %>
     
     <hr>
     <%= f.submit :search, :class => 'btn-search' %>
