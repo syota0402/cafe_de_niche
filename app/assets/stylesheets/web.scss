@@ -1,5 +1,14 @@
+// ----------------------------
+// サインインしているかで変わる部分
+
 .cover-container {
   font-size: 20px;
+}
+
+@media screen and (max-width: 1000px) {
+  .cover-container {
+    font-size: 2em;
+  }
 }
 
 // サインイン前のヘッダー
@@ -15,16 +24,49 @@
 
 .title-text {
   margin-top: 12px;
-  font-size: 30px;
+  font-size: 2em;
   text-align: center;
   font-weight: bold;
 }
 
 .title-sub-text {
   margin-top: 12px;
-  font-size: 15px;
+  font-size: 1.5em;
   text-align: center;
 }
+
+// sign-upボタン
+.title-sign-up-link {
+  color: #fff;
+  background-color: #CC935B;
+  position: absolute;
+  text-align: center;
+  padding: 5px 20px;
+  border: none;
+  left: 52%;
+}
+.title-sign-up-link:hover {
+  color: #fff;
+  background: #EFCD9A;
+}
+
+// sign-inボタン
+.title-sign-in-link {
+  color: #fff;
+  background-color: #CC935B;
+  position: absolute;
+  text-align: center;
+  padding: 5px 20px;
+  border: none;
+  right: 52%;
+}
+.title-sign-in-link:hover {
+  color: #fff;
+  background: #EFCD9A;
+}
+
+
+// ----------------------------
 
 .ranking_by_area {
   #ranking {
@@ -105,6 +147,8 @@
   }
 }
 
+// ------------------------------
+// best shop
 .best-shop {
   float: right;
   position: relative;
@@ -140,6 +184,22 @@
 .best-shop-image {
   position: absolute;
 }
+
+@media screen and (max-width: 1000px) {
+    .best-shop {
+    float: right;
+    position: relative;
+    margin: 1em 0;
+    padding: 0.5em 1em;
+    border: solid 3px #CC935B;
+    border-radius: 8px;
+    height: 8rem;
+    width: 16rem;
+    background-color: #CC935B;
+  }
+}
+
+// ------------------------------
 
 .list-shop {
   margin: 0;

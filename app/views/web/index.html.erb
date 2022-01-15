@@ -1,129 +1,133 @@
-<div class="container">
-  <div class="cover-container">
-    <!-- user_signed_in? はユーザがログインしているか調べるdeviseのHelperメソッド -->
-    <!--サインインしている-->
-    <% if user_signed_in? %>
-      <% if @my_best_shop.present? %>
-        <%= link_to(coffee_shop_path(@my_best_shop.id)) do %>
-          <div class="best-shop">
-            <div class="best-shop-title">my best shop</div>
-            <div class="best-shop-name"><%= @my_best_shop.name %></div>
-            <div class="best-shop-image"><%= render partial: 'shared/show_image_first', locals: { target: @my_best_shop, image_size: "100x100" } %></div>
-          </div>
-        <% end %>
+<div class="cover-container">
+  <!-- user_signed_in? はユーザがログインしているか調べるdeviseのHelperメソッド -->
+  <!--サインインしている-->
+  <% if user_signed_in? %>
+    <% if @my_best_shop.present? %>
+      <%= link_to(coffee_shop_path(@my_best_shop.id)) do %>
+        <div class="best-shop">
+          <div class="best-shop-title">my best shop</div>
+          <div class="best-shop-name"><%= @my_best_shop.name %></div>
+          <div class="best-shop-image"><%= render partial: 'shared/show_image_first', locals: { target: @my_best_shop, image_size: "100x100" } %></div>
+        </div>
       <% end %>
-      <%= link_to(favorite_users_path) do %>
-        <span class="badge badge-warning">Favorite shops</span>
-      <% end %>
-      <% current_user.likees(CoffeeShop).last(5).each do |favorite_coffee_shop| %>
-        <%= link_to favorite_coffee_shop.name, coffee_shop_path(favorite_coffee_shop), class: "link-text" %>
-      <% end %>
-      <br>
-      <%= link_to(following_users_path) do %>
-        <span class="badge badge-warning">Follow users</span>
-      <% end %>
-      <% current_user.followees(User).last(5).each do |follow_user| %>
-        <%= link_to follow_user.name, user_path(follow_user.id), class: "link-text" %>
-      <% end %>
-    <!--サインインしていない-->
-    <% else %>
-      <div class="cover-container-befoer-sign-in">
-        <p class="title-text">あなただけの検索条件で、<br>
-        あなたにぴったりのカフェがつかる</p>
-        <p class="title-sub-text" >
-          検索条件は50件、お気に入り登録も可能<br>
-          現在も作成中なのでご了承の程お願いします。<br>
-          どんどん更新されていくのも楽しんでもらえたら幸いです。
-        </p>
-      </div> 
     <% end %>
-  </div>
-
-  
-  <hr>
-  
-  <h2>Search</h2>
-  <div class="search-by-area">
-    <%= form_with url: search_coffee_shops_path, method: :get, local: true do |f| %>
-      <div class="search-text">
-        shop name
-        <br>
-        <div class="cp_iptxt">
-          <%= f.text_field :name, :class => 'cp_iptxt' %>
-        </div>
-      </div>
-      <div class="search-text">
-        tell
-        <br>
-        <div class="cp_ipnum">
-          <%= f.number_field :shop_tell, :class => 'cp_ipnum' %>
-        </div>
-      </div>
-      <div class="search-btn">
-        <%= f.submit :search, :class => 'btn-search' %>
-      </div>
-    <% end %> 
-  </div>
-  
-  <br>
-  
-  <div class="search_by_area2">
-    様々な検索条件から自分にぴったりなカフェを探す
+    <%= link_to(favorite_users_path) do %>
+      <span class="badge badge-warning">Favorite shops</span>
+    <% end %>
+    <% current_user.likees(CoffeeShop).last(5).each do |favorite_coffee_shop| %>
+      <%= link_to favorite_coffee_shop.name, coffee_shop_path(favorite_coffee_shop), class: "link-text" %>
+    <% end %>
     <br>
-    <% Prefecture.all.each do |prefecture| %>
-      <%= link_to search_path(prefecture_id: prefecture.id) , class: "btn btn-prefecture" do %>
-        <%= prefecture.name %>
-      <% end %>
+    <%= link_to(following_users_path) do %>
+      <span class="badge badge-warning">Follow users</span>
     <% end %>
-  </div>
-  
-  <hr>
-  
-  <div class="ranking_by_area">
-    <h2>Ranking</h2>
-    <div id="ranking">
-      <div id= "rank_favorite">
-        <h3>favorite</h3>
-        <% @rank_favorite_coffee_shops.each do |coffee_shop| %>
-          <%= link_to(coffee_shop_path(coffee_shop)) do %>
-            <%= render partial: 'shared/show_image_first', locals: { target: coffee_shop, image_size: "50x50" } %>
-            <button type="button" class="btn btn-outline-warning">
-              <%= coffee_shop.name %><span class="badge badge-light"><%= coffee_shop.likers_count %>人</span>
-            </button>
-          <% end %>
-          <br>
-        <%  end %>
-      </div>
-      
-      <br>
-    
-      <div id="rank_follow">
-        <h3>follow</h3>
-        <% @rank_follow_users.each do |user| %>
-          <%=link_to(user_path(user)) do %>
-            <%= render partial: 'shared/show_image', locals: { target: user, image_size: "50x50"} %>
-            <button type="button" class="btn btn-outline-warning">
-              <%= user.name %><span class="badge badge-light"><%= user.followers_count %>人</span>
-            </button>
-          <% end %>
-          <br>
-        <% end %>
-      </div>
-    
-      <br>
-      
-      <div id="rank_review">
-        <h3>review</h3>
-        <% @rank_review_users.each do |user| %>
-          <%=link_to(user_path(user)) do %>
-            <%= render partial: 'shared/show_image', locals: { target: user, image_size: "50x50" } %>
-            <button type="button" class="btn btn-outline-warning">
-              <%= user.name %><span class="badge badge-light"><%= Review.where(user_id: user.id).count %>件</span>
-            </button>
-          <% end %>
-          <br>
-        <% end %>
-      </div>
+    <% current_user.followees(User).last(5).each do |follow_user| %>
+      <%= link_to follow_user.name, user_path(follow_user.id), class: "link-text" %>
+    <% end %>
+  <!--サインインしていない-->
+  <% else %>
+    <div class="cover-container-befoer-sign-in">
+      <p class="title-text">あなただけの検索条件で、<br>
+      あなたにぴったりのカフェがつかる</p>
+      <p class="title-sub-text" >
+        検索条件は50件、お気に入り登録も可能<br>
+        現在も作成中なのでご了承の程お願いします。<br>
+        どんどん更新されていくのも楽しんでもらえたら幸いです。
+      </p>
+      <%= link_to(new_user_registration_path) do %>
+        <button class="title-sign-up-link" >Sign up</button>
+      <% end %>
+      <%= link_to(new_user_session_path) do %>
+        <button class="title-sign-in-link">Sign in</button>
+      <% end %>
     </div> 
-  </div>
+  <% end %>
+</div>
+
+
+<hr>
+
+<h2>Search</h2>
+<div class="search-by-area">
+  <%= form_with url: search_coffee_shops_path, method: :get, local: true do |f| %>
+    <div class="search-text">
+      shop name
+      <br>
+      <div class="cp_iptxt">
+        <%= f.text_field :name, :class => 'cp_iptxt' %>
+      </div>
+    </div>
+    <div class="search-text">
+      tell
+      <br>
+      <div class="cp_ipnum">
+        <%= f.number_field :shop_tell, :class => 'cp_ipnum' %>
+      </div>
+    </div>
+    <div class="search-btn">
+      <%= f.submit :search, :class => 'btn-search' %>
+    </div>
+  <% end %> 
+</div>
+
+<br>
+
+<div class="search_by_area2">
+  様々な検索条件から自分にぴったりなカフェを探す
+  <br>
+  <% Prefecture.all.each do |prefecture| %>
+    <%= link_to search_path(prefecture_id: prefecture.id) , class: "btn btn-prefecture" do %>
+      <%= prefecture.name %>
+    <% end %>
+  <% end %>
+</div>
+
+<hr>
+
+<div class="ranking_by_area">
+  <h2>Ranking</h2>
+  <div id="ranking">
+    <div id= "rank_favorite">
+      <h3>favorite</h3>
+      <% @rank_favorite_coffee_shops.each do |coffee_shop| %>
+        <%= link_to(coffee_shop_path(coffee_shop)) do %>
+          <%= render partial: 'shared/show_image_first', locals: { target: coffee_shop, image_size: "50x50" } %>
+          <button type="button" class="btn btn-outline-warning">
+            <%= coffee_shop.name %><span class="badge badge-light"><%= coffee_shop.likers_count %>人</span>
+          </button>
+        <% end %>
+        <br>
+      <%  end %>
+    </div>
+    
+    <br>
+  
+    <div id="rank_follow">
+      <h3>follow</h3>
+      <% @rank_follow_users.each do |user| %>
+        <%=link_to(user_path(user)) do %>
+          <%= render partial: 'shared/show_image', locals: { target: user, image_size: "50x50"} %>
+          <button type="button" class="btn btn-outline-warning">
+            <%= user.name %><span class="badge badge-light"><%= user.followers_count %>人</span>
+          </button>
+        <% end %>
+        <br>
+      <% end %>
+    </div>
+  
+    <br>
+    
+    <div id="rank_review">
+      <h3>review</h3>
+      <% @rank_review_users.each do |user| %>
+        <%=link_to(user_path(user)) do %>
+          <%= render partial: 'shared/show_image', locals: { target: user, image_size: "50x50" } %>
+          <button type="button" class="btn btn-outline-warning">
+            <%= user.name %><span class="badge badge-light"><%= Review.where(user_id: user.id).count %>件</span>
+          </button>
+        <% end %>
+        <br>
+      <% end %>
+    </div>
+  </div> 
 </div>
