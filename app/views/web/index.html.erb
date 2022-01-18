@@ -11,28 +11,50 @@
         </div>
       <% end %>
     <% end %>
-    <%= link_to(favorite_users_path) do %>
-      <span class="badge badge-warning">Favorite shops</span>
-    <% end %>
-    <% current_user.likees(CoffeeShop).last(5).each do |favorite_coffee_shop| %>
-      <%= link_to favorite_coffee_shop.name, coffee_shop_path(favorite_coffee_shop), class: "link-text" %>
-    <% end %>
+    
+    <div class="user-favorite-container">
+      <%= link_to(favorite_users_path) do %>
+        <span class="user-favorite-title">お気に入りのカフェ</span>
+      <% end %>
+      <% current_user.likees(CoffeeShop).last(5).each do |favorite_coffee_shop| %>
+        <div class="liker-user">
+          <%= link_to(coffee_shop_path(favorite_coffee_shop)) do %>
+		  			<%= render partial: 'shared/show_image_first', locals: { target: favorite_coffee_shop, image_size: "50x50" } %>
+		  			<p>
+		  				<%= favorite_coffee_shop.name %>
+		  			</p>
+					<% end %>
+        </div>
+      <% end %>
+    </div>
+    
     <br>
-    <%= link_to(following_users_path) do %>
-      <span class="badge badge-warning">Follow users</span>
-    <% end %>
-    <% current_user.followees(User).last(5).each do |follow_user| %>
-      <%= link_to follow_user.name, user_path(follow_user.id), class: "link-text" %>
-    <% end %>
+    
+    <div class="user-favorite-container">
+      <%= link_to(following_users_path) do %>
+        <span class="user-favorite-title">フォローしているユーザー</span>
+      <% end %>
+      <% current_user.followees(User).last(5).each do |follow_user| %>
+        <div class="liker-user">
+          <%= link_to(user_path(follow_user.id)) do %>
+		  			<%= render partial: 'shared/show_image', locals: { target: follow_user, image_size: "50x50" } %>
+		  			<p>
+		  				<%= follow_user.name %>
+		  			</p>
+					<% end %>
+        </div>
+      <% end %>
+    </div>
+    
   <!--サインインしていない-->
   <% else %>
     <div class="cover-container-befoer-sign-in">
       <p class="title-text">あなただけの検索条件で、<br>
-      あなたにぴったりのカフェがつかる</p>
+      あなたにぴったりのカフェが見つかる</p>
       <p class="title-sub-text" >
-        検索条件は50件、お気に入り登録も可能<br>
-        現在も作成中なのでご了承の程お願いします。<br>
-        どんどん更新されていくのも楽しんでもらえたら幸いです。
+        検索条件は50件、サインインするとお気に入り登録も可能<br>
+        隠れ家的なお店や、集中して作業したいなど自分好みのお店を検索可能<br>
+        サイトをどんどん更新されていくのも楽しんでもらえたら幸いです。
       </p>
       <%= link_to(new_user_registration_path) do %>
         <button class="title-sign-up-link" >Sign up</button>
@@ -84,11 +106,11 @@
 
 <hr>
 
+<h2>Ranking</h2>
 <div class="ranking_by_area">
-  <h2>Ranking</h2>
   <div id="ranking">
     <div id= "rank_favorite">
-      <h3>favorite</h3>
+      <h3>お気に入り数</h3>
       <% @rank_favorite_coffee_shops.each do |coffee_shop| %>
         <%= link_to(coffee_shop_path(coffee_shop)) do %>
           <%= render partial: 'shared/show_image_first', locals: { target: coffee_shop, image_size: "50x50" } %>
@@ -103,7 +125,7 @@
     <br>
   
     <div id="rank_follow">
-      <h3>follow</h3>
+      <h3>フォロー数</h3>
       <% @rank_follow_users.each do |user| %>
         <%=link_to(user_path(user)) do %>
           <%= render partial: 'shared/show_image', locals: { target: user, image_size: "50x50"} %>
@@ -118,7 +140,7 @@
     <br>
     
     <div id="rank_review">
-      <h3>review</h3>
+      <h3>レビュー数</h3>
       <% @rank_review_users.each do |user| %>
         <%=link_to(user_path(user)) do %>
           <%= render partial: 'shared/show_image', locals: { target: user, image_size: "50x50" } %>
