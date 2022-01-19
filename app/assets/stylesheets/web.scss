@@ -1,5 +1,8 @@
+// ----------------------------
+// サインインしているかで変わる部分
+
 .cover-container {
-  font-size: 20px;
+  
 }
 
 // サインイン前のヘッダー
@@ -15,96 +18,86 @@
 
 .title-text {
   margin-top: 12px;
-  font-size: 30px;
+  font-size: 2.5em;
   text-align: center;
   font-weight: bold;
 }
 
 .title-sub-text {
   margin-top: 12px;
-  font-size: 15px;
+  font-size: 2em;
   text-align: center;
 }
 
-.ranking_by_area {
-  #ranking {
-    display: flex;
-  }
-  #rank_favorite {
-    flex-grow: 1;
-    padding: 15px;
-  }
-  #rank_follow {
-    flex-grow: 1;
-    border-left: 1px solid #929292;
-    padding: 15px;
-  }
-  #rank_review {
-    flex-grow: 1;
-    border-left: 1px solid #929292;
-    padding: 15px;
-  }
+// sign-upボタン
+.title-sign-up-link {
+  color: #fff;
+  background-color: #CC935B;
+  position: absolute;
+  text-align: center;
+  padding: 0.5em 1em;
+  font-size: 2em;
+  border: none;
+  left: 52%;
+}
+.title-sign-up-link:hover {
+  color: #fff;
+  background: #EFCD9A;
 }
 
-.btn-prefecture {
-  border: 1px solid #ccc;
-  background: #f1e767;
-  background: -webkit-gradient(linear, left top, left bottom, from(#fdfbfb), to(#ebedee));
-  background: -webkit-linear-gradient(top, #fdfbfb 0%, #ebedee 100%);
-  background: linear-gradient(to bottom, #fdfbfb 0%, #ebedee 100%);
-  -webkit-box-shadow: inset 1px 1px 1px #fff;
-  box-shadow: inset 1px 1px 1px #fff;
+// sign-inボタン
+.title-sign-in-link {
+  color: #fff;
+  background-color: #CC935B;
+  position: absolute;
+  text-align: center;
+  padding: 0.5em 1em;
+  font-size: 2em;
+  border: none;
+  right: 52%;
+}
+.title-sign-in-link:hover {
+  color: #fff;
+  background: #EFCD9A;
+}
+// ----------------------------
+
+// ------------------------------
+// userのお気に入りとか
+.user-favorite-container {
+  position: relative;
+  margin: 1em;
+  padding: 10px;
+  width: 95%;
+  border: 2px solid #CC935B;
+  color: #555555;
+  background-color: #f8fafc;
+  box-shadow: 2px 2px 1px #c7c7c7;
+  border-radius: 8px;
+  height: 100px;
+  display: inline-flex;
+  font-size: 1.5em;
 }
 
-.btn-prefecture:hover {
-  background: -webkit-gradient(linear, left bottom, left top, from(#fdfbfb), to(#ebedee));
-  background: -webkit-linear-gradient(bottom, #fdfbfb 0%, #ebedee 100%);
-  background: linear-gradient(to top, #fdfbfb 0%, #ebedee 100%);
-}
-
-.btn-border {
-  border: 2px solid #000;
-  border-radius: 0;
-  background: #fff;
-  -webkit-box-shadow: 4px 4px 0 #000;
-  box-shadow: 4px 4px 0 #000;
-}
-
-.btn-border:hover {
-  -webkit-box-shadow: -4px -4px 0 #000;
-  box-shadow: -4px -4px 0 #000;
-}
-
-.link-text {
-  text-decoration: none;
-  color: #343a40;
-  border: solid 2px #67c5ff;
-  border-radius: 3px;
-  transition: .4s;
-  font-size: 18px;
-}
-
-.link-text:hover {
-  background: #67c5ff;
-  color: white;
-}
-
-.search-by-area {
-  display: flex;
-
-  .search-text {
-    padding: 0.5em;
-    float: left;
-  }
-  
-  .search-btn {
-    padding: 0.5em;
-    float: left;
-    position: relative;
-    top: 22px;
+@media screen and (min-width: 1000px) {
+  .user-favorite-container {
+    width: 32em;
   }
 }
 
+.user-favorite-title {
+  position: absolute;
+  left: 20px;
+  top: -27px;
+  padding: 0 0.5em;
+  font-weight: bold;
+  color: #CC935B;
+  background-color: #f8fafc;
+}
+// ------------------------------
+
+// ------------------------------
+// best shop
 .best-shop {
   float: right;
   position: relative;
@@ -141,57 +134,72 @@
   position: absolute;
 }
 
-.list-shop {
-  margin: 0;
+@media screen and (max-width: 1000px) {
+    .best-shop {
+    float: initial;
+    position: relative;
+    margin: 1em;
+    padding: 0.5em 1em;
+    border: solid 3px #CC935B;
+    border-radius: 8px;
+    height: 8rem;
+    width: 16rem;
+  }
+}
+// ------------------------------
+
+// .btn-border {
+//   border: 2px solid #000;
+//   border-radius: 0;
+//   background: #fff;
+//   -webkit-box-shadow: 4px 4px 0 #000;
+//   box-shadow: 4px 4px 0 #000;
+// }
+
+// .btn-border:hover {
+//   -webkit-box-shadow: -4px -4px 0 #000;
+//   box-shadow: -4px -4px 0 #000;
+// }
+
+// .link-text {
+//   text-decoration: none;
+//   color: #343a40;
+//   border: solid 2px #67c5ff;
+//   border-radius: 3px;
+//   transition: .4s;
+//   font-size: 18px;
+// }
+
+// .link-text:hover {
+//   background: #67c5ff;
+//   color: white;
+// }
+
+// ------------------------------
+// 検索エリア
+.search-by-area {
   display: flex;
-  position: relative;
-  height: 130px;
-
-}
-
-  .list-image {
-    position: absolute;
+  font-size: 1.5em;
+  
+  .search-text {
     padding: 0.5em;
+    float: left;
   }
   
-  .list-name {
-    position: absolute;
-    font-size: 36px;
-    left: 120px;
+  .search-btn {
+    padding: 0.5em;
+    float: left;
+    position: relative;
+    top: 33px;
   }
-  
-  .list-favorite {
-    position: absolute;
-    right: 0px;
-  }
-  
-  .list-popular {
-    position: absolute;
-    left: 120px;
-    top: 40px;
-    font-size: 20px;
-  }
-  
-  .list-info {
-    position: absolute;
-    left: 120px;
-    top: 70px;
-  }
-  
-.search-conditions{
-  position: relative;
 }
-.search-conditions p {
-  padding: 0.1em 1em;
-  margin: 0.5em;
-  color: #5d627b;
-  background: white;
-  border-left: solid 5px #5d627b;
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  display: inline-block;
+
+.btn-search {
+  color: #ffffff;
+  background-color: #CC935B;
+  border: none;
+  padding: 0.2em 1em;
+  border-radius: 0.5em;
 }
 
 .cp_iptxt {
@@ -230,11 +238,132 @@
   margin: 0;
   -moz-appearance:textfield;
 }
+// ------------------------------
 
-.btn-search {
-  color: #ffffff;
-  background-color: #CC935B;
-  border: none;
-  height: 2em;
-  border-radius: 0.5em;
+// ----------------------------
+// 検索（都道府県）
+.search_by_area2 {
+  font-size: 1.5em;
+  padding: 1em;
 }
+
+.btn-prefecture {
+  border: 1px solid #ccc;
+  background: -webkit-gradient(linear, left top, left bottom, from(#fdfbfb), to(#ebedee));
+  background: -webkit-linear-gradient(top, #fdfbfb 0%, #ebedee 100%);
+  background: linear-gradient(to bottom, #fdfbfb 0%, #ebedee 100%);
+  -webkit-box-shadow: inset 1px 1px 1px #fff;
+  box-shadow: inset 1px 1px 1px #fff;
+  font-size: 1.5em;
+}
+
+.btn-prefecture:hover {
+  background: -webkit-gradient(linear, left bottom, left top, from(#fdfbfb), to(#ebedee));
+  background: -webkit-linear-gradient(bottom, #fdfbfb 0%, #ebedee 100%);
+  background: linear-gradient(to top, #fdfbfb 0%, #ebedee 100%);
+}
+// ----------------------------
+
+// ----------------------------
+// ランキングエリア
+.ranking_by_area {
+  padding: 1em;
+  
+  #ranking {
+  }
+  
+  #rank_favorite {
+    padding: 15px;
+  }
+  
+  #rank_follow {
+    border-top: 1px solid #929292;
+    padding: 15px;
+  }
+  
+  #rank_review {
+    border-top: 1px solid #929292;
+    padding: 15px;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .ranking_by_area {
+    #ranking {
+      display: flex;
+    }
+    #rank_favorite {
+      flex-grow: 1;
+      padding: 15px;
+    }
+    #rank_follow {
+      flex-grow: 1;
+      border-left: 1px solid #929292;
+      border-top: 0px solid #929292;
+      padding: 15px;
+    }
+    #rank_review {
+      flex-grow: 1;
+      border-left: 1px solid #929292;
+      border-top: 0px solid #929292;
+      padding: 15px;
+    }
+  }
+}
+// ----------------------------
+
+
+// ----------------------------
+// 検索結果ページのCSS //
+.list-shop {
+  margin: 0;
+  display: flex;
+  position: relative;
+  height: 130px;
+}
+
+.list-image {
+  position: absolute;
+  padding: 0.5em;
+}
+
+.list-name {
+  position: absolute;
+  font-size: 36px;
+  left: 120px;
+}
+
+.list-favorite {
+  position: absolute;
+  right: 0px;
+}
+
+.list-popular {
+  position: absolute;
+  left: 120px;
+  top: 40px;
+  font-size: 20px;
+}
+
+.list-info {
+  position: absolute;
+  left: 120px;
+  top: 70px;
+}
+  
+.search-conditions{
+  position: relative;
+}
+.search-conditions p {
+  padding: 0.1em 1em;
+  margin: 0.5em;
+  color: #5d627b;
+  background: white;
+  border-left: solid 5px #5d627b;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  display: inline-block;
+}
+// ----------------------------
