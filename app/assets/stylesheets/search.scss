@@ -6,17 +6,24 @@
   border: solid 3px #CC935B;
   border-radius: 8px;
   display: inline-block;
+  font-size: 1.2rem;
+}
+
+@media screen and (max-width: 1000px) {
+  .search-container {
+  font-size: 1.5rem;
+}
 }
 
 .search-name {
   display: inline-block;
   padding: 0 9px;
   line-height: 1;
-  font-size: 19px;
   background: #FFF;
   color: revert;
   font-weight: bold;
   margin: 0.5em;
+  color: black;
 }
 
 // ラジオボタン

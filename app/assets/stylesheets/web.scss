@@ -74,14 +74,13 @@
   background-color: #f8fafc;
   box-shadow: 2px 2px 1px #c7c7c7;
   border-radius: 8px;
-  height: 100px;
   display: inline-flex;
-  font-size: 1.5em;
+  font-size: 1.5rem;
 }
 
 @media screen and (min-width: 1000px) {
   .user-favorite-container {
-    width: 32em;
+    width: 69%;
   }
 }
 
@@ -128,6 +127,7 @@
   left: 8rem;
   top: 2rem;
   color: black;
+  overflow-wrap: anywhere;
 }
 
 .best-shop-image {
