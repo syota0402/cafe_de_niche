@@ -319,41 +319,60 @@
   margin: 0;
   display: flex;
   position: relative;
-  height: 130px;
+  height: 10rem;
+  // margin: 0.5rem;
+  // border: 8px inset rgba(204, 147, 91, 0.82);
+  font-size: 1rem;
 }
 
 .list-image {
-  position: absolute;
   padding: 0.5em;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .list-name {
   position: absolute;
-  font-size: 36px;
+  font-size: 2rem;
   left: 120px;
 }
 
 .list-favorite {
   position: absolute;
-  right: 0px;
+  right: 1rem;
+}
+
+.list-access {
+  position: absolute;
+  left: 120px;
+  top: 2rem;
+  font-size: 1rem;
+}
+
+.list-review-score {
+  position: absolute;
+  left: 120px; 
+  top: 3rem;
+  font-size: 1.5rem;
 }
 
 .list-popular {
   position: absolute;
   left: 120px;
-  top: 40px;
-  font-size: 20px;
+  top: 5rem;
+  font-size: 1rem;
 }
 
 .list-info {
   position: absolute;
   left: 120px;
-  top: 70px;
+  top: 7rem;
 }
   
 .search-conditions{
   position: relative;
 }
+
 .search-conditions p {
   padding: 0.1em 1em;
   margin: 0.5em;
@@ -365,5 +384,10 @@
   width: -moz-fit-content;
   width: fit-content;
   display: inline-block;
+  font-size: 1rem;
+}
+
+.list-paginate {
+  margin-left: 120px;
 }
 // ----------------------------

@@ -1,5 +1,5 @@
 class CoffeeShopsController < ApplicationController
-  PER = 15
+  PER = 10
   
   def show
     @coffee_shop = CoffeeShop.find(params[:id])
