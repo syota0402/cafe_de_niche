@@ -1,4 +1,4 @@
-<div class="container">
+<!--<div class="container">-->
   <div class="search-conditions">
     <% @coffee_shop_search_conditions.each do |coffee_shop_search_condition| %>
       <p>
@@ -7,7 +7,7 @@
     <% end %>
   </div>
   <hr>
-  全<%= @coffee_shops_count %>件<br>
+  <h3>全<%= @coffee_shops_count %>件</h3>
   <% if @coffee_shops.blank? %>
     該当店舗なし
     <br>
@@ -29,22 +29,25 @@
             <% end %>
           <% end %>
         </div>
-        <br>
-        <div class="list-popular">
-          <%= image_tag "/images/review_image.png", size: "30x30" %><%= coffee_shop.reviews.count %>件
-          <%= ReviewAverageScoreService.new(coffee_shop.reviews).calculation %>点
-          <%= image_tag "/images/good_hand.png", size: "30x30" %><%= coffee_shop.likers(User).count %>人
+        <div class="list-access">
+          <%= coffee_shop.access %>
         </div>
-        <br>
+        <div class="list-review-score">
+          レビュー平均：<%= ReviewAverageScoreService.new(coffee_shop.reviews).calculation %>点
+        </div>
+        <div class="list-popular">
+          <%= image_tag "/images/review_image.png", size: "20x20" %>レビュー数：<%= coffee_shop.reviews.count %>件　
+          <%= image_tag "/images/good_hand.png", size: "20x20" %>お気に入り数：<%= coffee_shop.likers(User).count %>人
+        </div>
         <div class="list-info">
-          <%= coffee_shop.address %>
-          <% if coffee_shop.business_start_hour.present? and coffee_shop.business_end_hour.present? %>
+          住所：<%= coffee_shop.address %>
+          <% if coffee_shop.business_start_hour.present? and coffee_shop.business_end_hour.present? %>　
             営業時間：<%= coffee_shop.business_start_hour.hour %>時 ~ <%= coffee_shop.business_end_hour.hour %>時
           <% end %>
         </div>
       </div>
       <hr>
     <% end %>
-    <%= paginate @coffee_shops %>
+    <div class="list-paginate"><%= paginate @coffee_shops %></div>
   <% end %>
-</div>
+<!--</div>-->

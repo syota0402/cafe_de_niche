@@ -133,12 +133,14 @@
 
 .liker-user {
   display: inline-block;
-  width: 18%;
+  width: 20%;
   text-align: center;
+  overflow-wrap: break-word;
 }
 
 .liker-user p {
   color: black;
+  overflow-wrap: break-word;
 }
 
 .review {

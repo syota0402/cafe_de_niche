@@ -1,486 +1,587 @@
-<div class="container">
+<!--<div class="container">-->
   <%= form_with url: search_coffee_shops_path, method: :get, local: true do |f| %>
     
     <div class="search-container">
-      <div class="search-name">エリア</div>
-      <% @municipalities.each do |municipality| %>
+      <a class="search-name" href="#fold-municipality" data-toggle="collapse">エリア</a>
+      <div id="fold-municipality" class="collapse">
+        <% @municipalities.each do |municipality| %>
+          <div class="search-radio">
+            <%= f.radio_button :municipality_id, municipality.id %>
+            <%= f.label :municipality_id, municipality.name, {value: municipality.id, stylr: "display: inline-block;"} %>
+          </div>
+        <% end %> 
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-shop-name" data-toggle="collapse">店舗名</a>
+      <div id="fold-shop-name" class="collapse">
+        <%= f.text_field :name, :class => 'search-text' %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-search_category" data-toggle="collapse">こだわり</a>
+      <div id="fold-search_category" class="collapse">
+        <%= f.collection_check_boxes(:search_category_ids, SearchCategory.all, :id, :name, {include_hidden: false} ) do |search_category| %>
+          <div class="search-checkbox">
+            <%= search_category.check_box %>
+            <%= search_category.label %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-shop-atmosphere" data-toggle="collapse">お店の雰囲気</a>
+      <div id="fold-shop-atmosphere" class="collapse">
+        <%= f.collection_check_boxes(:shop_atmosphere_ids, ShopAtmosphere.all, :id, :name, {include_hidden: false}) do |shop_atmosphere| %>
+          <div class="search-checkbox">
+            <%= shop_atmosphere.check_box %>
+            <%= shop_atmosphere.label %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-review-score" data-toggle="collapse">レビュー点数</a>
+      <div id="fold-review-score" class="collapse">
+        <%= f.number_field :review_score, :class => 'search-number' %>
         <div class="search-radio">
-          <%= f.radio_button :municipality_id, municipality.id %>
-          <%= f.label :municipality_id, municipality.name, {value: municipality.id, stylr: "display: inline-block;"} %>
+          <%= f.radio_button :review_score_search_type, :more_than, {:checked => true} %>
+          <%= f.label :review_score_search_type, "以上", {value: :more_than, stylr: "display: inline-block;"} %>
+          <%= f.radio_button :review_score_search_type, :less_than %>
+          <%= f.label :review_score_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>
         </div>
-      <% end %> 
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">店舗名</div>
-      <%= f.text_field :name, :class => 'search-text' %>
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">こだわり</div>
-      <%= f.collection_check_boxes(:search_category_ids, SearchCategory.all, :id, :name, {include_hidden: false} ) do |search_category| %>
-        <div class="search-checkbox">
-          <%= search_category.check_box %>
-          <%= search_category.label %>
-        </div>
-      <% end %>
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">お店の雰囲気</div>
-      <%= f.collection_check_boxes(:shop_atmosphere_ids, ShopAtmosphere.all, :id, :name, {include_hidden: false}) do |shop_atmosphere| %>
-        <div class="search-checkbox">
-          <%= shop_atmosphere.check_box %>
-          <%= shop_atmosphere.label %>
-        </div>
-      <% end %>
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">レビュー点数</div>
-      <%= f.number_field :review_score, :class => 'search-number' %>
-      <div class="search-radio">
-        <%= f.radio_button :review_score_search_type, :more_than, {:checked => true} %>
-        <%= f.label :review_score_search_type, "以上", {value: :more_than, stylr: "display: inline-block;"} %>
-        <%= f.radio_button :review_score_search_type, :less_than %>
-        <%= f.label :review_score_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>
       </div>
     </div>
     
     <div class="search-container">
-      <div class="search-name">レビュー数</div>
-      <%= f.number_field :review_count, :class => 'search-number' %>
-      <div class="search-radio">
-        <%= f.radio_button :review_count_search_type, :more_than, {:checked => true} %>
-        <%= f.label :review_count_search_type, "以上", {value: :more_than, style: "display: inline-block;"} %>
-        <%= f.radio_button :review_count_search_type, :less_than %>
-        <%= f.label :review_count_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>
+      <a class="search-name" href="#fold-review-count" data-toggle="collapse">レビュー数</a>
+      <div id="fold-review-count" class="collapse">
+        <%= f.number_field :review_count, :class => 'search-number' %>
+        <div class="search-radio">
+          <%= f.radio_button :review_count_search_type, :more_than, {:checked => true} %>
+          <%= f.label :review_count_search_type, "以上", {value: :more_than, style: "display: inline-block;"} %>
+          <%= f.radio_button :review_count_search_type, :less_than %>
+          <%= f.label :review_count_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>
+        </div>
+        <!--※0で検索すると未レビューのお店のみ表示します。-->
       </div>
-      <!--※0で検索すると未レビューのお店のみ表示します。-->
     </div>
     
     <div class="search-container">
-      <div class="search-name">お気に入り数</div>
-      <%= f.number_field :favorite_count, :class => 'search-number' %>
-      <div class="search-radio">
-        <%= f.radio_button :favorite_count_search_type, :more_than, {:checked => true} %>
-        <%= f.label :favorite_count_search_type, "以上", {value: :more_than, style: "display: inline-block;"} %>
-        <%= f.radio_button :favorite_count_search_type, :less_than %>
-        <%= f.label :favorite_count_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>
+      <a class="search-name" href="#fold-favorite-count" data-toggle="collapse">お気に入り数</a>
+      <div id="fold-favorite-count" class="collapse">
+        <%= f.number_field :favorite_count, :class => 'search-number' %>
+        <div class="search-radio">
+          <%= f.radio_button :favorite_count_search_type, :more_than, {:checked => true} %>
+          <%= f.label :favorite_count_search_type, "以上", {value: :more_than, style: "display: inline-block;"} %>
+          <%= f.radio_button :favorite_count_search_type, :less_than %>
+          <%= f.label :favorite_count_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>
+        </div>
       </div>
     </div>
     <!--※0で検索するとお気に入り数0のお店のみ表示します。-->
     
     <div class="search-container">
-      <div class="search-name">営業時間</div>
-      <%= f.time_field :business_hour, :class => 'search-time' %>
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">すいている時間</div>
-      <%= f.time_field :slack_time, :class => 'search-time' %>
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">年齢層</div>
-      <%= f.select :age_group, AgeGroup.pluck(:name), { include_blank: '未選択' }, :class => 'search-select' %>
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">席数</div>
-      <%= f.number_field :shop_seats, :class => 'search-number' %>
-      <div class="search-radio">
-        <%= f.radio_button :shop_seats_search_type, :more_than, {:checked => true} %>
-        <%= f.label :shop_seats_search_type, "以上", {value: :more_than, style: "display: inline-block;"} %>
-        <%= f.radio_button :shop_seats_search_type, :less_than %>
-        <%= f.label :shop_seats_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>
+      <a class="search-name" href="#fold-business-hour" data-toggle="collapse">営業時間</a>
+      <div id="fold-business-hour" class="collapse">
+        <%= f.time_field :business_hour, :class => 'search-time' %>
       </div>
     </div>
     
     <div class="search-container">
-      <div class="search-name">コーヒー豆</div>
-      <%= f.collection_check_boxes(:coffee_bean_ids, CoffeeBean.all, :id, :name, {include_hidden: false}) do |coffee_bean| %>
-        <div class="search-checkbox">
-          <%= coffee_bean.check_box %>
-          <%= coffee_bean.label %>
-        </div>
-      <% end %>
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">お店の静かさ</div>
-      <%= f.collection_check_boxes(:volume_in_shop_ids, VolumeInShop.all, :id, :name, {include_hidden: false}) do |volume_in_shop| %>
-        <div class="search-checkbox">
-          <%= volume_in_shop.check_box %>
-          <%= volume_in_shop.label %>
-        </div>
-      <% end %>
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">食べ物</div>
-      <%= f.collection_check_boxes(:food_menu_ids, FoodMenu.all, :id, :name, {include_hidden: false}) do |food_menu| %>
-        <div class="search-checkbox">
-          <%= food_menu.check_box %>
-          <%= food_menu.label %>
-        </div>
-      <% end %>
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">BGM</div>
-      <%= f.collection_check_boxes(:shop_bgm_ids, ShopBgm.all, :id, :name, {include_hidden: false}) do |shop_bgm| %>
-        <div class="search-checkbox">
-          <%= shop_bgm.check_box %>
-          <%= shop_bgm.label %>
-        </div>
-      <% end %>
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">PC作業</div>
-      <%= f.select :pc_work, PcWork.pluck(:name), { include_blank: '未選択' }, :class => 'search-select' %>
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">時間制限</div>
-      <%= f.select :time_limit, TimeLimit.pluck(:name), { include_blank: '未選択' }, :class => 'search-select' %>
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">風景</div>
-      <%= f.collection_check_boxes(:shop_scenery_ids, ShopScenery.all, :id, :name, {include_hidden: false}) do |shop_scenery| %>
-        <div class="search-checkbox">
-          <%= shop_scenery.check_box %>
-          <%= shop_scenery.label %>
-        </div>
-      <% end %>
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">テラス席</div>
-      <div class="search-radio">
-        <%= f.radio_button :terrace_seat, "あり" %>
-        <%= f.label :terrace_seat, "あり", {value: "あり", style: "display: inline-block;"} %>
-        <%= f.radio_button :terrace_seat, "なし" %>
-        <%= f.label :terrace_seat, "なし", {value: "なし", style: "display: inline-block;"} %>
+      <a class="search-name" href="#fold-slack-time" data-toggle="collapse">すいている時間</a>
+      <div id="fold-slack-time" class="collapse">
+        <%= f.time_field :slack_time, :class => 'search-time' %>
       </div>
     </div>
     
     <div class="search-container">
-      <div class="search-name">貸切</div>
-      <div class="search-radio">
-        <%= f.radio_button :can_reserved, "可" %>
-        <%= f.label :can_reserved, "可", {value: "可", style: "display: inline-block;"} %>
-        <%= f.radio_button :can_reserved, "不可" %>
-        <%= f.label :can_reserved, "不可", {value: "不可", style: "display: inline-block;"} %>
+      <a class="search-name" href="#fold-age-group" data-toggle="collapse">年齢層</a>
+      <div id="fold-age-group" class="collapse">
+        <%= f.select :age_group, AgeGroup.pluck(:name), { include_blank: '未選択' }, :class => 'search-select' %>
       </div>
     </div>
     
     <div class="search-container">
-      <div class="search-name">漫画</div>
-      <div class="search-radio">
-        <%= f.radio_button :comic, "あり" %>
-        <%= f.label :comic, "あり", {value: "あり", style: "display: inline-block;"} %>
-        <%= f.radio_button :comic, "なし" %>
-        <%= f.label :comic, "なし", {value: "なし", style: "display: inline-block;"} %>
-      </div>
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">雑誌</div>
-      <div class="search-radio">
-        <%= f.radio_button :magazine, "あり" %>
-        <%= f.label :magazine, "あり", {value: "あり", style: "display: inline-block;"} %>
-        <%= f.radio_button :magazine, "なし" %>
-        <%= f.label :magazine, "なし", {value: "なし", style: "display: inline-block;"} %>
-      </div>
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">ラテアート</div>
-      <div class="search-radio">
-        <%= f.radio_button :latte_art, "あり" %>
-        <%= f.label :latte_art, "あり", {value: "あり", style: "display: inline-block;"} %>
-        <%= f.radio_button :latte_art, "なし" %>
-        <%= f.label :latte_art, "なし", {value: "なし", style: "display: inline-block;"} %>
-      </div>
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">新聞</div>
-      <div class="search-radio">
-        <%= f.radio_button :newspaper, "あり" %>
-        <%= f.label :newspaper, "あり", {value: "あり", style: "display: inline-block;"} %>
-        <%= f.radio_button :newspaper, "なし" %>
-        <%= f.label :newspaper, "なし", {value: "なし", style: "display: inline-block;"} %>
-      </div>
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">モーニング</div>
-      <div class="search-radio">
-        <%= f.radio_button :morning_menu, "あり" %>
-        <%= f.label :morning_menu, "あり", {value: "あり", style: "display: inline-block;"} %>
-        <%= f.radio_button :morning_menu, "なし" %>
-        <%= f.label :morning_menu, "なし", {value: "なし", style: "display: inline-block;"} %>
-      </div>
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">無料の水</div>
-      <div class="search-radio">
-        <%= f.radio_button :free_water, "あり" %>
-        <%= f.label :free_water, "あり", {value: "あり", style: "display: inline-block;"} %>
-        <%= f.radio_button :free_water, "なし" %>
-        <%= f.label :free_water, "なし", {value: "なし", style: "display: inline-block;"} %>
-      </div>
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">ペット</div>
-      <div class="search-radio">
-        <%= f.radio_button :with_pet, "可" %>
-        <%= f.label :with_pet, "可", {value: "可", style: "display: inline-block;"} %>
-        <%= f.radio_button :with_pet, "不可" %>
-        <%= f.label :with_pet, "不可", {value: "不可", style: "display: inline-block;"} %>
-      </div>
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">共有PC</div>
-      <div class="search-radio">
-        <%= f.radio_button :free_pc, "あり" %>
-        <%= f.label :free_pc, "あり", {value: "あり", style: "display: inline-block;"} %>
-        <%= f.radio_button :free_pc, "なし" %>
-        <%= f.label :free_pc, "なし", {value: "なし", style: "display: inline-block;"} %>
-      </div>
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">駐車場</div>
-      <div class="search-radio">
-        <%= f.radio_button :parking_place, "あり" %>
-        <%= f.label :parking_place, "あり", {value: "あり", style: "display: inline-block;"} %>
-        <%= f.radio_button :parking_place, "なし" %>
-        <%= f.label :parking_place, "なし", {value: "なし", style: "display: inline-block;"} %>
-      </div>
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">支払い方法</div>
-      <%= f.collection_check_boxes(:payment_method_ids, PaymentMethod.all, :id, :name, {include_hidden: false}) do |payment_method| %>
-        <div class="search-checkbox">
-          <%= payment_method.check_box %>
-          <%= payment_method.label %>
-        </div>
-      <% end %>
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">予算</div>
-      <%= f.number_field :shop_badget, :class => 'search-number' %>円
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">コーヒー1杯</div>
-      <%= f.number_field :coffee_price, :class => 'search-number' %>
-      <div class="search-radio">
-        <%= f.radio_button :coffee_price_search_type, :more_than, {:checked => true} %>
-        <%= f.label :coffee_price_search_type, "以上", {value: :more_than, style: "display: inline-block;"} %>
-        <%= f.radio_button :coffee_price_search_type, :less_than %>
-        <%= f.label :coffee_price_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>
-      </div>
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">カフェラテ1杯</div>
-      <%= f.number_field :latte_price, :class => 'search-number' %>
-      <div class="search-radio">
-        <%= f.radio_button :latte_price_search_type, :more_than, {:checked => true} %>
-        <%= f.label :latte_price_search_type, "以上", {value: :more_than, style: "display: inline-block;"} %>
-        <%= f.radio_button :latte_price_search_type, :less_than %>
-        <%= f.label :latte_price_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>
-      </div>
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">椅子の種類</div>
-      <%= f.collection_check_boxes(:chair_type_ids, ChairType.all, :id, :name, {include_hidden: false}) do |chair_type| %>
-        <div class="search-checkbox">
-          <%= chair_type.check_box %>
-          <%= chair_type.label %>
-        </div>
-      <% end %>
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">コンセント</div>
-      <%= f.collection_radio_buttons(:outlet, CoffeeShop.outlets_i18n, :first, :last, {include_hidden: false}) do |outlet| %>
+      <a class="search-name" href="#fold-shop-seat" data-toggle="collapse">席数</a>
+      <div id="fold-shop-seat" class="collapse">
+        <%= f.number_field :shop_seats, :class => 'search-number' %>
         <div class="search-radio">
-          <%= outlet.radio_button %>
-          <%= outlet.label %>
+          <%= f.radio_button :shop_seats_search_type, :more_than, {:checked => true} %>
+          <%= f.label :shop_seats_search_type, "以上", {value: :more_than, style: "display: inline-block;"} %>
+          <%= f.radio_button :shop_seats_search_type, :less_than %>
+          <%= f.label :shop_seats_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>
         </div>
-      <% end %>
+      </div>
     </div>
     
     <div class="search-container">
-      <div class="search-name">Wi-Fi</div>
-      <%= f.collection_radio_buttons(:wifi, CoffeeShop.wifis_i18n, :first, :last, {include_hidden: false}) do |wifi| %>
+      <a class="search-name" href="#fold-coffee-bean" data-toggle="collapse">コーヒー豆</a>
+      <div id="fold-coffee-bean" class="collapse">
+        <%= f.collection_check_boxes(:coffee_bean_ids, CoffeeBean.all, :id, :name, {include_hidden: false}) do |coffee_bean| %>
+          <div class="search-checkbox">
+            <%= coffee_bean.check_box %>
+            <%= coffee_bean.label %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-volume-in-shop" data-toggle="collapse">お店の静かさ</a>
+      <div id="fold-volume-in-shop" class="collapse">
+        <%= f.collection_check_boxes(:volume_in_shop_ids, VolumeInShop.all, :id, :name, {include_hidden: false}) do |volume_in_shop| %>
+          <div class="search-checkbox">
+            <%= volume_in_shop.check_box %>
+            <%= volume_in_shop.label %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-food" data-toggle="collapse">食べ物</a>
+      <div id="fold-food" class="collapse">
+        <%= f.collection_check_boxes(:food_menu_ids, FoodMenu.all, :id, :name, {include_hidden: false}) do |food_menu| %>
+          <div class="search-checkbox">
+            <%= food_menu.check_box %>
+            <%= food_menu.label %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-shop-bgm" data-toggle="collapse">BGM</a>
+      <div id="fold-shop-bgm" class="collapse">
+        <%= f.collection_check_boxes(:shop_bgm_ids, ShopBgm.all, :id, :name, {include_hidden: false}) do |shop_bgm| %>
+          <div class="search-checkbox">
+            <%= shop_bgm.check_box %>
+            <%= shop_bgm.label %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-pc-work" data-toggle="collapse">PC作業</a>
+      <div id="fold-pc-work" class="collapse">
+        <%= f.select :pc_work, PcWork.pluck(:name), { include_blank: '未選択' }, :class => 'search-select' %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-time-limit" data-toggle="collapse">時間制限</a>
+      <div id="fold-time-limit" class="collapse">
+        <%= f.select :time_limit, TimeLimit.pluck(:name), { include_blank: '未選択' }, :class => 'search-select' %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-shop-scenery" data-toggle="collapse">風景</a>
+      <div id="fold-shop-scenery" class="collapse">
+        <%= f.collection_check_boxes(:shop_scenery_ids, ShopScenery.all, :id, :name, {include_hidden: false}) do |shop_scenery| %>
+          <div class="search-checkbox">
+            <%= shop_scenery.check_box %>
+            <%= shop_scenery.label %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-terrace-seat" data-toggle="collapse">テラス席</a>
+      <div id="fold-terrace-seat" class="collapse">
         <div class="search-radio">
-          <%= wifi.radio_button %>
-          <%= wifi.label %>
+          <%= f.radio_button :terrace_seat, "あり" %>
+          <%= f.label :terrace_seat, "あり", {value: "あり", style: "display: inline-block;"} %>
+          <%= f.radio_button :terrace_seat, "なし" %>
+          <%= f.label :terrace_seat, "なし", {value: "なし", style: "display: inline-block;"} %>
         </div>
-      <% end %>
+      </div>
     </div>
     
     <div class="search-container">
-      <div class="search-name">喫煙・分煙</div>
-      <%= f.collection_radio_buttons(:smoking, CoffeeShop.smokings_i18n, :first, :last, {include_hidden: false}) do |smoking| %>
+      <a class="search-name" href="#fold-reserved" data-toggle="collapse">貸切</a>
+      <div id="fold-reserved" class="collapse">
         <div class="search-radio">
-          <%= smoking.radio_button %>
-          <%= smoking.label %>
+          <%= f.radio_button :can_reserved, "可" %>
+          <%= f.label :can_reserved, "可", {value: "可", style: "display: inline-block;"} %>
+          <%= f.radio_button :can_reserved, "不可" %>
+          <%= f.label :can_reserved, "不可", {value: "不可", style: "display: inline-block;"} %>
         </div>
-      <% end %>
+      </div>
     </div>
     
     <div class="search-container">
-      <div class="search-name">利用シーン</div>
-      <%= f.collection_check_boxes(:use_scene_ids, UseScene.all, :id, :name, {include_hidden: false}) do |use_scene| %>
-        <div class="search-checkbox">
-          <%= use_scene.check_box %>
-          <%= use_scene.label %>
-        </div>
-      <% end %>
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">店員さんの雰囲気</div>
-      <%= f.collection_check_boxes(:atmosphere_of_clerk_ids, AtmosphereOfClerk.all, :id, :name, {include_hidden: false}) do |atmosphere_of_clerk| %>
-        <div class="search-checkbox">
-          <%= atmosphere_of_clerk.check_box %>
-          <%= atmosphere_of_clerk.label %>
-        </div>
-      <% end %>
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">机の広さ</div>
-      <%= f.collection_check_boxes(:size_of_desk_ids, SizeOfDesk.all, :id, :name, {include_hidden: false}) do |size_of_desk| %>
-        <div class="search-checkbox">
-          <%= size_of_desk.check_box %>
-          <%= size_of_desk.label %>
-        </div>
-      <% end %>
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">ポイントカード</div>
-      <%= f.collection_check_boxes(:point_card_ids, PointCard.all, :id, :name, {include_hidden: false}) do |point_card| %>
-        <div class="search-checkbox">
-          <%= point_card.check_box %>
-          <%= point_card.label %>
-        </div>
-      <% end %>
-    </div>
-    
-    <div class="search-container">
-      <div class="search-name">予約</div>
-      <%= f.collection_radio_buttons(:reservation, CoffeeShop.reservations_i18n, :first, :last, {include_hidden: false}) do |reservation| %>
+      <a class="search-name" href="#fold-comic" data-toggle="collapse">漫画</a>
+      <div id="fold-comic" class="collapse">
         <div class="search-radio">
-          <%= reservation.radio_button %>
-          <%= reservation.label %>
+          <%= f.radio_button :comic, "あり" %>
+          <%= f.label :comic, "あり", {value: "あり", style: "display: inline-block;"} %>
+          <%= f.radio_button :comic, "なし" %>
+          <%= f.label :comic, "なし", {value: "なし", style: "display: inline-block;"} %>
         </div>
-      <% end %>
+      </div>
     </div>
     
     <div class="search-container">
-      <div class="search-name">テイクアウト</div>
-      <%= f.collection_radio_buttons(:take_out, CoffeeShop.take_outs_i18n, :first, :last, {include_hidden: false}) do |take_out| %>
+      <a class="search-name" href="#fold-magazine" data-toggle="collapse">雑誌</a>
+      <div id="fold-magazine" class="collapse">
         <div class="search-radio">
-          <%= take_out.radio_button %>
-          <%= take_out.label %>
+          <%= f.radio_button :magazine, "あり" %>
+          <%= f.label :magazine, "あり", {value: "あり", style: "display: inline-block;"} %>
+          <%= f.radio_button :magazine, "なし" %>
+          <%= f.label :magazine, "なし", {value: "なし", style: "display: inline-block;"} %>
         </div>
-      <% end %>
+      </div>
     </div>
     
     <div class="search-container">
-      <div class="search-name">お子様連れ</div>
-      <%= f.collection_radio_buttons(:with_children, CoffeeShop.with_children_i18n, :first, :last, {include_hidden: false}) do |with_children| %>
+      <a class="search-name" href="#fold-latte-art" data-toggle="collapse">ラテアート</a>
+      <div id="fold-latte-art" class="collapse">
         <div class="search-radio">
-          <%= with_children.radio_button %>
-          <%= with_children.label %>
+          <%= f.radio_button :latte_art, "あり" %>
+          <%= f.label :latte_art, "あり", {value: "あり", style: "display: inline-block;"} %>
+          <%= f.radio_button :latte_art, "なし" %>
+          <%= f.label :latte_art, "なし", {value: "なし", style: "display: inline-block;"} %>
         </div>
-      <% end %>
+      </div>
     </div>
     
     <div class="search-container">
-      <div class="search-name">Instagramアカウント</div>
-      <%= f.collection_radio_buttons(:have_insta_account, CoffeeShop.have_insta_accounts_i18n, :first, :last, {include_hidden: false}) do |have_insta_account| %>
+      <a class="search-name" href="#fold-newspaper" data-toggle="collapse">新聞</a>
+      <div id="fold-newspaper" class="collapse">
         <div class="search-radio">
-          <%= have_insta_account.radio_button %>
-          <%= have_insta_account.label %>
+          <%= f.radio_button :newspaper, "あり" %>
+          <%= f.label :newspaper, "あり", {value: "あり", style: "display: inline-block;"} %>
+          <%= f.radio_button :newspaper, "なし" %>
+          <%= f.label :newspaper, "なし", {value: "なし", style: "display: inline-block;"} %>
         </div>
-      <% end %>
+      </div>
     </div>
     
     <div class="search-container">
-      <div class="search-name">アミューズメント</div>
-      <%= f.collection_radio_buttons(:amusement, CoffeeShop.amusements_i18n, :first, :last, {include_hidden: false}) do |amusement| %>
+      <a class="search-name" href="#fold-morning-menu" data-toggle="collapse">モーニング</a>
+      <div id="fold-morning-menu" class="collapse">
         <div class="search-radio">
-          <%= amusement.radio_button %>
-          <%= amusement.label %>
+          <%= f.radio_button :morning_menu, "あり" %>
+          <%= f.label :morning_menu, "あり", {value: "あり", style: "display: inline-block;"} %>
+          <%= f.radio_button :morning_menu, "なし" %>
+          <%= f.label :morning_menu, "なし", {value: "なし", style: "display: inline-block;"} %>
         </div>
-      <% end %>
+      </div>
     </div>
     
     <div class="search-container">
-      <div class="search-name">インスタ映え</div>
-      <%= f.collection_radio_buttons(:look_by_instagram, CoffeeShop.look_by_instagrams_i18n, :first, :last, {include_hidden: false}) do |look_by_instagram| %>
+      <a class="search-name" href="#fold-free-water" data-toggle="collapse">無料の水</a>
+      <div id="fold-free-water" class="collapse">
         <div class="search-radio">
-          <%= look_by_instagram.radio_button %>
-          <%= look_by_instagram.label %>
+          <%= f.radio_button :free_water, "あり" %>
+          <%= f.label :free_water, "あり", {value: "あり", style: "display: inline-block;"} %>
+          <%= f.radio_button :free_water, "なし" %>
+          <%= f.label :free_water, "なし", {value: "なし", style: "display: inline-block;"} %>
         </div>
-      <% end %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-with-pet" data-toggle="collapse">ペット</a>
+      <div id="fold-with-pet" class="collapse">
+        <div class="search-radio">
+          <%= f.radio_button :with_pet, "可" %>
+          <%= f.label :with_pet, "可", {value: "可", style: "display: inline-block;"} %>
+          <%= f.radio_button :with_pet, "不可" %>
+          <%= f.label :with_pet, "不可", {value: "不可", style: "display: inline-block;"} %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-free-pc" data-toggle="collapse">共有PC</a>
+      <div id="fold-free-pc" class="collapse">
+        <div class="search-radio">
+          <%= f.radio_button :free_pc, "あり" %>
+          <%= f.label :free_pc, "あり", {value: "あり", style: "display: inline-block;"} %>
+          <%= f.radio_button :free_pc, "なし" %>
+          <%= f.label :free_pc, "なし", {value: "なし", style: "display: inline-block;"} %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-parking-place" data-toggle="collapse">駐車場</a>
+      <div id="fold-parking-place" class="collapse">
+        <div class="search-radio">
+          <%= f.radio_button :parking_place, "あり" %>
+          <%= f.label :parking_place, "あり", {value: "あり", style: "display: inline-block;"} %>
+          <%= f.radio_button :parking_place, "なし" %>
+          <%= f.label :parking_place, "なし", {value: "なし", style: "display: inline-block;"} %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-payment-method" data-toggle="collapse">支払い方法</a>
+      <div id="fold-payment-method" class="collapse">
+        <%= f.collection_check_boxes(:payment_method_ids, PaymentMethod.all, :id, :name, {include_hidden: false}) do |payment_method| %>
+          <div class="search-checkbox">
+            <%= payment_method.check_box %>
+            <%= payment_method.label %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-shop-badget" data-toggle="collapse">予算</a>
+      <div id="fold-shop-badget" class="collapse">
+        <%= f.number_field :shop_badget, :class => 'search-number' %>円
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-coffee-price" data-toggle="collapse">コーヒー1杯</a>
+      <div id="fold-coffee-price" class="collapse">
+        <%= f.number_field :coffee_price, :class => 'search-number' %>
+        <div class="search-radio">
+          <%= f.radio_button :coffee_price_search_type, :more_than, {:checked => true} %>
+          <%= f.label :coffee_price_search_type, "以上", {value: :more_than, style: "display: inline-block;"} %>
+          <%= f.radio_button :coffee_price_search_type, :less_than %>
+          <%= f.label :coffee_price_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-latte-price" data-toggle="collapse">カフェラテ1杯</a>
+      <div id="fold-latte-price" class="collapse">
+        <%= f.number_field :latte_price, :class => 'search-number' %>
+        <div class="search-radio">
+          <%= f.radio_button :latte_price_search_type, :more_than, {:checked => true} %>
+          <%= f.label :latte_price_search_type, "以上", {value: :more_than, style: "display: inline-block;"} %>
+          <%= f.radio_button :latte_price_search_type, :less_than %>
+          <%= f.label :latte_price_search_type, "以下", {value: :less_than, style: "display: inline-block;"} %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-chair-type" data-toggle="collapse">椅子の種類</a>
+      <div id="fold-chair-type" class="collapse">
+        <%= f.collection_check_boxes(:chair_type_ids, ChairType.all, :id, :name, {include_hidden: false}) do |chair_type| %>
+          <div class="search-checkbox">
+            <%= chair_type.check_box %>
+            <%= chair_type.label %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-outlet" data-toggle="collapse">コンセント</a>
+      <div id="fold-outlet" class="collapse">
+        <%= f.collection_radio_buttons(:outlet, CoffeeShop.outlets_i18n, :first, :last, {include_hidden: false}) do |outlet| %>
+          <div class="search-radio">
+            <%= outlet.radio_button %>
+            <%= outlet.label %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-wifi" data-toggle="collapse">Wi-Fi</a>
+      <div id="fold-wifi" class="collapse">
+        <%= f.collection_radio_buttons(:wifi, CoffeeShop.wifis_i18n, :first, :last, {include_hidden: false}) do |wifi| %>
+          <div class="search-radio">
+            <%= wifi.radio_button %>
+            <%= wifi.label %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-smoking" data-toggle="collapse">喫煙・分煙</a>
+      <div id="fold-smoking" class="collapse">
+        <%= f.collection_radio_buttons(:smoking, CoffeeShop.smokings_i18n, :first, :last, {include_hidden: false}) do |smoking| %>
+          <div class="search-radio">
+            <%= smoking.radio_button %>
+            <%= smoking.label %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-use-scene" data-toggle="collapse">利用シーン</a>
+      <div id="fold-use-scene" class="collapse">
+        <%= f.collection_check_boxes(:use_scene_ids, UseScene.all, :id, :name, {include_hidden: false}) do |use_scene| %>
+          <div class="search-checkbox">
+            <%= use_scene.check_box %>
+            <%= use_scene.label %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-tmosphere-of-clerk" data-toggle="collapse">店員さんの雰囲気</a>
+      <div id="fold-tmosphere-of-clerk" class="collapse">
+        <%= f.collection_check_boxes(:atmosphere_of_clerk_ids, AtmosphereOfClerk.all, :id, :name, {include_hidden: false}) do |atmosphere_of_clerk| %>
+          <div class="search-checkbox">
+            <%= atmosphere_of_clerk.check_box %>
+            <%= atmosphere_of_clerk.label %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-size-of-desk" data-toggle="collapse">机の広さ</a>
+      <div id="fold-size-of-desk" class="collapse">
+        <%= f.collection_check_boxes(:size_of_desk_ids, SizeOfDesk.all, :id, :name, {include_hidden: false}) do |size_of_desk| %>
+          <div class="search-checkbox">
+            <%= size_of_desk.check_box %>
+            <%= size_of_desk.label %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-point-card" data-toggle="collapse">ポイントカード</a>
+      <div id="fold-point-card" class="collapse">
+        <%= f.collection_check_boxes(:point_card_ids, PointCard.all, :id, :name, {include_hidden: false}) do |point_card| %>
+          <div class="search-checkbox">
+            <%= point_card.check_box %>
+            <%= point_card.label %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-reservation" data-toggle="collapse">予約</a>
+      <div id="fold-reservation" class="collapse">
+        <%= f.collection_radio_buttons(:reservation, CoffeeShop.reservations_i18n, :first, :last, {include_hidden: false}) do |reservation| %>
+          <div class="search-radio">
+            <%= reservation.radio_button %>
+            <%= reservation.label %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-take-out" data-toggle="collapse">テイクアウト</a>
+      <div id="fold-take-out" class="collapse">
+        <%= f.collection_radio_buttons(:take_out, CoffeeShop.take_outs_i18n, :first, :last, {include_hidden: false}) do |take_out| %>
+          <div class="search-radio">
+            <%= take_out.radio_button %>
+            <%= take_out.label %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-with-children" data-toggle="collapse">お子様連れ</a>
+      <div id="fold-with-children" class="collapse">
+        <%= f.collection_radio_buttons(:with_children, CoffeeShop.with_children_i18n, :first, :last, {include_hidden: false}) do |with_children| %>
+          <div class="search-radio">
+            <%= with_children.radio_button %>
+            <%= with_children.label %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-have-insta-account" data-toggle="collapse">Instagramアカウント</a>
+      <div id="fold-have-insta-account" class="collapse">
+        <%= f.collection_radio_buttons(:have_insta_account, CoffeeShop.have_insta_accounts_i18n, :first, :last, {include_hidden: false}) do |have_insta_account| %>
+          <div class="search-radio">
+            <%= have_insta_account.radio_button %>
+            <%= have_insta_account.label %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-amusement" data-toggle="collapse">アミューズメント</a>
+      <div id="fold-amusement" class="collapse">
+        <%= f.collection_radio_buttons(:amusement, CoffeeShop.amusements_i18n, :first, :last, {include_hidden: false}) do |amusement| %>
+          <div class="search-radio">
+            <%= amusement.radio_button %>
+            <%= amusement.label %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <a class="search-name" href="#fold-look-by-instagram" data-toggle="collapse">インスタ映え</a>
+      <div id="fold-look-by-instagram" class="collapse">
+        <%= f.collection_radio_buttons(:look_by_instagram, CoffeeShop.look_by_instagrams_i18n, :first, :last, {include_hidden: false}) do |look_by_instagram| %>
+          <div class="search-radio">
+            <%= look_by_instagram.radio_button %>
+            <%= look_by_instagram.label %>
+          </div>
+        <% end %>
+      </div>
     </div>
     
     <% if user_signed_in? %>
       <div class="search-container">
-        <div class="search-name">お気に入り登録</div>
-        <div class="search-radio">
-          <%= f.radio_button :bookmark, :register %>
-          <%= f.label :bookmark, "登録済み", {value: :register, style: "display: inline-block;"} %>
-          <%= f.radio_button :bookmark, :unregistered %>
-          <%= f.label :bookmark, "未登録", {value: :unregistered, style: "display: inline-block;"} %>
+        <a class="search-name" href="#fold-bookmark" data-toggle="collapse">お気に入り登録</a>
+        <div id="fold-bookmark" class="collapse">
+          <div class="search-radio">
+            <%= f.radio_button :bookmark, :register %>
+            <%= f.label :bookmark, "登録済み", {value: :register, style: "display: inline-block;"} %>
+            <%= f.radio_button :bookmark, :unregistered %>
+            <%= f.label :bookmark, "未登録", {value: :unregistered, style: "display: inline-block;"} %>
+          </div>
         </div>
       </div>
     <% end %>
     
     <% if user_signed_in? %>
       <div class="search-container">
-        <div class="search-name">フォローユーザーのお気に入り</div>
-        <div class="search-radio">
-          <%= f.radio_button :bookmark_by_follower, :register %>
-          <%= f.label :bookmark_by_follower, "登録済み", {value: :register, style: "display: inline-block;"} %>
-          <%= f.radio_button :bookmark_by_follower, :unregistered %>
-          <%= f.label :bookmark_by_follower, "未登録", {value: :unregistered, style: "display: inline-block;"} %>
+        <a class="search-name" href="#fold-bookmark-by-follower" data-toggle="collapse">フォローユーザーのお気に入り</a>
+        <div id="fold-bookmark-by-follower" class="collapse">
+          <div class="search-radio">
+            <%= f.radio_button :bookmark_by_follower, :register %>
+            <%= f.label :bookmark_by_follower, "登録済み", {value: :register, style: "display: inline-block;"} %>
+            <%= f.radio_button :bookmark_by_follower, :unregistered %>
+            <%= f.label :bookmark_by_follower, "未登録", {value: :unregistered, style: "display: inline-block;"} %>
+          </div>
         </div>
       </div>
     <% end %>
     
     <% if user_signed_in? %>
       <div class="search-container">
-        <div class="search-name">フォローユーザーのbest shop</div>
-        <div class="search-radio">
-          <%= f.radio_button :best_shop_by_follower, :register %>
-          <%= f.label :best_shop_by_follower, "登録済み", {value: :register, style: "display: inline-block;"} %>
-          <%= f.radio_button :best_shop_by_follower, :unregistered %>
-          <%= f.label :best_shop_by_follower, "未登録", {value: :unregistered, style: "display: inline-block;"} %>
+        <a class="search-name" href="#fold-best-shop-by-follower" data-toggle="collapse">フォローユーザーのbest shop</a>
+        <div id="fold-best-shop-by-follower" class="collapse">
+          <div class="search-radio">
+            <%= f.radio_button :best_shop_by_follower, :register %>
+            <%= f.label :best_shop_by_follower, "登録済み", {value: :register, style: "display: inline-block;"} %>
+            <%= f.radio_button :best_shop_by_follower, :unregistered %>
+            <%= f.label :best_shop_by_follower, "未登録", {value: :unregistered, style: "display: inline-block;"} %>
+          </div>
         </div>
       </div>
     <% end %>
     
     <hr>
-    <%= f.submit :search, :class => 'btn-search' %>
+    <%= f.submit :search, :class => 'search-btn' %>
   <% end %> 
-</div>
+<!--</div>-->
