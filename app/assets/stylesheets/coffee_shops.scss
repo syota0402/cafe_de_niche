@@ -1,13 +1,16 @@
+// ================
+// 一番上
 .shop-container {
   position: relative;
   display: inline-flex;
-  width: 100%;
+  width: 90%;
   z-index: 100;
+  margin: 0rem 2rem;
 }
 
 .shop-name {
   padding: 3px 50px;
-  font-size: 30px;
+  font-size: 3rem;
   border: solid 1px #CC935B;
   background-color: #ffffff;
 }
@@ -22,7 +25,7 @@
 
 .text-like {
   color: #CC935B;
-  font-size: small;
+  font-size: 1rem;
 }
 
 .favorite-button {
@@ -31,28 +34,32 @@
   background-color: #ffffff;
   right: 0;
   position: absolute;
-  top: 35px;
+  top: 3rem;
 }
 
 .text-favorite {
   color: #CC935B;
-  font-size: small;
+  font-size: 1rem;
 }
+// ================
 
+// ++++++++++++++++
+// 店舗情報
 .shop-info {
   position: relative;
+  margin: 0rem 1rem;
 }
 
 .shop-tell {
-  font-size: 20px;
+  font-size: 2rem;
 }
 
 .shop-hp {
-  font-size: 20px;
+  font-size: 2rem;
 }
 
 .shop-insta {
-  font-size: 20px;
+  font-size: 2rem;
 }
 
 .shop-table {
@@ -64,6 +71,7 @@
   table-layout: fixed;
   width: 100%;
   word-break: break-all;
+  font-size: 1.3rem;
 }
 
 .shop-table tr {
@@ -94,7 +102,10 @@
   border-width: 1px 0 0 1px;
   padding: 10px 12px;
 }
+// ++++++++++++++++
 
+// ----------------
+// お気に入り
 .liker-container {
   position: relative;
   margin: 2em auto;
@@ -105,14 +116,16 @@
   background-color: #f8fafc;
   box-shadow: 2px 2px 1px #c7c7c7;/* 影の色 */
   border-radius: 8px; /* 角の丸み */
-  height: 100px;
+  min-height: 100%;
   display: inline-flex;
+  font-size: 1.2rem;
+  left: 2.5%;
 }
 
 .liker-title {
   position: absolute;
-  left: 20px; /*（left）に変更すると左 */
-  top: -15px;
+  left: 20px;
+  top: -26px;
   padding: 0 .5em;
   font-weight: bold;
   font-size: 1.1em;
@@ -122,8 +135,8 @@
 
 .liker-count {
   position: absolute;
-  left: 114px;
-  top: -15px;
+  left: 147px;
+  top: -26px;
   padding: 0 0.5em;
   font-weight: bold;
   font-size: 1.1em;
@@ -142,7 +155,10 @@
   color: black;
   overflow-wrap: break-word;
 }
+// ----------------
 
+// ################
+// レビュー
 .review {
   position: relative;
   color: #CC935B;
@@ -195,40 +211,40 @@
 
 .review-container {
   position: relative;
-  padding: 0.5em 1em;
-  margin: 1em 0;
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
   background: #f4f4f4;
   border-left: solid 6px #CC935B;
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.33);
-  height: 135px;
+  min-height: 8rem;
 }
 
 .review-image {
-  position: absolute;
+  float: left;
 }
 
 .review-user {
-  position: absolute;
   right: 6px;
   width: 10%;
   text-align: center;
-  font-size: 1rem;
+  font-size: 1.1rem;
+  float: right;
 }
 
 .review-score {
-  position: absolute;
   right: 82px;
   font-family: 'Roboto', sans-serif;
   font-size: 4rem;
   line-height: 1;
   color: #CC935B;
+  float: right;
 }
 
 .review-comment {
-  position: absolute;
-  width: 62%;
   left: 127px;
-  font-size: 1.1rem;
+  font-size: 1.5rem;
+  word-break: break-word;
+  display: grid;
 }
 
 .review-date {
@@ -242,3 +258,17 @@
   position: absolute;
   bottom: 0;
 }
+// ################
+
+// $$$$$$$$$$$$$$$$
+// レビュー記入
+.user-review{
+  margin: 0rem 1rem;
+  font-size: 1rem;
+}
+
+.user-review-comment{
+  min-height: 5rem;
+  width: 50%;
+}
+// $$$$$$$$$$$$$$$$

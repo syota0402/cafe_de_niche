@@ -1,109 +1,104 @@
-<div class="container">
-	<div class="shop-container">
-		<h1 class="shop-name"><%= @coffee_shop.name %></h1>
-		<% if user_signed_in? %>
-			<%= link_to favorite_coffee_shop_path(target_action: "show"), class: "btn like-btn text-like" do %>
-				<%= current_user.likes?(@coffee_shop) ? "お気に入り解除" : "お気に入り" %>
-			<% end %>
-			<%= link_to setbestshop_user_path, class: "btn favorite-button text-favorite" do %>
-				<%= current_user.best_shop_id == @coffee_shop.id ? "mybest解除" : "mybest" %>
-			<% end %>
+<div class="shop-container">
+	<h1 class="shop-name"><%= @coffee_shop.name %></h1>
+	<% if user_signed_in? %>
+		<%= link_to favorite_coffee_shop_path(target_action: "show"), class: "btn like-btn text-like" do %>
+			<%= current_user.likes?(@coffee_shop) ? "お気に入り解除" : "お気に入り" %>
 		<% end %>
-	</div>
-	<div class="shop-info">
-		<%= render partial: 'shared/show_images', locals: { target: @coffee_shop, image_size: "200x200" } %>
-	  <div class="shop-tell">
-	  	<%= image_tag "/images/tell_icon.png", size: "25x25" %><%= @coffee_shop.shop_tell %>
-	  </div>
-	  <div class="shop-hp">
-	  	<%= image_tag "/images/hp_icon.png", size: "25x25" %><%= link_to @coffee_shop.shop_url, @coffee_shop.shop_url, target: :_blank, rel: "noopener noreferrer" %>
-	  </div>
-	  <div class="shop-insta">
-	  	<%= image_tag "/images/insta_icon.png", size: "25x25" %><%= link_to @coffee_shop.instagram_url, 'https://www.instagram.com/' + @coffee_shop.instagram_url , target: :_blank, rel: "noopener noreferrer" %>
-	  </div>
-	  <br>
-	  <table class="shop-table">
-	  	<tbody>
-	  		<% @shop_info.each do |shop_info| %>
-	  			<tr>
-		  			<th><%= shop_info[:title] %></th>
-		  			<td><%= shop_info[:value] %></td>
-		  		</tr>
-	  		<% end %>
-	  	</tbody>
-	  </table>
-	  <div class="liker-container">
-	  	<div class="liker-title">
-	  		お気に入り
-	  	</div>
-	  	<div class="liker-count">
-	  		<%= @coffee_shop.likers_count %>人
-	  	</div>
-		  <% @likers.last(5).each do |liker| %>
-		  	<div class="liker-user">
-		  		<%= link_to(user_path(liker.id)) do %>
-		  			<%= render partial: 'shared/show_image', locals: { target: liker, image_size: "50x50" } %>
-		  			<p>
-		  				<%= liker.name %>
-		  			</p>
-					<% end %>
-				</div>
-		  <% end %>
-	  </div>
-		<div class="review-totel-container">
-			<div class="review">Review</div>
-			<div class="review-totel-count">
-				<%= @reviews_count %>
-				<p>件</p>
+		<%= link_to setbestshop_user_path, class: "btn favorite-button text-favorite" do %>
+			<%= current_user.best_shop_id == @coffee_shop.id ? "mybest解除" : "mybest" %>
+		<% end %>
+	<% end %>
+</div>
+<div class="shop-info">
+	<%= render partial: 'shared/show_images', locals: { target: @coffee_shop, image_size: "250x250" } %>
+  <div class="shop-tell">
+  	<%= image_tag "/images/tell_icon.png", size: "30x30" %><%= @shop_tell %>
+  </div>
+  <div class="shop-hp">
+  	<%= image_tag "/images/hp_icon.png", size: "30x30" %><%= link_to @coffee_shop.shop_url, @coffee_shop.shop_url, target: :_blank, rel: "noopener noreferrer" %>
+  </div>
+  <div class="shop-insta">
+  	<%= image_tag "/images/insta_icon.png", size: "30x30" %><%= link_to @coffee_shop.instagram_url, 'https://www.instagram.com/' + @coffee_shop.instagram_url , target: :_blank, rel: "noopener noreferrer" %>
+  </div>
+  <br>
+  <table class="shop-table">
+  	<tbody>
+  		<% @shop_info.each do |shop_info| %>
+  			<tr>
+	  			<th><%= shop_info[:title] %></th>
+	  			<td><%= shop_info[:value] %></td>
+	  		</tr>
+  		<% end %>
+  	</tbody>
+  </table>
+  <div class="liker-container">
+  	<div class="liker-title">
+  		お気に入り
+  	</div>
+  	<div class="liker-count">
+  		<%= @coffee_shop.likers_count %>人
+  	</div>
+	  <% @likers.last(5).each do |liker| %>
+	  	<div class="liker-user">
+	  		<%= link_to(user_path(liker.id)) do %>
+	  			<%= render partial: 'shared/show_image', locals: { target: liker, image_size: "50x50" } %>
+	  			<p>
+	  				<%= liker.name %>
+	  			</p>
+				<% end %>
 			</div>
-			<div class="review-totel-score">
-				<%= @review_average_score %><p>点</p>
-			</div>
+	  <% end %>
+  </div>
+	<div class="review-totel-container">
+		<div class="review">Review</div>
+		<div class="review-totel-count">
+			<%= @reviews_count %>
+			<p>件</p>
 		</div>
-		
-		<% @reviews.each do |review| %>
-			<div class="review-container">
-				<div class="review-image">
-					<%= render partial: 'shared/show_image', locals: { target: review, image_size: "100x100" } %>
-			  </div>
-			  <div class="review-user">
-			  	<%= render partial: 'shared/show_image', locals: { target: review.user, image_size: "50x50" } %>
-			  	<p><%= link_to review.user.name, user_path(review.user_id) %></p>
-			  </div>
-				<div class="review-score"><%= review.review_score %></div>
-				<div class="review-comment"><%= review.review_comment %></div>
-				<div class="review-date">投稿日：<%= review.created_at.strftime("%Y-%m-%d") %></div>
-				<% if user_signed_in? and current_user.id == review.user_id %>
-					<div class="review-delete"><%= link_to "削除", review_path(review), method: :delete, data: { confirm: '削除してもいいですか?' } %></div>
-				<% end %>
-			</div>
-		<%end %>
-		
-		<%= paginate @reviews %>
-		
-		<hr>
-		
-		<% if user_signed_in? %>
-			<div class="offset-md-5 col-md-5">
-				<p>レビューを書く</p>
-				<%= form_with model: @review, url: coffee_shop_reviews_path(@coffee_shop) do |f| %>
-					<%= f.file_field :image, { onChange: "javascript: handleImage(this.files);"} %>
-					<img id="review-image-preview",size="50x50">
-					<div class="user-review-score">
-						満足度　※0~100の整数のみを入力してください
-						<%= f.number_field :review_score, class: "form-control m-2" %>
-					</div>
-					<div class="user-review-comment">
-						レビュー本文　※150字以内で入力してください
-						<%= f.text_area :review_comment, class: "form-control m-2" %>
-					</div>
-					<%= f.submit "書き込む" %>
-				<% end %>
-			</div>
-		<% end %>
-	<%= link_to "戻る", :back %>
-
+		<div class="review-totel-score">
+			<%= @review_average_score %><p>点</p>
+		</div>
 	</div>
+	
+	<% @reviews.each do |review| %>
+		<div class="review-container">
+			<div class="review-image">
+				<%= render partial: 'shared/show_image', locals: { target: review, image_size: "100x100" } %>
+		  </div>
+		  <div class="review-user">
+		  	<%= render partial: 'shared/show_image', locals: { target: review.user, image_size: "60x60" } %>
+		  	<p><%= link_to review.user.name, user_path(review.user_id) %></p>
+		  </div>
+			<div class="review-score"><%= review.review_score %></div>
+			<div class="review-comment"><%= review.review_comment %></div>
+			<div class="review-date">投稿日：<%= review.created_at.strftime("%Y-%m-%d") %></div>
+			<% if user_signed_in? and current_user.id == review.user_id %>
+				<div class="review-delete"><%= link_to "削除", review_path(review), method: :delete, data: { confirm: '削除してもいいですか?' } %></div>
+			<% end %>
+		</div>
+	<%end %>
+	
+	<%= paginate @reviews %>
+	
+	<hr>
+	
+	<% if user_signed_in? %>
+		<div class="user-review">
+			<h5>レビューを書く</h5>
+			<%= form_with model: @review, url: coffee_shop_reviews_path(@coffee_shop) do |f| %>
+				<%= f.file_field :image, { onChange: "javascript: handleImage(this.files);"} %>
+				<img id="review-image-preview",size="50x50">
+				<br>
+				<a>・満足度(点)　※0~100の整数のみを入力してください</a><br>
+				<%= f.number_field :review_score, class: "cp_ipnum " %>
+				<br>
+				<a>・レビュー本文　※150字以内で入力してください</a><br>
+				<%= f.text_area :review_comment, class: "user-review-comment cp_iptxt" %>
+				<br>
+				<%= f.submit "書き込む" %>
+			<% end %>
+		</div>
+	<% end %>
 </div>
 
 <%= javascript_include_tag "coffee_shops/show" %>

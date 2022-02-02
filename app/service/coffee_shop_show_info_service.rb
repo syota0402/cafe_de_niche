@@ -53,6 +53,17 @@ class CoffeeShopShowInfoService
     @shop_info
   end
   
+  # 電話番号に「-」をつける
+  def create_tell_number
+    tell =  @coffee_shop.shop_tell
+    @shop_tell = ""
+    if tell.length == 10
+      @shop_tell << "#{tell[0,2]}-#{tell[2,4]}-#{tell[6,4]}"
+    elsif tell.length == 11
+      @shop_tell << "#{tell[0,3]}-#{tell[3,4]}-#{tell[7,4]}"
+    end
+  end
+  
   private
   # 必須項目
   def create_required_item
