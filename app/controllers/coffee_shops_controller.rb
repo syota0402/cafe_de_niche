@@ -11,7 +11,9 @@ class CoffeeShopsController < ApplicationController
     # 店舗のレビューの平均点を計算
     @review_average_score = ReviewAverageScoreService.new(reviews).calculation
     # 店舗の詳細情報を取得
-    @shop_info = CoffeeShopShowInfoService.new(@coffee_shop).create
+    @coffee_shop_show_info_service = CoffeeShopShowInfoService.new(@coffee_shop)
+    @shop_info = @coffee_shop_show_info_service.create
+    @shop_tell = @coffee_shop_show_info_service.create_tell_number
   end
 
   def search
