@@ -7,6 +7,7 @@
   住所[必須]<%= f.text_field :address %>
   <br>
   電話番号[必須]<%= f.number_field :shop_tell %>
+  非公開<%= f.check_box :tell_secret, {}, "true", "false" %>
   <br>
   アクセス<%= f.text_field :access %>
   <br>
