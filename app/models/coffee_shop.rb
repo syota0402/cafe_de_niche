@@ -58,13 +58,10 @@ class CoffeeShop < ApplicationRecord
 	
 	# バリデーション
 	# 必ず登録してほしい項目
-	validates :name, :address, :shop_tell, :municipalitie_id, :regular_holiday, presence: true
-	
-	# 重複チェック
-	validates :shop_tell, uniqueness: true
+	validates :name, :address, :municipalitie_id, :regular_holiday, presence: true
 	
 	# 電話番号チェック
-	validates :shop_tell, presence: true, format: { with: /\A\d{10,11}\z/ }
+	validate :shop_tell_secret
 	
 	# 文字数
 	validates :name, length: { maximum: 30 }
@@ -143,4 +140,15 @@ class CoffeeShop < ApplicationRecord
 		end
 	end
 	
+	def shop_tell_secret
+		return if tell_secret
+		if shop_tell.length < 10 or shop_tell.length > 11
+			errors.add(:shop_tell, "の桁数が不正です")
+		end
+		
+		if CoffeeShop.where(shop_tell: shop_tell).count == 1
+			errors.add(:shop_tell, "が使用済みです")
+		end
+	end
+
 end

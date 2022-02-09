@@ -28,7 +28,7 @@
           <%= render partial: 'shared/show_images', locals: { target: coffee_shop, image_size: "100x100" } %>
           </td>
           <td><%= coffee_shop.name %></td>
-          <td><%= coffee_shop.shop_tell %></td>
+          <td><%= CoffeeShopShowInfoService.new(coffee_shop).create_tell_number %></td>
           <td><%= coffee_shop.address %></td>
           <td><%= link_to "編集", edit_dashboard_coffee_shop_path(coffee_shop) %></td>
           <td><%= link_to "削除", dashboard_coffee_shop_path(coffee_shop), method: :delete, data: { confirm: 'Are you sure?' } %></td>
