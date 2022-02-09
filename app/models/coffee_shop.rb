@@ -61,24 +61,6 @@ class CoffeeShop < ApplicationRecord
 	validates :name, :address, :municipalitie_id, :regular_holiday, presence: true
 	
 	# 電話番号チェック
-	# with_options if: :tell_secret? do |tell_secret|
-	# 	binding.pry
-	# 	tell_secret.validates :shop_tell, presence: true, format: { with: /\A\d{10,11}\z/ }
-	# 	tell_secret.validates :shop_tell, presence: true
-	# 	tell_secret.validates :shop_tell, uniqueness: true
-	# end
-
-	# def tell_secret?
-	# 	tell_secret == "false"
-	# end
-	# binding.pry
-	# validates :shop_tell, presence: true, format: { with: /\A\d{10,11}\z/ }, if: :tell_secret?
-	# validates :shop_tell, presence: true, if: :tell_secret?
-	# validates :shop_tell, uniqueness: true, if: :tell_secret?
-	
-	# def tell_secret?
-	# 	tell_secret == "false"
-	# end
 	validate :shop_tell_secret
 	
 	# 文字数
