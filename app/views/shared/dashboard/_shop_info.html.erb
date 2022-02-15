@@ -1,19 +1,26 @@
 <%= form_with model: @coffee_shop, url: coffee_shop_url, local: true do |f| %>
 
+  <div class="form-inline mt-4 mb-4 row">
+    <%= f.label "画像" %>
+    <%= render partial: 'shared/show_images', locals: { target: @coffee_shop, image_size: "100x100" } %>
+    <div class="d-flex flex-column ml-2">
+      <small class="mb-3">600px×600px推奨。<br>画像をアップロードして下さい。</small>
+      <%= f.file_field :images, onChange: "javascript: handleImage(this.files);", multiple: true %>
+      <img id="image-preview",size="50x50">
+    </div>
+  </div>
   店舗名[必須]<%= f.text_field :name %>
-  <br>
-  店舗HP<%= f.text_field :shop_url %>
-  <br>
-  住所[必須]<%= f.text_field :address %>
   <br>
   電話番号[必須]<%= f.number_field :shop_tell %>
   非公開<%= f.check_box :tell_secret, {}, "true", "false" %>
   <br>
-  アクセス<%= f.text_field :access %>
+  住所[必須]<%= f.text_field :address %>
   <br>
-  営業時間<%= f.time_field :business_start_hour %> ~ <%= f.time_field :business_end_hour %>
-  <br>
-  すいている時間<%= f.time_field :slack_time_start %> ~ <%= f.time_field :slack_time_end %>
+  エリア[必須]
+  <% Municipality.all.each do |municipalitie| %>
+    <%= f.radio_button :municipalitie, municipalitie.id %>
+    <%= f.label :municipalitie, municipalitie.name, {value: municipalitie.id, stylr: "display: inline-block;"} %>
+  <% end %>
   <br>
   定休日[必須]
   <% DayOfWeek.all.each do |day_of_week| %>
@@ -24,24 +31,22 @@
     <% end %>
   <% end %>
   <br>
-  年齢層
-  <%= f.select :age_group, AgeGroup.pluck(:name), { include_blank: '選択してください' } %>
+  店舗HP<%= f.text_field :shop_url %>
   <br>
   Instagram公式URL<%= f.text_field :instagram_url %>
   <br>
-  InstagramスポットURL<%= f.text_field :instagram_spot_url %>
+  アクセス<%= f.text_field :access %>
   <br>
-  エリア[必須]<%= f.select :municipalitie_id, @municipality_tags, { include_blank: '選択してください' } %>
+  営業時間<%= f.time_field :business_start_hour %> ~ <%= f.time_field :business_end_hour %>
   <br>
-  <div class="form-inline mt-4 mb-4 row">
-    <%= f.label "画像" %>
-    <%= render partial: 'shared/show_images', locals: { target: @coffee_shop, image_size: "100x100" } %>
-    <div class="d-flex flex-column ml-2">
-      <small class="mb-3">600px×600px推奨。<br>画像をアップロードして下さい。</small>
-      <%= f.file_field :images, onChange: "javascript: handleImage(this.files);", multiple: true %>
-      <img id="image-preview",size="50x50">
-    </div>
-  </div>
+  すいている時間<%= f.time_field :slack_time_start %> ~ <%= f.time_field :slack_time_end %>
+  <br>
+  年齢層
+  <% AgeGroup.all.each do |age_group| %>
+    <%= f.radio_button :age_group, age_group.id %>
+    <%= f.label :age_group, age_group.name, {value: age_group.id, stylr: "display: inline-block;"} %>
+  <% end %>
+  <br>
   こだわり<br>
   <div class="check_box">
     <%= f.collection_check_boxes(:search_category_ids, SearchCategory.all, :id, :name) do |search_category| %>
@@ -54,6 +59,26 @@
       <%= shop_atmosphere.label { shop_atmosphere.check_box + shop_atmosphere.text } %>
     <% end %>
   </div>
+  店員さんの雰囲気<br>
+  <div class="check_box">
+    <%= f.collection_check_boxes(:atmosphere_of_clerk_ids, AtmosphereOfClerk.all, :id, :name) do |atmosphere_of_clerk| %>
+      <%= atmosphere_of_clerk.label { atmosphere_of_clerk.check_box + atmosphere_of_clerk.text } %>
+    <% end %>
+  </div>
+  静かさ<br>
+  <div class="check_box">
+    <%= f.collection_check_boxes(:volume_in_shop_ids, VolumeInShop.all, :id, :name) do |volume_in_shop| %>
+      <%= volume_in_shop.label { volume_in_shop.check_box + volume_in_shop.text } %>
+    <% end %>  
+  </div>
+  風景<br>
+  <div class="check_box">
+    <%= f.collection_check_boxes(:shop_scenery_ids, ShopScenery.all, :id, :name) do |shop_scenery| %>
+      <%= shop_scenery.label { shop_scenery.check_box + shop_scenery.text } %>
+    <% end %>
+  </div>
+  <br>
+  インスタ映え：<%= f.collection_radio_buttons :look_by_instagram, CoffeeShop.look_by_instagrams_i18n, :first , :last %>
   コーヒー豆<br>
   <div class="check_box">
     <%= f.collection_check_boxes(:coffee_bean_ids, CoffeeBean.all, :id, :name) do |coffee_bean| %>
@@ -62,12 +87,6 @@
   </div>
   席数<%= f.number_field :shop_seats %>
   <br>
-  静かさ<br>
-  <div class="check_box">
-    <%= f.collection_check_boxes(:volume_in_shop_ids, VolumeInShop.all, :id, :name) do |volume_in_shop| %>
-      <%= volume_in_shop.label { volume_in_shop.check_box + volume_in_shop.text } %>
-    <% end %>  
-  </div>
   食べもの<br>
   <div class="check_box">
     <%= f.collection_check_boxes(:food_menu_ids, FoodMenu.all, :id, :name) do |food_menu| %>
@@ -80,42 +99,76 @@
       <%= shop_bgm.label { shop_bgm.check_box + shop_bgm.text } %>
     <% end %>
   </div>
-  PC作業<%= f.select :pc_work, PcWork.pluck(:name), { include_blank: '選択してください' } %>
+  テラス席
+  <%= f.radio_button :terrace_seat, 'あり' %>
+  <%= f.label :terrace_seat, 'あり', {value: 'あり', stylr: "display: inline-block;"} %>
+  <%= f.radio_button :terrace_seat, 'なし' %>
+  <%= f.label :terrace_seat, 'なし', {value: 'なし', stylr: "display: inline-block;"} %>
   <br>
-  時間制限<%= f.select :time_limit, TimeLimit.pluck(:name), { include_blank: '選択してください' } %>
+  貸切
+  <%= f.radio_button :can_reserved, '可' %>
+  <%= f.label :can_reserved, '可', {value: '可', stylr: "display: inline-block;"} %>
+  <%= f.radio_button :can_reserved, '不可' %>
+  <%= f.label :can_reserved, '不可', {value: '不可', stylr: "display: inline-block;"} %>
   <br>
-  風景<br>
-  <div class="check_box">
-    <%= f.collection_check_boxes(:shop_scenery_ids, ShopScenery.all, :id, :name) do |shop_scenery| %>
-      <%= shop_scenery.label { shop_scenery.check_box + shop_scenery.text } %>
-    <% end %>
-  </div>
-  テラス席<%= f.select :terrace_seat, ['あり', 'なし'], { include_blank: '選択してください'} %>
+  漫画
+  <%= f.radio_button :comic, 'あり' %>
+  <%= f.label :comic, 'あり', {value: 'あり', stylr: "display: inline-block;"} %>
+  <%= f.radio_button :comic, 'なし' %>
+  <%= f.label :comic, 'なし', {value: 'なし', stylr: "display: inline-block;"} %>
   <br>
-  貸切<%= f.select :can_reserved, ['可','不可'], { include_blank: '選択してください'} %>
+  雑誌
+  <%= f.radio_button :magazine, 'あり' %>
+  <%= f.label :magazine, 'あり', {value: 'あり', stylr: "display: inline-block;"} %>
+  <%= f.radio_button :magazine, 'なし' %>
+  <%= f.label :magazine, 'なし', {value: 'なし', stylr: "display: inline-block;"} %>
   <br>
-  漫画<%= f.select :comic, ['あり','なし'], { include_blank: '選択してください' } %>
+  新聞
+  <%= f.radio_button :newspaper, 'あり' %>
+  <%= f.label :newspaper, 'あり', {value: 'あり', stylr: "display: inline-block;"} %>
+  <%= f.radio_button :newspaper, 'なし' %>
+  <%= f.label :newspaper, 'なし', {value: 'なし', stylr: "display: inline-block;"} %>
   <br>
-  雑誌<%= f.select :magazine, ['あり','なし'], { include_blank: '選択してください' } %>
+  ラテアート
+  <%= f.radio_button :latte_art, 'あり' %>
+  <%= f.label :latte_art, 'あり', {value: 'あり', stylr: "display: inline-block;"} %>
+  <%= f.radio_button :latte_art, 'なし' %>
+  <%= f.label :latte_art, 'なし', {value: 'なし', stylr: "display: inline-block;"} %>
   <br>
-  ラテアート<%= f.select :latte_art, ['あり','なし'], { include_blank: '選択してください' } %>
+  モーニング
+  <%= f.radio_button :morning_menu, 'あり' %>
+  <%= f.label :morning_menu, 'あり', {value: 'あり', stylr: "display: inline-block;"} %>
+  <%= f.radio_button :morning_menu, 'なし' %>
+  <%= f.label :morning_menu, 'なし', {value: 'なし', stylr: "display: inline-block;"} %>
   <br>
-  新聞<%= f.select :newspaper, ['あり','なし'], { include_blank: '選択してください' } %>
+  無料の水
+  <%= f.radio_button :free_water, 'あり' %>
+  <%= f.label :free_water, 'あり', {value: 'あり', stylr: "display: inline-block;"} %>
+  <%= f.radio_button :free_water, 'なし' %>
+  <%= f.label :free_water, 'なし', {value: 'なし', stylr: "display: inline-block;"} %>
   <br>
-  モーニング<%= f.select :morning_menu, ['あり','なし'], { include_blank: '選択してください' } %>
+  ペット
+  <%= f.radio_button :with_pet, 'あり' %>
+  <%= f.label :with_pet, 'あり', {value: 'あり', stylr: "display: inline-block;"} %>
+  <%= f.radio_button :with_pet, 'なし' %>
+  <%= f.label :with_pet, 'なし', {value: 'なし', stylr: "display: inline-block;"} %>
   <br>
-  無料の水<%= f.select :free_water, ['あり','なし'], { include_blank: '選択してください' } %>
-  <br>
-  ペット<%= f.select :with_pet, ['可','不可'], { include_blank: '選択してください' } %>
-  <br>
-  共有PC<%= f.select :free_pc, ['あり','なし'], { include_blank: '選択してください' } %>
-  <br>
-  駐車場<%= f.select :parking_place, ['あり', 'なし'], { include_blank: '選択してください' } %>
+  駐車場
+  <%= f.radio_button :parking_place, 'あり' %>
+  <%= f.label :parking_place, 'あり', {value: 'あり', stylr: "display: inline-block;"} %>
+  <%= f.radio_button :parking_place, 'なし' %>
+  <%= f.label :parking_place, 'なし', {value: 'なし', stylr: "display: inline-block;"} %>
   <br>
   支払い方法<br>
   <div class="check_box">
     <%= f.collection_check_boxes(:payment_method_ids, PaymentMethod.all, :id, :name) do |payment_method| %>
       <%= payment_method.label { payment_method.check_box + payment_method.text } %>
+    <% end %>
+  </div>
+  ポイントカード<br>
+  <div class="check_box">
+    <%= f.collection_check_boxes(:point_card_ids, PointCard.all, :id, :name) do |point_card| %>
+      <%= point_card.label { point_card.check_box + point_card.text } %>
     <% end %>
   </div>
   予算(上限)：<%= f.number_field :shop_badget_upper %>円
@@ -126,17 +179,11 @@
   <br>
   カフェラテ(1杯)：<%= f.number_field :latte_price %>円
   <br>
-  椅子の種類<br>
-  <div class="check_box">
-    <%= f.collection_check_boxes(:chair_type_ids, ChairType.all, :id, :name) do |chair_type| %>
-      <%= chair_type.label { chair_type.check_box + chair_type.text } %>
-    <% end %>
-  </div>
-  コンセント：<%= f.select :outlet, CoffeeShop.outlets_i18n.invert, { include_blank: '選択してください'} %>
+  コンセント：<%= f.collection_radio_buttons :outlet, CoffeeShop.outlets_i18n, :first , :last %>
   <br>
-  Wi-Fi：<%= f.select :wifi, CoffeeShop.wifis_i18n.invert, { include_blank: '選択してください'} %>
+  Wi-Fi：<%= f.collection_radio_buttons :wifi, CoffeeShop.wifis_i18n, :first , :last %>
   <br>
-  禁煙・喫煙：<%= f.select :smoking, CoffeeShop.smokings_i18n.invert, { include_blank: '選択してください'} %>
+  禁煙・喫煙：<%= f.collection_radio_buttons :smoking, CoffeeShop.smokings_i18n, :first , :last %>
   <br>
   利用シーン<br>
   <div class="check_box">
@@ -144,10 +191,28 @@
       <%= use_scene.label { use_scene.check_box + use_scene.text } %>
     <% end %>
   </div>
-  店員さんの雰囲気<br>
+  PC作業
+  <% PcWork.all.each do |pc_work| %>
+    <%= f.radio_button :pc_work, pc_work.id %>
+    <%= f.label :pc_work, pc_work.name, {value: pc_work.id, stylr: "display: inline-block;"} %>
+  <% end %>
+  <br>
+  時間制限
+  <% TimeLimit.all.each do |time_limit| %>
+    <%= f.radio_button :time_limit, time_limit.id %>
+    <%= f.label :time_limit, time_limit.name, {value: time_limit.id, stylr: "display: inline-block;"} %>
+  <% end %>
+  <br>
+  共有PC
+  <%= f.radio_button :free_pc, 'あり' %>
+  <%= f.label :free_pc, 'あり', {value: 'あり', stylr: "display: inline-block;"} %>
+  <%= f.radio_button :free_pc, 'なし' %>
+  <%= f.label :free_pc, 'なし', {value: 'なし', stylr: "display: inline-block;"} %>
+  <br>
+  椅子の種類<br>
   <div class="check_box">
-    <%= f.collection_check_boxes(:atmosphere_of_clerk_ids, AtmosphereOfClerk.all, :id, :name) do |atmosphere_of_clerk| %>
-      <%= atmosphere_of_clerk.label { atmosphere_of_clerk.check_box + atmosphere_of_clerk.text } %>
+    <%= f.collection_check_boxes(:chair_type_ids, ChairType.all, :id, :name) do |chair_type| %>
+      <%= chair_type.label { chair_type.check_box + chair_type.text } %>
     <% end %>
   </div>
   机の広さ<br>
@@ -156,21 +221,13 @@
       <%= size_of_desk.label { size_of_desk.check_box + size_of_desk.text } %>
     <% end %>
   </div>
-  ポイントカード<br>
-  <div class="check_box">
-    <%= f.collection_check_boxes(:point_card_ids, PointCard.all, :id, :name) do |point_card| %>
-      <%= point_card.label { point_card.check_box + point_card.text } %>
-    <% end %>
-  </div>
-  予約：<%= f.select :reservation, CoffeeShop.reservations_i18n.invert, { include_blank: '選択してください'} %>
+  予約：<%= f.collection_radio_buttons :reservation, CoffeeShop.reservations_i18n, :first , :last %>
   <br>
-  テイクアウト：<%= f.select :take_out, CoffeeShop.take_outs_i18n.invert, { include_blank: '選択してください'} %>
+  テイクアウト：<%= f.collection_radio_buttons :take_out, CoffeeShop.take_outs_i18n, :first , :last %>
   <br>
-  お子様連れ：<%= f.select :with_children, CoffeeShop.with_children_i18n.invert, { include_blank: '選択してください'} %>
+  お子様連れ：<%= f.collection_radio_buttons :with_children, CoffeeShop.with_children_i18n, :first , :last %>
   <br>
-  アミューズメント：<%= f.select :amusement, CoffeeShop.amusements_i18n.invert, { include_blank: '選択してください'} %>
-  <br>
-  インスタ映え：<%= f.select :look_by_instagram, CoffeeShop.look_by_instagrams_i18n.invert, { include_blank: '選択してください'} %>
+  アミューズメント：<%= f.collection_radio_buttons :amusement, CoffeeShop.amusements_i18n, :first , :last %>
   <hr>
   <% if metod.eql?('edit') %>
     <%= f.submit "更新" %>
