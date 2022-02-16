@@ -18,7 +18,6 @@ class Dashboard::CoffeeShopsController < ApplicationController
   
   def new
     @coffee_shop = CoffeeShop.new
-    set_municipality_tags
   end
 
   def create
@@ -32,7 +31,7 @@ class Dashboard::CoffeeShopsController < ApplicationController
   end
 
   def edit
-    set_municipality_tags
+    # set_municipality_tags
   end
 
   def update
@@ -56,14 +55,6 @@ class Dashboard::CoffeeShopsController < ApplicationController
   private
   def set_coffee_shop
     @coffee_shop = CoffeeShop.find(params[:id])
-  end
-    
-  def set_municipality_tags
-    municipalities = Municipality.all
-    @municipality_tags = []
-    municipalities.each do |municipality|
-      @municipality_tags << [municipality.name, municipality.id]
-    end
   end
   
   def coffee_shop_params
