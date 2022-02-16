@@ -18,7 +18,6 @@ class Dashboard::CoffeeShopsController < ApplicationController
   
   def new
     @coffee_shop = CoffeeShop.new
-    # set_municipality_tags
   end
 
   def create
@@ -57,14 +56,6 @@ class Dashboard::CoffeeShopsController < ApplicationController
   def set_coffee_shop
     @coffee_shop = CoffeeShop.find(params[:id])
   end
-    
-  # def set_municipality_tags
-  #   municipalities = Municipality.all
-  #   @municipality_tags = []
-  #   municipalities.each do |municipality|
-  #     @municipality_tags << [municipality.name, municipality.id]
-  #   end
-  # end
   
   def coffee_shop_params
     params.require(:coffee_shop).permit(:name, :shop_url, :address, :shop_tell, :access, :business_start_hour, :business_end_hour, :instagram_url, :instagram_spot_url, :municipalitie_id, :slack_time_start, :slack_time_end, :age_group, :shop_seats, :pc_work, :time_limit, :terrace_seat, :can_reserved, :comic, :magazine, :latte_art, :newspaper, :morning_menu, :parking_place, :free_water, :with_pet, :free_pc, :shop_badget_upper, :shop_badget_lower, :coffee_price, :latte_price, :outlet, :wifi, :smoking, :reservation, :take_out, :with_children, :have_insta_account, :amusement, :look_by_instagram, :tell_secret, 
