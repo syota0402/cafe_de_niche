@@ -18,6 +18,7 @@ class Dashboard::CoffeeShopsController < ApplicationController
   
   def new
     @coffee_shop = CoffeeShop.new
+    @municipalities = Municipality.where(prefecture_id: params[:prefecture_id])
   end
 
   def create
@@ -31,7 +32,7 @@ class Dashboard::CoffeeShopsController < ApplicationController
   end
 
   def edit
-    # set_municipality_tags
+    set_municipalities
   end
 
   def update
@@ -75,6 +76,17 @@ class Dashboard::CoffeeShopsController < ApplicationController
     users.each do |user|
       user.update(best_shop_id: "")
     end
+  end
+  
+  def set_municipalities
+    # 店舗情報からエリアidを取得
+    eria_id = @coffee_shop.municipalitie_id
+    
+    # エリアIDから都道府県のIDを取得
+    set_prefecture_id = Municipality.find(eria_id).prefecture_id
+    
+    # 都道府県のIDから対象の都道府県の全てのエリアIDを取得
+    @municipalities = Municipality.where(prefecture_id: set_prefecture_id)
   end
   
 end

@@ -14,7 +14,10 @@ Rails.application.routes.draw do
   
   namespace :dashboard do
     resources :users, only: [:index, :destroy, :edit, :update]
-    resources :coffee_shops, except: [:show]
+    # resources :coffee_shops, except: [:show]
+    resources :coffee_shops do
+      get :select, on: :collection
+    end
     resources :search_categories, except: [:new]
     resources :prefectures, except: [:new]
     resources :municipalities, except: [:new]

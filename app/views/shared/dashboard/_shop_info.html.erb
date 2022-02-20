@@ -16,7 +16,7 @@
   <div class='dashbord-item'>住所[必須]</div><%= f.text_field :address %>
   <br>
   <div class='dashbord-item'>エリア[必須]</div>
-  <% Municipality.all.each do |municipalitie| %>
+  <% @municipalities.all.each do |municipalitie| %>
     <%= f.radio_button :municipalitie_id, municipalitie.id %>
     <%= f.label :municipalitie_id, municipalitie.name, {value: municipalitie.id, stylr: "display: inline-block;"} %>
   <% end %>
