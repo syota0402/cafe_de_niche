@@ -1,0 +1,6 @@
+ <h2>都道府県を選択</h2>
+<% Prefecture.all.each do |prefecture| %>
+  <%= link_to new_dashboard_coffee_shop_path(prefecture_id: prefecture.id) , class: "btn btn-prefecture" do %>
+    <%= prefecture.name %>
+  <% end %>
+<% end %>

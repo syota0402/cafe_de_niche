@@ -18,6 +18,8 @@ class Dashboard::CoffeeShopsController < ApplicationController
   
   def new
     @coffee_shop = CoffeeShop.new
+    # 対象の都道府県のエリアのみ表示
+    @municipalities = Municipality.where(prefecture_id: params[:prefecture_id])
   end
 
   def create
@@ -31,7 +33,8 @@ class Dashboard::CoffeeShopsController < ApplicationController
   end
 
   def edit
-    # set_municipality_tags
+    # 対象の都道府県のエリアのみ表示
+    @municipalities = Municipality.where(prefecture_id: Municipality.find(@coffee_shop.municipalitie_id).prefecture_id)
   end
 
   def update
