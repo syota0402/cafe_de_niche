@@ -61,9 +61,13 @@ class CoffeeShop < ApplicationRecord
 	validates :name, :address, :municipalitie_id, :regular_holiday, presence: true
 	
 	# 電話番号チェック
-	validate :shop_tell_secret
+	# 非公開にチェックが入っていなければ、重複と桁数をチェックする
+	with_options unless: :tell_secret do
+		validates :shop_tell, uniqueness: true
+		validates :shop_tell, presence: true, format: { with: /\A\d{10,11}\z/ }
+	end
 	
-	# 文字数
+	# 文字数(最大)
 	validates :name, length: { maximum: 30 }
 	validates :shop_url, length: { maximum: 2048 }
 	validates :address, length: { maximum: 300 }
@@ -95,7 +99,7 @@ class CoffeeShop < ApplicationRecord
 	
 	scope :search_for_name_and_tell, -> (keyword) {
 		where("name LIKE ?", "%#{keyword}%").
-		or(where(tell: keyword.to_i))
+		or(where(shop_tell: keyword.to_i))
 	}
 	
 	def review_new
@@ -140,15 +144,4 @@ class CoffeeShop < ApplicationRecord
 		end
 	end
 	
-	def shop_tell_secret
-		return if tell_secret
-		if shop_tell.length < 10 or shop_tell.length > 11
-			errors.add(:shop_tell, "の桁数が不正です")
-		end
-		
-		if CoffeeShop.where(shop_tell: shop_tell).count == 1
-			errors.add(:shop_tell, "が使用済みです")
-		end
-	end
-
 end
