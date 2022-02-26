@@ -41,7 +41,7 @@ class CoffeeShop < ApplicationRecord
 	has_many :point_cards, :through => :coffee_shop_point_cards
 	
 	has_many :coffee_shop_drink_menus, dependent: :destroy
-	has_many :food_menus, :through => :coffee_shop_drink_menus
+	has_many :drink_menus, :through => :coffee_shop_drink_menus
 	
 	accepts_nested_attributes_for :coffee_shop_search_categories, allow_destroy: true
 	accepts_nested_attributes_for :coffee_shop_shop_atmospheres, allow_destroy: true

@@ -91,6 +91,12 @@
       <%= food_menu.label { food_menu.check_box + food_menu.text } %>
     <% end %>
   </div>
+  <div class='dashbord-item'>飲み物</div>
+  <div class="check_box">
+    <%= f.collection_check_boxes(:drink_menu_ids, DrinkMenu.all, :id, :name) do |drink_menu| %>
+      <%= drink_menu.label { drink_menu.check_box + drink_menu.text } %>
+    <% end %>
+  </div>
   <div class='dashbord-item'>BGM</div>
   <div class="check_box">
     <%= f.collection_check_boxes(:shop_bgm_ids, ShopBgm.all, :id, :name) do |shop_bgm| %>
