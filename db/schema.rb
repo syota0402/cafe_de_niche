@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_08_110634) do
+ActiveRecord::Schema.define(version: 2022_02_26_092503) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -74,6 +74,13 @@ ActiveRecord::Schema.define(version: 2022_02_08_110634) do
   create_table "coffee_shop_coffee_beans", force: :cascade do |t|
     t.integer "coffee_shop_id"
     t.integer "coffee_bean_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "coffee_shop_drink_menus", force: :cascade do |t|
+    t.integer "coffee_shop_id"
+    t.integer "drink_menu_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -202,6 +209,12 @@ ActiveRecord::Schema.define(version: 2022_02_08_110634) do
   end
 
   create_table "day_of_weeks", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "drink_menus", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

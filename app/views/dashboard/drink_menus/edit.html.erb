@@ -1,0 +1,9 @@
+<h1>飲み物編集</h1>
+
+<%= form_with model: @drink_menu, url: dashboard_drink_menu_path(@drink_menu), local: true do |f| %>
+  <%= f.label :name, "品面" %>
+  <%= f.text_field :name %>
+  
+  <%= f.submit "更新" %>
+<% end %>
+<%= link_to "飲み物一覧に戻る", dashboard_drink_menus_path %>
