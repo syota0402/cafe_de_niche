@@ -154,6 +154,18 @@
   </div>
   
   <div class="search-container">
+    <a class="search-name" href="#fold-drink" data-toggle="collapse">飲み物</a>
+    <div id="fold-drink" class="collapse">
+      <%= f.collection_check_boxes(:drink_menu_ids, DrinkMenu.all, :id, :name, {include_hidden: false}) do |drink_menu| %>
+        <div class="search-checkbox">
+          <%= drink_menu.check_box %>
+          <%= drink_menu.label %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="search-container">
     <a class="search-name" href="#fold-shop-bgm" data-toggle="collapse">BGM</a>
     <div id="fold-shop-bgm" class="collapse">
       <%= f.collection_check_boxes(:shop_bgm_ids, ShopBgm.all, :id, :name, {include_hidden: false}) do |shop_bgm| %>

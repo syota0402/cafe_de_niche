@@ -31,24 +31,26 @@
   		<% end %>
   	</tbody>
   </table>
-  <div class="liker-container">
-  	<div class="liker-title">
-  		お気に入り
-  	</div>
-  	<div class="liker-count">
-  		<%= @coffee_shop.likers_count %>人
-  	</div>
-	  <% @likers.last(5).each do |liker| %>
-	  	<div class="liker-user">
-	  		<%= link_to(user_path(liker.id)) do %>
-	  			<%= render partial: 'shared/show_image', locals: { target: liker, image_size: "50x50" } %>
-	  			<p>
-	  				<%= liker.name %>
-	  			</p>
-				<% end %>
-			</div>
-	  <% end %>
-  </div>
+  <% if @likers.present? %>
+	  <div class="liker-container">
+	  	<div class="liker-title">
+	  		お気に入り
+	  	</div>
+	  	<div class="liker-count">
+	  		<%= @coffee_shop.likers_count %>人
+	  	</div>
+		  <% @likers.last(5).each do |liker| %>
+		  	<div class="liker-user">
+		  		<%= link_to(user_path(liker.id)) do %>
+		  			<%= render partial: 'shared/show_image', locals: { target: liker, image_size: "50x50" } %>
+		  			<p>
+		  				<%= liker.name %>
+		  			</p>
+					<% end %>
+				</div>
+		  <% end %>
+		</div>
+	<% end %>
 	<div class="review-totel-container">
 		<div class="review">Review</div>
 		<div class="review-totel-count">

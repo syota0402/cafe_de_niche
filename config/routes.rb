@@ -33,6 +33,7 @@ Rails.application.routes.draw do
     resources :atmosphere_of_clerks, except: [:new]
     resources :size_of_desks, except: [:new]
     resources :point_cards, except: [:new]
+    resources :drink_menus, except: [:new]
   end
   
   devise_for :users, :controllers => {

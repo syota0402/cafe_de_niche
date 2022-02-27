@@ -17,6 +17,7 @@ class CoffeeShopShowInfoService
     create_shop_seat if @coffee_shop.shop_seats.present?
     create_volume_in_shop if @coffee_shop.volume_in_shops.present?
     create_food_menu if @coffee_shop.food_menus.present?
+    create_drink_menu if @coffee_shop.drink_menus.present?
     create_shop_bgm if @coffee_shop.shop_bgms.present?
     create_pc_work if @coffee_shop.pc_work.present?
     create_time_limit if @coffee_shop.time_limit.present?
@@ -181,6 +182,15 @@ class CoffeeShopShowInfoService
     hash.class
     hash[:title] = '食べ物'
     hash[:value] = @coffee_shop.food_menus.pluck(:name).join(',')
+    @shop_info << hash
+  end
+  
+  # 飲み物
+  def create_drink_menu
+    hash = {}
+    hash.class
+    hash[:title] = '飲み物'
+    hash[:value] = @coffee_shop.drink_menus.pluck(:name).join(',')
     @shop_info << hash
   end
   
