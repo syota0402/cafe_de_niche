@@ -61,6 +61,7 @@ class CoffeeShopsController < ApplicationController
       hash[:shop_seats_search_type] = params[:shop_seats_search_type]
       hash[:volume_in_shop_ids] = params[:volume_in_shop_ids]
       hash[:food_menu_ids] = params[:food_menu_ids]
+      hash[:drink_menu_ids] = params[:drink_menu_ids]
       hash[:shop_bgm_ids] = params[:shop_bgm_ids]
       hash[:pc_work] = params[:pc_work]
       hash[:time_limit] = params[:time_limit]

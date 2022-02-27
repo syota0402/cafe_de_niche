@@ -57,6 +57,7 @@ class CoffeeShopSearchService
     @bookmark = hash[:bookmark]
     @bookmark_by_follower = hash[:bookmark_by_follower]
     @best_shop_by_follower = hash[:best_shop_by_follower]
+    @drink_menu_ids = hash[:drink_menu_ids]
   end
   
   def search
@@ -106,6 +107,9 @@ class CoffeeShopSearchService
     
     # 食べ物
     search_by_food_menu if @food_menu_ids.present?
+    
+    # 飲み物
+    search_by_drink_menu if @drink_menu_ids.present?
     
     # BGM
     search_by_shop_bgm if @shop_bgm_ids.present?
@@ -359,6 +363,12 @@ class CoffeeShopSearchService
   # 食べ物
   def search_by_food_menu
     coffee_shop_ids = CoffeeShopFoodMenu.where(food_menu_id: @food_menu_ids).pluck(:coffee_shop_id)
+    @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
+  end
+  
+  # 飲み物
+  def search_by_drink_menu
+    coffee_shop_ids = CoffeeShopDrinkMenu.where(drink_menu_id: @drink_menu_ids).pluck(:coffee_shop_id)
     @coffee_shops = @coffee_shops.where(id: coffee_shop_ids)
   end
   

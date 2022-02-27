@@ -12,39 +12,45 @@
       <% end %>
     <% end %>
     
-    <div class="user-favorite-container">
-      <%= link_to(favorite_users_path) do %>
-        <span class="user-favorite-title">お気に入りのカフェ</span>
-      <% end %>
-      <% current_user.likees(CoffeeShop).last(5).each do |favorite_coffee_shop| %>
-        <div class="liker-user">
-          <%= link_to(coffee_shop_path(favorite_coffee_shop)) do %>
-		  			<%= render partial: 'shared/show_image_first', locals: { target: favorite_coffee_shop, image_size: "50x50" } %>
-		  			<p>
-		  				<%= favorite_coffee_shop.name %>
-		  			</p>
-					<% end %>
-        </div>
-      <% end %>
-    </div>
+    <!--お気に入りのお店を5つ表示-->
+    <% if current_user.likees(CoffeeShop).present? %>
+      <div class="user-favorite-container">
+        <%= link_to(favorite_users_path) do %>
+          <span class="user-favorite-title">お気に入りのカフェ</span>
+        <% end %>
+        <% current_user.likees(CoffeeShop).last(5).each do |favorite_coffee_shop| %>
+          <div class="liker-user">
+            <%= link_to(coffee_shop_path(favorite_coffee_shop)) do %>
+  		  			<%= render partial: 'shared/show_image_first', locals: { target: favorite_coffee_shop, image_size: "50x50" } %>
+  		  			<p>
+  		  				<%= favorite_coffee_shop.name %>
+  		  			</p>
+  					<% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
     
     <br>
     
-    <div class="user-favorite-container">
-      <%= link_to(following_users_path) do %>
-        <span class="user-favorite-title">フォローしているユーザー</span>
-      <% end %>
-      <% current_user.followees(User).last(5).each do |follow_user| %>
-        <div class="liker-user">
-          <%= link_to(user_path(follow_user.id)) do %>
-		  			<%= render partial: 'shared/show_image', locals: { target: follow_user, image_size: "50x50" } %>
-		  			<p>
-		  				<%= follow_user.name %>
-		  			</p>
-					<% end %>
-        </div>
-      <% end %>
-    </div>
+    <!--フォローユーザーを5人表示-->
+    <% if current_user.followees(User).present? %>
+      <div class="user-favorite-container">
+        <%= link_to(following_users_path) do %>
+          <span class="user-favorite-title">フォローしているユーザー</span>
+        <% end %>
+        <% current_user.followees(User).last(5).each do |follow_user| %>
+          <div class="liker-user">
+            <%= link_to(user_path(follow_user.id)) do %>
+  		  			<%= render partial: 'shared/show_image', locals: { target: follow_user, image_size: "50x50" } %>
+  		  			<p>
+  		  				<%= follow_user.name %>
+  		  			</p>
+  					<% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
     
   <!--サインインしていない-->
   <% else %>
