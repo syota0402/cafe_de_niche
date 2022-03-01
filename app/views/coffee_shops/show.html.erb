@@ -14,12 +14,21 @@
   <div class="shop-tell">
   	<%= image_tag "/images/tell_icon.png", size: "30x30" %><%= @shop_tell %>
   </div>
-  <div class="shop-hp">
-  	<%= image_tag "/images/hp_icon.png", size: "30x30" %><%= link_to @coffee_shop.shop_url, @coffee_shop.shop_url, target: :_blank, rel: "noopener noreferrer" %>
-  </div>
-  <div class="shop-insta">
-  	<%= image_tag "/images/insta_icon.png", size: "30x30" %><%= link_to @coffee_shop.instagram_url, 'https://www.instagram.com/' + @coffee_shop.instagram_url , target: :_blank, rel: "noopener noreferrer" %>
-  </div>
+  <% if @coffee_shop.shop_url.present? %>
+	  <div class="shop-hp">
+	  	<%= image_tag "/images/hp_icon.png", size: "30x30" %><%= link_to @coffee_shop.shop_url, @coffee_shop.shop_url, target: :_blank, rel: "noopener noreferrer" %>
+	  </div>
+	<% end %>
+	<% if @coffee_shop.instagram_url.present? %>
+	  <div class="shop-insta">
+	  	<%= image_tag "/images/insta_icon.png", size: "30x30" %><%= link_to @coffee_shop.instagram_url, 'https://www.instagram.com/' + @coffee_shop.instagram_url , target: :_blank, rel: "noopener noreferrer" %>
+	  </div>
+	<% end %>
+	<% if @coffee_shop.tabelog_url.present? %>	 
+	  <div class="shop-tabelog">
+	  	<%= image_tag "/images/tabelog_icon.png", size: "50x30" %><%= link_to @coffee_shop.tabelog_url, @coffee_shop.tabelog_url, target: :_blank, rel: "noopener noreferrer" %>
+	  </div>
+	<% end %>
   <br>
   <table class="shop-table">
   	<tbody>
