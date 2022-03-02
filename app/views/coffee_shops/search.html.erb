@@ -20,7 +20,7 @@
           <% end %>
         </div>
         <h3 class="list-name">
-          <%= link_to coffee_shop.name, coffee_shop_path(coffee_shop) %>
+          <%= link_to coffee_shop.name, coffee_shop_path(coffee_shop), class: 'list-name-color' %>
         </h3>
         <div class="list-favorite">
           <% if user_signed_in? %>
@@ -38,6 +38,29 @@
         <div class="list-popular">
           <%= image_tag "/images/review_image.png", size: "20x20" %>レビュー数：<%= coffee_shop.reviews.count %>件　
           <%= image_tag "/images/good_hand.png", size: "20x20" %>お気に入り数：<%= coffee_shop.likers(User).count %>人
+        </div>
+        <div class="list-sns">
+          <% if coffee_shop.shop_url.present? %>
+            <div class="list-icon">
+          	  <%= link_to coffee_shop.shop_url do %>
+        	  	  <%= image_tag "/images/hp_icon.png", size: "30x30" %>
+        	  	<% end %>
+        	  </div>
+        	<% end %>
+          <% if coffee_shop.instagram_url.present? %>
+        	  <div class="list-icon">
+        	  	<%= link_to('https://www.instagram.com/' + coffee_shop.instagram_url) do %>
+        	  	  <%= image_tag "/images/insta_icon.png", size: "30x30" %>
+        	  	<% end %>
+        	  </div>
+        	<% end %>
+        	<% if coffee_shop.tabelog_url.present? %>
+            <div class="list-icon">
+              <%= link_to(coffee_shop.tabelog_url) do %>
+        	  	  <%= image_tag "/images/tabelog_icon.png", size: "50x30" %>
+        	  	<% end %>
+            </div>
+          <% end %>
         </div>
         <div class="list-info">
           住所：<%= coffee_shop.address %>

@@ -319,8 +319,6 @@
   display: flex;
   position: relative;
   height: 10rem;
-  // margin: 0.5rem;
-  // border: 8px inset rgba(204, 147, 91, 0.82);
   font-size: 1rem;
 }
 
@@ -336,6 +334,10 @@
   left: 120px;
 }
 
+.list-name-color {
+  font-weight: bold;
+}
+
 .list-favorite {
   position: absolute;
   right: 1rem;
@@ -344,21 +346,21 @@
 .list-access {
   position: absolute;
   left: 120px;
-  top: 2rem;
+  top: 2.3rem;
   font-size: 1rem;
 }
 
 .list-review-score {
   position: absolute;
   left: 120px; 
-  top: 3rem;
+  top: 3.4rem;
   font-size: 1.5rem;
 }
 
 .list-popular {
   position: absolute;
   left: 120px;
-  top: 5rem;
+  top: 5.3rem;
   font-size: 1rem;
 }
 
@@ -388,6 +390,17 @@
 
 .list-paginate {
   margin-left: 120px;
+}
+
+
+.list-sns {
+  right: 4rem;
+  position: absolute;
+  text-align: center;
+}
+
+.list-icon {
+  padding: 5px 0;
 }
 // ----------------------------
 
