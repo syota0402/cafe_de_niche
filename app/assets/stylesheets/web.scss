@@ -328,6 +328,11 @@
   margin-bottom: auto;
 }
 
+.list-image img:hover{
+  transform: scale(1.2);
+  transition-duration: 0.5s;
+}
+
 .list-name {
   position: absolute;
   font-size: 2rem;
@@ -402,6 +407,14 @@
 .list-icon {
   padding: 5px 0;
 }
+
+// 横回転させる
+.list-icon:hover img{
+  transform: rotateY( 360deg );
+  transition-duration: 0.5s;
+}
+
+
 // ----------------------------
 
 // =============
