@@ -1,7 +1,8 @@
 <%= form_with url: search_coffee_shops_path, method: :get, local: true do |f| %>
   
+  <!-- エリア -->
   <div class="search-container">
-    <a class="search-name" >エリア</a><br>
+    <%= image_tag "/images/search_item/municipality.png", size: "80x30" %><br>
     <% @municipalities.each do |municipality| %>
       <div class="search-radio">
         <%= f.radio_button :municipality_id, municipality.id %>
@@ -10,15 +11,21 @@
     <% end %>
   </div>
   
+  <!-- 店舗名 -->
   <div class="search-container">
-    <a class="search-name" href="#fold-shop-name" data-toggle="collapse">店舗名</a>
+    <a class="search-image" href="#fold-shop-name" data-toggle="collapse">
+      <%= image_tag "/images/search_item/shopname.png", size: "80x40" %>
+    </a>
     <div id="fold-shop-name" class="collapse">
       <%= f.text_field :name, :class => 'search-text' %>
     </div>
   </div>
   
+  <!-- こだわり -->
   <div class="search-container">
-    <a class="search-name" href="#fold-search_category" data-toggle="collapse">こだわり</a>
+    <a class="search-image" href="#fold-search_category" data-toggle="collapse">
+      <%= image_tag "/images/search_item/search_category.png", size: "100x40" %>
+    </a>
     <div id="fold-search_category" class="collapse">
       <%= f.collection_check_boxes(:search_category_ids, SearchCategory.all, :id, :name, {include_hidden: false} ) do |search_category| %>
         <div class="search-checkbox">
@@ -29,9 +36,11 @@
     </div>
   </div>
 
-  
+  <!-- お店の雰囲気 -->
   <div class="search-container">
-    <a class="search-name" href="#fold-shop-atmosphere" data-toggle="collapse">お店の雰囲気</a>
+    <a class="search-image" href="#fold-shop-atmosphere" data-toggle="collapse">
+      <%= image_tag "/images/search_item/shop_atmosphere.png", size: "150x40" %>
+    </a>
     <div id="fold-shop-atmosphere" class="collapse">
       <%= f.collection_check_boxes(:shop_atmosphere_ids, ShopAtmosphere.all, :id, :name, {include_hidden: false}) do |shop_atmosphere| %>
         <div class="search-checkbox">
@@ -42,8 +51,11 @@
     </div>
   </div>
   
+  <!-- レビュー点数 -->
   <div class="search-container">
-    <a class="search-name" href="#fold-review-score" data-toggle="collapse">レビュー点数</a>
+    <a class="search-image" href="#fold-review-score" data-toggle="collapse">
+      <%= image_tag "/images/search_item/review_score.png", size: "140x40" %>
+    </a>
     <div id="fold-review-score" class="collapse">
       <%= f.number_field :review_score, :class => 'search-number' %>
       <div class="search-radio">
@@ -55,8 +67,11 @@
     </div>
   </div>
   
+  <!-- レビュー数 -->
   <div class="search-container">
-    <a class="search-name" href="#fold-review-count" data-toggle="collapse">レビュー数</a>
+    <a class="search-image" href="#fold-review-count" data-toggle="collapse">
+      <%= image_tag "/images/search_item/review_count.png", size: "120x40" %>
+    </a>
     <div id="fold-review-count" class="collapse">
       <%= f.number_field :review_count, :class => 'search-number' %>
       <div class="search-radio">
@@ -69,8 +84,11 @@
     </div>
   </div>
   
+  <!-- お気に入り数 -->
   <div class="search-container">
-    <a class="search-name" href="#fold-favorite-count" data-toggle="collapse">お気に入り数</a>
+    <a class="search-image" href="#fold-favorite-count" data-toggle="collapse">
+      <%= image_tag "/images/search_item/favorite_count.png", size: "120x40" %>
+    </a>
     <div id="fold-favorite-count" class="collapse">
       <%= f.number_field :favorite_count, :class => 'search-number' %>
       <div class="search-radio">
@@ -83,29 +101,41 @@
   </div>
   <!--※0で検索するとお気に入り数0のお店のみ表示します。-->
   
+  <!-- 営業時間 -->
   <div class="search-container">
-    <a class="search-name" href="#fold-business-hour" data-toggle="collapse">営業時間</a>
+    <a class="search-image" href="#fold-business-hour" data-toggle="collapse">
+      <%= image_tag "/images/search_item/business_hour.png", size: "90x40" %>
+    </a>
     <div id="fold-business-hour" class="collapse">
       <%= f.time_field :business_hour, :class => 'search-time' %>
     </div>
   </div>
   
+  <!-- すいている時間 -->　
   <div class="search-container">
-    <a class="search-name" href="#fold-slack-time" data-toggle="collapse">すいている時間</a>
+    <a class="search-image" href="#fold-slack-time" data-toggle="collapse">
+      <%= image_tag "/images/search_item/slack_time.png", size: "140x40" %>
+    </a>
     <div id="fold-slack-time" class="collapse">
       <%= f.time_field :slack_time, :class => 'search-time' %>
     </div>
   </div>
   
+  <!-- 年齢層 -->
   <div class="search-container">
-    <a class="search-name" href="#fold-age-group" data-toggle="collapse">年齢層</a>
+    <a class="search-image" href="#fold-age-group" data-toggle="collapse">
+      <%= image_tag "/images/search_item/age_group.png", size: "70x40" %>
+    </a>
     <div id="fold-age-group" class="collapse">
       <%= f.select :age_group, AgeGroup.pluck(:name), { include_blank: '未選択' }, :class => 'search-select' %>
     </div>
   </div>
   
+  <!-- 席数 -->
   <div class="search-container">
-    <a class="search-name" href="#fold-shop-seat" data-toggle="collapse">席数</a>
+    <a class="search-image" href="#fold-shop-seat" data-toggle="collapse">
+      <%= image_tag "/images/search_item/shop_seats.png", size: "50x40" %>
+    </a>
     <div id="fold-shop-seat" class="collapse">
       <%= f.number_field :shop_seats, :class => 'search-number' %>
       <div class="search-radio">
@@ -117,8 +147,11 @@
     </div>
   </div>
   
+  <!-- コーヒー豆 -->
   <div class="search-container">
-    <a class="search-name" href="#fold-coffee-bean" data-toggle="collapse">コーヒー豆</a>
+    <a class="search-image" href="#fold-coffee-bean" data-toggle="collapse">
+      <%= image_tag "/images/search_item/coffee_bean.png", size: "120x40" %>
+    </a>
     <div id="fold-coffee-bean" class="collapse">
       <%= f.collection_check_boxes(:coffee_bean_ids, CoffeeBean.all, :id, :name, {include_hidden: false}) do |coffee_bean| %>
         <div class="search-checkbox">
@@ -129,8 +162,11 @@
     </div>
   </div>
   
+  <!-- お店の静かさ -->
   <div class="search-container">
-    <a class="search-name" href="#fold-volume-in-shop" data-toggle="collapse">お店の静かさ</a>
+    <a class="search-image" href="#fold-volume-in-shop" data-toggle="collapse">
+      <%= image_tag "/images/search_item/volume_in_shop.png", size: "130x40" %>
+    </a>
     <div id="fold-volume-in-shop" class="collapse">
       <%= f.collection_check_boxes(:volume_in_shop_ids, VolumeInShop.all, :id, :name, {include_hidden: false}) do |volume_in_shop| %>
         <div class="search-checkbox">
@@ -141,8 +177,11 @@
     </div>
   </div>
   
+  <!-- 食べ物 -->
   <div class="search-container">
-    <a class="search-name" href="#fold-food" data-toggle="collapse">食べ物</a>
+    <a class="search-image" href="#fold-food" data-toggle="collapse">
+      <%= image_tag "/images/search_item/food_menu.png", size: "60x40" %>
+    </a>
     <div id="fold-food" class="collapse">
       <%= f.collection_check_boxes(:food_menu_ids, FoodMenu.all, :id, :name, {include_hidden: false}) do |food_menu| %>
         <div class="search-checkbox">
@@ -153,8 +192,11 @@
     </div>
   </div>
   
+  <!-- 飲み物 -->
   <div class="search-container">
-    <a class="search-name" href="#fold-drink" data-toggle="collapse">飲み物</a>
+    <a class="search-image" href="#fold-drink" data-toggle="collapse">
+      <%= image_tag "/images/search_item/drink_menu.png", size: "60x40" %>
+    </a>
     <div id="fold-drink" class="collapse">
       <%= f.collection_check_boxes(:drink_menu_ids, DrinkMenu.all, :id, :name, {include_hidden: false}) do |drink_menu| %>
         <div class="search-checkbox">
@@ -165,8 +207,11 @@
     </div>
   </div>
   
+  <!-- BGM -->
   <div class="search-container">
-    <a class="search-name" href="#fold-shop-bgm" data-toggle="collapse">BGM</a>
+    <a class="search-image" href="#fold-shop-bgm" data-toggle="collapse">
+      <%= image_tag "/images/search_item/shop_bgm.png", size: "60x40" %>
+    </a>
     <div id="fold-shop-bgm" class="collapse">
       <%= f.collection_check_boxes(:shop_bgm_ids, ShopBgm.all, :id, :name, {include_hidden: false}) do |shop_bgm| %>
         <div class="search-checkbox">
@@ -177,22 +222,31 @@
     </div>
   </div>
   
+  <!-- PC作業 -->
   <div class="search-container">
-    <a class="search-name" href="#fold-pc-work" data-toggle="collapse">PC作業</a>
+    <a class="search-image" href="#fold-pc-work" data-toggle="collapse">
+      <%= image_tag "/images/search_item/pc_work.png", size: "90x40" %>
+    </a>
     <div id="fold-pc-work" class="collapse">
       <%= f.select :pc_work, PcWork.pluck(:name), { include_blank: '未選択' }, :class => 'search-select' %>
     </div>
   </div>
   
+  <!-- 時間制限 -->
   <div class="search-container">
-    <a class="search-name" href="#fold-time-limit" data-toggle="collapse">時間制限</a>
+    <a class="search-image" href="#fold-time-limit" data-toggle="collapse">
+      <%= image_tag "/images/search_item/time_limit.png", size: "100x40" %>
+    </a>
     <div id="fold-time-limit" class="collapse">
       <%= f.select :time_limit, TimeLimit.pluck(:name), { include_blank: '未選択' }, :class => 'search-select' %>
     </div>
   </div>
   
+  <!-- 風景 -->
   <div class="search-container">
-    <a class="search-name" href="#fold-shop-scenery" data-toggle="collapse">風景</a>
+    <a class="search-image" href="#fold-shop-scenery" data-toggle="collapse">
+      <%= image_tag "/images/search_item/shop_scenery.png", size: "50x40" %>
+    </a>
     <div id="fold-shop-scenery" class="collapse">
       <%= f.collection_check_boxes(:shop_scenery_ids, ShopScenery.all, :id, :name, {include_hidden: false}) do |shop_scenery| %>
         <div class="search-checkbox">
@@ -203,8 +257,11 @@
     </div>
   </div>
   
+  <!-- テラス席 -->
   <div class="search-container">
-    <a class="search-name" href="#fold-terrace-seat" data-toggle="collapse">テラス席</a>
+    <a class="search-image" href="#fold-terrace-seat" data-toggle="collapse">
+      <%= image_tag "/images/search_item/terrace_seat.png", size: "90x40" %>
+    </a>
     <div id="fold-terrace-seat" class="collapse">
       <div class="search-radio">
         <%= f.radio_button :terrace_seat, "あり" %>
@@ -215,8 +272,11 @@
     </div>
   </div>
   
+  <!-- 貸切 -->
   <div class="search-container">
-    <a class="search-name" href="#fold-reserved" data-toggle="collapse">貸切</a>
+    <a class="search-image" href="#fold-reserved" data-toggle="collapse">
+      <%= image_tag "/images/search_item/can_reserved.png", size: "50x40" %>
+    </a>
     <div id="fold-reserved" class="collapse">
       <div class="search-radio">
         <%= f.radio_button :can_reserved, "可" %>
@@ -227,8 +287,11 @@
     </div>
   </div>
   
+  <!-- 漫画 -->
   <div class="search-container">
-    <a class="search-name" href="#fold-comic" data-toggle="collapse">漫画</a>
+    <a class="search-image" href="#fold-comic" data-toggle="collapse">
+      <%= image_tag "/images/search_item/comic.png", size: "50x40" %>
+    </a>
     <div id="fold-comic" class="collapse">
       <div class="search-radio">
         <%= f.radio_button :comic, "あり" %>
@@ -239,8 +302,11 @@
     </div>
   </div>
   
+  <!-- 雑誌 -->
   <div class="search-container">
-    <a class="search-name" href="#fold-magazine" data-toggle="collapse">雑誌</a>
+    <a class="search-image" href="#fold-magazine" data-toggle="collapse">
+      <%= image_tag "/images/search_item/magazine.png", size: "50x40" %>
+    </a>
     <div id="fold-magazine" class="collapse">
       <div class="search-radio">
         <%= f.radio_button :magazine, "あり" %>
@@ -251,8 +317,11 @@
     </div>
   </div>
   
+  <!-- ラテアート -->
   <div class="search-container">
-    <a class="search-name" href="#fold-latte-art" data-toggle="collapse">ラテアート</a>
+    <a class="search-image" href="#fold-latte-art" data-toggle="collapse">
+      <%= image_tag "/images/search_item/latte_art.png", size: "110x40" %>
+    </a>
     <div id="fold-latte-art" class="collapse">
       <div class="search-radio">
         <%= f.radio_button :latte_art, "あり" %>
@@ -263,8 +332,11 @@
     </div>
   </div>
   
+  <!-- 新聞 -->
   <div class="search-container">
-    <a class="search-name" href="#fold-newspaper" data-toggle="collapse">新聞</a>
+    <a class="search-image" href="#fold-newspaper" data-toggle="collapse">
+      <%= image_tag "/images/search_item/newspaper.png", size: "50x40" %>
+    </a>
     <div id="fold-newspaper" class="collapse">
       <div class="search-radio">
         <%= f.radio_button :newspaper, "あり" %>
@@ -275,8 +347,11 @@
     </div>
   </div>
   
+  <!-- モーニング -->
   <div class="search-container">
-    <a class="search-name" href="#fold-morning-menu" data-toggle="collapse">モーニング</a>
+    <a class="search-image" href="#fold-morning-menu" data-toggle="collapse">
+      <%= image_tag "/images/search_item/morning_menu.png", size: "110x40" %>
+    </a>
     <div id="fold-morning-menu" class="collapse">
       <div class="search-radio">
         <%= f.radio_button :morning_menu, "あり" %>
@@ -287,8 +362,11 @@
     </div>
   </div>
   
+  <!-- 無料の水 -->
   <div class="search-container">
-    <a class="search-name" href="#fold-free-water" data-toggle="collapse">無料の水</a>
+    <a class="search-image" href="#fold-free-water" data-toggle="collapse">
+      <%= image_tag "/images/search_item/free_water.png", size: "90x40" %>
+    </a>
     <div id="fold-free-water" class="collapse">
       <div class="search-radio">
         <%= f.radio_button :free_water, "あり" %>
@@ -299,8 +377,11 @@
     </div>
   </div>
   
+  <!-- ペット -->
   <div class="search-container">
-    <a class="search-name" href="#fold-with-pet" data-toggle="collapse">ペット</a>
+    <a class="search-image" href="#fold-with-pet" data-toggle="collapse">
+      <%= image_tag "/images/search_item/with_pet.png", size: "60x40" %>
+    </a>
     <div id="fold-with-pet" class="collapse">
       <div class="search-radio">
         <%= f.radio_button :with_pet, "可" %>
@@ -311,8 +392,11 @@
     </div>
   </div>
   
+  <!-- 共有PC -->　
   <div class="search-container">
-    <a class="search-name" href="#fold-free-pc" data-toggle="collapse">共有PC</a>
+    <a class="search-image" href="#fold-free-pc" data-toggle="collapse">
+      <%= image_tag "/images/search_item/free_pc.png", size: "80x40" %>
+    </a>
     <div id="fold-free-pc" class="collapse">
       <div class="search-radio">
         <%= f.radio_button :free_pc, "あり" %>
@@ -323,8 +407,11 @@
     </div>
   </div>
   
+  <!-- 駐車場 -->
   <div class="search-container">
-    <a class="search-name" href="#fold-parking-place" data-toggle="collapse">駐車場</a>
+    <a class="search-image" href="#fold-parking-place" data-toggle="collapse">
+      <%= image_tag "/images/search_item/parking_place.png", size: "60x40" %>
+    </a>
     <div id="fold-parking-place" class="collapse">
       <div class="search-radio">
         <%= f.radio_button :parking_place, "あり" %>
@@ -335,8 +422,11 @@
     </div>
   </div>
   
+  <!-- 支払い方法 -->
   <div class="search-container">
-    <a class="search-name" href="#fold-payment-method" data-toggle="collapse">支払い方法</a>
+    <a class="search-image" href="#fold-payment-method" data-toggle="collapse">
+      <%= image_tag "/images/search_item/payment_method.png", size: "100x40" %>
+    </a>
     <div id="fold-payment-method" class="collapse">
       <%= f.collection_check_boxes(:payment_method_ids, PaymentMethod.all, :id, :name, {include_hidden: false}) do |payment_method| %>
         <div class="search-checkbox">
@@ -347,15 +437,21 @@
     </div>
   </div>
   
+  <!-- 予算 -->
   <div class="search-container">
-    <a class="search-name" href="#fold-shop-badget" data-toggle="collapse">予算</a>
+    <a class="search-image" href="#fold-shop-badget" data-toggle="collapse">
+      <%= image_tag "/images/search_item/shop_badget.png", size: "40x40" %>
+    </a>
     <div id="fold-shop-badget" class="collapse">
       <%= f.number_field :shop_badget, :class => 'search-number' %>円
     </div>
   </div>
   
+  <!-- コーヒー1杯 -->
   <div class="search-container">
-    <a class="search-name" href="#fold-coffee-price" data-toggle="collapse">コーヒー1杯</a>
+    <a class="search-image" href="#fold-coffee-price" data-toggle="collapse">
+      <%= image_tag "/images/search_item/coffee_price.png", size: "130x40" %>
+    </a>
     <div id="fold-coffee-price" class="collapse">
       <%= f.number_field :coffee_price, :class => 'search-number' %>
       <div class="search-radio">
@@ -367,8 +463,11 @@
     </div>
   </div>
   
+  <!-- カフェラテ1杯 -->
   <div class="search-container">
-    <a class="search-name" href="#fold-latte-price" data-toggle="collapse">カフェラテ1杯</a>
+    <a class="search-image" href="#fold-latte-price" data-toggle="collapse">
+      <%= image_tag "/images/search_item/latte_price.png", size: "150x40" %>
+    </a>
     <div id="fold-latte-price" class="collapse">
       <%= f.number_field :latte_price, :class => 'search-number' %>
       <div class="search-radio">
@@ -380,8 +479,11 @@
     </div>
   </div>
   
+  <!-- 椅子の種類 -->
   <div class="search-container">
-    <a class="search-name" href="#fold-chair-type" data-toggle="collapse">椅子の種類</a>
+    <a class="search-image" href="#fold-chair-type" data-toggle="collapse">
+      <%= image_tag "/images/search_item/chair_type.png", size: "110x40" %>
+    </a>
     <div id="fold-chair-type" class="collapse">
       <%= f.collection_check_boxes(:chair_type_ids, ChairType.all, :id, :name, {include_hidden: false}) do |chair_type| %>
         <div class="search-checkbox">
@@ -392,8 +494,11 @@
     </div>
   </div>
   
+  <!-- コンセント -->
   <div class="search-container">
-    <a class="search-name" href="#fold-outlet" data-toggle="collapse">コンセント</a>
+    <a class="search-image" href="#fold-outlet" data-toggle="collapse">
+      <%= image_tag "/images/search_item/outlet.png", size: "100x40" %>
+    </a>
     <div id="fold-outlet" class="collapse">
       <%= f.collection_radio_buttons(:outlet, CoffeeShop.outlets_i18n, :first, :last, {include_hidden: false}) do |outlet| %>
         <div class="search-radio">
@@ -404,8 +509,11 @@
     </div>
   </div>
   
+  <!-- Wi-Fi -->
   <div class="search-container">
-    <a class="search-name" href="#fold-wifi" data-toggle="collapse">Wi-Fi</a>
+    <a class="search-image" href="#fold-wifi" data-toggle="collapse">
+      <%= image_tag "/images/search_item/wifi.png", size: "60x40" %>
+    </a>
     <div id="fold-wifi" class="collapse">
       <%= f.collection_radio_buttons(:wifi, CoffeeShop.wifis_i18n, :first, :last, {include_hidden: false}) do |wifi| %>
         <div class="search-radio">
@@ -416,8 +524,11 @@
     </div>
   </div>
   
+  <!-- 喫煙・分煙 -->
   <div class="search-container">
-    <a class="search-name" href="#fold-smoking" data-toggle="collapse">喫煙・分煙</a>
+    <a class="search-image" href="#fold-smoking" data-toggle="collapse">
+      <%= image_tag "/images/search_item/smoking.png", size: "100x40" %>
+    </a>
     <div id="fold-smoking" class="collapse">
       <%= f.collection_radio_buttons(:smoking, CoffeeShop.smokings_i18n, :first, :last, {include_hidden: false}) do |smoking| %>
         <div class="search-radio">
@@ -428,8 +539,11 @@
     </div>
   </div>
   
+  <!-- 利用シーン -->
   <div class="search-container">
-    <a class="search-name" href="#fold-use-scene" data-toggle="collapse">利用シーン</a>
+    <a class="search-image" href="#fold-use-scene" data-toggle="collapse">
+      <%= image_tag "/images/search_item/use_scene.png", size: "90x40" %>
+    </a>
     <div id="fold-use-scene" class="collapse">
       <%= f.collection_check_boxes(:use_scene_ids, UseScene.all, :id, :name, {include_hidden: false}) do |use_scene| %>
         <div class="search-checkbox">
@@ -440,8 +554,11 @@
     </div>
   </div>
   
+  <!-- 店員さんの雰囲気 -->
   <div class="search-container">
-    <a class="search-name" href="#fold-tmosphere-of-clerk" data-toggle="collapse">店員さんの雰囲気</a>
+    <a class="search-image" href="#fold-tmosphere-of-clerk" data-toggle="collapse">
+      <%= image_tag "/images/search_item/atmosphere_of_clerk.png", size: "160x40" %>
+    </a>
     <div id="fold-tmosphere-of-clerk" class="collapse">
       <%= f.collection_check_boxes(:atmosphere_of_clerk_ids, AtmosphereOfClerk.all, :id, :name, {include_hidden: false}) do |atmosphere_of_clerk| %>
         <div class="search-checkbox">
@@ -452,8 +569,11 @@
     </div>
   </div>
   
+  <!-- 机の広さ -->
   <div class="search-container">
-    <a class="search-name" href="#fold-size-of-desk" data-toggle="collapse">机の広さ</a>
+    <a class="search-image" href="#fold-size-of-desk" data-toggle="collapse">
+      <%= image_tag "/images/search_item/size_of_desk.png", size: "80x40" %>
+    </a>
     <div id="fold-size-of-desk" class="collapse">
       <%= f.collection_check_boxes(:size_of_desk_ids, SizeOfDesk.all, :id, :name, {include_hidden: false}) do |size_of_desk| %>
         <div class="search-checkbox">
@@ -464,8 +584,11 @@
     </div>
   </div>
   
+  <!-- ポイントカード -->
   <div class="search-container">
-    <a class="search-name" href="#fold-point-card" data-toggle="collapse">ポイントカード</a>
+    <a class="search-image" href="#fold-point-card" data-toggle="collapse">
+      <%= image_tag "/images/search_item/point_card.png", size: "130x40" %>
+    </a>
     <div id="fold-point-card" class="collapse">
       <%= f.collection_check_boxes(:point_card_ids, PointCard.all, :id, :name, {include_hidden: false}) do |point_card| %>
         <div class="search-checkbox">
@@ -476,8 +599,12 @@
     </div>
   </div>
   
+  
+<!-- 予約 -->
   <div class="search-container">
-    <a class="search-name" href="#fold-reservation" data-toggle="collapse">予約</a>
+    <a class="search-image" href="#fold-reservation" data-toggle="collapse">
+      <%= image_tag "/images/search_item/reservation.png", size: "50x40" %>
+    </a>
     <div id="fold-reservation" class="collapse">
       <%= f.collection_radio_buttons(:reservation, CoffeeShop.reservations_i18n, :first, :last, {include_hidden: false}) do |reservation| %>
         <div class="search-radio">
@@ -488,8 +615,11 @@
     </div>
   </div>
   
+  <!-- テイクアウト -->
   <div class="search-container">
-    <a class="search-name" href="#fold-take-out" data-toggle="collapse">テイクアウト</a>
+    <a class="search-image" href="#fold-take-out" data-toggle="collapse">
+      <%= image_tag "/images/search_item/take_out.png", size: "110x40" %>
+    </a>
     <div id="fold-take-out" class="collapse">
       <%= f.collection_radio_buttons(:take_out, CoffeeShop.take_outs_i18n, :first, :last, {include_hidden: false}) do |take_out| %>
         <div class="search-radio">
@@ -500,8 +630,11 @@
     </div>
   </div>
   
+  <!-- お子様連れ -->
   <div class="search-container">
-    <a class="search-name" href="#fold-with-children" data-toggle="collapse">お子様連れ</a>
+    <a class="search-image" href="#fold-with-children" data-toggle="collapse">
+      <%= image_tag "/images/search_item/with_children.png", size: "110x40" %>
+    </a>
     <div id="fold-with-children" class="collapse">
       <%= f.collection_radio_buttons(:with_children, CoffeeShop.with_children_i18n, :first, :last, {include_hidden: false}) do |with_children| %>
         <div class="search-radio">
@@ -512,8 +645,11 @@
     </div>
   </div>
   
+  <!-- Instagramアカウント -->
   <div class="search-container">
-    <a class="search-name" href="#fold-have-insta-account" data-toggle="collapse">Instagramアカウント</a>
+    <a class="search-image" href="#fold-have-insta-account" data-toggle="collapse">
+      <%= image_tag "/images/search_item/have_insta_account.png", size: "170x40" %>
+    </a>
     <div id="fold-have-insta-account" class="collapse">
       <%= f.collection_radio_buttons(:have_insta_account, CoffeeShop.have_insta_accounts_i18n, :first, :last, {include_hidden: false}) do |have_insta_account| %>
         <div class="search-radio">
@@ -524,8 +660,11 @@
     </div>
   </div>
   
+  <!-- アミューズメント -->
   <div class="search-container">
-    <a class="search-name" href="#fold-amusement" data-toggle="collapse">アミューズメント</a>
+    <a class="search-image" href="#fold-amusement" data-toggle="collapse">
+      <%= image_tag "/images/search_item/amusement.png", size: "150x40" %>
+    </a>
     <div id="fold-amusement" class="collapse">
       <%= f.collection_radio_buttons(:amusement, CoffeeShop.amusements_i18n, :first, :last, {include_hidden: false}) do |amusement| %>
         <div class="search-radio">
@@ -536,8 +675,11 @@
     </div>
   </div>
   
+  <!-- インスタ映え -->
   <div class="search-container">
-    <a class="search-name" href="#fold-look-by-instagram" data-toggle="collapse">インスタ映え</a>
+    <a class="search-image" href="#fold-look-by-instagram" data-toggle="collapse">
+      <%= image_tag "/images/search_item/look_by_instagram.png", size: "110x40" %>
+    </a>
     <div id="fold-look-by-instagram" class="collapse">
       <%= f.collection_radio_buttons(:look_by_instagram, CoffeeShop.look_by_instagrams_i18n, :first, :last, {include_hidden: false}) do |look_by_instagram| %>
         <div class="search-radio">
@@ -548,9 +690,12 @@
     </div>
   </div>
   
+  <!-- お気に入り登録 -->
   <% if user_signed_in? %>
     <div class="search-container">
-      <a class="search-name" href="#fold-bookmark" data-toggle="collapse">お気に入り登録</a>
+      <a class="search-image" href="#fold-bookmark" data-toggle="collapse">
+        <%= image_tag "/images/search_item/bookmark.png", size: "130x40" %>
+      </a>
       <div id="fold-bookmark" class="collapse">
         <div class="search-radio">
           <%= f.radio_button :bookmark, :register %>
@@ -562,9 +707,12 @@
     </div>
   <% end %>
   
+  <!-- フォローユーザーのお気に入り -->
   <% if user_signed_in? %>
     <div class="search-container">
-      <a class="search-name" href="#fold-bookmark-by-follower" data-toggle="collapse">フォローユーザーのお気に入り</a>
+      <a class="search-image" href="#fold-bookmark-by-follower" data-toggle="collapse">
+        <%= image_tag "/images/search_item/bookmark_by_follower.png", size: "250x40" %>
+      </a>
       <div id="fold-bookmark-by-follower" class="collapse">
         <div class="search-radio">
           <%= f.radio_button :bookmark_by_follower, :register %>
@@ -576,9 +724,12 @@
     </div>
   <% end %>
   
+  <!-- フォローユーザーのbest shop -->
   <% if user_signed_in? %>
     <div class="search-container">
-      <a class="search-name" href="#fold-best-shop-by-follower" data-toggle="collapse">フォローユーザーのbest shop</a>
+      <a class="search-image" href="#fold-best-shop-by-follower" data-toggle="collapse">
+        <%= image_tag "/images/search_item/best_shop_by_follower.png", size: "270x40" %>
+      </a>
       <div id="fold-best-shop-by-follower" class="collapse">
         <div class="search-radio">
           <%= f.radio_button :best_shop_by_follower, :register %>
