@@ -16,6 +16,7 @@ class CreateCoffeeShopSearchConditionsService
     @shop_atmosphere_ids = hash[:shop_atmosphere_ids]
     @shop_seats = hash[:shop_seats]
     @shop_seats_search_type = hash[:shop_seats_search_type]
+    @coffee_bean_ids = hash[:coffee_bean_ids]
     @volume_in_shop_ids = hash[:volume_in_shop_ids]
     @food_menu_ids = hash[:food_menu_ids]
     @drink_menu_ids = hash[:drink_menu_ids]
@@ -74,6 +75,7 @@ class CreateCoffeeShopSearchConditionsService
     create_age_group if @age_group.present?
     create_shop_atmosphere if @shop_atmosphere_ids.present?
     create_shop_seats if @shop_seats.present?
+    create_coffee_bean if @coffee_bean_ids.present?
     create_volume_in_shop if @volume_in_shop_ids.present?
     create_food_menu if @food_menu_ids.present?
     create_drink_menu if @drink_menu_ids.present?
@@ -168,8 +170,9 @@ class CreateCoffeeShopSearchConditionsService
     @coffee_shop_search_conditions << return_message
   end
   
+  # 珈琲豆の種類
   def create_coffee_bean
-    coffee_beans = CoffeeBean.where(id: params[:coffee_bean_ids])
+    coffee_beans = CoffeeBean.where(id: @coffee_bean_ids)
     return_message = "コーヒー豆：#{coffee_beans.pluck(:name).join('or')}"
     @coffee_shop_search_conditions << return_message
   end
