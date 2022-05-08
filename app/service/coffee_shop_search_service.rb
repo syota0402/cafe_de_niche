@@ -17,6 +17,7 @@ class CoffeeShopSearchService
     @shop_atmosphere_ids = hash[:shop_atmosphere_ids]
     @shop_seats = hash[:shop_seats]
     @shop_seats_search_type = hash[:shop_seats_search_type]
+    @coffee_bean_ids = hash[:coffee_bean_ids]
     @volume_in_shop_ids = hash[:volume_in_shop_ids]
     @food_menu_ids = hash[:food_menu_ids]
     @shop_bgm_ids = hash[:shop_bgm_ids]

@@ -5,7 +5,13 @@ class Dashboard::MunicipalitiesController < ApplicationController
   layout "dashboard/dashboard"
   
   def index
-    @municipalities = Municipality.all
+    # @municipalities = Municipality.all
+    if params[:keyword].present?
+      keyword = params[:keyword].strip
+      @municipalities = Municipality.search_for_eria_name(keyword).page(params[:page]).per(15)
+    else
+      @municipalities = Municipality.page(params[:page]).per(15)
+    end
     @municipality = Municipality.new
   end
   

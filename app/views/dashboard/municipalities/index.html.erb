@@ -11,6 +11,12 @@
     <%= f.submit "新規作成" %>
   <% end %>
   
+  <%= form_with url: dashboard_municipalities_path, method: :get, local: true do |f| %>
+    エリア検索
+    <%= f.text_field :keyword %>
+    <%= f.submit "検索" %>
+  <% end %>
+  
   <table class="table mt-5">
     <thead>
       <tr>
@@ -38,4 +44,5 @@
       <% end %>
     </tbody>
   </table>
+  <%= paginate @municipalities %>
 </div>
