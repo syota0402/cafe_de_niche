@@ -1,31 +1,24 @@
 .user-container {
   position: relative;
-  margin: 1rem;
-}
+  margin: 1rem; }
 
 .user-name {
   font-size: 2.5rem;
   left: 124px;
   position: absolute;
-  top: 14px;
-}
+  top: 14px; }
 
 .liker-btn {
-  position: static;
-}
+  position: static; }
 
 .self-introduction {
-  font-size: 1.5rem;
-}
+  font-size: 1.5rem; }
 
-.user-insta {
-  // display: inline-flex;
-  // position: absolute;
-  // top: 0px;
-  // right: 0px;
-  font-size: 2rem;
+.sns-link {
+  font-size: 1.5rem;
   vertical-align: middle;
   margin: 0 0.5rem;
+  display: inline-block;
 }
 
 .user-follow-count {
@@ -33,30 +26,32 @@
   right: 0px;
   position: absolute;
   top: 75px;
-  animation: purupuru_anim 1.5s infinite;
-}
+  animation: purupuru_anim 1.5s infinite; }
 
 @keyframes purupuru_anim {
-	0% {	transform: translate(0, 0);}
-	5% {	transform: translate(-5px, -0);}
-	10% {	transform: translate(5px, 0);}
-	15% {	transform: translate(-5px, -0);}
-	20% {	transform: translate(5px, 0);}
-	25% {	transform: translate(-5px, -0);}
-	30% {	transform: translate(0, 0);}
-	100% {	transform: translate(0, 0);}
-}
-
+  0% {
+    transform: translate(0, 0); }
+  5% {
+    transform: translate(-5px, 0); }
+  10% {
+    transform: translate(5px, 0); }
+  15% {
+    transform: translate(-5px, 0); }
+  20% {
+    transform: translate(5px, 0); }
+  25% {
+    transform: translate(-5px, 0); }
+  30% {
+    transform: translate(0, 0); }
+  100% {
+    transform: translate(0, 0); } }
 .user-reviews-count {
   font-size: 2rem;
-  margin: 1rem;
-  
-}
+  margin: 1rem; }
 
 .like-shop-info {
   bottom: -27px;
-  position: absolute;
-}
+  position: absolute; }
 
 .user-best-shop {
   position: absolute;
@@ -67,8 +62,7 @@
   width: 16rem;
   background-color: #FFF;
   top: -11px;
-  right: 148px;
-}
+  right: 148px; }
 
 .best-shop-title2 {
   position: absolute;
@@ -80,5 +74,6 @@
   font-size: 19px;
   background: #FFF;
   color: #CC935B;
-  font-weight: bold;
-}
+  font-weight: bold; }
+
+/*# sourceMappingURL=users.css.map */

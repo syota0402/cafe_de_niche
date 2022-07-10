@@ -81,7 +81,7 @@ class UsersController < ApplicationController
   end
   
   def user_params
-    params.permit(:name, :email, :password, :password_confirmation, :age, :gender, :self_introduction, :image, :instagram_url)
+    params.permit(:name, :email, :password, :password_confirmation, :age, :gender, :self_introduction, :image, :instagram_url, :twitter_url, :youtube_url, :users_blog_url, :tabelog_url, :facebook_url, :tiktok_url)
   end
   
   def password_set?

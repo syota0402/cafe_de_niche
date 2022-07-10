@@ -12,16 +12,55 @@
       <%end %>
     </div>
   <% end %>
+  
+  <div class= 'sns-link-container'>
+    <% if @show_user.instagram_url.present? %>
+      <div class="sns-link">
+        <%= image_tag "/images/insta_icon.png", size: "30x30" %><%= link_to @show_user.instagram_url, 'https://www.instagram.com/' + @show_user.instagram_url, target: :_blank, rel: "noopener noreferrer" %>
+      </div>
+    <% end %>
+    
+    <% if @show_user.twitter_url.present? %>
+      <div class="sns-link">
+        <%= image_tag "/images/twitter_icon.png", size: "30x30" %><%= link_to @show_user.twitter_url, 'https://twitter.com/' + @show_user.twitter_url, target: :_blank, rel: "noopener noreferrer" %>
+      </div>
+    <% end %>
+    
+    <% if @show_user.youtube_url.present? %>
+      <div class="sns-link">
+        <%= image_tag "/images/youtube_icon.png", size: "30x30" %><%= link_to @show_user.youtube_url, 'https://www.youtube.com/channel/UCQn1FqrR2OCjSe6Nl4GlVHw?&ab_channel=' + @show_user.youtube_url, target: :_blank, rel: "noopener noreferrer" %>
+      </div>
+    <% end %>
+    
+    <% if @show_user.users_blog_url.present? %>
+      <div class="sns-link">
+        <%= image_tag "/images/user_blog_icon.png", size: "30x30" %><%= link_to @show_user.users_blog_url, @show_user.users_blog_url, target: :_blank, rel: "noopener noreferrer" %>
+      </div>
+    <% end %>
+    
+    <% if @show_user.tabelog_url.present? %>
+      <div class="sns-link">
+        <%= image_tag "/images/tabelog_icon.png", size: "30x30" %><%= link_to @show_user.tabelog_url, 'https://tabelog.com/rvwr/' + @show_user.tabelog_url, target: :_blank, rel: "noopener noreferrer" %>
+      </div>
+    <% end %>
+    
+    <% if @show_user.facebook_url.present? %>
+      <div class="sns-link">
+        <%= image_tag "/images/facebook_icon.png", size: "30x30" %><%= link_to @show_user.facebook_url, 'https://www.facebook.com/' + @show_user.facebook_url, target: :_blank, rel: "noopener noreferrer" %>
+      </div>
+    <% end %>
+    
+    <% if @show_user.tiktok_url.present? %>
+      <div class="sns-link">
+        <%= image_tag "/images/tiktok_icon.png", size: "30x30" %><%= link_to @show_user.tiktok_url, 'https://www.tiktok.com/@' +@show_user.tiktok_url, rel: :_blank, rel: "noopener noreferrer" %>
+      </div>
+    <% end %>
+    
+  </div>
+  
   <div class='self-introduction'>
     <%= @show_user.self_introduction %>
   </div>
-  <% if @show_user.instagram_url.present? %>
-    <div class="user-insta">
-      <% if @show_user.instagram_url.present? %>
-        <%= image_tag "/images/insta_icon.png", size: "25x25" %><%= link_to @show_user.instagram_url, 'https://www.instagram.com/' + @show_user.instagram_url, target: :_blank, rel: "noopener noreferrer" %>
-      <% end %>
-    </div>
-  <% end %>
   <div class='user-follow-count'><%= @followers.count %>人がフォローなう</div>
   <% if @user_best_shop.present? %>
     <%= link_to(coffee_shop_path(@user_best_shop.id)) do %>
