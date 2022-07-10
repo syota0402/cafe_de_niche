@@ -46,6 +46,36 @@
   
   <hr>
   
+  <%= f.label :twitter_url, "Twitterのアカウント" %>(「@」はいりません)
+  <%= f.text_field :twitter_url, value: @user.twitter_url %>
+  
+  <hr>
+  
+  <%= f.label :youtube_url, "YouTubeのアカウント" %>
+  <%= f.text_field :youtube_url, value: @user.youtube_url %>
+  
+  <hr>
+  
+  <%= f.label :users_blog_url, "個人ブログのURL" %>
+  <%= f.text_field :users_blog_url, value: @user.users_blog_url %>
+  
+  <hr>
+  
+  <%= f.label :tabelog_url, "食べログのアカウント" %>
+  <%= f.text_field :tabelog_url, value: @user.tabelog_url %>
+  
+  <hr>
+  
+  <%= f.label :facebook_url, "FaceBookのアカウント" %>
+  <%= f.text_field :facebook_url, value: @user.facebook_url %>
+  
+  <hr>
+  
+  <%= f.label :tiktok_url, "TikTokのアカウント" %>
+  <%= f.text_field :tiktok_url, value: @user.tiktok_url %>
+  
+  <hr>
+  
   <%= f.submit "保存" %>
 <% end %>
 
