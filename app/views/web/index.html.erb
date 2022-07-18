@@ -112,7 +112,7 @@
   <br>
   <% Prefecture.all.each do |prefecture| %>
     <b><%= prefecture.name %></b>
-    <% Municipality.where(prefecture_id: prefecture.id).limit(5).each do |municipality| %>
+    <% Municipality.where(prefecture_id: prefecture.id).each do |municipality| %>
       <%= municipality.name %>：<%= CoffeeShop.where(municipalitie_id: municipality.id).count %>件
     <% end %>
     <br>
