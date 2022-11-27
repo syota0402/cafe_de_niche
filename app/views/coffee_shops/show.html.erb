@@ -75,11 +75,18 @@
 		<div class="review-container">
 			<div class="review-image">
 				<%= render partial: 'shared/show_image', locals: { target: review, image_size: "100x100" } %>
-		  </div>
-		  <div class="review-user">
-		  	<%= render partial: 'shared/show_image', locals: { target: review.user, image_size: "60x60" } %>
-		  	<p><%= link_to review.user.name, user_path(review.user_id) %></p>
-		  </div>
+			</div>
+			<% if review.coffee_shop_id == User.find_by(id: review.user_id).best_shop_id %>
+				<div class="review-user-best">
+					<%= render partial: 'shared/show_image', locals: { target: review.user, image_size: "60x60" } %>
+					<p><%= link_to review.user.name, user_path(review.user_id) %></p>
+				</div>
+			<% else %>
+				<div class="review-user">
+					<%= render partial: 'shared/show_image', locals: { target: review.user, image_size: "60x60" } %>
+					<p><%= link_to review.user.name, user_path(review.user_id) %></p>
+				</div>
+			<% end %>
 			<div class="review-score"><%= review.review_score %></div>
 			<div class="review-comment"><%= review.review_comment %></div>
 			<div class="review-date">投稿日：<%= review.created_at.strftime("%Y-%m-%d") %></div>
