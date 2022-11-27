@@ -237,6 +237,26 @@
   float: right;
 }
 
+.review-user-best {
+  right: 6px;
+  width: 10%;
+  text-align: center;
+  font-size: 1.1rem;
+  float: right;
+  border-style: solid;
+  border-color: red
+}
+
+.review-user-favorite {
+  right: 6px;
+  width: 10%;
+  text-align: center;
+  font-size: 1.1rem;
+  float: right;
+  border-style: solid;
+  border-color: blue
+}
+
 .review-score {
   right: 82px;
   font-family: 'Roboto', sans-serif;
